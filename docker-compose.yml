@@ -1,6 +1,6 @@
 services:
   windows:
-    image: .
+    image: dockurr/windows
     container_name: windows
     environment:
       VERSION: "11"
@@ -15,5 +15,7 @@ services:
       - 3389:3389/udp
     volumes:
       - ./windows:/storage
+      - ./src/:/oem
+      - ./shared/:/data
     restart: always
     stop_grace_period: 2m

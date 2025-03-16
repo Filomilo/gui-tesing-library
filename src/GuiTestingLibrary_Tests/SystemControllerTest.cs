@@ -1,15 +1,16 @@
 using gui_tesing_library;
+using NUnit.Framework;
 
 namespace GuiTestingLibrary_Tets
 {
     public class SystemControllerTest
     {
-        [Fact]
+        [Test]
         public void Test_GetOSVersion()
         {
            OperatingSystem os= SystemController.Instance.GetOSVersion();
-            Assert.Equal("Win32NT", os.Platform.ToString());
-            Assert.Equal(10, os.Version.Major);
+            Assert.That("Win32NT"==os.Platform.ToString());
+            Assert.That(10==os.Version.Major);
         }
     }
 }
