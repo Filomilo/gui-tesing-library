@@ -6,4 +6,9 @@ winget install Microsoft.NuGet --accept-source-agreements --accept-package-agree
 winget install Microsoft.dotnet.runtime.8 --accept-source-agreements --accept-package-agreements >> \\host.lan\Data\\winget-output.log
 echo 245.67>> \\host.lan\Data\\test-output.log
 timeout 10
-start cmd /k "C:\OEM\runTest.bat"
+cd C:\OEM\GuiTestingLibrary_Tests
+"C:\Program Files\dotnet\dotnet.exe" test 
+"C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
+start cmd /c "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe -f gdigrab -framerate 30 -i desktop output.mkv -nostdin > \\host.lan\Data\\ffmpeg-output.log "
+"C:\Program Files\dotnet\dotnet.exe" test 
+"C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
