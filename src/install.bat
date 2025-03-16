@@ -9,6 +9,6 @@ timeout 10
 cd C:\OEM\GuiTestingLibrary_Tests
 "C:\Program Files\dotnet\dotnet.exe" test 
 "C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
-start cmd /c "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe -f gdigrab -framerate 30 -i desktop output.mkv -nostdin > \\host.lan\Data\\ffmpeg-output.log "
+start cmd /c "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe -f gdigrab -framerate 30 -i \\host.lan\Data\\desktop output.mkv -nostdin > \\host.lan\Data\\ffmpeg-output.log "
 "C:\Program Files\dotnet\dotnet.exe" test 
 "C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
