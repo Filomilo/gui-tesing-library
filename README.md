@@ -1,5 +1,5 @@
 ### nazwiska, imiona oraz adresy mailowe
-Filip Borowiec s092686@student.tu.kielce.pl
+Filip Borowiec 
 
 ### temat projektu
 Zdalne sterowanie komputerem
