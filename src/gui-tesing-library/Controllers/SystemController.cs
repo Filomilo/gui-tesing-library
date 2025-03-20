@@ -24,5 +24,31 @@ namespace gui_tesing_library
             GTProcess gtProcess = new GTProcess(WinApiWrapper.CreateProcess(v));
             return gtProcess;
         }
+
+        public GTWindow GetWindowByName(string name)
+        {
+            GTWindow window = null;
+            WinApiWrapper.EnumWindows((hwnd, param) =>
+            {
+
+                StringBuilder title = new StringBuilder(256);
+                WinApiWrapper.GetWindowText(hwnd, title, title.Capacity);
+                Console.WriteLine($"Window Handle: {hwnd}, Title: {title}");
+                if (title.Length > 0 && name==title.ToString())
+                {
+          
+                    window=new GTWindow(hwnd.ToInt64());
+                    return false;
+                }
+
+                return true; 
+            }, IntPtr.Zero);
+
+
+
+            return window;
+        }
+
+        
     }
 }
