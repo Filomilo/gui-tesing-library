@@ -22,6 +22,10 @@ namespace gui_tesing_library.Components
         public int kill()
         {
             this._Process.Kill();
+            Helpers.AwaitTrue(() =>
+            {
+                return this._Process.HasExited;
+            });
             return 0;
             // add exception handling
         }

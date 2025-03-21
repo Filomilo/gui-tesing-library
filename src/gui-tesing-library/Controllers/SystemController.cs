@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,17 @@ namespace gui_tesing_library
         private static readonly SystemController _instance = new SystemController();
         private SystemController() { }
         public static SystemController Instance => _instance;
+
+        public static Vector2 MaximizedWindowSize
+        {
+            get
+            {
+                return new Vector2(
+                    WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXMAXIMIZED),
+                    WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYMAXIMIZED)
+                    );
+            }
+        }
 
         public OperatingSystem GetOSVersion()
         {
@@ -27,26 +39,17 @@ namespace gui_tesing_library
 
         public GTWindow GetWindowByName(string name)
         {
-            GTWindow window = null;
-            WinApiWrapper.EnumWindows((hwnd, param) =>
+            try
             {
+                Helpers.AwaitTrue(() => { return (long)WinApiWrapper.FindWindowA(null, name) > 0; });
+                IntPtr winId = (IntPtr)WinApiWrapper.FindWindowA(null, name);
 
-                StringBuilder title = new StringBuilder(256);
-                WinApiWrapper.GetWindowText(hwnd, title, title.Capacity);
-                Console.WriteLine($"Window Handle: {hwnd}, Title: {title}");
-                if (title.Length > 0 && name==title.ToString())
-                {
-          
-                    window=new GTWindow(hwnd.ToInt64());
-                    return false;
-                }
-
-                return true; 
-            }, IntPtr.Zero);
-
-
-
-            return window;
+                return new GTWindow((long)winId);
+            }
+            catch (TimeoutException ex)
+            {
+                return null;
+            }
         }
 
         

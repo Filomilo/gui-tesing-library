@@ -2,6 +2,7 @@ using gui_tesing_library;
 using NUnit.Framework;
 using gui_tesing_library.Components;
 using System.Diagnostics;
+using System.Numerics;
 
 namespace GuiTestingLibrary_Tets
 {
@@ -23,6 +24,13 @@ namespace GuiTestingLibrary_Tets
                 );
             Assert.That(gtRocess.ProcesId>0);
             Assert.That(gtRocess.kill() >= 0);
+        }
+        [Test]
+        public void Test_GetMaximisedWindowSize()
+        {
+            Vector2 MaxWindowsize = SystemController.MaximizedWindowSize;
+            Assert.That(MaxWindowsize.X== 1936);
+            Assert.That(MaxWindowsize.Y == 1048);
         }
 
     }

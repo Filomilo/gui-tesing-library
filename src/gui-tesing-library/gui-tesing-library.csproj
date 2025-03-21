@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Components\GTProcess.cs" />
     <Compile Include="Components\GTWindow.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="WinApiWrapper.cs" />
