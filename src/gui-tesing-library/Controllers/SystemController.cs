@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace gui_tesing_library
@@ -33,6 +34,7 @@ namespace gui_tesing_library
 
         public GTProcess StartProcess(string v)
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
             GTProcess gtProcess = new GTProcess(WinApiWrapper.CreateProcess(v));
             return gtProcess;
         }

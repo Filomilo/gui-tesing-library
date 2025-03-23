@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32.SafeHandles;
 using static gui_tesing_library.WinApiWrapper;
@@ -60,6 +61,7 @@ namespace gui_tesing_library.Components
 
         public bool DoesExist()
         {
+
             return WinApiWrapper.IsWindow(new IntPtr(this._HWnd));
 
 
@@ -67,12 +69,15 @@ namespace gui_tesing_library.Components
 
         public void SetPostion(int x, int y)
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
             WinApiWrapper.SetWindowPos(new IntPtr(this._HWnd), 0, x, y, 0, 0, UFlags.SWP_NOSIZE);
 
         }
 
         public void KillProces()
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
             this.Process.kill();
             Helpers.AwaitTrue(() =>
             {
@@ -82,11 +87,15 @@ namespace gui_tesing_library.Components
 
         public void SetWindowSize(int x, int y)
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
             WinApiWrapper.SetWindowPos(new IntPtr(this._HWnd), 0, 0, 0, x, y, UFlags.SWP_NOMOVE);
         }
 
         public void Minimize()
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
             WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
                 NCmdShow.SW_MINIMIZE
             );
@@ -94,6 +103,8 @@ namespace gui_tesing_library.Components
 
         public void Maximize()
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
             WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
                 NCmdShow.SW_SHOWMAXIMIZED
             );
@@ -101,7 +112,8 @@ namespace gui_tesing_library.Components
 
         public void BringUpFront()
         {
-             WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+            WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
                 NCmdShow.SW_RESTORE
             );
             bool returnVal= WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
@@ -114,6 +126,7 @@ namespace gui_tesing_library.Components
 
         public void Destroy()
         {
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
             WinApiWrapper.DestroyWindow(new IntPtr(this._HWnd));
             Helpers.AwaitTrue(() =>
             {

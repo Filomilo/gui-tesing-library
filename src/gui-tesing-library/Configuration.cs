@@ -21,8 +21,19 @@ namespace gui_tesing_library
                 _ProcesAwaitTime = value;
             }
         }
+        private static int _ActionDelay = 200;
 
-
+        public static int ActionDelay
+        {
+            get
+            {
+                return _ActionDelay;
+            }
+            set
+            {
+                _ActionDelay = value;
+            }
+        }
 
     }
 }
