@@ -19,8 +19,18 @@ namespace gui_tesing_library.Components
             get { return this._Process.Id; }
         }
 
+        public bool DoesExist
+        {
+            get { return _Process.Id>0; }
+        }
+
         public int kill()
         {
+            if(!DoesExist)
+            {
+                //todo: logg warrignng
+                return 0;
+            }
             this._Process.Kill();
             Helpers.AwaitTrue(() =>
             {
