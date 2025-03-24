@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lombok.NET;
+using static gui_tesing_library.WinApiWrapper;
 
 namespace gui_tesing_library.Components
 {
@@ -18,9 +19,23 @@ namespace gui_tesing_library.Components
             get { return this._Process.Id; }
         }
 
+        public bool DoesExist
+        {
+            get { return _Process.Id>0; }
+        }
+
         public int kill()
         {
+            if(!DoesExist)
+            {
+                //todo: logg warrignng
+                return 0;
+            }
             this._Process.Kill();
+            Helpers.AwaitTrue(() =>
+            {
+                return this._Process.HasExited;
+            });
             return 0;
             // add exception handling
         }
@@ -29,5 +44,35 @@ namespace gui_tesing_library.Components
         {
             this._Process = process;
         }
+
+        public List<GTWindow> getPrcoessWindow()
+        {
+            
+            List<IntPtr> windowHandles = new List<IntPtr>();
+            Console.WriteLine($"This Peocesss: {this.ProcesId}");
+            WinApiWrapper.EnumWindows((hwnd, param) =>
+               {
+
+                   StringBuilder title = new StringBuilder(256);
+                   WinApiWrapper.GetWindowText(hwnd, title, title.Capacity);
+
+                   if (title.Length > 0) // Ignore empty titles
+                   {
+                       Console.WriteLine($"Window Handle: {hwnd}, Title: {title}");
+                   }
+
+                   GetWindowThreadProcessId(hwnd, out uint parentProcessId);
+
+                   Console.WriteLine($"Window Handle: {hwnd}, Process ID: {parentProcessId}");
+
+                   return true; // Continue enumeration
+               }, IntPtr.Zero);
+
+
+
+               return null;
+
+        }
+
     }
 }
