@@ -4,13 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lombok.NET;
 using static gui_tesing_library.WinApiWrapper;
 
 namespace gui_tesing_library.Components
 {
-    [AllArgsConstructor]
-    [With]
+
     public class GTProcess
     {
         private Process _Process;
