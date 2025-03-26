@@ -8,13 +8,8 @@ winget install Microsoft.DotNet.Framework.DeveloperPack_4 -v 4.7.2 --accept-sour
 winget install Microsoft.NuGet --accept-source-agreements --accept-package-agreements >> \\host.lan\Data\\winget-output.log
 winget install Microsoft.dotnet.runtime.8 --accept-source-agreements --accept-package-agreements >> \\host.lan\Data\\winget-output.log
 set PATH="C:\Program Files\Common Files\Oracle\Java\javapath";%PATH% 
-cd C:\OEM\GuiTestingLibrary_Tests
-"C:\Program Files\dotnet\dotnet.exe" test 
-"C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
-"C:\Program Files\dotnet\dotnet.exe" test 
-"C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
-"C:\Program Files\dotnet\dotnet.exe" dotnet test --logger "trx;LogFileName=\\host.lan\Data\\test-results.xml"
+start /min cmd /c "C:\OEM\runTest.bat"
 
-echo "fin" >> \\host.lan\Data\\fin
 
+ 
 

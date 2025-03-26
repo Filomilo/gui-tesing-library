@@ -20,7 +20,7 @@ namespace GuiTestingLibrary_Tets
         public void Test_StartProces()
         {
             GTProcess gtRocess = SystemController.Instance.StartProcess(
-                "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
+                "\"C:\\Program Files\\Common Files\\Oracle\\Java\\javapath\\java\" -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
                 );
             Assert.That(gtRocess.ProcesId>0);
             Assert.That(gtRocess.kill() >= 0);
