@@ -2,7 +2,7 @@ name: Dot net test on windows docker
 run-name: ${{ github.actor }} is testing Code
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  NUnit_Tests:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
