@@ -30,6 +30,12 @@ jobs:
         with:
             name: test-run_Resultts
             path: ./shared
-
-
-      
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: success() 
+        with:
+          name: NUnit Tests            
+          path: shared/test-results.xml    
+          reporter: dotnet-nunit
+          fail-on-error: 'true'
+          fail-on-empty: 'true'
