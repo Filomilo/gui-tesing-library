@@ -57,7 +57,7 @@ type(String input with action defined as Key.ENTER)
 * GetActiveProcesses
 * 
 
-### Screen
+### Screen - Singleton
 * GetSize
 * GetScreenshot
 * GetScreenShotRect
@@ -76,7 +76,7 @@ type(String input with action defined as Key.ENTER)
 * Close
 
 
-### Mouse
+### Mouse- Singleton
 * MoveMouse
 * SetPostion
 * GetPosition
@@ -93,7 +93,7 @@ type(String input with action defined as Key.ENTER)
 * ScrollDown
 * MoveRelativeToWindow
 
-### KeyBoard
+### KeyBoard- Singleton
 * Press (KEY)
 * UnPress(Key)
 * Click(Key)
