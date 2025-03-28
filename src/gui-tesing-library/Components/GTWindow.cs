@@ -6,136 +6,181 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using gui_tesing_library.Controllers;
+using gui_tesing_library.Models;
 using Microsoft.Win32.SafeHandles;
 using static gui_tesing_library.WinApiWrapper;
 
 namespace gui_tesing_library.Components
 {
-    public class GTWindow
+    public class GTWindow : IGTWindow
     {
-        private long _HWnd;
+        //private long _HWnd;
 
-        public GTWindow(long hWnd)
+        //public GTWindow(long hWnd)
+        //{
+        //    _HWnd = hWnd;
+        //}
+
+        //public GTProcess Process
+        //{
+        //    get
+        //    {
+        //        GetWindowThreadProcessId(new IntPtr(this._HWnd),out uint lpdwProcess);
+        //        return new GTProcess(System.Diagnostics.Process.GetProcessById(
+        //             (int)   lpdwProcess
+        //          )
+        //            );
+
+        //    }
+        //}
+
+
+        //public Vector2 Size{
+        //    get
+        //    {
+        //        WinApiWrapper.GetWindowRect( new IntPtr(this._HWnd) , out RECT lpRect);
+        //        return new Vector2(lpRect.Right - lpRect.Left, lpRect.Bottom - lpRect.Top);
+        //    }
+        //}
+
+        //public bool IsMinimized
+        //{
+        //    get
+        //    {
+        //        return WinApiWrapper.IsIconic(new IntPtr(this._HWnd) );
+        //    }
+        //}
+
+        //public Vector2 Postion
+        //{
+        //    get
+        //    {
+        //        WinApiWrapper.GetWindowRect(new IntPtr(this._HWnd), out RECT lpRect);
+        //        return new Vector2(lpRect.Left, lpRect.Top);
+        //    }
+        //}
+
+        //public bool DoesExist()
+        //{
+
+        //    return WinApiWrapper.IsWindow(new IntPtr(this._HWnd));
+
+
+        //}
+
+        //public void SetPostion(int x, int y)
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+        //    WinApiWrapper.SetWindowPos(new IntPtr(this._HWnd), 0, x, y, 0, 0, UFlags.SWP_NOSIZE);
+
+        //}
+
+        //public void KillProces()
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
+        //    this.Process.kill();
+        //    Helpers.AwaitTrue(() =>
+        //    {
+        //        return this.DoesExist() == false;
+        //    });
+        //}
+
+        //public void SetWindowSize(int x, int y)
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
+        //    WinApiWrapper.SetWindowPos(new IntPtr(this._HWnd), 0, 0, 0, x, y, UFlags.SWP_NOMOVE);
+        //}
+
+        //public void Minimize()
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
+        //    WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
+        //        NCmdShow.SW_MINIMIZE
+        //    );
+        //}
+
+        //public void Maximize()
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+
+        //    WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
+        //        NCmdShow.SW_SHOWMAXIMIZED
+        //    );
+        //}
+
+        //public void BringUpFront()
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+        //    WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
+        //        NCmdShow.SW_RESTORE
+        //    );
+        //    bool returnVal= WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
+        //        NCmdShow.SW_SHOW
+        //    );
+        //    WinApiWrapper.BringWindowToTop(new IntPtr(this._HWnd));
+        //    int error = WinApiWrapper.GetLastError();
+        //    Console.WriteLine($"Last Error: {error}");
+        //}
+
+        //public void Destroy()
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+        //    WinApiWrapper.DestroyWindow(new IntPtr(this._HWnd));
+        //    Helpers.AwaitTrue(() =>
+        //    {
+        //        return this.DoesExist() == false;
+        //    });
+        //}
+        public Vector2i Position => throw new NotImplementedException();
+
+        public bool DoesExist => throw new NotImplementedException();
+
+        public string Name => throw new NotImplementedException();
+
+        public Vector2i Size => throw new NotImplementedException();
+
+        public IGTProcess Close()
         {
-            _HWnd = hWnd;
+            throw new NotImplementedException();
         }
 
-        public GTProcess Process
+        public Color GetPixelColorAt(Vector2i postion)
         {
-            get
-            {
-                GetWindowThreadProcessId(new IntPtr(this._HWnd),out uint lpdwProcess);
-                return new GTProcess(System.Diagnostics.Process.GetProcessById(
-                     (int)   lpdwProcess
-                  )
-                    );
-               
-            }
+            throw new NotImplementedException();
         }
 
-
-        public Vector2 Size{
-            get
-            {
-                WinApiWrapper.GetWindowRect( new IntPtr(this._HWnd) , out RECT lpRect);
-                return new Vector2(lpRect.Right - lpRect.Left, lpRect.Bottom - lpRect.Top);
-            }
-        }
-
-        public bool IsMinimized
+        public IGTProcess GetProcessOfWindow()
         {
-            get
-            {
-                return WinApiWrapper.IsIconic(new IntPtr(this._HWnd) );
-            }
+            throw new NotImplementedException();
         }
 
-        public Vector2 Postion
+        public ScreenShot GetScreenshot()
         {
-            get
-            {
-                WinApiWrapper.GetWindowRect(new IntPtr(this._HWnd), out RECT lpRect);
-                return new Vector2(lpRect.Left, lpRect.Top);
-            }
+            throw new NotImplementedException();
         }
 
-        public bool DoesExist()
+        public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
         {
-
-            return WinApiWrapper.IsWindow(new IntPtr(this._HWnd));
-
-
+            throw new NotImplementedException();
         }
 
-        public void SetPostion(int x, int y)
+        public IGTProcess Maximize()
         {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-            WinApiWrapper.SetWindowPos(new IntPtr(this._HWnd), 0, x, y, 0, 0, UFlags.SWP_NOSIZE);
-
+            throw new NotImplementedException();
         }
 
-        public void KillProces()
+        public IGTProcess Minimize()
         {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-
-            this.Process.kill();
-            Helpers.AwaitTrue(() =>
-            {
-                return this.DoesExist() == false;
-            });
+            throw new NotImplementedException();
         }
 
-        public void SetWindowSize(int x, int y)
+        public IGTProcess MoveWindow(Vector2i offset)
         {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-
-            WinApiWrapper.SetWindowPos(new IntPtr(this._HWnd), 0, 0, 0, x, y, UFlags.SWP_NOMOVE);
+            throw new NotImplementedException();
         }
-
-        public void Minimize()
-        {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-
-            WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
-                NCmdShow.SW_MINIMIZE
-            );
-        }
-
-        public void Maximize()
-        {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-
-            WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
-                NCmdShow.SW_SHOWMAXIMIZED
-            );
-        }
-
-        public void BringUpFront()
-        {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-            WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
-                NCmdShow.SW_RESTORE
-            );
-            bool returnVal= WinApiWrapper.ShowWindow(new IntPtr(this._HWnd),
-                NCmdShow.SW_SHOW
-            );
-            WinApiWrapper.BringWindowToTop(new IntPtr(this._HWnd));
-            int error = WinApiWrapper.GetLastError();
-            Console.WriteLine($"Last Error: {error}");
-        }
-
-        public void Destroy()
-        {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-            WinApiWrapper.DestroyWindow(new IntPtr(this._HWnd));
-            Helpers.AwaitTrue(() =>
-            {
-                return this.DoesExist() == false;
-            });
-        }
-
-
-
-
     }
 }

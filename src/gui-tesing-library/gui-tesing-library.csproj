@@ -52,6 +52,9 @@
     <Compile Include="Components\GTWindow.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\KeyboardController.cs" />
+    <Compile Include="Controllers\MouseController.cs" />
+    <Compile Include="Controllers\ScreenController.cs" />
     <Compile Include="Interfaces\IGTKeyboard.cs" />
     <Compile Include="Interfaces\IGTMouse.cs" />
     <Compile Include="Interfaces\IGTScreen.cs" />

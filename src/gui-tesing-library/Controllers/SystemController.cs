@@ -1,4 +1,5 @@
 ﻿using gui_tesing_library.Components;
+using gui_tesing_library.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,50 +11,84 @@ using System.Threading.Tasks;
 
 namespace gui_tesing_library
 {
-     public class SystemController
+    public class SystemController : IGTSystem
     {
-        private static readonly SystemController _instance = new SystemController();
-        private SystemController() { }
-        public static SystemController Instance => _instance;
+        //private static readonly SystemController _instance = new SystemController();
+        //private SystemController() { }
+        //public static SystemController Instance => _instance;
 
-        public static Vector2 MaximizedWindowSize
+        //public static Vector2 MaximizedWindowSize
+        //{
+        //    get
+        //    {
+        //        return new Vector2(
+        //            WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXMAXIMIZED),
+        //            WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYMAXIMIZED)
+        //            );
+        //    }
+        //}
+
+        //public OperatingSystem GetOSVersion()
+        //{
+        //    return Environment.OSVersion;
+        //}
+
+        //public GTProcess StartProcess(string v)
+        //{
+        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+        //    GTProcess gtProcess = new GTProcess(WinApiWrapper.CreateProcess(v));
+        //    return gtProcess;
+        //}
+
+        //public GTWindow GetWindowByName(string name)
+        //{
+        //    try
+        //    {
+        //        Helpers.AwaitTrue(() => { return (long)WinApiWrapper.FindWindowA(null, name) > 0; });
+        //        IntPtr winId = (IntPtr)WinApiWrapper.FindWindowA(null, name);
+
+        //        return new GTWindow((long)winId);
+        //    }
+        //    catch (TimeoutException ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+        IGTSystem IGTSystem.Instance => throw new NotImplementedException();
+
+        public IEnumerable<IGTProcess> FindProcessByName(string name)
         {
-            get
-            {
-                return new Vector2(
-                    WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXMAXIMIZED),
-                    WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYMAXIMIZED)
-                    );
-            }
+            throw new NotImplementedException();
         }
 
-        public OperatingSystem GetOSVersion()
+        public IEnumerable<IGTWindow> FindWindowByName(string name)
         {
-            return Environment.OSVersion;
+            throw new NotImplementedException();
         }
 
-        public GTProcess StartProcess(string v)
+        public IEnumerable<IGTProcess> GetActiveProcesses()
         {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-            GTProcess gtProcess = new GTProcess(WinApiWrapper.CreateProcess(v));
-            return gtProcess;
+            throw new NotImplementedException();
         }
 
-        public GTWindow GetWindowByName(string name)
+        public IEnumerable<IGTWindow> GetActiveWindows()
         {
-            try
-            {
-                Helpers.AwaitTrue(() => { return (long)WinApiWrapper.FindWindowA(null, name) > 0; });
-                IntPtr winId = (IntPtr)WinApiWrapper.FindWindowA(null, name);
-
-                return new GTWindow((long)winId);
-            }
-            catch (TimeoutException ex)
-            {
-                return null;
-            }
+            throw new NotImplementedException();
         }
 
-        
+        public string GetClipBoardContent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IGTProcess StartProcess(string commandString)
+        {
+            throw new NotImplementedException();
+        }
+
+        GTSystemVersion IGTSystem.GetSystemVersion()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
