@@ -30,12 +30,9 @@ jobs:
         with:
             name: test-run_Resultts
             path: ./shared
-      - name: Generate HTML test report
-        uses: rjtngit/nunit-html-action@v1
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
         with:
-            inputXmlPath: shared/test-results.xml    
-            outputHtmlPath: test_report/results.html
-      - name: Upload test report
-        uses: actions/upload-artifact@v3
-        with:
-              path: test_report
+          files: |
+            ./shared/*.xml
