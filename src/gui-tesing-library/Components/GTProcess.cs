@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gui_tesing_library.Interfaces;
+using gui_tesing_library.SystemCalls;
 using Lombok.NET;
 using static gui_tesing_library.WinApiWrapper;
 
@@ -13,6 +15,15 @@ namespace gui_tesing_library.Components
     [With]
     public class GTProcess : IGTProcess
     {
+        private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
+
+        private int _handle;
+
+        public GTProcess(int handle)
+        {
+            this._handle = handle;
+        }
+
         //private Process _Process;
         //public int ProcesId
         //{
@@ -75,7 +86,13 @@ namespace gui_tesing_library.Components
         //}
         public string Name => throw new NotImplementedException();
 
-        public bool IsAlive => throw new NotImplementedException();
+        public bool IsAlive
+        {
+            get
+            {
+                return _SystemCalls.GetDoesProcessExist(this._handle);
+            }
+        }
 
         public long GetRamUsage()
         {
@@ -89,7 +106,7 @@ namespace gui_tesing_library.Components
 
         public void kill()
         {
-            throw new NotImplementedException();
+           this._SystemCalls.TerminateProcess(this._handle);
         }
     }
 }

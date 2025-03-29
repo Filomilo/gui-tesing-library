@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gui_tesing_library.Controllers;
 
 namespace GuiTestingLibrary_Tets.Components
 {
     [TestFixture]
     class GtWindowTest
     {
-        private GTProcess gtRocess;
-        private GTWindow window;
+        private IGTProcess gtRocess;
+        private IGTWindow window;
 
         [NUnit.Framework.SetUp]
         public void init()
@@ -22,41 +23,51 @@ namespace GuiTestingLibrary_Tets.Components
             gtRocess = SystemController.Instance.StartProcess(
                 "\"C:\\Program Files\\Common Files\\Oracle\\Java\\javapath\\java\" -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
             );
-            Assert.That(gtRocess.ProcesId > 0);
-            window = SystemController.Instance.GetWindowByName("Hello!");
+            Assert.That(gtRocess.IsAlive);
+            window = SystemController.Instance.WindowOfNameShouldExist("Hello!"). FindTopWindowByName("Hello!");
             Assert.That(window!=null);
            
         }
         [NUnit.Framework.TearDown]
         public void purge()
         {
-            Assert.That(gtRocess.kill() >= 0);
-            window.KillProces();
-
-            Assert.That(window.DoesExist() == false);
-            Assert.That(SystemController.Instance.GetWindowByName("Hello!") == null);
-            ;
+            Assert.DoesNotThrow(() =>
+            {
+                gtRocess.kill();
+            });
+            window.Close();
+            window.KillProcess();
+            window.ShouldWindowExist(false);
+            Assert.That(window.DoesExist == false);
+            Assert.Throws<ArgumentException>(() =>
+            {
+                SystemController.Instance.FindTopWindowByName("Hello!");
+            });
         }
 
         [Test]
         public void getWindowSizeTest()
         {
-         
-            Assert.That(window.Size.X==336 && window.Size.Y == 279);
+            Assert.DoesNotThrow(() =>
+            {
+                window.SizeShouldBe(new Vector2i(336, 279));
+            });
+          
+            Assert.That(window.Size.x==336 && window.Size.y == 279);
         }
         [Test]
         public void setWindowSizeTest()
         {
 
             window.SetWindowSize(800, 600);
-            Assert.That(window.Size.X == 800 && window.Size.Y == 600);
+            Assert.That(window.Size.x == 800 && window.Size.y == 600);
         }
         [Test]
         public void setWindowPostionTest()
         {
 
             window.SetPostion(0, 0);
-            Assert.That(window.Postion.X == 0 && window.Postion.Y == 0);
+            Assert.That(window.Position.x == 0 && window.Position.y == 0);
         }
 
 
@@ -65,11 +76,11 @@ namespace GuiTestingLibrary_Tets.Components
         {
             Assert.That(window.IsMinimized==false);
             window.Minimize();
-            Assert.That(window.IsMinimized==true);
+            Assert.That(window.ShouldBeMinimized(true).IsMinimized==true);
             window.BringUpFront();
-            Assert.That(window.IsMinimized == false);
+            Assert.That(window.ShouldBeMinimized(false).IsMinimized == false);
             window.Maximize();
-            Assert.That(window.Size.X == SystemController.MaximizedWindowSize.X && window.Size.Y == SystemController.MaximizedWindowSize.Y);
+            Assert.That(window.Size.x == ScreenController.Instance.MaximizedWindowSize.x && window.Size.y == ScreenController.Instance.MaximizedWindowSize.y);
         }
 
 

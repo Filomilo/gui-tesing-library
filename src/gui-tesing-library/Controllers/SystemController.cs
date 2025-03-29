@@ -8,11 +8,17 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using gui_tesing_library.Controllers;
+using gui_tesing_library.Directives;
+using gui_tesing_library.Interfaces;
+using gui_tesing_library.SystemCalls;
 
 namespace gui_tesing_library
 {
     public class SystemController : IGTSystem
     {
+        private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
+
         //private static readonly SystemController _instance = new SystemController();
         //private SystemController() { }
         //public static SystemController Instance => _instance;
@@ -33,12 +39,6 @@ namespace gui_tesing_library
         //    return Environment.OSVersion;
         //}
 
-        //public GTProcess StartProcess(string v)
-        //{
-        //    Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-        //    GTProcess gtProcess = new GTProcess(WinApiWrapper.CreateProcess(v));
-        //    return gtProcess;
-        //}
 
         //public GTWindow GetWindowByName(string name)
         //{
@@ -54,16 +54,45 @@ namespace gui_tesing_library
         //        return null;
         //    }
         //}
-        IGTSystem IGTSystem.Instance => throw new NotImplementedException();
 
-        public IEnumerable<IGTProcess> FindProcessByName(string name)
+        static IGTSystem _gtSystem=null;
+
+     public static   IGTSystem Instance
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (_gtSystem == null)
+                {
+                    _gtSystem = new SystemController();
+                }
+
+                return _gtSystem;
+            }
         }
 
         public IEnumerable<IGTWindow> FindWindowByName(string name)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<IGTProcess> FindProcessByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+        [Log]
+        public IGTWindow FindTopWindowByName(string name)
+        {
+            IGTWindow window = new GTWindow(this._SystemCalls.FindWindowByName(name));
+            return window;
+        }
+
+        public IGTSystem WindowOfNameShouldExist(string name)
+        {
+            Helpers.AwaitTrue(() =>
+            {
+                return this._SystemCalls.FindWindowByName(name) != 0;
+            });
+            return this;
         }
 
         public IEnumerable<IGTProcess> GetActiveProcesses()
@@ -80,11 +109,25 @@ namespace gui_tesing_library
         {
             throw new NotImplementedException();
         }
-
+        [Log]
         public IGTProcess StartProcess(string commandString)
         {
-            throw new NotImplementedException();
+
+            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+            IGTProcess gtProcess = new GTProcess(_SystemCalls.CreateProcess(commandString));
+            return gtProcess;
         }
+
+        public GTSystemVersion OsVersion
+        {
+                    get
+                    {
+                        return new GTSystemVersion(Environment.OSVersion);
+                    }
+                    
+        }
+
+        public Vector2 MaximizedWindowSize { get; set; }
 
         GTSystemVersion IGTSystem.GetSystemVersion()
         {
