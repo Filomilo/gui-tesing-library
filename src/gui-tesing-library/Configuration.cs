@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace gui_tesing_library
@@ -34,6 +36,7 @@ namespace gui_tesing_library
                 _ActionDelay = value;
             }
         }
+
 
     }
 }

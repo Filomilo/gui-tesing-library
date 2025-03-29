@@ -55,4 +55,5 @@ praca magisterskska: ...
 https://github.com/Filomilo/gui-tesing-library
 
 
-
+## Plan interfejsów
+[InterfacePlan](./docs/InterfacePlan.md)

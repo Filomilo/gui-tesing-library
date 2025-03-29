@@ -13,7 +13,7 @@ namespace GuiTestingLibrary_Tets.Components
     [TestFixture]
     class GtProcessTest
     {
-        private GTProcess gtRocess;
+        private IGTProcess gtRocess;
 
 
         [NUnit.Framework.SetUp]
@@ -21,16 +21,19 @@ namespace GuiTestingLibrary_Tets.Components
         {
          
                 gtRocess = SystemController.Instance.StartProcess(
-                    "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
+                    "\"C:\\Program Files\\Common Files\\Oracle\\Java\\javapath\\java\" -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
                 );
-                Assert.That(gtRocess.ProcesId > 0);
+                Assert.That(gtRocess.IsAlive);
 
             
     }
         [NUnit.Framework.TearDown]
         public void purge()
         {
-            Assert.That(gtRocess.kill() >= 0);
+            Assert.DoesNotThrow(() =>
+            {
+                gtRocess.kill();
+            }); 
         }
 
 

@@ -5,37 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace gui_tesing_library
 {
     public static class WinApiWrapper
     {
-        public static Process CreateProcess(string startCommand)
-        {
 
-            List< String> splits = startCommand.Split(' ').ToList();
-            if (splits.Count == 0)
-            {
-//todo: custom exception
-            }
-
-            String programName = splits[0];
-            splits.RemoveAt(0);
-            string args = "";
-            if (splits.Count > 0)
-            {
-                args = string.Join(" ",splits);
-            }
-            // todo: handle spaces in path
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = programName;
-            startInfo.Arguments = args;
-            startInfo.WorkingDirectory = Directory.GetCurrentDirectory();
-            Process process = Process.Start(startInfo);
-            
-            return process;
-        }
 
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
@@ -66,8 +43,10 @@ namespace gui_tesing_library
     }
 
 
+    [DllImport("kernel32.dll")]
+    public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
 
-    [Flags]
+        [Flags]
     public enum UFlags
         {
             SWP_ASYNCWINDOWPOS= 0x4000,
@@ -236,5 +215,30 @@ namespace gui_tesing_library
             String lpClassName,
             String lpWindowName
         );
+
+        [DllImport("kernel32.dll")]
+        public static extern bool TerminateProcess(IntPtr hProcess, uint uExitCode);
+
+        [Flags]
+        public enum ProcessAccessRights : uint
+        {
+            PROCESS_TERMINATE = 0x0001,                
+            PROCESS_CREATE_THREAD = 0x0002,            
+            PROCESS_SET_INFORMATION = 0x0200,          
+            PROCESS_QUERY_INFORMATION = 0x0400,        
+            PROCESS_SET_QUOTA = 0x0100,                
+            PROCESS_SUSPEND_RESUME = 0x0800,           
+            PROCESS_QUERY_LIMITED_INFORMATION = 0x1000,
+            PROCESS_VM_OPERATION = 0x0008,             
+            PROCESS_VM_READ = 0x0010,                  
+            PROCESS_VM_WRITE = 0x0020,                 
+            PROCESS_DUP_HANDLE = 0x0040,               
+            PROCESS_CREATE_PROCESS = 0x0080,           
+            SYNCHRONIZE = 0x00100000,                  
+            PROCESS_ALL_ACCESS = 0x1F0FFF,             
+        }
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr OpenProcess(ProcessAccessRights dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+
     }
 }
