@@ -39,7 +39,7 @@ jobs:
         if: success() 
         with:
           name: NUnit Tests            
-          path: shared/*.xml    
+          path: shared/*.trx    
           reporter: dotnet-nunit
           fail-on-error: 'true'
           fail-on-empty: 'true'
