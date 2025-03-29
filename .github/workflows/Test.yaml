@@ -1,6 +1,10 @@
 name: Dot net test on windows docker
 run-name: ${{ github.actor }} is testing Code
 on: [push]
+permissions:
+  contents: read
+  actions: read
+  checks: write
 jobs:
   NUnit_Tests:
     runs-on: ubuntu-20.04
