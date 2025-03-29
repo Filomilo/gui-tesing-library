@@ -56,6 +56,4 @@ https://github.com/Filomilo/gui-tesing-library
 
 
 ## Plan interfejsów
-
-[[InterfacePlan]]
-
+[InterfacePlan](./docs/InterfacePlan.md)
