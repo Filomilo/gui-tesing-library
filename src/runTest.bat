@@ -1,4 +1,5 @@
 cd C:\OEM\GuiTestingLibrary_Tests
+"C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\nuget.exe" restore ..\gui-tesing-library\gui-tesing-library.sln >> \\host.lan\Data\\nugetRestore.log
 @REM "C:\Program Files\dotnet\dotnet.exe" test 
 @REM "C:\Program Files\dotnet\dotnet.exe" test >> \\host.lan\Data\\dotnet-output.log
 @REM "C:\Program Files\dotnet\dotnet.exe" test 
