@@ -1,3 +1,4 @@
+start /min cmd /c "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe -f gdigrab -framerate 30 -i desktop \\host.lan\Data\\desktop-output.mkv -nostdin > \\host.lan\Data\\ffmpeg-output.log "
 cd C:\OEM\GuiTestingLibrary_Tests
 "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\nuget.exe" restore ..\gui-tesing-library\gui-tesing-library.sln >> \\host.lan\Data\\nugetRestore.log
 @REM "C:\Program Files\dotnet\dotnet.exe" test 
