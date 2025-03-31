@@ -24,7 +24,7 @@ TIMEOUT=$((60 * 60))
 SECONDS=0
 
 echo "Waiting for docker test to finish"
-until [ -f "shared/fin" ] || (( SECONDS >= TIMEOUT )); do sleep 1;  done
+until [ -f "shared/test-results.trx" ] || (( SECONDS >= TIMEOUT )); do sleep 1;  done
 
 
 docker compose down
