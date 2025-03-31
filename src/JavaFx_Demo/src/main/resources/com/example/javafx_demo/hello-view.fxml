@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="525.0" prefWidth="1112.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="465.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx_demo.HelloController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="24.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="426.0" />
@@ -36,7 +36,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane gridLinesVisible="true" prefHeight="94.0" prefWidth="167.0" style="-fx-background-color: brown;">
+            <GridPane fx:id="OperatorGridPane" gridLinesVisible="true" prefHeight="94.0" prefWidth="167.0" style="-fx-background-color: brown;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -45,8 +45,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" text="Change title" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <TextField fx:id="titleTexField" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <Button fx:id="chnageTitleBUtton" alignment="CENTER" mnemonicParsing="false" onAction="#CHANGE__TITLE_ACTION" prefHeight="25.0" text="Change title" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <GridPane style="-fx-background-color: CHARTREUSE;" GridPane.columnIndex="1">
@@ -60,15 +60,15 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Slider GridPane.rowIndex="1" />
-                  <Slider GridPane.rowIndex="2" />
-                  <Slider GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
+                  <Slider fx:id="resSlider" max="1.0" onDragDetected="#redMouseDrag" onMouseDragOver="#redMouseDrag" GridPane.rowIndex="1" />
+                  <Slider fx:id="GreenSlider" max="1.0" GridPane.rowIndex="2" />
+                  <Slider fx:id="BlueSlider" max="1.0" GridPane.rowIndex="3" />
+                  <Pane fx:id="SliderColorPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />
                </children>
             </GridPane>
-            <Canvas height="136.0" width="334.0" GridPane.columnIndex="2" />
-            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-             <Button alignment="CENTER" text="OPEN MODAL" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Canvas fx:id="CanvasPane" height="77.0" style="-fx-background-color: green;" width="116.0" GridPane.columnIndex="2" />
+            <TextArea fx:id="textAreaTest" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+             <Button fx:id="openModlaButton" alignment="CENTER" onAction="#OnOpenModalButton" text="OPEN MODAL" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
              <ColorPicker GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <GridPane GridPane.rowIndex="2">
               <columnConstraints>
@@ -81,10 +81,10 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button alignment="CENTER" mnemonicParsing="false" text="BLACK" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Button mnemonicParsing="false" text="GREEN" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
+                  <Button fx:id="whiteButton" mnemonicParsing="false" onAction="#onWhiteButtonChange" text="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="blackButton" alignment="CENTER" mnemonicParsing="false" onAction="#onBlackButtonChange" text="BLACK" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <Button fx:id="greenButton" mnemonicParsing="false" onAction="#onGreenButtonChange" text="GREEN" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Pane fx:id="ColorButtonPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
                </children>
             </GridPane>
 

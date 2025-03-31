@@ -24,9 +24,10 @@
             </goals>
             <configuration>
               <shadedArtifactAttached>true</shadedArtifactAttached>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
               <transformers>
                 <transformer>
-                  <mainClass>com.example.javafx_demo.HelloApplication</mainClass>
+                  <mainClass>com.example.javafx_demo.GUIStarter</mainClass>
                 </transformer>
               </transformers>
             </configuration>
