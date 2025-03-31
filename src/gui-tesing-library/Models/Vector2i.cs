@@ -8,9 +8,9 @@ namespace gui_tesing_library.Controllers
 {
     public class Vector2i
     {
-        public Vector2i(int rectLeft, int rectTop)
+        public Vector2i(int x, int y)
         {
-           x=rectLeft; y=rectTop;
+           this.x=x; this.y=y;
         }
 
         public int x { get; set; }
@@ -29,6 +29,9 @@ namespace gui_tesing_library.Controllers
             return Equals((Vector2i)obj);
         }
 
-   
+        public override string ToString()
+        {
+            return $"[{x};{y}]";
+        }
     }
 }

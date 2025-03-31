@@ -251,11 +251,15 @@ namespace gui_tesing_library
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr OpenProcess(ProcessAccessRights dwDesiredAccess, bool bInheritHandle,
             int dwProcessId);
-
-
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int x;
+            public int y;
+        }
 
         [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out Vector2i lpPoint);
+        public static extern bool GetCursorPos(out POINT lpPoint);
 
         [DllImport("user32.dll")]
         public static extern bool SetCursorPos(int X, int Y);

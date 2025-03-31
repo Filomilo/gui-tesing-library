@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gui_tesing_library.Directives;
 using gui_tesing_library.SystemCalls;
 using Lombok.NET;
 
@@ -99,13 +100,15 @@ namespace gui_tesing_library.Controllers
         {
             throw new NotImplementedException();
         }
-
+        [Delay]
+        [Log]
         public IGTMouse SetPosition(Vector2i position)
         {
             SystemCallsFactory.GetSystemCalls().SetMousePostion(position);
             return this;
         }
-
+        [Delay]
+        [Log]
         public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon)
         {
             throw new NotImplementedException();

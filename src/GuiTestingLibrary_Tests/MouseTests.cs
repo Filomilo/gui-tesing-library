@@ -17,7 +17,7 @@ namespace GuiTestingLibrary_Tets
         {
             Vector2i newPos = new Vector2i(100, 100);
             MouseController.Instance.SetPosition(newPos);
-            Assert.That(newPos.Equals(MouseController.Instance.Position));
+            Assert.That(newPos.Equals(MouseController.Instance.Position),$"Mouse position is not {newPos}",$"{newPos} Equals {MouseController.Instance.Position}");
         }
     }
 }

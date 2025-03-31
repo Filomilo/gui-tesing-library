@@ -174,8 +174,8 @@ namespace gui_tesing_library.WInApi
 
         public Vector2i GetMousePosition()
         {
-            WinApiWrapper.GetCursorPos(out Vector2i pos);
-            return pos;
+            WinApiWrapper.GetCursorPos(out POINT pos);
+            return new Vector2i((int)pos.x, (int)pos.y);
         }
     }
 }

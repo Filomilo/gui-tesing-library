@@ -117,7 +117,7 @@ namespace gui_tesing_library
             IGTProcess gtProcess = new GTProcess(_SystemCalls.CreateProcess(commandString));
             return gtProcess;
         }
-
+       
         public GTSystemVersion OsVersion
         {
                     get
