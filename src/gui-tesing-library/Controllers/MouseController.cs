@@ -38,7 +38,8 @@ namespace gui_tesing_library.Controllers
 
         public IGTMouse ClickLeft()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().ClickLeft();
+            return this;
         }
 
         public IGTMouse ClickMiddle()
@@ -112,6 +113,16 @@ namespace gui_tesing_library.Controllers
         public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon)
         {
             throw new NotImplementedException();
+        }
+        [Delay]
+        [Log]
+        public IGTMouse PositionShouldBe(Vector2i pos)
+        {
+            Helpers.AwaitTrue(() =>
+            {
+                return this.Position.Equals(pos);
+            },$"Mouse postion was not {pos} withing maximum time but {this.Position}");
+            return this;
         }
     }
 }

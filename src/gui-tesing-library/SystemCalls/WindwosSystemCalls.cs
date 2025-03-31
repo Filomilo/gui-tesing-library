@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,12 +12,14 @@ using System.Threading.Tasks;
 using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
+using WindowsInput;
 using static gui_tesing_library.WinApiWrapper;
 
 namespace gui_tesing_library.WInApi
 {
-    class WindwosSystemCalls: ISystemCalls
+    class WindwosSystemCalls : ISystemCalls
     {
+        private InputSimulator _inputSimulator = new InputSimulator();
         public int CreateProcess(string startCommand)
         {
             String programName = "";
@@ -176,6 +179,20 @@ namespace gui_tesing_library.WInApi
         {
             WinApiWrapper.GetCursorPos(out POINT pos);
             return new Vector2i((int)pos.x, (int)pos.y);
+        }
+
+        public string GetWindowName(int handle)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            WinApiWrapper.GetWindowText(new IntPtr(handle) , stringBuilder, 512);
+            return stringBuilder.ToString();
+        }
+
+        void ISystemCalls.ClickLeft()
+        {
+            _inputSimulator.Mouse.LeftButtonClick();
+
+
         }
     }
 }

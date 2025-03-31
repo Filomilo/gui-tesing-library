@@ -28,5 +28,7 @@ namespace gui_tesing_library.Interfaces
         void SetWindowSize(int handle, Vector2i vector2i);
         void SetMousePostion(Vector2i position);
         Vector2i GetMousePosition();
+        string GetWindowName(int handle);
+        void ClickLeft();
     }
 }

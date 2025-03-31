@@ -91,7 +91,7 @@ namespace gui_tesing_library
             Helpers.AwaitTrue(() =>
             {
                 return this._SystemCalls.FindWindowByName(name) != 0;
-            });
+            }, $"No window of name [{name}]");
             return this;
         }
 

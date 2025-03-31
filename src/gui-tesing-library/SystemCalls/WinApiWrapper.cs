@@ -269,21 +269,72 @@ namespace gui_tesing_library
             INPUT_MOUSE=0, INPUT_KEYBOARD=1, INPUT_HARDWARE=2,
         }
 
-        //[StructLayout(LayoutKind.Explicit)]
-        //struct INPUT
-        //{
-        //    [FieldOffset(0)] INPUT_TYPE type;
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagKEYBDINPUT
+        {
+            public long dx;
+            public long dy;
+            public IntPtr mouseData;
+            public MouseEventFlags dwFlags;
+            public IntPtr time;
+            public ulong dwExtraInfo;
+        };
 
-        //    union {
-        //        MOUSEINPUT mi;
-        //        KEYBDINPUT ki;
-        //        HARDWAREINPUT hi;
-        //    }
 
-        //    DUMMYUNIONNAME;
-        //};
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagHARDWAREINPUT
+        {
+            IntPtr uMsg;
+            IntPtr wParamL;
+            IntPtr wParamH;
+        }
 
-    //[DllImport("user32.dll", SetLastError = true)]
-    //    private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
+
+        [Flags]
+        public enum MouseEventFlags : uint
+        {
+            MOUSEEVENTF_MOVE = 0x0001,               // Movement occurred
+            MOUSEEVENTF_LEFTDOWN = 0x0002,           // The left button was pressed
+            MOUSEEVENTF_LEFTUP = 0x0004,             // The left button was released
+            MOUSEEVENTF_RIGHTDOWN = 0x0008,          // The right button was pressed
+            MOUSEEVENTF_RIGHTUP = 0x0010,            // The right button was released
+            MOUSEEVENTF_MIDDLEDOWN = 0x0020,         // The middle button was pressed
+            MOUSEEVENTF_MIDDLEUP = 0x0040,           // The middle button was released
+            MOUSEEVENTF_XDOWN = 0x0080,              // An X button was pressed
+            MOUSEEVENTF_XUP = 0x0100,                // An X button was released
+            MOUSEEVENTF_WHEEL = 0x0800,              // The wheel was moved
+            MOUSEEVENTF_HWHEEL = 0x1000,             // The wheel was moved horizontally
+            MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000,    // The WM_MOUSEMOVE messages will not be coalesced
+            MOUSEEVENTF_VIRTUALDESK = 0x4000,        // Maps coordinates to the entire desktop
+            MOUSEEVENTF_ABSOLUTE = 0x8000            // The dx and dy members contain normalized absolute coordinates
+        }
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagMOUSEINPUT
+        {
+            public int dx;
+            public int dy;
+            public int mouseData;
+            public MouseEventFlags dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct INPUT
+        {
+            [FieldOffset(0)] public INPUT_TYPE type;
+            [FieldOffset(4)] public tagMOUSEINPUT MOUSEINPUT;
+            [FieldOffset(4)] public tagKEYBDINPUT KEYBDINPUT;
+            [FieldOffset(4)] public tagHARDWAREINPUT HARDWAREINPUT;
+        };
+
+  
+
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
     }
 }

@@ -58,12 +58,7 @@ namespace gui_tesing_library.Components
             }
         }
         public Vector2i MaximizedWindowSize { get; }
-        [Log]
-        [Delay]
-        IGTWindow IGTWindow.GetProcessOfWindow()
-        {
-            throw new NotImplementedException();
-        }
+   
         [Delay]
         [Log]
         IGTWindow IGTWindow.Close()
@@ -177,7 +172,7 @@ namespace gui_tesing_library.Components
         [Log]
         IGTWindow IGTWindow.ShouldWindowExist(bool v)
         {
-            Helpers.AwaitTrue((() => this.DoesExist == v));
+            Helpers.AwaitTrue((() => this.DoesExist == v),$"Window {this.GetWindowName()} is not {v} within max time");
             return this;
         }
         [Log]
@@ -194,6 +189,12 @@ namespace gui_tesing_library.Components
                 return this.IsMinimized==state;
             });
             return this;
+        }
+
+        [Log]
+        public string GetWindowName()
+        {
+         return   SystemCallsFactory.GetSystemCalls().GetWindowName(this._handle);
         }
     }
 }

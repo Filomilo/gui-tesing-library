@@ -15,7 +15,7 @@ namespace gui_tesing_library
         IGTWindow MoveWindow(Vector2i offset);
         IGTWindow Minimize();
         IGTWindow Maximize();
-        IGTWindow GetProcessOfWindow();
+        IGTProcess GetProcessOfWindow();
         IGTWindow Close();
         IGTWindow SetWindowSize(int x, int y);
         IGTWindow SetPostion(int x, int y);
@@ -25,5 +25,6 @@ namespace gui_tesing_library
         IGTWindow KillProcess();
 
         IGTWindow ShouldBeMinimized(bool state);
+        string GetWindowName();
     }
 }

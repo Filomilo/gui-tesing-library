@@ -13,7 +13,7 @@ namespace gui_tesing_library
     {
 
 
-        internal static void AwaitTrue(Func<bool> func)
+        internal static void AwaitTrue(Func<bool> func,string mes="")
         {
             bool state = false;
            Stopwatch sw = Stopwatch.StartNew();
@@ -22,7 +22,7 @@ namespace gui_tesing_library
                if (sw.ElapsedMilliseconds > Configuration.ProcesAwaitTime)
                {
                    sw.Stop();
-                   throw new TimeoutException("Did not reach state within max time");
+                   throw new TimeoutException("Did not reach state within max time ::: "+mes);
                }
                state = func();
                if(!state)
