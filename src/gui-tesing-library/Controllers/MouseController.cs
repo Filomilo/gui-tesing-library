@@ -3,12 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gui_tesing_library.SystemCalls;
+using Lombok.NET;
 
 namespace gui_tesing_library.Controllers
 {
-    class MouseController : IGTMouse
+    [Singleton]
+    public partial class MouseController : IGTMouse
     {
-        public Vector2i Position => throw new NotImplementedException();
+        static IGTMouse _MouseController = null;
+
+        public static IGTMouse Instance
+        {
+            get
+            {
+                if (_MouseController == null)
+                {
+                    _MouseController = new MouseController();
+                }
+
+                return _MouseController;
+            }
+        }
+
+
+        public Vector2i Position
+        {
+            get
+            {
+                return SystemCallsFactory.GetSystemCalls().GetMousePosition();
+            }
+        }
 
         public IGTMouse ClickLeft()
         {
@@ -77,7 +102,8 @@ namespace gui_tesing_library.Controllers
 
         public IGTMouse SetPosition(Vector2i position)
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().SetMousePostion(position);
+            return this;
         }
 
         public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon)

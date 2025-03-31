@@ -29,12 +29,6 @@ namespace gui_tesing_library.Controllers
             return Equals((Vector2i)obj);
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (x * 397) ^ y;
-            }
-        }
+   
     }
 }

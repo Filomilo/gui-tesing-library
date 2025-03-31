@@ -166,5 +166,16 @@ namespace gui_tesing_library.WInApi
         {
             WinApiWrapper.SetWindowPos(new IntPtr(handle), 0, 0, 0, vector2i.x, vector2i.y, UFlags.SWP_NOMOVE);
         }
+
+        public void SetMousePostion(Vector2i position)
+        {
+            WinApiWrapper.SetCursorPos(position.x, position.y);
+        }
+
+        public Vector2i GetMousePosition()
+        {
+            WinApiWrapper.GetCursorPos(out Vector2i pos);
+            return pos;
+        }
     }
 }

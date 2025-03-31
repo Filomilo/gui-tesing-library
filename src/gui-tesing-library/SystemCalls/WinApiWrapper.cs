@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using gui_tesing_library.Controllers;
 
 namespace gui_tesing_library
 {
@@ -16,72 +17,76 @@ namespace gui_tesing_library
 
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, UFlags wFlags);
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy,
+            UFlags wFlags);
+
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
         public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
-    [DllImport("user32.dll")]
-    public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
-    [DllImport("kernel32.dll")]
-    public static extern uint GetProcessIdOfThread(IntPtr ThreadHandle);
+        [DllImport("user32.dll")]
+        public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
-
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
-
-    [DllImport("user32.dll")]
-    public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct RECT
-    {
-        public int Left;
-        public int Top;
-        public int Right;
-        public int Bottom;
-    }
+        [DllImport("kernel32.dll")]
+        public static extern uint GetProcessIdOfThread(IntPtr ThreadHandle);
 
 
-    [DllImport("kernel32.dll")]
-    public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
+
+        [DllImport("kernel32.dll")]
+        public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
 
         [Flags]
-    public enum UFlags
+        public enum UFlags
         {
-            SWP_ASYNCWINDOWPOS= 0x4000,
-            SWP_DEFERERASE= 0x2000,
-            SWP_DRAWFRAME= 0x0020,
-            SWP_FRAMECHANGED= 0x0020,
-            SWP_HIDEWINDOW= 0x0080, 
-            SWP_NOACTIVATE= 0x0010,
-            SWP_NOCOPYBITS= 0x0100,
-            SWP_NOMOVE= 0x0002,
-            SWP_NOOWNERZORDER= 0x0200,
-            SWP_NOREDRAW= 0x0008,
-            SWP_NOREPOSITION= 0x0200,
-            SWP_NOSENDCHANGING= 0x0400,
-            SWP_NOSIZE= 0x0001,
-            SWP_NOZORDER= 0x0004,
-            SWP_SHOWWINDOW= 0x0040
+            SWP_ASYNCWINDOWPOS = 0x4000,
+            SWP_DEFERERASE = 0x2000,
+            SWP_DRAWFRAME = 0x0020,
+            SWP_FRAMECHANGED = 0x0020,
+            SWP_HIDEWINDOW = 0x0080,
+            SWP_NOACTIVATE = 0x0010,
+            SWP_NOCOPYBITS = 0x0100,
+            SWP_NOMOVE = 0x0002,
+            SWP_NOOWNERZORDER = 0x0200,
+            SWP_NOREDRAW = 0x0008,
+            SWP_NOREPOSITION = 0x0200,
+            SWP_NOSENDCHANGING = 0x0400,
+            SWP_NOSIZE = 0x0001,
+            SWP_NOZORDER = 0x0004,
+            SWP_SHOWWINDOW = 0x0040
 
         }
 
 
-       public enum NCmdShow
+        public enum NCmdShow
         {
-            SW_HIDE= 0,
-            SW_NORMAL=1,
-            SW_SHOWMINIMIZED=2,
-            SW_SHOWMAXIMIZED=3,
-            SW_SHOWNOACTIVATE=4,
-            SW_SHOW=5,
-            SW_MINIMIZE=6,
-            SW_SHOWMINNOACTIVE=7, 
-            SW_SHOWNA=8,
-            SW_RESTORE=9,
-            SW_SHOWDEFAULT=10,
-            SW_FORCEMINIMIZE=11
+            SW_HIDE = 0,
+            SW_NORMAL = 1,
+            SW_SHOWMINIMIZED = 2,
+            SW_SHOWMAXIMIZED = 3,
+            SW_SHOWNOACTIVATE = 4,
+            SW_SHOW = 5,
+            SW_MINIMIZE = 6,
+            SW_SHOWMINNOACTIVE = 7,
+            SW_SHOWNA = 8,
+            SW_RESTORE = 9,
+            SW_SHOWDEFAULT = 10,
+            SW_FORCEMINIMIZE = 11
         }
 
         [DllImport("user32.dll")]
@@ -94,12 +99,15 @@ namespace gui_tesing_library
         public static extern bool IsIconic(
             IntPtr hWnd
         );
+
         [DllImport("user32.dll")]
         public static extern bool BringWindowToTop(
             IntPtr hWnd
         );
+
         [DllImport("user32.dll")]
         public static extern bool IsWindow(IntPtr hWnd);
+
         [DllImport("kernel32.dll")]
         public static extern int GetLastError();
 
@@ -201,10 +209,12 @@ namespace gui_tesing_library
             SM_REMOTECONTROL = 8193,
             SM_CARETBLINKINGENABLED = 8194,
         }
+
         [DllImport("user32.dll")]
         public static extern bool CloseWindow(
-           IntPtr hwnd
+            IntPtr hwnd
         );
+
         [DllImport("user32.dll")]
         public static extern bool DestroyWindow(
             IntPtr hwnd
@@ -222,23 +232,54 @@ namespace gui_tesing_library
         [Flags]
         public enum ProcessAccessRights : uint
         {
-            PROCESS_TERMINATE = 0x0001,                
-            PROCESS_CREATE_THREAD = 0x0002,            
-            PROCESS_SET_INFORMATION = 0x0200,          
-            PROCESS_QUERY_INFORMATION = 0x0400,        
-            PROCESS_SET_QUOTA = 0x0100,                
-            PROCESS_SUSPEND_RESUME = 0x0800,           
+            PROCESS_TERMINATE = 0x0001,
+            PROCESS_CREATE_THREAD = 0x0002,
+            PROCESS_SET_INFORMATION = 0x0200,
+            PROCESS_QUERY_INFORMATION = 0x0400,
+            PROCESS_SET_QUOTA = 0x0100,
+            PROCESS_SUSPEND_RESUME = 0x0800,
             PROCESS_QUERY_LIMITED_INFORMATION = 0x1000,
-            PROCESS_VM_OPERATION = 0x0008,             
-            PROCESS_VM_READ = 0x0010,                  
-            PROCESS_VM_WRITE = 0x0020,                 
-            PROCESS_DUP_HANDLE = 0x0040,               
-            PROCESS_CREATE_PROCESS = 0x0080,           
-            SYNCHRONIZE = 0x00100000,                  
-            PROCESS_ALL_ACCESS = 0x1F0FFF,             
+            PROCESS_VM_OPERATION = 0x0008,
+            PROCESS_VM_READ = 0x0010,
+            PROCESS_VM_WRITE = 0x0020,
+            PROCESS_DUP_HANDLE = 0x0040,
+            PROCESS_CREATE_PROCESS = 0x0080,
+            SYNCHRONIZE = 0x00100000,
+            PROCESS_ALL_ACCESS = 0x1F0FFF,
         }
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr OpenProcess(ProcessAccessRights dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr OpenProcess(ProcessAccessRights dwDesiredAccess, bool bInheritHandle,
+            int dwProcessId);
+
+
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out Vector2i lpPoint);
+
+        [DllImport("user32.dll")]
+        public static extern bool SetCursorPos(int X, int Y);
+
+        public enum INPUT_TYPE
+        {
+            INPUT_MOUSE=0, INPUT_KEYBOARD=1, INPUT_HARDWARE=2,
+        }
+
+        //[StructLayout(LayoutKind.Explicit)]
+        //struct INPUT
+        //{
+        //    [FieldOffset(0)] INPUT_TYPE type;
+
+        //    union {
+        //        MOUSEINPUT mi;
+        //        KEYBDINPUT ki;
+        //        HARDWAREINPUT hi;
+        //    }
+
+        //    DUMMYUNIONNAME;
+        //};
+
+    //[DllImport("user32.dll", SetLastError = true)]
+    //    private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
     }
 }
