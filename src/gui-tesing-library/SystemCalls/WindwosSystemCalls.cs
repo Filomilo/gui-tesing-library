@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
+using gui_tesing_library.Models;
 using WindowsInput;
 using static gui_tesing_library.WinApiWrapper;
 
@@ -20,6 +22,7 @@ namespace gui_tesing_library.WInApi
     class WindwosSystemCalls : ISystemCalls
     {
         private InputSimulator _inputSimulator = new InputSimulator();
+
         public int CreateProcess(string startCommand)
         {
             String programName = "";
@@ -63,9 +66,9 @@ namespace gui_tesing_library.WInApi
         public bool GetDoesProcessExist(int handle)
         {
             uint exitCode;
-            if (WinApiWrapper.GetExitCodeProcess( new IntPtr(handle), out exitCode))
+            if (WinApiWrapper.GetExitCodeProcess(new IntPtr(handle), out exitCode))
             {
-                return exitCode == 259;// STILL_ACTIVE; 
+                return exitCode == 259; // STILL_ACTIVE;
             }
             return false;
         }
@@ -76,11 +79,9 @@ namespace gui_tesing_library.WInApi
             WinApiWrapper.TerminateProcess(new IntPtr(handle), 0);
         }
 
-
-
         public int FindWindowByName(string name)
         {
-           return (int)WinApiWrapper.FindWindowA(null,name);
+            return (int)WinApiWrapper.FindWindowA(null, name);
         }
 
         public Vector2i GetWindowPositon(int handle)
@@ -94,17 +95,17 @@ namespace gui_tesing_library.WInApi
         {
             WinApiWrapper.RECT rect;
             WinApiWrapper.GetWindowRect(new IntPtr(handle), out rect);
-            return new Vector2i(rect.Right- rect.Left,rect.Bottom- rect.Top);
+            return new Vector2i(rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
         public void CloseWindow(int handle)
         {
-            WinApiWrapper.CloseWindow(new IntPtr(handle) );
+            WinApiWrapper.CloseWindow(new IntPtr(handle));
         }
 
         public bool DoesWindowExist(int handle)
         {
-           return WinApiWrapper.IsWindow(new IntPtr(handle));
+            return WinApiWrapper.IsWindow(new IntPtr(handle));
         }
 
         public int GetWindowThreadProcessId(int handle)
@@ -114,18 +115,21 @@ namespace gui_tesing_library.WInApi
             return (int)ProcessId;
         }
 
-
         public int GetProcessHandleFromId(int id)
         {
-            IntPtr processHandle = WinApiWrapper.OpenProcess(WinApiWrapper.ProcessAccessRights. PROCESS_QUERY_INFORMATION | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ | ProcessAccessRights.PROCESS_TERMINATE, false, id);
+            IntPtr processHandle = WinApiWrapper.OpenProcess(
+                WinApiWrapper.ProcessAccessRights.PROCESS_QUERY_INFORMATION
+                    | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ
+                    | ProcessAccessRights.PROCESS_TERMINATE,
+                false,
+                id
+            );
             return processHandle.ToInt32();
         }
 
         public void MinimizeWindow(int handle)
         {
-            WinApiWrapper.ShowWindow(new IntPtr(handle),
-                NCmdShow.SW_MINIMIZE
-            );
+            WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_MINIMIZE);
         }
 
         public bool IsWindowsMinimized(int handle)
@@ -135,26 +139,19 @@ namespace gui_tesing_library.WInApi
 
         public void BringWindowUpFront(int handle)
         {
-            WinApiWrapper.ShowWindow(new IntPtr(handle),
-                NCmdShow.SW_RESTORE
-            );
-            bool returnVal = WinApiWrapper.ShowWindow(new IntPtr(handle),
-                NCmdShow.SW_SHOW
-            );
+            WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_RESTORE);
+            bool returnVal = WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_SHOW);
             WinApiWrapper.BringWindowToTop(new IntPtr(handle));
         }
 
         public void MaximizeWindow(int handle)
         {
-
-            WinApiWrapper.ShowWindow(new IntPtr(handle),
-                NCmdShow.SW_SHOWMAXIMIZED   
-            );
+            WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_SHOWMAXIMIZED);
         }
 
         public Vector2i GetMaximizedWindowSize()
         {
-          return  new Vector2i(
+            return new Vector2i(
                 WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXMAXIMIZED),
                 WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYMAXIMIZED)
             );
@@ -162,12 +159,28 @@ namespace gui_tesing_library.WInApi
 
         public void SetWindowPostion(int handle, Vector2i vector2i)
         {
-            WinApiWrapper.SetWindowPos(new IntPtr(handle), 0, vector2i.x, vector2i.y, 0, 0, UFlags.SWP_NOSIZE);
+            WinApiWrapper.SetWindowPos(
+                new IntPtr(handle),
+                0,
+                vector2i.x,
+                vector2i.y,
+                0,
+                0,
+                UFlags.SWP_NOSIZE
+            );
         }
 
         public void SetWindowSize(int handle, Vector2i vector2i)
         {
-            WinApiWrapper.SetWindowPos(new IntPtr(handle), 0, 0, 0, vector2i.x, vector2i.y, UFlags.SWP_NOMOVE);
+            WinApiWrapper.SetWindowPos(
+                new IntPtr(handle),
+                0,
+                0,
+                0,
+                vector2i.x,
+                vector2i.y,
+                UFlags.SWP_NOMOVE
+            );
         }
 
         public void SetMousePostion(Vector2i position)
@@ -184,15 +197,90 @@ namespace gui_tesing_library.WInApi
         public string GetWindowName(int handle)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            WinApiWrapper.GetWindowText(new IntPtr(handle) , stringBuilder, 512);
+            WinApiWrapper.GetWindowText(new IntPtr(handle), stringBuilder, 512);
             return stringBuilder.ToString();
         }
 
         void ISystemCalls.ClickLeft()
         {
             _inputSimulator.Mouse.LeftButtonClick();
+        }
 
+        public void ClickMiddle()
+        {
+            _inputSimulator.Mouse.XButtonClick(0x0010);
+        }
 
+        public void ClickRight()
+        {
+            _inputSimulator.Mouse.RightButtonClick();
+        }
+
+        public void PressLeft()
+        {
+            _inputSimulator.Mouse.LeftButtonDown();
+        }
+
+        public void PressMiddle()
+        {
+            _inputSimulator.Mouse.XButtonDown(0x0010);
+        }
+
+        public void PressRight()
+        {
+            _inputSimulator.Mouse.RightButtonDown();
+        }
+
+        public void ReleaseLeft()
+        {
+            _inputSimulator.Mouse.LeftButtonUp();
+        }
+
+        public void ReleaseMiddle()
+        {
+            _inputSimulator.Mouse.XButtonUp(0x0010);
+        }
+
+        public void ReleaseRight()
+        {
+            _inputSimulator.Mouse.RightButtonUp();
+        }
+
+        public void Scroll(int scrollValue)
+        {
+            _inputSimulator.Mouse.VerticalScroll(scrollValue);
+        }
+
+        public int GetWindowTitleBarHeight()
+        {
+            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYCAPTION);
+        }
+
+        public int GetWindowBorderWidth()
+        {
+            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXFRAME);
+        }
+
+        public int GetWindowBorderHeight()
+        {
+            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYFRAME);
+        }
+
+        public int GetWindowPadding()
+        {
+            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXPADDEDBORDER);
+        }
+
+        public Color GetPixelColorAt(Vector2i pos, int handle)
+        {
+            IntPtr dc = WinApiWrapper.GetDC(IntPtr.Zero);
+            uint color = WinApiWrapper.GetPixel(dc, pos.x, pos.y);
+            int red = (int)(color & 0x000000FF);
+            int green = (int)((color & 0x0000FF00) >> 8);
+            int blue = (int)((color & 0x00FF0000) >> 16);
+            Color col = new Color(red, green, blue);
+            ReleaseDC(IntPtr.Zero, new IntPtr(handle));
+            return col;
         }
     }
 }

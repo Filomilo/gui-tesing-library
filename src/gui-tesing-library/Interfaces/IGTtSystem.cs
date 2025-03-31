@@ -11,10 +11,7 @@ namespace gui_tesing_library
 {
     public interface IGTSystem
     {
-        GTSystemVersion OsVersion
-        {
-            get;
-        }
+        GTSystemVersion OsVersion { get; }
 
         Vector2 MaximizedWindowSize { get; set; }
 
@@ -29,5 +26,10 @@ namespace gui_tesing_library
         IGTWindow FindTopWindowByName(string name);
 
         IGTSystem WindowOfNameShouldExist(string name);
+
+        int GetWindowTitleBarHeight();
+        int GetWindowBorderWidth();
+        int GetWindowBorderHeight();
+        int GetWindowPadding();
     }
 }

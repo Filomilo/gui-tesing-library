@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using gui_tesing_library.Directives;
 using gui_tesing_library.SystemCalls;
 using Lombok.NET;
+using Microsoft.Win32.SafeHandles;
 
 namespace gui_tesing_library.Controllers
 {
@@ -27,13 +28,9 @@ namespace gui_tesing_library.Controllers
             }
         }
 
-
         public Vector2i Position
         {
-            get
-            {
-                return SystemCallsFactory.GetSystemCalls().GetMousePosition();
-            }
+            get { return SystemCallsFactory.GetSystemCalls().GetMousePosition(); }
         }
 
         public IGTMouse ClickLeft()
@@ -44,63 +41,64 @@ namespace gui_tesing_library.Controllers
 
         public IGTMouse ClickMiddle()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().ClickMiddle();
+            return this;
         }
 
         public IGTMouse ClickRight()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().ClickRight();
+            return this;
         }
 
         public IGTMouse MoveMouse(Vector2i offset)
         {
-            throw new NotImplementedException();
-        }
-
-        public IGTMouse MoveRelativeToWindow(IGTWindow window, Vector2i offset)
-        {
-            throw new NotImplementedException();
+            this.SetPosition(this.Position + offset);
+            return this;
         }
 
         public IGTMouse PressLeft()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().PressLeft();
+            return this;
         }
 
         public IGTMouse PressMiddle()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().PressMiddle();
+            return this;
         }
 
         public IGTMouse PressRight()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().PressRight();
+            return this;
         }
 
         public IGTMouse ReleaseLeft()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().ReleaseLeft();
+            return this;
         }
 
         public IGTMouse ReleaseMiddle()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().ReleaseMiddle();
+            return this;
         }
 
         public IGTMouse ReleaseRight()
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().ReleaseRight();
+            return this;
         }
 
-        public IGTMouse ScrollDown(int scrollValue)
+        public IGTMouse Scroll(int scrollValue)
         {
-            throw new NotImplementedException();
+            SystemCallsFactory.GetSystemCalls().Scroll(scrollValue);
+            return this;
         }
 
-        public IGTMouse ScrollUp(int scrollValue)
-        {
-            throw new NotImplementedException();
-        }
         [Delay]
         [Log]
         public IGTMouse SetPosition(Vector2i position)
@@ -108,20 +106,27 @@ namespace gui_tesing_library.Controllers
             SystemCallsFactory.GetSystemCalls().SetMousePostion(position);
             return this;
         }
+
         [Delay]
         [Log]
         public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon)
         {
-            throw new NotImplementedException();
+            Vector2i windowPositon = window.Position;
+            this.SetPosition(positon + windowPositon);
+            return this;
         }
+
         [Delay]
         [Log]
         public IGTMouse PositionShouldBe(Vector2i pos)
         {
-            Helpers.AwaitTrue(() =>
-            {
-                return this.Position.Equals(pos);
-            },$"Mouse postion was not {pos} withing maximum time but {this.Position}");
+            Helpers.AwaitTrue(
+                () =>
+                {
+                    return this.Position.Equals(pos);
+                },
+                $"Mouse postion was not {pos} withing maximum time but {this.Position}"
+            );
             return this;
         }
     }
