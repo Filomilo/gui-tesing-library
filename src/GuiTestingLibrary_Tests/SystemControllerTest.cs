@@ -11,6 +11,7 @@ namespace GuiTestingLibrary_Tets
     public class SystemControllerTest
     {
         [Test]
+            [Ignore("This test is platform specific")]
         public void Test_GetOSVersion()
         {
             GTSystemVersion os = SystemController.Instance.OsVersion;

@@ -30,4 +30,3 @@ until [ -f "shared/fin" ] || (( SECONDS >= TIMEOUT )); do sleep 1;  done
 docker compose down
 
 
-
