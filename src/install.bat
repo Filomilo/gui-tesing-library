@@ -1,4 +1,5 @@
 timeout 100
+taskkill /f /im explorer.exe
 winget install ffmpeg --accept-source-agreements --accept-package-agreements >> \\host.lan\Data\\winget-output.log
 start /min cmd /c "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe -f gdigrab -framerate 30 -i desktop \\host.lan\Data\\desktop-output.mkv -nostdin > \\host.lan\Data\\ffmpeg-output.log "
 winget install Chocolatey --accept-source-agreements --accept-package-agreements >> \\host.lan\Data\\winget-output.log
