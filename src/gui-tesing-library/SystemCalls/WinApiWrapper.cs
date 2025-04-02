@@ -331,5 +331,45 @@ namespace gui_tesing_library
 
         [DllImport("user32.dll")]
         public static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
+
+        public const uint SRCCOPY = 0x00CC0020;
+        public const int CAPTUREBLT = 0x40000000;
+
+        [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
+        public static extern bool BitBlt(
+            IntPtr hdcDest,
+            int nXDest,
+            int nYDest,
+            int nWidth,
+            int nHeight,
+            IntPtr hdcSrc,
+            int nXSrc,
+            int nYSrc,
+            uint dwRop
+        );
+
+        [DllImport("user32.dll")]
+        public static extern int ReleaseDC(IntPtr hWnd, int hDC);
+
+        [DllImport("gdi32.dll")]
+        public static extern int CreateCompatibleDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll")]
+        public static extern int CreateCompatibleBitmap(IntPtr hdc, int width, int height);
+
+        [DllImport("gdi32.dll")]
+        public static extern int SelectObject(IntPtr hdc, IntPtr hObject);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool DeleteObject(IntPtr hObject);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool DeleteDC(IntPtr hdc);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowDC(IntPtr hWnd);
     }
 }

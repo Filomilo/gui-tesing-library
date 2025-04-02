@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using gui_tesing_library.Components;
+using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 
 namespace gui_tesing_library
@@ -31,5 +32,6 @@ namespace gui_tesing_library
         int GetWindowBorderWidth();
         int GetWindowBorderHeight();
         int GetWindowPadding();
+        Vector2i GetScreenSize();
     }
 }

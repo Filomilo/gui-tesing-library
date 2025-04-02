@@ -44,6 +44,8 @@ namespace gui_tesing_library.Interfaces
         int GetWindowBorderWidth();
         int GetWindowBorderHeight();
         int GetWindowPadding();
-        Color GetPixelColorAt(Vector2i pos, int handle);
+        ScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size);
+        Vector2i GetScreenSize();
+        Color GetPixelColorAt(Vector2i postion, int handle);
     }
 }

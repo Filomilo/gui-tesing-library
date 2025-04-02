@@ -9,9 +9,18 @@ namespace gui_tesing_library.Models
 {
     public class Color
     {
-        private int r { get; set; }
-        private int g { get; set; }
-        private int b { get; set; }
+        public static readonly Color Red = new Color(1f, 0f, 0f);
+        public static readonly object Black = new Color(0f, 0f, 0f);
+        public static readonly object Pink = new Color(1f, 0f, 0f);
+        public static readonly object Yellow = new Color(1f, 0f, 0f);
+        public static readonly object Aqua = new Color(1f, 0f, 0f);
+        public static readonly object Orange = new Color(1f, 0f, 0f);
+        public static readonly object Green = new Color(0f, 1f, 0f);
+        public static readonly object Blue = new Color(0f, 0f, 1f);
+
+        public int r { get; set; }
+        public int g { get; set; }
+        public int b { get; set; }
 
         public Color(int r, int g, int b)
         {
@@ -25,6 +34,13 @@ namespace gui_tesing_library.Models
             this.r = (int)(r * 255);
             this.g = (int)(g * 255);
             this.b = (int)(b * 255);
+        }
+
+        public Color(System.Drawing.Color color)
+        {
+            this.r = color.R;
+            this.g = color.G;
+            this.b = color.B;
         }
 
         public override string ToString()

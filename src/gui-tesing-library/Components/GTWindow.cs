@@ -128,7 +128,13 @@ namespace gui_tesing_library.Components
         [Log]
         public ScreenShot GetScreenshot()
         {
-            throw new NotImplementedException();
+            return SystemCallsFactory
+                .GetSystemCalls()
+                .GetScreenShotFromHandle(
+                    this._handle,
+                    new Vector2i(0, 0),
+                    this.GetWindowContentSize()
+                );
         }
 
         [Log]
@@ -230,22 +236,24 @@ namespace gui_tesing_library.Components
 
         public Vector2i GetWindowContentSize()
         {
-            Vector2i size = this.Position;
+            Vector2i size = this.Size;
+            int borderWidth = SystemController.Instance.GetWindowBorderWidth();
+            int windwopadding = SystemController.Instance.GetWindowPadding();
+            int WindowBorderHeight = SystemController.Instance.GetWindowBorderHeight();
+            int windowtielebarheight = SystemController.Instance.GetWindowTitleBarHeight();
             return new Vector2i(
-                size.x - SystemController.Instance.GetWindowBorderWidth(),
-                size.y
-                    - SystemController.Instance.GetWindowBorderHeight()
-                    - SystemController.Instance.GetWindowTitleBarHeight()
+                size.x - borderWidth * 2 - windwopadding * 2,
+                size.y - WindowBorderHeight * 2 - windowtielebarheight - windwopadding * 2
             );
         }
 
         public Color GetContentPixelColorAt(Vector2i postion)
         {
-            Vector2i WindowPOsiton = this.Position;
-            Vector2i ContnetPostion = this.GetWindowContentPosition();
-            Vector2i offset = ContnetPostion - WindowPOsiton;
-            Vector2i newPos = postion + offset;
-            return this.GetPixelColorAt(newPos);
+            //Vector2i WindowPOsiton = this.Position;
+            //Vector2i ContnetPostion = this.GetWindowContentPosition();
+            //Vector2i offset = ContnetPostion - WindowPOsiton;
+            //Vector2i newPos = postion + offset;
+            return this.GetPixelColorAt(postion);
         }
 
         public IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color)

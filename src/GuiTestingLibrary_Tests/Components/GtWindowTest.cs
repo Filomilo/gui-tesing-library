@@ -88,11 +88,21 @@ namespace GuiTestingLibrary_Tets.Components
         }
 
         [Test]
+        public void GetScreenShot()
+        {
+            window.ShouldBeMinimized(false);
+            Thread.Sleep(1000);
+            ScreenShot screenShot = window.GetScreenshot();
+            Assert.That(screenShot != null);
+            screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
+        }
+
+        [Test]
         public void getColorTest()
         {
             Assert.That(window.IsMinimized == false);
             window.ShouldBeMinimized(false);
-            Color red = new Color(1.0f, 0.0f, 0.0f);
+
             Vector2i pos = new Vector2i(0, 0) + new Vector2i(250, 210);
             //Assert.That(
             //    window.PixelAtShouldBeColor(pos, red).GetPixelColorAt(pos).Equals(red),
@@ -100,25 +110,44 @@ namespace GuiTestingLibrary_Tets.Components
             //);
             Vector2i contentSize = window.GetWindowContentSize();
             Vector2i contentPs = window.GetWindowContentPosition();
-
-            Vector2i windowsPosiont = window.Position;
-            Vector2i windowsSize = window.Size;
             Thread.Sleep(1000);
-            HashSet<Color> colorsFound = new HashSet<Color>();
-            for (int i = 0; i < windowsSize.x; i += 10)
-            {
-                for (int j = 0; j < windowsSize.y; j += 10)
-                {
-                    Vector2i poss = windowsPosiont + new Vector2i(i, j);
-                    Color white = new Color(1f, 1f, 1f);
-                    Color retirved = ScreenController.Instance.GetPixelColorAt(pos); //ScreenController.Instance.GetPixelColorAt(poss);
-                    colorsFound.Add(retirved);
-                    if (!retirved.Equals(white))
-                        Console.WriteLine($"Color at {poss} is {retirved} ");
-                }
-            }
-            Assert.That(colorsFound.Count > 1);
-            Console.WriteLine(String.Join(", ", colorsFound));
+            Color colorLeftTop = window.GetContentPixelColorAt(new Vector2i(0, 0));
+            Assert.That(colorLeftTop.Equals(Color.Red));
+
+            Color colorRightTop = window.GetContentPixelColorAt(
+                new Vector2i(window.GetWindowContentSize().x, 0)
+            );
+            Assert.That(colorRightTop.Equals(Color.Black));
+
+            Color colorMiddleTop = window.GetContentPixelColorAt(
+                new Vector2i(window.GetWindowContentSize().x / 2 - 100, 0)
+            );
+            Assert.That(colorMiddleTop.Equals(Color.Blue));
+
+            Color colorLeftBottom = window.GetContentPixelColorAt(
+                new Vector2i(0, window.GetWindowContentSize().y)
+            );
+            Assert.That(colorLeftBottom.Equals(Color.Green));
+
+            Color colorRightBottom = window.GetContentPixelColorAt(
+                new Vector2i(window.GetWindowContentSize().x, window.GetWindowContentSize().y)
+            );
+            Assert.That(colorRightBottom.Equals(Color.Orange));
+
+            Color colorMiddleBottom = window.GetContentPixelColorAt(
+                new Vector2i(window.GetWindowContentSize().x / 2, window.GetWindowContentSize().y)
+            );
+            Assert.That(colorMiddleBottom.Equals(Color.Aqua));
+
+            Color colorLeftMiddle = window.GetContentPixelColorAt(
+                new Vector2i(0, window.GetWindowContentSize().y / 2)
+            );
+            Assert.That(colorLeftMiddle.Equals(Color.Yellow));
+
+            Color colorRightMiddle = window.GetContentPixelColorAt(
+                new Vector2i(window.GetWindowContentSize().x, window.GetWindowContentSize().y / 2)
+            );
+            Assert.That(colorRightMiddle.Equals(Color.Pink));
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -15,6 +16,7 @@ using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using WindowsInput;
+using static System.Net.Mime.MediaTypeNames;
 using static gui_tesing_library.WinApiWrapper;
 
 namespace gui_tesing_library.WInApi
@@ -271,16 +273,70 @@ namespace gui_tesing_library.WInApi
             return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXPADDEDBORDER);
         }
 
-        public Color GetPixelColorAt(Vector2i pos, int handle)
+        public ScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size)
         {
-            IntPtr dc = WinApiWrapper.GetDC(IntPtr.Zero);
-            uint color = WinApiWrapper.GetPixel(dc, pos.x, pos.y);
-            int red = (int)(color & 0x000000FF);
-            int green = (int)((color & 0x0000FF00) >> 8);
-            int blue = (int)((color & 0x00FF0000) >> 16);
-            Color col = new Color(red, green, blue);
-            ReleaseDC(IntPtr.Zero, new IntPtr(handle));
-            return col;
+            IntPtr hdcScreen = WinApiWrapper.GetDC(new IntPtr(handle));
+            int hdcMemDC = CreateCompatibleDC(hdcScreen);
+
+            int hBitmap = CreateCompatibleBitmap(hdcScreen, Size.x, Size.y);
+            int hOld = SelectObject(new IntPtr(hdcMemDC), new IntPtr(hBitmap));
+
+            bool res = WinApiWrapper.BitBlt(
+                new IntPtr(hdcMemDC),
+                StartPosition.x,
+                StartPosition.y,
+                Size.x,
+                Size.y,
+                hdcScreen,
+                0,
+                0,
+                WinApiWrapper.SRCCOPY
+            );
+
+            if (!res)
+            {
+                SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
+                DeleteObject(new IntPtr(hBitmap));
+                DeleteDC(new IntPtr(hdcMemDC));
+                ReleaseDC(new IntPtr(handle), hdcScreen);
+                throw new InvalidOperationException("BitBlt failed");
+            }
+
+            Bitmap bitmap = null;
+            try
+            {
+                bitmap = Bitmap.FromHbitmap(new IntPtr(hBitmap));
+            }
+            catch (System.ExecutionEngineException e)
+            {
+                SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
+                DeleteObject(new IntPtr(hBitmap));
+                DeleteDC(new IntPtr(hdcMemDC));
+                ReleaseDC(new IntPtr(handle), hdcScreen);
+                int error = Marshal.GetLastWin32Error();
+                throw new InvalidOperationException($"Marshal copy error code: {error}");
+            }
+
+            SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
+            DeleteObject(new IntPtr(hBitmap));
+            ReleaseDC(IntPtr.Zero, hdcScreen);
+            ReleaseDC(IntPtr.Zero, hdcMemDC);
+
+            return new ScreenShot(bitmap);
+        }
+
+        public Vector2i GetScreenSize()
+        {
+            return new Vector2i(
+                WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXSCREEN),
+                WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYSCREEN)
+            );
+        }
+
+        public Models.Color GetPixelColorAt(Vector2i postion, int handle)
+        {
+            ScreenShot screenShot = GetScreenShotFromHandle(handle, postion, new Vector2i(1, 1));
+            return screenShot.GetPixelColorAt(new Vector2i(0, 0));
         }
     }
 }

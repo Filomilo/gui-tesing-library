@@ -39,6 +39,11 @@ namespace gui_tesing_library.Controllers
             return $"[{x};{y}]";
         }
 
+        internal int Area()
+        {
+            return x * y;
+        }
+
         public static Vector2i operator +(Vector2i a, Vector2i b) =>
             new Vector2i(a.x + b.x, a.y + b.y);
 

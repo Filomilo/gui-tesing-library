@@ -41,7 +41,13 @@ namespace gui_tesing_library.Controllers
 
         public ScreenShot GetScreenshot()
         {
-            throw new NotImplementedException();
+            return SystemCallsFactory
+                .GetSystemCalls()
+                .GetScreenShotFromHandle(
+                    0,
+                    new Vector2i(0, 0),
+                    SystemController.Instance.GetScreenSize()
+                );
         }
 
         public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
@@ -52,7 +58,8 @@ namespace gui_tesing_library.Controllers
         [Log]
         public Color GetPixelColorAt(Vector2i postion)
         {
-            return SystemCallsFactory.GetSystemCalls().GetPixelColorAt(postion, 0);
+            //return SystemCallsFactory.GetSystemCalls().GetPixelColorAt(postion, 0);
+            return new Color(0, 0, 0);
         }
 
         [Log]

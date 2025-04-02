@@ -153,5 +153,10 @@ namespace gui_tesing_library
         {
             return this._SystemCalls.GetWindowPadding();
         }
+
+        public Vector2i GetScreenSize()
+        {
+            return this._SystemCalls.GetScreenSize();
+        }
     }
 }
