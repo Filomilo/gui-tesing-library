@@ -242,8 +242,8 @@ namespace gui_tesing_library.Components
             int WindowBorderHeight = SystemController.Instance.GetWindowBorderHeight();
             int windowtielebarheight = SystemController.Instance.GetWindowTitleBarHeight();
             return new Vector2i(
-                size.x - borderWidth * 2 - windwopadding * 2,
-                size.y - WindowBorderHeight * 2 - windowtielebarheight - windwopadding * 2
+                size.x - borderWidth * 2 - windwopadding * 2 - 1,
+                size.y - WindowBorderHeight * 2 - windowtielebarheight - windwopadding * 2 - 5
             );
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Configuration;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,7 +63,7 @@ namespace gui_tesing_library.Models
                     );
                 }
             }
-            bmp.Save(file);
+            bmp.Save(file, ImageFormat.Bmp);
         }
     }
 }

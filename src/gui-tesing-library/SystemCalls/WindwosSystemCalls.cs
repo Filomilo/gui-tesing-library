@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,6 +19,7 @@ using gui_tesing_library.Models;
 using WindowsInput;
 using static System.Net.Mime.MediaTypeNames;
 using static gui_tesing_library.WinApiWrapper;
+using Color = gui_tesing_library.Models.Color;
 
 namespace gui_tesing_library.WInApi
 {
@@ -335,8 +337,15 @@ namespace gui_tesing_library.WInApi
 
         public Models.Color GetPixelColorAt(Vector2i postion, int handle)
         {
-            ScreenShot screenShot = GetScreenShotFromHandle(handle, postion, new Vector2i(1, 1));
-            return screenShot.GetPixelColorAt(new Vector2i(0, 0));
+            IntPtr hdc = GetDC(new IntPtr(handle));
+            uint pixel = GetPixel(hdc, postion.x, postion.y);
+            ReleaseDC(new IntPtr(handle), hdc);
+
+            int red = (int)(pixel & 0x000000FF);
+            int green = (int)((pixel & 0x0000FF00) >> 8);
+            int blue = (int)((pixel & 0x00FF0000) >> 16);
+
+            return new Color(red, green, blue);
         }
     }
 }

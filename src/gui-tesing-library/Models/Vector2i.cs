@@ -49,5 +49,10 @@ namespace gui_tesing_library.Controllers
 
         public static Vector2i operator -(Vector2i a, Vector2i b) =>
             new Vector2i(a.x - b.x, a.y - b.y);
+
+        public static Vector2i operator /(Vector2i a, int b) => new Vector2i(a.x / b, a.y / 2);
+
+        public static Vector2i operator /(Vector2i a, Vector2i b) =>
+            new Vector2i(a.x / b.x, a.y / b.y);
     }
 }

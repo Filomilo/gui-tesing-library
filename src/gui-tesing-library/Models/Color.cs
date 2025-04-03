@@ -11,12 +11,13 @@ namespace gui_tesing_library.Models
     {
         public static readonly Color Red = new Color(1f, 0f, 0f);
         public static readonly object Black = new Color(0f, 0f, 0f);
-        public static readonly object Pink = new Color(1f, 0f, 0f);
-        public static readonly object Yellow = new Color(1f, 0f, 0f);
-        public static readonly object Aqua = new Color(1f, 0f, 0f);
-        public static readonly object Orange = new Color(1f, 0f, 0f);
-        public static readonly object Green = new Color(0f, 1f, 0f);
+        public static readonly object Pink = new Color(55, 192, 103);
+        public static readonly object Yellow = new Color(1f, 1f, 0f);
+        public static readonly object Aqua = new Color(207, 157, 150);
+        public static readonly object Orange = new Color(131, 117, 127);
+        public static readonly object Green = new Color(0, 128, 0);
         public static readonly object Blue = new Color(0f, 0f, 1f);
+        public static readonly object White = new Color(1f, 1f, 1f);
 
         public int r { get; set; }
         public int g { get; set; }
