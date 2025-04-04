@@ -347,5 +347,17 @@ namespace gui_tesing_library.WInApi
 
             return new Color(red, green, blue);
         }
+
+        public void MoveMouse(Vector2i offset)
+        {
+            _inputSimulator.Mouse.MoveMouseBy(offset.x, offset.y);
+        }
+
+        public void MoveMouseTo(Vector2i newPos)
+        {
+            Vector2i currMousePos = this.GetMousePosition();
+            Vector2i movmeentOFfset = newPos-currMousePos;
+            _inputSimulator.Mouse.MoveMouseBy(movmeentOFfset.x, movmeentOFfset.y);
+        }
     }
 }

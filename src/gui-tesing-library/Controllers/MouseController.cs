@@ -33,6 +33,8 @@ namespace gui_tesing_library.Controllers
             get { return SystemCallsFactory.GetSystemCalls().GetMousePosition(); }
         }
 
+        [Log]
+        [Delay]
         public IGTMouse ClickLeft()
         {
             SystemCallsFactory.GetSystemCalls().ClickLeft();
@@ -53,10 +55,11 @@ namespace gui_tesing_library.Controllers
 
         public IGTMouse MoveMouse(Vector2i offset)
         {
-            this.SetPosition(this.Position + offset);
+            SystemCallsFactory.GetSystemCalls().MoveMouse(offset);
             return this;
         }
-
+        [Log]
+        [Delay]
         public IGTMouse PressLeft()
         {
             SystemCallsFactory.GetSystemCalls().PressLeft();
@@ -128,6 +131,13 @@ namespace gui_tesing_library.Controllers
                 $"Mouse postion was not {pos} withing maximum time but {this.Position}"
             );
             return this;
+        }
+        [Delay]
+        [Log]
+        public void MoveMouseTo(Vector2i newPos)
+        {
+            SystemCallsFactory.GetSystemCalls().MoveMouseTo(newPos);
+
         }
     }
 }

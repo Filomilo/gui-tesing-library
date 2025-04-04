@@ -95,7 +95,6 @@
     <Compile Include="SystemCalls\WindwosSystemCalls.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FodyWeavers.Designer.xml" />
     <Content Include="FodyWeavers.xml">
       <SubType>Component</SubType>
     </Content>

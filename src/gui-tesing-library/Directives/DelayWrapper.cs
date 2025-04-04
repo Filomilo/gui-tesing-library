@@ -16,12 +16,12 @@ namespace gui_tesing_library.Directives
         private MethodBase _method;
         public void Init(object instance, MethodBase method, object[] args)
         {
-            Thread.Sleep(Configuration.ActionDelay);
+          
         }
 
         public void OnEntry()
         {
-            
+            Thread.Sleep(Configuration.ActionDelay);
         }
 
         public void OnExit()
