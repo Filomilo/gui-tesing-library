@@ -127,6 +127,8 @@ namespace GuiTestingLibrary_Tets.Components
             //}
             //Color colorLeftTop = window.GetContentPixelColorAt(new Vector2i(0, 0));
             //Assert.That(colorLeftTop.Equals(Color.Red));
+
+            gui_tesing_library.Configuration.ActionDelay = 0;
             for (int x = 0; x < colorGridSize; x++)
             {
                 for (int y = 0; y < colorGridSize; y++)

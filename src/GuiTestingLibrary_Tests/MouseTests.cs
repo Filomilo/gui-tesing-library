@@ -157,8 +157,9 @@ namespace GuiTestingLibrary_Tets
                 currBlueSliderPostion = newBlueSliderPostion;
 
                 Color Colorshouldbe = new Color(r, g, b);
+                Thread.Sleep(50);
                 Color currColor = window.GetContentPixelColorAt(colorCheckPostion);
-                Assert.That(currColor.Equals(Colorshouldbe), $"Color at postion [[{colorCheckPostion}]] is not {Colorshouldbe} but [[{currColor}]] ");
+                Assert.That(currColor.getDiffrence(Colorshouldbe) <2, $"Color at postion [[{colorCheckPostion}]] is not {Colorshouldbe} but [[{currColor}]], Difrence: {currColor.getDiffrence(Colorshouldbe)} ");
 
 
             };

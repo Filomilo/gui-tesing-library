@@ -247,8 +247,9 @@ namespace gui_tesing_library.Components
             );
         }
 
-        [Delay]
+ 
         [Log]
+        [Delay]
         public Color GetContentPixelColorAt(Vector2i postion)
         {
             //Vector2i WindowPOsiton = this.Position;

@@ -67,5 +67,13 @@ namespace gui_tesing_library.Models
         {
             return (r << 16) | (g << 8) | b;
         }
+
+        public Double getDiffrence(Color color)
+        {
+            int rdiff = this.r - color.r;
+            int gdiff=this.g - color.g;
+            int bdiff=this.b - color.b;
+            return Math.Sqrt(Math.Pow(Math.Sqrt(Math.Pow(rdiff,2) + Math.Pow(bdiff,2)),2) + Math.Pow( gdiff,2));
+        }
     }
 }
