@@ -84,7 +84,7 @@
                   <Button fx:id="whiteButton" mnemonicParsing="false" onAction="#onWhiteButtonChange" text="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Button fx:id="blackButton" alignment="CENTER" mnemonicParsing="false" onAction="#onBlackButtonChange" text="BLACK" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button fx:id="greenButton" mnemonicParsing="false" onAction="#onGreenButtonChange" text="GREEN" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Pane fx:id="ColorButtonPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
+                  <Pane fx:id="ColorButtonPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lime;" />
                </children>
             </GridPane>
 

@@ -1,6 +1,4 @@
-﻿using gui_tesing_library.Components;
-using gui_tesing_library.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,9 +6,11 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Directives;
 using gui_tesing_library.Interfaces;
+using gui_tesing_library.Models;
 using gui_tesing_library.SystemCalls;
 
 namespace gui_tesing_library
@@ -55,9 +55,9 @@ namespace gui_tesing_library
         //    }
         //}
 
-        static IGTSystem _gtSystem=null;
+        static IGTSystem _gtSystem = null;
 
-     public static   IGTSystem Instance
+        public static IGTSystem Instance
         {
             get
             {
@@ -79,6 +79,7 @@ namespace gui_tesing_library
         {
             throw new NotImplementedException();
         }
+
         [Log]
         public IGTWindow FindTopWindowByName(string name)
         {
@@ -88,10 +89,13 @@ namespace gui_tesing_library
 
         public IGTSystem WindowOfNameShouldExist(string name)
         {
-            Helpers.AwaitTrue(() =>
-            {
-                return this._SystemCalls.FindWindowByName(name) != 0;
-            });
+            Helpers.AwaitTrue(
+                () =>
+                {
+                    return this._SystemCalls.FindWindowByName(name) != 0;
+                },
+                $"No window of name [{name}]"
+            );
             return this;
         }
 
@@ -109,10 +113,10 @@ namespace gui_tesing_library
         {
             throw new NotImplementedException();
         }
+
         [Log]
         public IGTProcess StartProcess(string commandString)
         {
-
             Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
             IGTProcess gtProcess = new GTProcess(_SystemCalls.CreateProcess(commandString));
             return gtProcess;
@@ -120,11 +124,7 @@ namespace gui_tesing_library
 
         public GTSystemVersion OsVersion
         {
-                    get
-                    {
-                        return new GTSystemVersion(Environment.OSVersion);
-                    }
-                    
+            get { return new GTSystemVersion(Environment.OSVersion); }
         }
 
         public Vector2 MaximizedWindowSize { get; set; }
@@ -132,6 +132,31 @@ namespace gui_tesing_library
         GTSystemVersion IGTSystem.GetSystemVersion()
         {
             throw new NotImplementedException();
+        }
+
+        public int GetWindowTitleBarHeight()
+        {
+            return this._SystemCalls.GetWindowTitleBarHeight();
+        }
+
+        public int GetWindowBorderWidth()
+        {
+            return this._SystemCalls.GetWindowBorderWidth();
+        }
+
+        public int GetWindowBorderHeight()
+        {
+            return this._SystemCalls.GetWindowBorderHeight();
+        }
+
+        public int GetWindowPadding()
+        {
+            return this._SystemCalls.GetWindowPadding();
+        }
+
+        public Vector2i GetScreenSize()
+        {
+            return this._SystemCalls.GetScreenSize();
         }
     }
 }

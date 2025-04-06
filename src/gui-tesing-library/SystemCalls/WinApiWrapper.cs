@@ -13,12 +13,16 @@ namespace gui_tesing_library
 {
     public static class WinApiWrapper
     {
-
-
-
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy,
-            UFlags wFlags);
+        public static extern IntPtr SetWindowPos(
+            IntPtr hWnd,
+            int hWndInsertAfter,
+            int x,
+            int Y,
+            int cx,
+            int cy,
+            UFlags wFlags
+        );
 
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
@@ -30,7 +34,6 @@ namespace gui_tesing_library
 
         [DllImport("kernel32.dll")]
         public static extern uint GetProcessIdOfThread(IntPtr ThreadHandle);
-
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
@@ -46,7 +49,6 @@ namespace gui_tesing_library
             public int Right;
             public int Bottom;
         }
-
 
         [DllImport("kernel32.dll")]
         public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
@@ -68,10 +70,8 @@ namespace gui_tesing_library
             SWP_NOSENDCHANGING = 0x0400,
             SWP_NOSIZE = 0x0001,
             SWP_NOZORDER = 0x0004,
-            SWP_SHOWWINDOW = 0x0040
-
+            SWP_SHOWWINDOW = 0x0040,
         }
-
 
         public enum NCmdShow
         {
@@ -86,24 +86,17 @@ namespace gui_tesing_library
             SW_SHOWNA = 8,
             SW_RESTORE = 9,
             SW_SHOWDEFAULT = 10,
-            SW_FORCEMINIMIZE = 11
+            SW_FORCEMINIMIZE = 11,
         }
 
         [DllImport("user32.dll")]
-        public static extern bool ShowWindow(
-            IntPtr hWnd,
-            NCmdShow nCmdShow
-        );
+        public static extern bool ShowWindow(IntPtr hWnd, NCmdShow nCmdShow);
 
         [DllImport("user32.dll")]
-        public static extern bool IsIconic(
-            IntPtr hWnd
-        );
+        public static extern bool IsIconic(IntPtr hWnd);
 
         [DllImport("user32.dll")]
-        public static extern bool BringWindowToTop(
-            IntPtr hWnd
-        );
+        public static extern bool BringWindowToTop(IntPtr hWnd);
 
         [DllImport("user32.dll")]
         public static extern bool IsWindow(IntPtr hWnd);
@@ -111,11 +104,8 @@ namespace gui_tesing_library
         [DllImport("kernel32.dll")]
         public static extern int GetLastError();
 
-
         [DllImport("user32.dll")]
-        public static extern int GetSystemMetrics(
-            SystemMetrics nIndex
-        );
+        public static extern int GetSystemMetrics(SystemMetrics nIndex);
 
         public enum SystemMetrics
         {
@@ -211,20 +201,13 @@ namespace gui_tesing_library
         }
 
         [DllImport("user32.dll")]
-        public static extern bool CloseWindow(
-            IntPtr hwnd
-        );
+        public static extern bool CloseWindow(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern bool DestroyWindow(
-            IntPtr hwnd
-        );
+        public static extern bool DestroyWindow(IntPtr hwnd);
 
         [DllImport("user32.dll")]
-        public static extern long FindWindowA(
-            String lpClassName,
-            String lpWindowName
-        );
+        public static extern long FindWindowA(String lpClassName, String lpWindowName);
 
         [DllImport("kernel32.dll")]
         public static extern bool TerminateProcess(IntPtr hProcess, uint uExitCode);
@@ -249,37 +232,144 @@ namespace gui_tesing_library
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr OpenProcess(ProcessAccessRights dwDesiredAccess, bool bInheritHandle,
-            int dwProcessId);
+        public static extern IntPtr OpenProcess(
+            ProcessAccessRights dwDesiredAccess,
+            bool bInheritHandle,
+            int dwProcessId
+        );
 
-
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int x;
+            public int y;
+        }
 
         [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out Vector2i lpPoint);
+        public static extern bool GetCursorPos(out POINT lpPoint);
 
         [DllImport("user32.dll")]
         public static extern bool SetCursorPos(int X, int Y);
 
         public enum INPUT_TYPE
         {
-            INPUT_MOUSE=0, INPUT_KEYBOARD=1, INPUT_HARDWARE=2,
+            INPUT_MOUSE = 0,
+            INPUT_KEYBOARD = 1,
+            INPUT_HARDWARE = 2,
         }
 
-        //[StructLayout(LayoutKind.Explicit)]
-        //struct INPUT
-        //{
-        //    [FieldOffset(0)] INPUT_TYPE type;
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagKEYBDINPUT
+        {
+            public long dx;
+            public long dy;
+            public IntPtr mouseData;
+            public MouseEventFlags dwFlags;
+            public IntPtr time;
+            public ulong dwExtraInfo;
+        };
 
-        //    union {
-        //        MOUSEINPUT mi;
-        //        KEYBDINPUT ki;
-        //        HARDWAREINPUT hi;
-        //    }
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagHARDWAREINPUT
+        {
+            IntPtr uMsg;
+            IntPtr wParamL;
+            IntPtr wParamH;
+        }
 
-        //    DUMMYUNIONNAME;
-        //};
+        [Flags]
+        public enum MouseEventFlags : uint
+        {
+            MOUSEEVENTF_MOVE = 0x0001, // Movement occurred
+            MOUSEEVENTF_LEFTDOWN = 0x0002, // The left button was pressed
+            MOUSEEVENTF_LEFTUP = 0x0004, // The left button was released
+            MOUSEEVENTF_RIGHTDOWN = 0x0008, // The right button was pressed
+            MOUSEEVENTF_RIGHTUP = 0x0010, // The right button was released
+            MOUSEEVENTF_MIDDLEDOWN = 0x0020, // The middle button was pressed
+            MOUSEEVENTF_MIDDLEUP = 0x0040, // The middle button was released
+            MOUSEEVENTF_XDOWN = 0x0080, // An X button was pressed
+            MOUSEEVENTF_XUP = 0x0100, // An X button was released
+            MOUSEEVENTF_WHEEL = 0x0800, // The wheel was moved
+            MOUSEEVENTF_HWHEEL = 0x1000, // The wheel was moved horizontally
+            MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000, // The WM_MOUSEMOVE messages will not be coalesced
+            MOUSEEVENTF_VIRTUALDESK = 0x4000, // Maps coordinates to the entire desktop
+            MOUSEEVENTF_ABSOLUTE = 0x8000, // The dx and dy members contain normalized absolute coordinates
+        }
 
-    //[DllImport("user32.dll", SetLastError = true)]
-    //    private static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
+        [StructLayout(LayoutKind.Sequential)]
+        public struct tagMOUSEINPUT
+        {
+            public int dx;
+            public int dy;
+            public int mouseData;
+            public MouseEventFlags dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct INPUT
+        {
+            [FieldOffset(0)]
+            public INPUT_TYPE type;
+
+            [FieldOffset(4)]
+            public tagMOUSEINPUT MOUSEINPUT;
+
+            [FieldOffset(4)]
+            public tagKEYBDINPUT KEYBDINPUT;
+
+            [FieldOffset(4)]
+            public tagHARDWAREINPUT HARDWAREINPUT;
+        };
+
+        [DllImport("gdi32.dll")]
+        public static extern uint GetPixel(IntPtr hdc, int x, int y);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDC(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
+
+        public const uint SRCCOPY = 0x00CC0020;
+        public const int CAPTUREBLT = 0x40000000;
+
+        [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
+        public static extern bool BitBlt(
+            IntPtr hdcDest,
+            int nXDest,
+            int nYDest,
+            int nWidth,
+            int nHeight,
+            IntPtr hdcSrc,
+            int nXSrc,
+            int nYSrc,
+            uint dwRop
+        );
+
+        [DllImport("user32.dll")]
+        public static extern int ReleaseDC(IntPtr hWnd, int hDC);
+
+        [DllImport("gdi32.dll")]
+        public static extern int CreateCompatibleDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll")]
+        public static extern int CreateCompatibleBitmap(IntPtr hdc, int width, int height);
+
+        [DllImport("gdi32.dll")]
+        public static extern int SelectObject(IntPtr hdc, IntPtr hObject);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool DeleteObject(IntPtr hObject);
+
+        [DllImport("gdi32.dll")]
+        public static extern bool DeleteDC(IntPtr hdc);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowDC(IntPtr hWnd);
     }
 }

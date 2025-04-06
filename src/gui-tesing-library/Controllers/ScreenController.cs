@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gui_tesing_library.Directives;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using gui_tesing_library.SystemCalls;
 
 namespace gui_tesing_library.Controllers
 {
-    public class ScreenController: IGTScreen
+    public class ScreenController : IGTScreen
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
 
@@ -19,7 +20,8 @@ namespace gui_tesing_library.Controllers
         {
             get
             {
-                return _SystemCalls.GetMaximizedWindowSize();;
+                return _SystemCalls.GetMaximizedWindowSize();
+                ;
             }
         }
         private static IGTScreen _gtScreen;
@@ -39,7 +41,13 @@ namespace gui_tesing_library.Controllers
 
         public ScreenShot GetScreenshot()
         {
-            throw new NotImplementedException();
+            return SystemCallsFactory
+                .GetSystemCalls()
+                .GetScreenShotFromHandle(
+                    0,
+                    new Vector2i(0, 0),
+                    SystemController.Instance.GetScreenSize()
+                );
         }
 
         public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
@@ -47,9 +55,24 @@ namespace gui_tesing_library.Controllers
             throw new NotImplementedException();
         }
 
+        [Log]
         public Color GetPixelColorAt(Vector2i postion)
         {
-            throw new NotImplementedException();
+            //return SystemCallsFactory.GetSystemCalls().GetPixelColorAt(postion, 0);
+            return new Color(0, 0, 0);
+        }
+
+        [Log]
+        public IGTScreen PixelAtShouldBeColor(Vector2i postion, Color color)
+        {
+            Helpers.AwaitTrue(
+                () =>
+                {
+                    return GetPixelColorAt(postion).Equals(color);
+                },
+                $"Pixel color at {postion} was not {color} with in given time"
+            );
+            return this;
         }
     }
 }

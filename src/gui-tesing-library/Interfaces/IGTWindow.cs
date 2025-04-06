@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.Design;
-using gui_tesing_library.Controllers;
 using gui_tesing_library;
+using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 
 namespace gui_tesing_library
 {
-    public interface IGTWindow: IGTScreen
+    public interface IGTWindow : IGTScreen
     {
         Vector2i Position { get; }
         bool DoesExist { get; }
@@ -15,7 +15,7 @@ namespace gui_tesing_library
         IGTWindow MoveWindow(Vector2i offset);
         IGTWindow Minimize();
         IGTWindow Maximize();
-        IGTWindow GetProcessOfWindow();
+        IGTProcess GetProcessOfWindow();
         IGTWindow Close();
         IGTWindow SetWindowSize(int x, int y);
         IGTWindow SetPostion(int x, int y);
@@ -25,5 +25,12 @@ namespace gui_tesing_library
         IGTWindow KillProcess();
 
         IGTWindow ShouldBeMinimized(bool state);
+        string GetWindowName();
+
+        Vector2i GetWindowContentPosition();
+        Vector2i GetWindowContentSize();
+
+        Color GetContentPixelColorAt(Vector2i postion);
+        IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color);
     }
 }

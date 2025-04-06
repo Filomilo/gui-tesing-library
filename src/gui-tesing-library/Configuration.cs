@@ -23,7 +23,7 @@ namespace gui_tesing_library
                 _ProcesAwaitTime = value;
             }
         }
-        private static int _ActionDelay = 200;
+        private static int _ActionDelay = 800;
 
         public static int ActionDelay
         {
