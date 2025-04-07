@@ -13,7 +13,7 @@ namespace GuiTestingLibrary_Tets
         public static IGTWindow OpenExampleGui()
         {
            IGTProcess gtRocess = SystemController.Instance.StartProcess(
-                "\"C:\\Program Files\\Common Files\\Oracle\\Java\\javapath\\java\" -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
+                "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
             );
             Assert.That(gtRocess.IsAlive);
             IGTWindow window = SystemController.Instance.WindowOfNameShouldExist("Hello!").FindTopWindowByName("Hello!");
