@@ -7,6 +7,10 @@ cd C:\OEM\GuiTestingLibrary_Tests
 @REM "C:\Program Files\dotnet\dotnet.exe" dotnet restore >> \\host.lan\Data\\dotnet.log
 @REM "C:\Program Files\dotnet\dotnet.exe" dotnet add package Lombok.NET --version 2.4.1 >> \\host.lan\Data\\dotnet.log
 @REM "C:\Program Files\dotnet\dotnet.exe" dotnet add package System.Numerics.Vectors --version 4.1.6  >> \\host.lan\Data\\dotnet.log
+"C:\Program Files\dotnet\dotnet.exe" dotnet add package Fody --version 6.9.2  >> \\host.lan\Data\\dotnet.log
+"C:\Program Files\dotnet\dotnet.exe" dotnet add package MethodDecorator.Fody --version 1.1.1  >> \\host.lan\Data\\dotnet.log
+"C:\Program Files\dotnet\dotnet.exe" dotnet add package MethodDecorator.Fody --version 4.1.0  >> \\host.lan\Data\\dotnet.log
+
 start /min cmd /c "C:\Users\Docker\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe -f gdigrab -framerate 30 -i desktop \\host.lan\Data\\desktop-output.mkv -nostdin > \\host.lan\Data\\ffmpeg-output.log "
 "C:\Program Files\dotnet\dotnet.exe" dotnet test --logger "trx;LogFileName=\\host.lan\Data\\test-results.trx" 
 echo "fin" >> \\host.lan\Data\\fin
