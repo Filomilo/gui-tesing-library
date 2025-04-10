@@ -11,6 +11,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
@@ -23,7 +24,7 @@ using Color = gui_tesing_library.Models.Color;
 
 namespace gui_tesing_library.WInApi
 {
-    class WindwosSystemCalls : ISystemCalls
+    public class WindowsSystemCalls : ISystemCalls
     {
         private InputSimulator _inputSimulator = new InputSimulator();
 
@@ -145,6 +146,15 @@ namespace gui_tesing_library.WInApi
         {
             WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_RESTORE);
             bool returnVal = WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_SHOW);
+            WinApiWrapper.SetWindowPos(
+                new IntPtr(handle),
+                WinApiWrapper.HwndInsertAfter.HWND_TOPMOST,
+                0,
+                0,
+                0,
+                0,
+                WinApiWrapper.UFlags.SWP_NOMOVE | WinApiWrapper.UFlags.SWP_NOSIZE
+            );
             WinApiWrapper.BringWindowToTop(new IntPtr(handle));
         }
 
@@ -356,8 +366,76 @@ namespace gui_tesing_library.WInApi
         public void MoveMouseTo(Vector2i newPos)
         {
             Vector2i currMousePos = this.GetMousePosition();
-            Vector2i movmeentOFfset = newPos-currMousePos;
-            _inputSimulator.Mouse.MoveMouseBy(movmeentOFfset.x, movmeentOFfset.y);
+            Vector2i movementOffset = newPos - currMousePos;
+            int steps = 100;
+
+            float stepX = (float)movementOffset.x / steps;
+            float stepY = (float)movementOffset.y / steps;
+
+            float x = currMousePos.x;
+            float y = currMousePos.y;
+
+            for (int i = 0; i < steps; i++)
+            {
+                Thread.Sleep(1);
+                x += stepX;
+                y += stepY;
+
+                // Calculate movement delta from previous point to current
+                _inputSimulator.Mouse.MoveMouseBy(
+                    (int)(Math.Ceiling(stepX) == 0 ? -1 : Math.Ceiling(stepX)),
+                    (int)(Math.Ceiling(stepY) == 0 ? -1 : Math.Ceiling(stepY))
+                );
+            }
+
+            if (!this.GetMousePosition().Equals(newPos))
+            {
+                MoveMouseTo(newPos);
+            }
+        }
+
+        public void TypeText(string text)
+        {
+            _inputSimulator.Keyboard.TextEntry(text);
+        }
+
+        public void ClickKey(Key key)
+        {
+            _inputSimulator.Keyboard.KeyPress(DataMapper.KeyToVirtualKey(key));
+        }
+
+        public void ReleaseKey(Key key)
+        {
+            _inputSimulator.Keyboard.KeyUp(DataMapper.KeyToVirtualKey(key));
+        }
+
+        public void PressKey(Key key)
+        {
+            _inputSimulator.Keyboard.KeyDown(DataMapper.KeyToVirtualKey(key));
+        }
+
+        public string GetClipBoardData()
+        {
+            string text = "";
+
+            if (IsClipboardFormatAvailable(CF_UNICODETEXT))
+            {
+                if (OpenClipboard(IntPtr.Zero))
+                {
+                    var data = GetClipboardData(CF_UNICODETEXT);
+                    if (data != IntPtr.Zero)
+                    {
+                        data = GlobalLock(data);
+                        text = Marshal.PtrToStringUni(data);
+                        GlobalUnlock(data);
+                        return text;
+                    }
+                }
+            }
+
+            CloseClipboard();
+
+            return "";
         }
     }
 }

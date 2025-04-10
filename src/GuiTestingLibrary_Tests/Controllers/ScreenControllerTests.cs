@@ -20,7 +20,7 @@ namespace gui_tesing_library.Controllers.Tests
         public void GetScreenshotTest()
         {
             ScreenShot screenShot = ScreenController.Instance.GetScreenshot();
-            screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
+            screenShot.SaveAsBitmap("C\\test.bmp");
         }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="Controllers\KeyboardController.cs" />
     <Compile Include="Controllers\MouseController.cs" />
     <Compile Include="Controllers\ScreenController.cs" />
+    <Compile Include="DataMapper.cs" />
     <Compile Include="Directives\DelayWrapper.cs" />
     <Compile Include="Directives\ExceptionWrapper.cs" />
     <Compile Include="Directives\LogWrapper.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="SystemCalls\SystemCallsFactory.cs" />
     <Compile Include="SystemCalls\WinApiWrapper.cs" />
-    <Compile Include="SystemCalls\WindwosSystemCalls.cs" />
+    <Compile Include="SystemCalls\WindowsSystemCalls.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml">

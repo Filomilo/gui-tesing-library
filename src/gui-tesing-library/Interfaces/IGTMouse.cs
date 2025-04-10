@@ -23,7 +23,9 @@ namespace gui_tesing_library
         IGTMouse ReleaseRight();
         IGTMouse Scroll(int scrollValue);
         IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon);
+        IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2f positon);
         IGTMouse PositionShouldBe(Vector2i pos);
-        void MoveMouseTo(Vector2i newRedSliderPostion);
+        IGTMouse MoveMouseTo(Vector2i newRedSliderPostion);
+        IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, Vector2i position);
     }
 }

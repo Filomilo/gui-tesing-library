@@ -16,7 +16,7 @@ namespace gui_tesing_library
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
         public static extern IntPtr SetWindowPos(
             IntPtr hWnd,
-            int hWndInsertAfter,
+            HwndInsertAfter hWndInsertAfter,
             int x,
             int Y,
             int cx,
@@ -52,6 +52,14 @@ namespace gui_tesing_library
 
         [DllImport("kernel32.dll")]
         public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
+
+        public enum HwndInsertAfter
+        {
+            HWND_TOP = 0,
+            HWND_BOTTOM = 1,
+            HWND_TOPMOST = -1,
+            HWND_NOTOPMOST = -2,
+        }
 
         [Flags]
         public enum UFlags
@@ -106,6 +114,29 @@ namespace gui_tesing_library
 
         [DllImport("user32.dll")]
         public static extern int GetSystemMetrics(SystemMetrics nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern bool CloseClipboard();
+
+        [DllImport("user32.dll")]
+        public static extern bool OpenClipboard(IntPtr WndNewOwner);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetClipboardData(uint uFormat);
+
+        [DllImport("user32.dll", SetLastError = false)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool IsClipboardFormatAvailable(uint uFormat);
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GlobalLock(IntPtr hMem);
+
+        [DllImport("kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GlobalUnlock(IntPtr hMem);
+
+        public const uint CF_TEXT = 1;
+        public const uint CF_UNICODETEXT = 13;
 
         public enum SystemMetrics
         {
