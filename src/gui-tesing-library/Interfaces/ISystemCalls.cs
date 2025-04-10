@@ -49,5 +49,9 @@ namespace gui_tesing_library.Interfaces
         Color GetPixelColorAt(Vector2i postion, int handle);
         void MoveMouse(Vector2i offset);
         void MoveMouseTo(Vector2i newPos);
+        void TypeText(string text);
+        void ClickKey(Key key);
+        void ReleaseKey(Key key);
+        void PressKey(Key key);
     }
 }

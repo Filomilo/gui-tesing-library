@@ -55,4 +55,53 @@ namespace gui_tesing_library.Controllers
         public static Vector2i operator /(Vector2i a, Vector2i b) =>
             new Vector2i(a.x / b.x, a.y / b.y);
     }
+
+    public class Vector2f
+    {
+        public Vector2f(float x, float y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public float x { get; set; }
+        public float y { get; set; }
+
+        protected bool Equals(Vector2f other)
+        {
+            return x == other.x && y == other.y;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is null)
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != GetType())
+                return false;
+            return Equals((Vector2i)obj);
+        }
+
+        public override string ToString()
+        {
+            return $"[{x};{y}]";
+        }
+
+        internal float Area()
+        {
+            return x * y;
+        }
+
+        public static Vector2f operator +(Vector2f a, Vector2f b) =>
+            new Vector2f(a.x + b.x, a.y + b.y);
+
+        public static Vector2f operator -(Vector2f a, Vector2f b) =>
+            new Vector2f(a.x - b.x, a.y - b.y);
+
+        public static Vector2f operator /(Vector2f a, int b) => new Vector2f(a.x / b, a.y / 2);
+
+        public static Vector2f operator /(Vector2f a, Vector2f b) =>
+            new Vector2f(a.x / b.x, a.y / b.y);
+    }
 }

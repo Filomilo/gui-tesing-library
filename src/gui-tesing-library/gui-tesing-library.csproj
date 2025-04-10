@@ -72,6 +72,7 @@
     <Compile Include="Controllers\KeyboardController.cs" />
     <Compile Include="Controllers\MouseController.cs" />
     <Compile Include="Controllers\ScreenController.cs" />
+    <Compile Include="DataMapper.cs" />
     <Compile Include="Directives\DelayWrapper.cs" />
     <Compile Include="Directives\ExceptionWrapper.cs" />
     <Compile Include="Directives\LogWrapper.cs" />

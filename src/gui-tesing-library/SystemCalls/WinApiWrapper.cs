@@ -16,7 +16,7 @@ namespace gui_tesing_library
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
         public static extern IntPtr SetWindowPos(
             IntPtr hWnd,
-            int hWndInsertAfter,
+            HwndInsertAfter hWndInsertAfter,
             int x,
             int Y,
             int cx,
@@ -52,6 +52,14 @@ namespace gui_tesing_library
 
         [DllImport("kernel32.dll")]
         public static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
+
+        public enum HwndInsertAfter
+        {
+            HWND_TOP = 0,
+            HWND_BOTTOM = 1,
+            HWND_TOPMOST = -1,
+            HWND_NOTOPMOST = -2,
+        }
 
         [Flags]
         public enum UFlags

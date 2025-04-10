@@ -247,7 +247,6 @@ namespace gui_tesing_library.Components
             );
         }
 
- 
         [Log]
         [Delay]
         public Color GetContentPixelColorAt(Vector2i postion)
@@ -267,6 +266,28 @@ namespace gui_tesing_library.Components
                     return GetContentPixelColorAt(position).Equals(color);
                 },
                 $"Content Pixel color at {position} of window {this.GetWindowName()} was not {color} but {GetContentPixelColorAt(position)} with in given time"
+            );
+            return this;
+        }
+
+        public IGTWindow CenterWindow()
+        {
+            Vector2i screenSize = SystemController.Instance.GetScreenSize();
+            Vector2i windowSize = this.Size;
+            Vector2i diffrence = screenSize - windowSize;
+            this.SetPostion(diffrence.x / 2, diffrence.y / 2);
+
+            return this;
+        }
+
+        public IGTWindow WindowNameShouldBe(string title)
+        {
+            Helpers.AwaitTrue(
+                () =>
+                {
+                    return this.GetWindowName() == title;
+                },
+                $"Window name was not [[{title}]] but [[{this.GetWindowName()}]] within {Configuration.ProcesAwaitTime} ms"
             );
             return this;
         }
