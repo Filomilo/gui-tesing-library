@@ -83,7 +83,10 @@ namespace gui_tesing_library
         [Log]
         public IGTWindow FindTopWindowByName(string name)
         {
-            IGTWindow window = new GTWindow(this._SystemCalls.FindWindowByName(name));
+            int handle = this._SystemCalls.FindWindowByName(name);
+            if (handle <= 0)
+                return null;
+            IGTWindow window = new GTWindow(handle);
             return window;
         }
 

@@ -54,7 +54,35 @@ namespace gui_tesing_library.Controllers
 
         public IGTMouse MoveMouse(Vector2i offset)
         {
-            SystemCallsFactory.GetSystemCalls().MoveMouse(offset);
+            Vector2i currPostion = this.Position;
+            Vector2i FinalPos = currPostion + offset;
+
+            Vector2i diff = FinalPos - this.Position;
+            //diff /= 2;
+            int i = 0;
+            Vector2f currPosF = (Vector2f)currPostion;
+            Vector2f finalPosF = (Vector2f)FinalPos;
+            int length = (int)(FinalPos - currPostion).Length;
+            Vector2f step = (finalPosF - currPosF) / length;
+            for (int j = 0; j < length; j++)
+            {
+                currPosF += step;
+                Vector2i newPos = (Vector2i)currPosF;
+                Vector2i off = newPos - this.Position;
+                SystemCallsFactory.GetSystemCalls().MoveMouse(off);
+            }
+
+            //while (!this.Position.Equals(FinalPos))
+            //{
+            //    i++;
+            //    SystemCallsFactory.GetSystemCalls().MoveMouse(diff);
+            //    diff = FinalPos - this.Position;
+            //    //diff /= 2;
+            //    Console.WriteLine($"Mouse position: {this.Position} after offset {diff}");
+            //    if (i > moveLimit)
+            //        break;
+            //}
+
             return this;
         }
 

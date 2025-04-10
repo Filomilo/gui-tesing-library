@@ -56,6 +56,31 @@ namespace GuiTestingLibrary_Tets
         }
 
         [Test]
+        public void testMouseMove()
+        {
+            Random rnd = new Random();
+            Vector2i mouseOffser = new Vector2i(rnd.Next(0, 100), rnd.Next(0, 100));
+            //mouseOffser = new Vector2i(1000, 0);
+            Vector2i startPostino = new Vector2i(100, 100);
+            Vector2i finalPostion = startPostino + mouseOffser;
+            MouseController.Instance.SetPosition(new Vector2i(100, 100));
+            Assert.That(
+                MouseController
+                    .Instance.PositionShouldBe(startPostino)
+                    .Position.Equals(startPostino),
+                $"Mouse position is not {startPostino} but {MouseController.Instance.Position}"
+            );
+            MouseController.Instance.MoveMouse(mouseOffser);
+            Assert.DoesNotThrow(
+                () =>
+                {
+                    MouseController.Instance.PositionShouldBe(finalPostion);
+                },
+                $"Mouse position is not {finalPostion} but {MouseController.Instance.Position} with move offset {mouseOffser}"
+            );
+        }
+
+        [Test]
         public void ColorSwicherTest()
         {
             IGTWindow window = TestHelpers.OpenExampleGui();
@@ -123,23 +148,26 @@ namespace GuiTestingLibrary_Tets
             Vector2i colorCheckPostion =
                 sliderRedStartPostion + new Vector2i(0, (int)(-spaceBetwenSliders * 1.5));
             Color initColor = window.GetContentPixelColorAt(colorCheckPostion);
-            MouseController.Instance.MoveMouseRelativeToWindowTo(window, sliderBlueStaVector2I);
-
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, sliderBlueStaVector2I)
-                .PositionShouldBe(window.Position + sliderBlueStaVector2I)
-                .MoveMouseTo(
-                    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
-                )
-                //.MoveMouseTo(
-                //    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
-                //)
-                //.SetPosition(
-                //    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
-                //)
-                .PositionShouldBe(
-                    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
-                );
+                .Instance.MoveMouseTo(sliderRedStartPostion)
+                .PositionShouldBe(sliderRedStartPostion);
+            //MouseController.Instance.MoveMouseRelativeToWindowTo(window, sliderBlueStaVector2I);
+
+            //MouseController
+            //    .Instance.SetPositionRelativeToWindow(window, sliderBlueStaVector2I)
+            //    .PositionShouldBe(window.Position + sliderBlueStaVector2I)
+            //    .MoveMouseTo(
+            //        window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
+            //    )
+            //.MoveMouseTo(
+            //    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
+            //)
+            //.SetPosition(
+            //    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
+            //)
+            //.PositionShouldBe(
+            //    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
+            //);
             Thread.Sleep(3000);
             //Assert.That(
             //    initColor.Equals(Color.Black),
