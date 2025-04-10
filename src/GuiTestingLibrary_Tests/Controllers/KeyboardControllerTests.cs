@@ -8,6 +8,7 @@ using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 using GuiTestingLibrary_Tets;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace gui_tesing_library.Controllers.Tests
 {
@@ -15,8 +16,6 @@ namespace gui_tesing_library.Controllers.Tests
     public class KeyboardControllerTests
     {
         private IGTWindow window;
-        private Vector2f windowNameINputPos = new Vector2f(0.25f, 0.24f);
-        private Vector2f ChangeWindowTitleButtonPositon = new Vector2f(0.21f, 0.35f);
 
         [SetUp]
         public void setup()
@@ -36,7 +35,10 @@ namespace gui_tesing_library.Controllers.Tests
         {
             string Title = "Test_" + Guid.NewGuid().ToString();
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, windowNameINputPos)
+                .Instance.SetPositionRelativeToWindow(
+                    window,
+                    TestHelpers.RelativePostions.windowNameINputPos
+                )
                 .ClickLeft();
             KeyboardController
                 .Instance.Type(Title)
@@ -48,7 +50,10 @@ namespace gui_tesing_library.Controllers.Tests
                 .ReleaseKey(Key.CONTROL);
 
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, ChangeWindowTitleButtonPositon)
+                .Instance.SetPositionRelativeToWindow(
+                    window,
+                    TestHelpers.RelativePostions.ChangeWindowTitleButtonPositon
+                )
                 .ClickLeft();
             Title = Title + Title;
             Assert.That(
@@ -62,7 +67,10 @@ namespace gui_tesing_library.Controllers.Tests
         {
             string Title = "0a p";
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, windowNameINputPos)
+                .Instance.SetPositionRelativeToWindow(
+                    window,
+                    TestHelpers.RelativePostions.windowNameINputPos
+                )
                 .ClickLeft();
 
             KeyboardController
@@ -71,7 +79,10 @@ namespace gui_tesing_library.Controllers.Tests
                 .ClickKey(Key.SPACE)
                 .ClickKey(Key.KEY_P);
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, ChangeWindowTitleButtonPositon)
+                .Instance.SetPositionRelativeToWindow(
+                    window,
+                    TestHelpers.RelativePostions.ChangeWindowTitleButtonPositon
+                )
                 .ClickLeft();
 
             Assert.That(
@@ -85,11 +96,17 @@ namespace gui_tesing_library.Controllers.Tests
         {
             string Title = "Test_" + Guid.NewGuid().ToString();
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, windowNameINputPos)
+                .Instance.SetPositionRelativeToWindow(
+                    window,
+                    TestHelpers.RelativePostions.windowNameINputPos
+                )
                 .ClickLeft();
             KeyboardController.Instance.Type(Title);
             MouseController
-                .Instance.SetPositionRelativeToWindow(window, ChangeWindowTitleButtonPositon)
+                .Instance.SetPositionRelativeToWindow(
+                    window,
+                    TestHelpers.RelativePostions.ChangeWindowTitleButtonPositon
+                )
                 .ClickLeft();
 
             Assert.That(

@@ -16,7 +16,7 @@ namespace gui_tesing_library.SystemCalls
             OperatingSystem os = Environment.OSVersion;
             if (os.Platform == PlatformID.Win32NT)
             {
-                return new WindwosSystemCalls();
+                return new WindowsSystemCalls();
             }
             ErrorController.Throw(new NotImplementedException("This system is not yet supported"));
             return null;

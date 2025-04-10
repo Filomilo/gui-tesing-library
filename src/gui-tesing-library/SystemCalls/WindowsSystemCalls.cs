@@ -24,7 +24,7 @@ using Color = gui_tesing_library.Models.Color;
 
 namespace gui_tesing_library.WInApi
 {
-    class WindwosSystemCalls : ISystemCalls
+    public class WindowsSystemCalls : ISystemCalls
     {
         private InputSimulator _inputSimulator = new InputSimulator();
 
@@ -412,6 +412,30 @@ namespace gui_tesing_library.WInApi
         public void PressKey(Key key)
         {
             _inputSimulator.Keyboard.KeyDown(DataMapper.KeyToVirtualKey(key));
+        }
+
+        public string GetClipBoardData()
+        {
+            string text = "";
+
+            if (IsClipboardFormatAvailable(CF_UNICODETEXT))
+            {
+                if (OpenClipboard(IntPtr.Zero))
+                {
+                    var data = GetClipboardData(CF_UNICODETEXT);
+                    if (data != IntPtr.Zero)
+                    {
+                        data = GlobalLock(data);
+                        text = Marshal.PtrToStringUni(data);
+                        GlobalUnlock(data);
+                        return text;
+                    }
+                }
+            }
+
+            CloseClipboard();
+
+            return "";
         }
     }
 }

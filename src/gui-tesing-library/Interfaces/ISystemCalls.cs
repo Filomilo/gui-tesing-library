@@ -53,5 +53,6 @@ namespace gui_tesing_library.Interfaces
         void ClickKey(Key key);
         void ReleaseKey(Key key);
         void PressKey(Key key);
+        string GetClipBoardData();
     }
 }

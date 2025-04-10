@@ -93,7 +93,7 @@
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="SystemCalls\SystemCallsFactory.cs" />
     <Compile Include="SystemCalls\WinApiWrapper.cs" />
-    <Compile Include="SystemCalls\WindwosSystemCalls.cs" />
+    <Compile Include="SystemCalls\WindowsSystemCalls.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml">

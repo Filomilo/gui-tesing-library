@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gui_tesing_library;
+using gui_tesing_library.Controllers;
+using LoremNET;
 using NUnit.Framework;
 
 namespace GuiTestingLibrary_Tets
@@ -77,6 +79,18 @@ namespace GuiTestingLibrary_Tets
                 if (stopwatch.ElapsedMilliseconds > timeout)
                     throw new TimeoutException($"Ensure true timouet {timeout}");
             }
+        }
+
+        internal static class RelativePostions
+        {
+            public static Vector2f windowNameINputPos = new Vector2f(0.25f, 0.24f);
+            public static Vector2f ChangeWindowTitleButtonPositon = new Vector2f(0.21f, 0.35f);
+            public static Vector2f TextAreaInput = new Vector2f(0.21f, 0.55f);
+        }
+
+        public static string GetLoremIpsumText()
+        {
+            return Lorem.Paragraph(10, 20);
         }
     }
 }
