@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using gui_tesing_library;
@@ -13,6 +14,8 @@ namespace GuiTestingLibrary_Tets
 {
     class TestHelpers
     {
+
+       
         public static IGTWindow OpenExampleGui()
         {
             IGTProcess gtRocess = SystemController.Instance.StartProcess(
@@ -86,7 +89,18 @@ namespace GuiTestingLibrary_Tets
             public static Vector2f windowNameINputPos = new Vector2f(0.25f, 0.24f);
             public static Vector2f ChangeWindowTitleButtonPositon = new Vector2f(0.21f, 0.35f);
             public static Vector2f TextAreaInput = new Vector2f(0.21f, 0.55f);
+            
         }
+        private static string ImageReferanceLocation = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName+
+            "\\ScreenShotReferances\\";
+        internal static class InageReferance
+        {
+            internal static readonly string BlackSquare=ImageReferanceLocation+ "BlackSquare.bmp";
+            public static string EntryWindow720p = ImageReferanceLocation + "EntryWindow_720p.bmp";
+
+        }                                
+
+
 
         public static string GetLoremIpsumText()
         {
