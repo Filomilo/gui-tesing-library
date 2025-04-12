@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using gui_tesing_library.Services;
 
 namespace gui_tesing_library
 {
@@ -38,5 +39,13 @@ namespace gui_tesing_library
         }
 
 
+        public static ImageComparerFactory.IMAGE_COMPARER_TYPE ImageComparerType
+        {
+            get;
+            set;
+        } = ImageComparerFactory.IMAGE_COMPARER_TYPE.HASH_COMPARER;
     }
-}
+
+
+
+    }

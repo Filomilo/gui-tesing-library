@@ -39,6 +39,10 @@
     <ProjectReference Include="..\gui-tesing-library\gui-tesing-library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ScreenShotReferances\" />
+  </ItemGroup>
+
 
 
 </Project>
