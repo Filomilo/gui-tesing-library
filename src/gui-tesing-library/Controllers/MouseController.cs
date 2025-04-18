@@ -142,14 +142,14 @@ namespace gui_tesing_library.Controllers
         [Log]
         public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon)
         {
-            Vector2i windowPositon = window.Position;
+            Vector2i windowPositon = window.GetWindowContentPosition();
             this.SetPosition(positon + windowPositon);
             return this;
         }
 
         public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2f positon)
         {
-            Vector2i size = window.Size;
+            Vector2i size = window.GetWindowContentSize();
             this.SetPositionRelativeToWindow(
                 window,
                 new Vector2i((int)(positon.x * size.x), (int)(positon.y * size.y))
@@ -159,12 +159,19 @@ namespace gui_tesing_library.Controllers
 
         [Delay]
         [Log]
-        public IGTMouse PositionShouldBe(Vector2i pos)
+        public IGTMouse PositionShouldBe(Vector2i pos, int errorDistance)
         {
             Helpers.AwaitTrue(
                 () =>
                 {
-                    return this.Position.Equals(pos);
+                    Vector2i diff = this.Position - pos;
+                    diff.x = Math.Abs(diff.x);
+                    diff.y = Math.Abs(diff.y);
+                    if (diff.x > errorDistance || diff.y > errorDistance)
+                    {
+                        return false;
+                    }
+                    return true;
                 },
                 $"Mouse postion was not {pos} withing maximum time but {this.Position}"
             );
@@ -181,8 +188,52 @@ namespace gui_tesing_library.Controllers
 
         public IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, Vector2i positon)
         {
-            Vector2i windowPositon = window.Position;
+            Vector2i windowPositon = window.GetWindowContentPosition();
             this.MoveMouseTo(positon + windowPositon);
+            return this;
+        }
+
+        IGTMouse IGTMouse.MoveMouseRelativeToWindowTo(IGTWindow window, Vector2f vector2f)
+        {
+            Vector2i size = window.GetWindowContentSize();
+            MoveMouseRelativeToWindowTo(window, new Vector2i((int)(size.x * vector2f.x), (int)(size.y * vector2f.y)));
+            return this;
+        }
+
+        public Vector2f GetPostionRelativeToWinodw(IGTWindow window)
+        {
+        
+            Vector2i mousePositon = this.Position;
+            Vector2i contentPositon = window.GetWindowContentPosition();
+            Vector2i contentSize = window.GetWindowContentSize();
+           
+            Vector2i mousePosiotnAdjustedForContentPostion=mousePositon - contentPositon;
+            Vector2f postionRelativeToContentSize =
+                ((Vector2f)(mousePosiotnAdjustedForContentPostion)) / ((Vector2f)(contentSize));
+      
+            return postionRelativeToContentSize;
+        }
+
+        public IGTMouse PositionRelativeToWindowShouldBe(IGTWindow window, Vector2f realitvePos, float errorDistance)
+        {
+            Helpers.AwaitTrue(
+                () =>
+                {
+                    return GetPostionRelativeToWinodw(window).DistanceFrom(realitvePos) < errorDistance;
+
+                },
+                $"Mouse postion realtive to window was not {realitvePos} withing maximum time but {GetPostionRelativeToWinodw(window)} which is distance of [[{GetPostionRelativeToWinodw(window).DistanceFrom(realitvePos)}]]] and allowed is [[{errorDistance}]]"
+            );
+            return this;
+        }
+
+        public IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, Vector2f realitvePos)
+        {
+            Vector2i size = window.GetWindowContentSize();
+            Vector2i windowPostion = window.Position;
+            Vector2i newPos = new Vector2i((int)(size.x * realitvePos.x), (int)(size.y * realitvePos.y));
+            Vector2i absolutePostion=windowPostion + newPos;
+            this.MoveMouseTo(absolutePostion);
             return this;
         }
     }

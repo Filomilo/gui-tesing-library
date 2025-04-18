@@ -15,6 +15,8 @@ namespace GuiTestingLibrary_Tets
     {
         public static IGTWindow OpenExampleGui()
         {
+            int prevActionDleay = gui_tesing_library.Configuration.ActionDelay;
+            gui_tesing_library.Configuration.ActionDelay = 10;
             IGTProcess gtRocess = SystemController.Instance.StartProcess(
                 "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
             );
@@ -26,6 +28,7 @@ namespace GuiTestingLibrary_Tets
                 .CenterWindow()
                 .BringUpFront();
             Assert.That(window != null);
+            gui_tesing_library.Configuration.ActionDelay = prevActionDleay;
             return window;
         }
 
@@ -86,6 +89,20 @@ namespace GuiTestingLibrary_Tets
             public static Vector2f windowNameINputPos = new Vector2f(0.25f, 0.24f);
             public static Vector2f ChangeWindowTitleButtonPositon = new Vector2f(0.21f, 0.35f);
             public static Vector2f TextAreaInput = new Vector2f(0.21f, 0.55f);
+            public static Vector2f ColorSwitcherColorTest = new Vector2f(0.21f, 0.66f);
+            public static Vector2f ColorSwitcherGreenButton = new Vector2f(0.21f, 0.9f);
+            public static Vector2f ColorSwitcherBlackButton = ColorSwitcherGreenButton+new Vector2f(0,-0.06f);
+            public static Vector2f ColorSwitcherWhiteButton = ColorSwitcherBlackButton + new Vector2f(0, -0.06f);
+
+
+            public static Vector2f SliderColorCheckPostion = new Vector2f(0.355f, 0.10f);
+            public static Vector2f RedSliderStartPostion= new Vector2f(0.355f, 0.19f);
+            public static Vector2f RedSliderEndPostion = new Vector2f(0.652f, 0.19f);
+            public static Vector2f GreenSliderStartPostion = new Vector2f(0.355f, 0.26f);
+            public static Vector2f GreenSliderEndPostion = new Vector2f(0.652f, 0.26f);
+            public static Vector2f BlueSliderStartPostion = new Vector2f(0.355f, 0.33f);
+            public static Vector2f BlueSliderEndPostion = new Vector2f(0.652f, 0.33f);
+            public static float ColorSliderLength = BlueSliderEndPostion.x- BlueSliderStartPostion.x;
         }
 
         public static string GetLoremIpsumText()

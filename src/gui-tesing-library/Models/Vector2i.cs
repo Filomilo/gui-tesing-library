@@ -90,7 +90,7 @@ namespace gui_tesing_library.Controllers
                 return true;
             if (obj.GetType() != GetType())
                 return false;
-            return Equals((Vector2i)obj);
+            return Equals((Vector2f)obj);
         }
 
         public override string ToString()
@@ -101,6 +101,12 @@ namespace gui_tesing_library.Controllers
         internal float Area()
         {
             return x * y;
+        }
+
+        public float DistanceFrom(Vector2f pos)
+        {
+            Vector2f distance = new Vector2f(this.x - pos.x, this.y - pos.y);
+            return (float)Math.Sqrt(Math.Pow((double)distance.x, 2) + Math.Pow((double)distance.y, 2));
         }
 
         public static Vector2f operator +(Vector2f a, Vector2f b) =>

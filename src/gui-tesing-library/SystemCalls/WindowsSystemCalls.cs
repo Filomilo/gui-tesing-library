@@ -365,33 +365,13 @@ namespace gui_tesing_library.WInApi
 
         public void MoveMouseTo(Vector2i newPos)
         {
-            Vector2i currMousePos = this.GetMousePosition();
-            Vector2i movementOffset = newPos - currMousePos;
-            int steps = 100;
-
-            float stepX = (float)movementOffset.x / steps;
-            float stepY = (float)movementOffset.y / steps;
-
-            float x = currMousePos.x;
-            float y = currMousePos.y;
-
-            for (int i = 0; i < steps; i++)
-            {
-                Thread.Sleep(1);
-                x += stepX;
-                y += stepY;
-
-                // Calculate movement delta from previous point to current
-                _inputSimulator.Mouse.MoveMouseBy(
-                    (int)(Math.Ceiling(stepX) == 0 ? -1 : Math.Ceiling(stepX)),
-                    (int)(Math.Ceiling(stepY) == 0 ? -1 : Math.Ceiling(stepY))
-                );
-            }
-
-            if (!this.GetMousePosition().Equals(newPos))
-            {
-                MoveMouseTo(newPos);
-            }
+            Vector2f aboslutePostion =
+                new Vector2f((newPos.x * 65535f / WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXSCREEN)),
+                    (newPos.y * 65535f / WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYSCREEN)));
+            _inputSimulator.Mouse.MoveMouseTo(
+                (uint)Math.Round(aboslutePostion.x) ,
+                (uint)Math.Round(aboslutePostion.y)
+            );
         }
 
         public void TypeText(string text)
