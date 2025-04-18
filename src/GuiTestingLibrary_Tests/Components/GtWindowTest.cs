@@ -21,7 +21,7 @@ namespace GuiTestingLibrary_Tets.Components
         public void init()
         {
             gtRocess = SystemController.Instance.StartProcess(
-                "\"C:\\Program Files\\Common Files\\Oracle\\Java\\javapath\\java\" -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
+                $"{TestHelpers.JavaPath} -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
             );
             Assert.That(gtRocess.IsAlive);
             window = SystemController
