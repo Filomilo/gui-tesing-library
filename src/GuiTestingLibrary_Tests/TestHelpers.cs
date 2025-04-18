@@ -105,7 +105,14 @@ namespace GuiTestingLibrary_Tets
             public static Vector2f BlueSliderEndPostion = new Vector2f(0.652f, 0.33f);
             public static float ColorSliderLength = BlueSliderEndPostion.x- BlueSliderStartPostion.x;
         }
+        private static string ImageReferanceLocation = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName +
+                                                       "\\ScreenShotReferances\\";
+        internal static class InageReferance
+        {
+            internal static readonly string BlackSquare = ImageReferanceLocation + "BlackSquare.bmp";
+            public static string EntryWindow720p = ImageReferanceLocation + "EntryWindow_720p.bmp";
 
+        }
         public static string GetLoremIpsumText()
         {
             return Lorem.Paragraph(10, 20);
