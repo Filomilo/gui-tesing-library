@@ -111,7 +111,7 @@ namespace gui_tesing_library
 
         public string GetClipBoardContent()
         {
-            throw new NotImplementedException();
+            return this._SystemCalls.GetClipBoardData();
         }
 
         [Log]

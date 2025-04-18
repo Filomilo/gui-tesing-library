@@ -25,6 +25,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="LoremNET" Version="2.0.0" />
     <PackageReference Include="MethodDecorator.Fody" Version="1.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NUnit" Version="4.3.2" />
@@ -41,6 +42,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\gui-tesing-library\gui-tesing-library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ScreenShotReferances\" />
   </ItemGroup>
 
 

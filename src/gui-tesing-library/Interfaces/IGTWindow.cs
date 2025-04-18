@@ -32,5 +32,7 @@ namespace gui_tesing_library
 
         Color GetContentPixelColorAt(Vector2i postion);
         IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color);
+        IGTWindow CenterWindow();
+        IGTWindow WindowNameShouldBe(string title);
     }
 }
