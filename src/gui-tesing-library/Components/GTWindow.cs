@@ -258,6 +258,13 @@ namespace gui_tesing_library.Components
             return this.GetPixelColorAt(postion);
         }
 
+        public Color GetContentPixelColorAt(Vector2f realtivePostion)
+        {
+            Vector2i contentSize = this.GetWindowContentSize();
+            return GetContentPixelColorAt(new Vector2i((int)(contentSize.x * realtivePostion.x),
+                (int)(contentSize.y * realtivePostion.y)));
+        }
+
         public IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color)
         {
             Helpers.AwaitTrue(
@@ -288,6 +295,18 @@ namespace gui_tesing_library.Components
                     return this.GetWindowName() == title;
                 },
                 $"Window name was not [[{title}]] but [[{this.GetWindowName()}]] within {Configuration.ProcesAwaitTime} ms"
+            );
+            return this;
+        }
+
+        public IGTWindow ContentPixelAtShouldBeColor(Vector2f sliderColorCheckPostion, Color colorshouldbe, int errorPass)
+        {
+            Helpers.AwaitTrue(
+                () =>
+                {
+                    return GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)<errorPass;
+                },
+                $"Content Pixel color at {sliderColorCheckPostion} of window {this.GetWindowName()} was not {colorshouldbe} but {GetContentPixelColorAt(sliderColorCheckPostion)} with in given time, difreance: [[{GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)}]], with error pass [[{errorPass}]]"
             );
             return this;
         }

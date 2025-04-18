@@ -18,6 +18,11 @@ namespace gui_tesing_library.Controllers
         public int x { get; set; }
         public int y { get; set; }
 
+        public float Length
+        {
+            get { return (float)Math.Sqrt(Math.Pow((double)x, 2) + Math.Pow((double)y, 2)); }
+        }
+
         protected bool Equals(Vector2i other)
         {
             return x == other.x && y == other.y;
@@ -54,6 +59,11 @@ namespace gui_tesing_library.Controllers
 
         public static Vector2i operator /(Vector2i a, Vector2i b) =>
             new Vector2i(a.x / b.x, a.y / b.y);
+
+        public static explicit operator Vector2i(Vector2f v)
+        {
+            return new Vector2i((int)v.x, (int)v.y);
+        }
     }
 
     public class Vector2f
@@ -80,7 +90,7 @@ namespace gui_tesing_library.Controllers
                 return true;
             if (obj.GetType() != GetType())
                 return false;
-            return Equals((Vector2i)obj);
+            return Equals((Vector2f)obj);
         }
 
         public override string ToString()
@@ -93,15 +103,26 @@ namespace gui_tesing_library.Controllers
             return x * y;
         }
 
+        public float DistanceFrom(Vector2f pos)
+        {
+            Vector2f distance = new Vector2f(this.x - pos.x, this.y - pos.y);
+            return (float)Math.Sqrt(Math.Pow((double)distance.x, 2) + Math.Pow((double)distance.y, 2));
+        }
+
         public static Vector2f operator +(Vector2f a, Vector2f b) =>
             new Vector2f(a.x + b.x, a.y + b.y);
 
         public static Vector2f operator -(Vector2f a, Vector2f b) =>
             new Vector2f(a.x - b.x, a.y - b.y);
 
-        public static Vector2f operator /(Vector2f a, int b) => new Vector2f(a.x / b, a.y / 2);
+        public static Vector2f operator /(Vector2f a, int b) => new Vector2f(a.x / b, a.y / b);
 
         public static Vector2f operator /(Vector2f a, Vector2f b) =>
             new Vector2f(a.x / b.x, a.y / b.y);
+
+        public static explicit operator Vector2f(Vector2i v)
+        {
+            return new Vector2f((int)v.x, (int)v.y);
+        }
     }
 }
