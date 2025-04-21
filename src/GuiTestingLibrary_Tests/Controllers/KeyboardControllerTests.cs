@@ -26,7 +26,7 @@ namespace gui_tesing_library.Controllers.Tests
         [Test()]
         public void PressReleaseKeyTest()
         {
-            string Title = "Test_" + Guid.NewGuid().ToString();
+            string Title = "Test_";
             MouseController
                 .Instance.SetPositionRelativeToWindow(
                     window,
@@ -88,7 +88,7 @@ namespace gui_tesing_library.Controllers.Tests
         [Test()]
         public void TypeTest()
         {
-            string Title = "Test_" + Guid.NewGuid().ToString();
+            string Title = "Test_";
             MouseController
                 .Instance.SetPositionRelativeToWindow(
                     window,

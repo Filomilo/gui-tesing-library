@@ -42,6 +42,14 @@ namespace GuiTestingLibrary_Tets.Components
             ;
         }
 
+
+        [Test]
+        public void getWindowNameTest()
+        {
+            Assert.That(window.GetWindowName().Equals("Hello!"));
+            Assert.That(window.WindowNameShouldBe("Hello!").GetWindowName().Equals("Hello!"));
+        }
+
         [Test]
         public void getWindowSizeTest()
         {
