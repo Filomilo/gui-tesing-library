@@ -31,8 +31,10 @@ namespace gui_tesing_library
         Vector2i GetWindowContentSize();
 
         Color GetContentPixelColorAt(Vector2i postion);
+        Color GetContentPixelColorAt(Vector2f realtivePostion);
         IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color);
         IGTWindow CenterWindow();
         IGTWindow WindowNameShouldBe(string title);
+        IGTWindow ContentPixelAtShouldBeColor(Vector2f sliderColorCheckPostion, Color colorshouldbe, int errorPass);
     }
 }

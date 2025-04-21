@@ -41,10 +41,8 @@ namespace GuiTestingLibrary_Tets.Components
             window.KillProcess();
             window.ShouldWindowExist(false);
             Assert.That(window.DoesExist == false);
-            Assert.Throws<ArgumentException>(() =>
-            {
-                SystemController.Instance.FindTopWindowByName("Hello!");
-            });
+            Assert.That(SystemController.Instance.FindTopWindowByName("Hello!") == null);
+            ;
         }
 
         [Test]
