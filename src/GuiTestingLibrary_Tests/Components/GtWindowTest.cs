@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using gui_tesing_library;
-using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 using NUnit.Framework;
@@ -14,7 +9,9 @@ namespace GuiTestingLibrary_Tets.Components
     [TestFixture]
     class GtWindowTest
     {
+        [Required]
         private IGTProcess gtRocess;
+        [Required]
         private IGTWindow window;
 
         [NUnit.Framework.SetUp]

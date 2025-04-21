@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
-using gui_tesing_library.Models;
+﻿using gui_tesing_library.Models;
 using GuiTestingLibrary_Tets;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -60,6 +53,7 @@ namespace gui_tesing_library.Controllers.Tests
                 window.WindowNameShouldBe(Title).GetWindowName().Equals(Title),
                 $"Window title is not [[{Title}]] but [[{window.GetWindowName()}]]"
             );
+            window.WindowNameShouldBe(Title).GetProcessOfWindow().kill();
         }
 
         [Test()]

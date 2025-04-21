@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
+﻿using gui_tesing_library.Controllers;
 using gui_tesing_library.Directives;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using gui_tesing_library.SystemCalls;
-using Microsoft.Win32.SafeHandles;
-using static gui_tesing_library.WinApiWrapper;
+using System;
 
 namespace gui_tesing_library.Components
 {
@@ -304,7 +295,7 @@ namespace gui_tesing_library.Components
             Helpers.AwaitTrue(
                 () =>
                 {
-                    return GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)<errorPass;
+                    return GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe) < errorPass;
                 },
                 $"Content Pixel color at {sliderColorCheckPostion} of window {this.GetWindowName()} was not {colorshouldbe} but {GetContentPixelColorAt(sliderColorCheckPostion)} with in given time, difreance: [[{GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)}]], with error pass [[{errorPass}]]"
             );

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gui_tesing_library.Models
 {
@@ -71,9 +66,9 @@ namespace gui_tesing_library.Models
         public Double getDiffrence(Color color)
         {
             int rdiff = this.r - color.r;
-            int gdiff=this.g - color.g;
-            int bdiff=this.b - color.b;
-            return Math.Sqrt(Math.Pow(Math.Sqrt(Math.Pow(rdiff,2) + Math.Pow(bdiff,2)),2) + Math.Pow( gdiff,2));
+            int gdiff = this.g - color.g;
+            int bdiff = this.b - color.b;
+            return Math.Sqrt(Math.Pow(Math.Sqrt(Math.Pow(rdiff, 2) + Math.Pow(bdiff, 2)), 2) + Math.Pow(gdiff, 2));
         }
     }
 }

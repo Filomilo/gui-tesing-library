@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GregsStack.InputSimulatorStandard.Native;
 using gui_tesing_library.Models;
-using WindowsInput.Native;
+using System;
 
 namespace gui_tesing_library
 {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Directives;
+﻿using gui_tesing_library.Directives;
 using gui_tesing_library.SystemCalls;
-using Lombok.NET;
-using Microsoft.Win32.SafeHandles;
+using System;
 
 namespace gui_tesing_library.Controllers
 {
@@ -59,7 +53,7 @@ namespace gui_tesing_library.Controllers
 
             Vector2i diff = FinalPos - this.Position;
             //diff /= 2;
-            int i = 0;
+            //int i = 0;
             Vector2f currPosF = (Vector2f)currPostion;
             Vector2f finalPosF = (Vector2f)FinalPos;
             int length = (int)(FinalPos - currPostion).Length;
@@ -202,15 +196,15 @@ namespace gui_tesing_library.Controllers
 
         public Vector2f GetPostionRelativeToWinodw(IGTWindow window)
         {
-        
+
             Vector2i mousePositon = this.Position;
             Vector2i contentPositon = window.GetWindowContentPosition();
             Vector2i contentSize = window.GetWindowContentSize();
-           
-            Vector2i mousePosiotnAdjustedForContentPostion=mousePositon - contentPositon;
+
+            Vector2i mousePosiotnAdjustedForContentPostion = mousePositon - contentPositon;
             Vector2f postionRelativeToContentSize =
                 ((Vector2f)(mousePosiotnAdjustedForContentPostion)) / ((Vector2f)(contentSize));
-      
+
             return postionRelativeToContentSize;
         }
 
@@ -232,7 +226,7 @@ namespace gui_tesing_library.Controllers
             Vector2i size = window.GetWindowContentSize();
             Vector2i windowPostion = window.Position;
             Vector2i newPos = new Vector2i((int)(size.x * realitvePos.x), (int)(size.y * realitvePos.y));
-            Vector2i absolutePostion=windowPostion + newPos;
+            Vector2i absolutePostion = windowPostion + newPos;
             this.MoveMouseTo(absolutePostion);
             return this;
         }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Components;
-using gui_tesing_library.Controllers;
+﻿using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace gui_tesing_library
 {

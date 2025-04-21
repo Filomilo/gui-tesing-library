@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
 
-namespace gui_tesing_library
+namespace gui_tesing_library.SystemCalls
 {
     public static class WinApiWrapper
     {

@@ -1,28 +1,18 @@
-﻿using System;
-using System.CodeDom;
+﻿using GregsStack.InputSimulatorStandard;
+using gui_tesing_library.Controllers;
+using gui_tesing_library.Interfaces;
+using gui_tesing_library.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using gui_tesing_library.Components;
-using gui_tesing_library.Controllers;
-using gui_tesing_library.Interfaces;
-using gui_tesing_library.Models;
-using WindowsInput;
-using static System.Net.Mime.MediaTypeNames;
-using static gui_tesing_library.WinApiWrapper;
 using Color = gui_tesing_library.Models.Color;
-
-namespace gui_tesing_library.WInApi
+namespace gui_tesing_library.SystemCalls
 {
     public class WindowsSystemCalls : ISystemCalls
     {
@@ -80,7 +70,6 @@ namespace gui_tesing_library.WInApi
 
         public void TerminateProcess(int handle)
         {
-            IntPtr exitCode;
             WinApiWrapper.TerminateProcess(new IntPtr(handle), 0);
         }
 
@@ -125,7 +114,7 @@ namespace gui_tesing_library.WInApi
             IntPtr processHandle = WinApiWrapper.OpenProcess(
                 WinApiWrapper.ProcessAccessRights.PROCESS_QUERY_INFORMATION
                     | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ
-                    | ProcessAccessRights.PROCESS_TERMINATE,
+                    | WinApiWrapper.ProcessAccessRights.PROCESS_TERMINATE,
                 false,
                 id
             );
@@ -134,7 +123,7 @@ namespace gui_tesing_library.WInApi
 
         public void MinimizeWindow(int handle)
         {
-            WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_MINIMIZE);
+            WinApiWrapper.ShowWindow(new IntPtr(handle), WinApiWrapper.NCmdShow.SW_MINIMIZE);
         }
 
         public bool IsWindowsMinimized(int handle)
@@ -144,8 +133,8 @@ namespace gui_tesing_library.WInApi
 
         public void BringWindowUpFront(int handle)
         {
-            WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_RESTORE);
-            bool returnVal = WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_SHOW);
+            WinApiWrapper.ShowWindow(new IntPtr(handle), WinApiWrapper.NCmdShow.SW_RESTORE);
+            bool returnVal = WinApiWrapper.ShowWindow(new IntPtr(handle), WinApiWrapper.NCmdShow.SW_SHOW);
             WinApiWrapper.SetWindowPos(
                 new IntPtr(handle),
                 WinApiWrapper.HwndInsertAfter.HWND_TOPMOST,
@@ -160,7 +149,7 @@ namespace gui_tesing_library.WInApi
 
         public void MaximizeWindow(int handle)
         {
-            WinApiWrapper.ShowWindow(new IntPtr(handle), NCmdShow.SW_SHOWMAXIMIZED);
+            WinApiWrapper.ShowWindow(new IntPtr(handle), WinApiWrapper.NCmdShow.SW_SHOWMAXIMIZED);
         }
 
         public Vector2i GetMaximizedWindowSize()
@@ -180,7 +169,7 @@ namespace gui_tesing_library.WInApi
                 vector2i.y,
                 0,
                 0,
-                UFlags.SWP_NOSIZE
+                    WinApiWrapper.UFlags.SWP_NOSIZE
             );
         }
 
@@ -193,7 +182,7 @@ namespace gui_tesing_library.WInApi
                 0,
                 vector2i.x,
                 vector2i.y,
-                UFlags.SWP_NOMOVE
+                 WinApiWrapper.UFlags.SWP_NOMOVE
             );
         }
 
@@ -204,7 +193,7 @@ namespace gui_tesing_library.WInApi
 
         public Vector2i GetMousePosition()
         {
-            WinApiWrapper.GetCursorPos(out POINT pos);
+            WinApiWrapper.GetCursorPos(out WinApiWrapper.POINT pos);
             return new Vector2i((int)pos.x, (int)pos.y);
         }
 
@@ -267,31 +256,31 @@ namespace gui_tesing_library.WInApi
 
         public int GetWindowTitleBarHeight()
         {
-            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYCAPTION);
+            return WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYCAPTION);
         }
 
         public int GetWindowBorderWidth()
         {
-            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXFRAME);
+            return WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXFRAME);
         }
 
         public int GetWindowBorderHeight()
         {
-            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYFRAME);
+            return WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYFRAME);
         }
 
         public int GetWindowPadding()
         {
-            return WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXPADDEDBORDER);
+            return WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXPADDEDBORDER);
         }
 
         public ScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size)
         {
             IntPtr hdcScreen = WinApiWrapper.GetDC(new IntPtr(handle));
-            int hdcMemDC = CreateCompatibleDC(hdcScreen);
+            int hdcMemDC = WinApiWrapper.CreateCompatibleDC(hdcScreen);
 
-            int hBitmap = CreateCompatibleBitmap(hdcScreen, Size.x, Size.y);
-            int hOld = SelectObject(new IntPtr(hdcMemDC), new IntPtr(hBitmap));
+            int hBitmap = WinApiWrapper.CreateCompatibleBitmap(hdcScreen, Size.x, Size.y);
+            int hOld = WinApiWrapper.SelectObject(new IntPtr(hdcMemDC), new IntPtr(hBitmap));
 
             bool res = WinApiWrapper.BitBlt(
                 new IntPtr(hdcMemDC),
@@ -307,32 +296,32 @@ namespace gui_tesing_library.WInApi
 
             if (!res)
             {
-                SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
-                DeleteObject(new IntPtr(hBitmap));
-                DeleteDC(new IntPtr(hdcMemDC));
-                ReleaseDC(new IntPtr(handle), hdcScreen);
+                WinApiWrapper.SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
+                WinApiWrapper.DeleteObject(new IntPtr(hBitmap));
+                WinApiWrapper.DeleteDC(new IntPtr(hdcMemDC));
+                WinApiWrapper.ReleaseDC(new IntPtr(handle), hdcScreen);
                 throw new InvalidOperationException("BitBlt failed");
             }
 
             Bitmap bitmap = null;
             try
             {
-                bitmap = Bitmap.FromHbitmap(new IntPtr(hBitmap));
+                bitmap = Image.FromHbitmap(new IntPtr(hBitmap));
             }
-            catch (System.ExecutionEngineException e)
+            catch (Exception e)
             {
-                SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
-                DeleteObject(new IntPtr(hBitmap));
-                DeleteDC(new IntPtr(hdcMemDC));
-                ReleaseDC(new IntPtr(handle), hdcScreen);
+                WinApiWrapper.SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
+                WinApiWrapper.DeleteObject(new IntPtr(hBitmap));
+                WinApiWrapper.DeleteDC(new IntPtr(hdcMemDC));
+                WinApiWrapper.ReleaseDC(new IntPtr(handle), hdcScreen);
                 int error = Marshal.GetLastWin32Error();
-                throw new InvalidOperationException($"Marshal copy error code: {error}");
+                throw new InvalidOperationException($"Marshal copy error code: {error} -- {e.Message}");
             }
 
-            SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
-            DeleteObject(new IntPtr(hBitmap));
-            ReleaseDC(IntPtr.Zero, hdcScreen);
-            ReleaseDC(IntPtr.Zero, hdcMemDC);
+            WinApiWrapper.SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
+            WinApiWrapper.DeleteObject(new IntPtr(hBitmap));
+            WinApiWrapper.ReleaseDC(IntPtr.Zero, hdcScreen);
+            WinApiWrapper.ReleaseDC(IntPtr.Zero, hdcMemDC);
 
             return new ScreenShot(bitmap);
         }
@@ -340,16 +329,16 @@ namespace gui_tesing_library.WInApi
         public Vector2i GetScreenSize()
         {
             return new Vector2i(
-                WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXSCREEN),
-                WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYSCREEN)
+                WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXSCREEN),
+                WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYSCREEN)
             );
         }
 
         public Models.Color GetPixelColorAt(Vector2i postion, int handle)
         {
-            IntPtr hdc = GetDC(new IntPtr(handle));
-            uint pixel = GetPixel(hdc, postion.x, postion.y);
-            ReleaseDC(new IntPtr(handle), hdc);
+            IntPtr hdc = WinApiWrapper.GetDC(new IntPtr(handle));
+            uint pixel = WinApiWrapper.GetPixel(hdc, postion.x, postion.y);
+            WinApiWrapper.ReleaseDC(new IntPtr(handle), hdc);
 
             int red = (int)(pixel & 0x000000FF);
             int green = (int)((pixel & 0x0000FF00) >> 8);
@@ -366,10 +355,10 @@ namespace gui_tesing_library.WInApi
         public void MoveMouseTo(Vector2i newPos)
         {
             Vector2f aboslutePostion =
-                new Vector2f((newPos.x * 65535f / WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CXSCREEN)),
-                    (newPos.y * 65535f / WinApiWrapper.GetSystemMetrics(SystemMetrics.SM_CYSCREEN)));
+                new Vector2f((newPos.x * 65535f / WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXSCREEN)),
+                    (newPos.y * 65535f / WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYSCREEN)));
             _inputSimulator.Mouse.MoveMouseTo(
-                (uint)Math.Round(aboslutePostion.x) ,
+                (uint)Math.Round(aboslutePostion.x),
                 (uint)Math.Round(aboslutePostion.y)
             );
         }
@@ -398,22 +387,22 @@ namespace gui_tesing_library.WInApi
         {
             string text = "";
 
-            if (IsClipboardFormatAvailable(CF_UNICODETEXT))
+            if (WinApiWrapper.IsClipboardFormatAvailable(WinApiWrapper.CF_UNICODETEXT))
             {
-                if (OpenClipboard(IntPtr.Zero))
+                if (WinApiWrapper.OpenClipboard(IntPtr.Zero))
                 {
-                    var data = GetClipboardData(CF_UNICODETEXT);
+                    var data = WinApiWrapper.GetClipboardData(WinApiWrapper.CF_UNICODETEXT);
                     if (data != IntPtr.Zero)
                     {
-                        data = GlobalLock(data);
+                        data = WinApiWrapper.GlobalLock(data);
                         text = Marshal.PtrToStringUni(data);
-                        GlobalUnlock(data);
+                        WinApiWrapper.GlobalUnlock(data);
                         return text;
                     }
                 }
             }
 
-            CloseClipboard();
+            WinApiWrapper.CloseClipboard();
 
             return "";
         }

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>gui_tesing_library</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -8,6 +8,7 @@
     <Product>gui-tesing-library</Product>
     <Copyright>Copyright ©  2025</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <FodyEnable>true</FodyEnable>
     <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -16,19 +17,33 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CoenM.ImageSharp.ImageHash" Version="1.3.6" />
+    <PackageReference Include="Costura.Fody" Version="6.0.0" >
+      <IncludeAssets>compile;runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <PackageReference Include="ILRepack" Version="2.0.41">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="GregsStack.InputSimulatorStandard" Version="1.3.5"  />
+
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CoenM.ImageSharp.ImageHash" Version="1.3.6" />
-    <PackageReference Include="Fody" Version="6.9.2" />
-    <PackageReference Include="InputSimulator" Version="1.0.4.0" />
+    <PackageReference Include="Fody" Version="6.9.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Lombok.NET" Version="2.4.1" />
-    <PackageReference Include="MethodDecorator.Fody" Version="1.1.1" />
-    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+    <PackageReference Include="MethodDecorator.Fody" Version="1.1.1" PrivateAssets="All"  />
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0"  PrivateAssets="All" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.3" PrivateAssets="All" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" PrivateAssets="All" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="WindowsInput" Version="6.4.1" PrivateAssets="All" />
+
   </ItemGroup>
 </Project>

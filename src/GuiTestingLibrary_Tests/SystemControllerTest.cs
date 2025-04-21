@@ -1,9 +1,7 @@
 using gui_tesing_library;
-using NUnit.Framework;
-using gui_tesing_library.Components;
-using System.Diagnostics;
-using System.Numerics;
 using gui_tesing_library.Models;
+using NUnit.Framework;
+using System.Numerics;
 
 namespace GuiTestingLibrary_Tets
 {
@@ -11,13 +9,13 @@ namespace GuiTestingLibrary_Tets
     public class SystemControllerTest
     {
         [Test]
-            [Ignore("This test is platform specific")]
+        [Ignore("This test is platform specific")]
         public void Test_GetOSVersion()
         {
             GTSystemVersion os = SystemController.Instance.OsVersion;
-            Assert.That("Microsoft Windows NT 10.0.22631.0" ==os.VersionString);
+            Assert.That("Microsoft Windows NT 10.0.22631.0" == os.VersionString);
         }
-        [Test] 
+        [Test]
         public void Test_StartProces()
         {
             IGTProcess gtRocess = SystemController.Instance.StartProcess(

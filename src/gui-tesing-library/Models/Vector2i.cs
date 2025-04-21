@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gui_tesing_library.Controllers
 {
@@ -37,6 +32,11 @@ namespace gui_tesing_library.Controllers
             if (obj.GetType() != GetType())
                 return false;
             return Equals((Vector2i)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public override string ToString()
@@ -91,6 +91,11 @@ namespace gui_tesing_library.Controllers
             if (obj.GetType() != GetType())
                 return false;
             return Equals((Vector2f)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public override string ToString()
