@@ -16,18 +16,18 @@ namespace gui_tesing_library.Controllers
     {
         static IGTKeyboard _MouseController = null;
 
-        public static IGTKeyboard Instance
-        {
-            get
-            {
-                if (_MouseController == null)
-                {
-                    _MouseController = new KeyboardController();
-                }
+        //public static IGTKeyboard Instance
+        //{
+        //    get
+        //    {
+        //        if (_MouseController == null)
+        //        {
+        //            _MouseController = new KeyboardController();
+        //        }
 
-                return _MouseController;
-            }
-        }
+        //        return _MouseController;
+        //    }
+        //}
 
         [Log]
         [Delay]

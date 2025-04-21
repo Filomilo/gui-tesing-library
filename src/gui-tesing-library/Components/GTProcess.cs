@@ -13,7 +13,7 @@ namespace gui_tesing_library.Components
 {
     [AllArgsConstructor]
     [With]
-    public class GTProcess : IGTProcess
+    public partial class GTProcess : IGTProcess
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
 
