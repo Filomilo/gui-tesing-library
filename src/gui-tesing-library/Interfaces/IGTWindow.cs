@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Design;
-using gui_tesing_library;
-using gui_tesing_library.Controllers;
+﻿using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 
 namespace gui_tesing_library

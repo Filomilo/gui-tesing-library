@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+  <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -36,11 +36,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\gui-tesing-library\gui-tesing-library.csproj" />
+    <Folder Include="ScreenShotReferances\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ScreenShotReferances\" />
+    <Reference Include="gui-tesing-library">
+      <HintPath>..\gui-tesing-library\bin\Debug\net8.0-windows\gui-tesing-library.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

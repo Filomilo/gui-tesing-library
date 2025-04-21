@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library;
+﻿using gui_tesing_library;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 using NUnit.Framework;
@@ -75,7 +68,7 @@ namespace GuiTestingLibrary_Tets
             Assert.DoesNotThrow(
                 () =>
                 {
-                    MouseController.Instance.PositionShouldBe(finalPostion,2);
+                    MouseController.Instance.PositionShouldBe(finalPostion, 2);
                 },
                 $"Mouse position is not {finalPostion} but {MouseController.Instance.Position} with move offset {mouseOffser}"
             );
@@ -84,7 +77,7 @@ namespace GuiTestingLibrary_Tets
         [Test]
         public void ColorSwicherTest()
         {
-          
+
             IGTWindow window = TestHelpers.OpenExampleGui();
             gui_tesing_library.Configuration.ActionDelay = 100;
             window.SetWindowSize(1280, 720).CenterWindow();
@@ -128,7 +121,7 @@ namespace GuiTestingLibrary_Tets
             Vector2f pos = new Vector2f(0.5f, 0.5f);
             MouseController.Instance.SetPositionRelativeToWindow(window, pos);
             Thread.Sleep(1000);
-            Assert.That( MouseController.Instance.GetPostionRelativeToWinodw(window).DistanceFrom(pos)<0.01,$"Mouse postion reative to window should be [[{pos}]] but is [[{MouseController.Instance.GetPostionRelativeToWinodw(window)}]]");
+            Assert.That(MouseController.Instance.GetPostionRelativeToWinodw(window).DistanceFrom(pos) < 0.01, $"Mouse postion reative to window should be [[{pos}]] but is [[{MouseController.Instance.GetPostionRelativeToWinodw(window)}]]");
         }
         [Test]
         public void setMOusePostinoRelativeToWindwo()
@@ -137,7 +130,7 @@ namespace GuiTestingLibrary_Tets
             MouseController.Instance.SetPositionRelativeToWindow(window, new Vector2f(0.5f, 0.5f));
             Assert.DoesNotThrow((() =>
             {
-                MouseController.Instance.PositionRelativeToWindowShouldBe(window, new Vector2f(0.5f, 0.5f),0.01f);
+                MouseController.Instance.PositionRelativeToWindowShouldBe(window, new Vector2f(0.5f, 0.5f), 0.01f);
             }));
         }
 
@@ -163,18 +156,18 @@ namespace GuiTestingLibrary_Tets
         {
             IGTWindow window = TestHelpers.OpenExampleGui();
             Vector2i conntentPositon = window.GetWindowContentPosition();
-            MouseController.Instance.SetPositionRelativeToWindow(window,new Vector2i(100, 100));
+            MouseController.Instance.SetPositionRelativeToWindow(window, new Vector2i(100, 100));
             Assert.That(
-                MouseController.Instance.PositionShouldBe(conntentPositon+new Vector2i(100, 100)).Position.Equals(conntentPositon+new Vector2i(100, 100)),
-                $"Mouse position is not {conntentPositon+new Vector2i(100, 100)} but {MouseController.Instance.Position}"
+                MouseController.Instance.PositionShouldBe(conntentPositon + new Vector2i(100, 100)).Position.Equals(conntentPositon + new Vector2i(100, 100)),
+                $"Mouse position is not {conntentPositon + new Vector2i(100, 100)} but {MouseController.Instance.Position}"
             );
-            MouseController.Instance.MoveMouseRelativeToWindowTo(window, new Vector2i(200,200));
+            MouseController.Instance.MoveMouseRelativeToWindowTo(window, new Vector2i(200, 200));
 
             Assert.DoesNotThrow((() =>
             {
-                MouseController.Instance.PositionShouldBe(conntentPositon + new Vector2i(200, 200),2);
+                MouseController.Instance.PositionShouldBe(conntentPositon + new Vector2i(200, 200), 2);
             }), $"Mouse position is not {conntentPositon + new Vector2i(200, 200)} but {MouseController.Instance.Position}");
-         
+
         }
 
 
@@ -184,7 +177,7 @@ namespace GuiTestingLibrary_Tets
             IGTWindow window = TestHelpers.OpenExampleGui();
 
             MouseController.Instance.SetPositionRelativeToWindow(window, new Vector2i(100, 100));
-           
+
             Assert.DoesNotThrow(() =>
             {
                 MouseController.Instance.MoveMouseRelativeToWindowTo(window, new Vector2f(0.5f, 0.5f));
@@ -192,7 +185,7 @@ namespace GuiTestingLibrary_Tets
             Thread.Sleep(1000);
             Assert.DoesNotThrow((() =>
             {
-                MouseController.Instance.PositionRelativeToWindowShouldBe(window, new Vector2f(0.5f, 0.5f),0.02f);
+                MouseController.Instance.PositionRelativeToWindowShouldBe(window, new Vector2f(0.5f, 0.5f), 0.02f);
             }));
         }
 
@@ -247,7 +240,7 @@ namespace GuiTestingLibrary_Tets
 
             var setColor = (int r, int g, int b) =>
             {
-                float redOffset =(float)(TestHelpers.RelativePostions.ColorSliderLength * (r / 255.0));
+                float redOffset = (float)(TestHelpers.RelativePostions.ColorSliderLength * (r / 255.0));
                 float greeOffset = (float)(TestHelpers.RelativePostions.ColorSliderLength * (g / 255.0));
                 float blueOffset = (float)(TestHelpers.RelativePostions.ColorSliderLength * (b / 255.0));
 
@@ -255,7 +248,7 @@ namespace GuiTestingLibrary_Tets
                 Vector2f newGreenSliderPostion =
                     TestHelpers.RelativePostions.GreenSliderStartPostion + new Vector2f(greeOffset, 0);
                 Vector2f newBlueSliderPostion = TestHelpers.RelativePostions.BlueSliderStartPostion + new Vector2f(blueOffset, 0);
-                Assert.That(newRedSliderPostion.x<TestHelpers.RelativePostions.RedSliderEndPostion.x, $"Red lisder move positn oshoudl be less then maximusm red slider postion, new positon [[{newRedSliderPostion}]] slider max [[{TestHelpers.RelativePostions.RedSliderEndPostion}]]");
+                Assert.That(newRedSliderPostion.x < TestHelpers.RelativePostions.RedSliderEndPostion.x, $"Red lisder move positn oshoudl be less then maximusm red slider postion, new positon [[{newRedSliderPostion}]] slider max [[{TestHelpers.RelativePostions.RedSliderEndPostion}]]");
                 Assert.That(newGreenSliderPostion.x < TestHelpers.RelativePostions.GreenSliderEndPostion.x, $"Green lisder move positn oshoudl be less then maximusm Green slider postion, new positon [[{newGreenSliderPostion}]] slider max [[{TestHelpers.RelativePostions.GreenSliderEndPostion}]]");
                 Assert.That(newBlueSliderPostion.x < TestHelpers.RelativePostions.BlueSliderEndPostion.x, $"Blue lisder move positn oshoudl be less then maximusm Blue slider postion, new positon [[{newBlueSliderPostion}]] slider max [[{TestHelpers.RelativePostions.BlueSliderEndPostion}]]");
 
@@ -286,7 +279,7 @@ namespace GuiTestingLibrary_Tets
 
                 Color Colorshouldbe = new Color(r, g, b);
                 Thread.Sleep(100);
-                Color currColor = window.BringUpFront().ContentPixelAtShouldBeColor(TestHelpers.RelativePostions.SliderColorCheckPostion, Colorshouldbe,6).GetContentPixelColorAt(TestHelpers.RelativePostions.SliderColorCheckPostion);
+                Color currColor = window.BringUpFront().ContentPixelAtShouldBeColor(TestHelpers.RelativePostions.SliderColorCheckPostion, Colorshouldbe, 6).GetContentPixelColorAt(TestHelpers.RelativePostions.SliderColorCheckPostion);
 
                 Assert.That(
                     currColor.getDiffrence(Colorshouldbe) < 6,
@@ -296,7 +289,7 @@ namespace GuiTestingLibrary_Tets
             Random rnd = new Random();
             for (int i = 0; i < 5; i++)
             {
-                int r =rnd.Next(0, 255);
+                int r = rnd.Next(0, 255);
                 int g = rnd.Next(0, 255);
                 int b = rnd.Next(0, 255);
 

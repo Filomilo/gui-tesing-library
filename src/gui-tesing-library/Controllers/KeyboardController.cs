@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Directives;
+﻿using gui_tesing_library.Directives;
 using gui_tesing_library.Models;
 using gui_tesing_library.SystemCalls;
 using Lombok.NET;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace gui_tesing_library.Controllers
 {
@@ -16,18 +10,18 @@ namespace gui_tesing_library.Controllers
     {
         static IGTKeyboard _MouseController = null;
 
-        public static IGTKeyboard Instance
-        {
-            get
-            {
-                if (_MouseController == null)
-                {
-                    _MouseController = new KeyboardController();
-                }
+        //public static IGTKeyboard Instance
+        //{
+        //    get
+        //    {
+        //        if (_MouseController == null)
+        //        {
+        //            _MouseController = new KeyboardController();
+        //        }
 
-                return _MouseController;
-            }
-        }
+        //        return _MouseController;
+        //    }
+        //}
 
         [Log]
         [Delay]

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Configuration;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
+﻿using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Services;
-using SixLabors.ImageSharp.Formats.Bmp;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace gui_tesing_library.Models
 {
@@ -69,14 +63,14 @@ namespace gui_tesing_library.Models
         public double CompareToImage(string filePathToComparingImage)
         {
             IImageComparer comparer = ImageComparerFactory.GetComparer();
-            string tmpPath= Path.GetTempPath() + Guid.NewGuid().ToString() + ".bmp";
+            string tmpPath = Path.GetTempPath() + Guid.NewGuid().ToString() + ".bmp";
             this.SaveAsBitmap(tmpPath);
             double simmilarity = 0;
             using (FileStream stram1 = File.OpenRead(tmpPath))
             {
                 using (FileStream stram2 = File.OpenRead(filePathToComparingImage))
                 {
-                    simmilarity= comparer.CompareImages(stram1, stram2);
+                    simmilarity = comparer.CompareImages(stram1, stram2);
                 }
             }
             File.Delete(tmpPath);
@@ -84,7 +78,7 @@ namespace gui_tesing_library.Models
 
         }
 
-        public ScreenShot SimmilarityBetweenImagesShouldBe(string ImagePath,double simmilarity)
+        public ScreenShot SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity)
         {
             double simmilarityOfImage = this.CompareToImage(ImagePath);
             if (simmilarityOfImage > simmilarity)
@@ -97,6 +91,6 @@ namespace gui_tesing_library.Models
             }
         }
 
-   
+
     }
 }

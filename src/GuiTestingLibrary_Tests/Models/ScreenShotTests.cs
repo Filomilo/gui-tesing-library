@@ -1,13 +1,6 @@
-﻿using NUnit.Framework;
-using gui_tesing_library.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
+﻿using gui_tesing_library.Controllers;
 using GuiTestingLibrary_Tets;
+using NUnit.Framework;
 
 namespace gui_tesing_library.Models.Tests
 {
@@ -19,7 +12,7 @@ namespace gui_tesing_library.Models.Tests
         [SetUp()]
         public void setup()
         {
-            window=TestHelpers.OpenExampleGui();
+            window = TestHelpers.OpenExampleGui();
         }
 
         [TearDown()]
@@ -34,11 +27,11 @@ namespace gui_tesing_library.Models.Tests
         public void ScreenShotTest()
         {
             ScreenShot screenShot = window.GetScreenshot();
-            Vector2i expectedImageSize=window.GetWindowContentSize();
+            Vector2i expectedImageSize = window.GetWindowContentSize();
             Assert.That(screenShot != null);
             Assert.That(screenShot.Width > 0);
             Assert.That(screenShot.Height > 0);
-            Assert.That(screenShot.Width == expectedImageSize.x,$"Screenshot width is [[{screenShot.Width}]] and expected [[{expectedImageSize.x}]]");
+            Assert.That(screenShot.Width == expectedImageSize.x, $"Screenshot width is [[{screenShot.Width}]] and expected [[{expectedImageSize.x}]]");
             Assert.That(screenShot.Height == expectedImageSize.y, $"Screenshot width is [[{screenShot.Height}]] and expected [[{expectedImageSize.y}]]");
 
         }
@@ -47,7 +40,7 @@ namespace gui_tesing_library.Models.Tests
         public void GetPixelColorAtTest()
         {
             ScreenShot screenShot = window.GetScreenshot();
-            Assert.That(screenShot.GetPixelColorAt(new Vector2i(10, 10)).Equals(Color.Red));;
+            Assert.That(screenShot.GetPixelColorAt(new Vector2i(10, 10)).Equals(Color.Red)); ;
         }
 
         [Test()]
@@ -64,7 +57,7 @@ namespace gui_tesing_library.Models.Tests
         public void CompareToImageTest()
         {
             ScreenShot screenShot = window.GetScreenshot();
-            Assert.That(screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) ==1, $"Comparing to itself should return 1, instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}");
+            Assert.That(screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) == 1, $"Comparing to itself should return 1, instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}");
         }
         [Test()]
         public void CompareToImageTestBad()

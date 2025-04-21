@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
+﻿using gui_tesing_library.Controllers;
 using MethodDecorator.Fody.Interfaces;
+using System;
+using System.Reflection;
 
 namespace gui_tesing_library.Directives
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor)]
-    class LogAttribute: Attribute, IMethodDecorator
+    class LogAttribute : Attribute, IMethodDecorator
     {
         private MethodBase _method;
         public void Init(object instance, MethodBase method, object[] args)
         {
-            _method=method; ;
+            _method = method; ;
         }
 
         public void OnEntry()
@@ -30,7 +26,7 @@ namespace gui_tesing_library.Directives
 
         public void OnException(Exception exception)
         {
-          ErrorController.Throw($"{_method.Name} executed with excpetion",exception);
+            ErrorController.Throw($"{_method.Name} executed with excpetion", exception);
         }
     }
 }

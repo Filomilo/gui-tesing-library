@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Interfaces;
+﻿using gui_tesing_library.Interfaces;
 using gui_tesing_library.SystemCalls;
 using Lombok.NET;
-using static gui_tesing_library.WinApiWrapper;
+using System;
+using System.Collections.Generic;
 
 namespace gui_tesing_library.Components
 {
     [AllArgsConstructor]
     [With]
-    public class GTProcess : IGTProcess
+    public partial class GTProcess : IGTProcess
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
 
@@ -106,7 +101,7 @@ namespace gui_tesing_library.Components
 
         public void kill()
         {
-           this._SystemCalls.TerminateProcess(this._handle);
+            this._SystemCalls.TerminateProcess(this._handle);
         }
     }
 }

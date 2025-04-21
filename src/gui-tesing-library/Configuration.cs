@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using gui_tesing_library.Services;
+﻿using gui_tesing_library.Services;
 
 namespace gui_tesing_library
 {
     public class Configuration
     {
-        private static long _ProcesAwaitTime=6000;
+        private static long _ProcesAwaitTime = 6000;
 
         public static long ProcesAwaitTime
         {
@@ -48,4 +41,4 @@ namespace gui_tesing_library
 
 
 
-    }
+}
