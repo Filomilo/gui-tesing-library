@@ -7,10 +7,14 @@ using gui_tesing_library.SystemCalls;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace gui_tesing_library
 {
+    [ComVisible(true)]
+    [Guid("6494d476-a797-422b-85a9-cba51a17c6a2")] 
+    [ClassInterface(ClassInterfaceType.None)]
     public class SystemController : IGTSystem
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();

@@ -2,9 +2,13 @@
 using gui_tesing_library.Models;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.InteropServices;
 
 namespace gui_tesing_library
 {
+    [ComVisible(true)]
+    [Guid("06f50eef-93dc-495d-9c65-0104af5aa47e")] 
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IGTSystem
     {
         GTSystemVersion OsVersion { get; }

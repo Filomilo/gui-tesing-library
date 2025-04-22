@@ -41,7 +41,7 @@
 
   <ItemGroup>
     <Reference Include="gui-tesing-library">
-      <HintPath>..\gui-tesing-library\bin\Debug\net8.0-windows\gui-tesing-library.dll</HintPath>
+      <HintPath>..\gui-testing-library-java\gui-tesing-library.dll</HintPath>
     </Reference>
   </ItemGroup>
 
