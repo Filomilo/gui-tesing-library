@@ -10,6 +10,12 @@ namespace gui_tesing_library.Controllers
             this.y = y;
         }
 
+        public Vector2i(Vector2i_CS vector2i_CS)
+        {
+            this.x = vector2i_CS.X;
+            this.y = vector2i_CS.Y;
+        }
+
         public int x { get; set; }
         public int y { get; set; }
 
@@ -111,7 +117,8 @@ namespace gui_tesing_library.Controllers
         public float DistanceFrom(Vector2f pos)
         {
             Vector2f distance = new Vector2f(this.x - pos.x, this.y - pos.y);
-            return (float)Math.Sqrt(Math.Pow((double)distance.x, 2) + Math.Pow((double)distance.y, 2));
+            return (float)
+                Math.Sqrt(Math.Pow((double)distance.x, 2) + Math.Pow((double)distance.y, 2));
         }
 
         public static Vector2f operator +(Vector2f a, Vector2f b) =>

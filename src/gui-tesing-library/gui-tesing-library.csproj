@@ -46,4 +46,7 @@
     <PackageReference Include="WindowsInput" Version="6.4.1" PrivateAssets="All" />
 
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj" />
+  </ItemGroup>
 </Project>

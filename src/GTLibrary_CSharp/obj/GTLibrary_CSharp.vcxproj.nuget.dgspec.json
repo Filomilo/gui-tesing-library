@@ -4,6 +4,22 @@
     "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj": {}
   },
   "projects": {
+    "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
+      "restore": {
+        "projectUniqueName": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj",
+        "projectName": "GtLibrary",
+        "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj",
+        "UsingMicrosoftNETSdk": false,
+        "frameworks": {
+          "native": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "native": {}
+      }
+    },
     "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj": {
       "version": "1.0.0",
       "restore": {
@@ -33,7 +49,11 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
+                "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj"
+              }
+            }
           }
         },
         "restoreAuditProperties": {

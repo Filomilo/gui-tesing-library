@@ -1,17 +1,16 @@
-﻿using gui_tesing_library.Controllers;
-using gui_tesing_library.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
+using gui_tesing_library.Controllers;
+using gui_tesing_library.Models;
 
 namespace gui_tesing_library
 {
-
     public interface IGTSystem
     {
-        GTSystemVersion OsVersion { get; }
+        GTSystemVersion GetOsVersion();
 
-        Vector2 MaximizedWindowSize { get; set; }
+        Vector2i GetMaximizedWindowSize();
 
         GTSystemVersion GetSystemVersion();
         IGTProcess StartProcess(string commandString);

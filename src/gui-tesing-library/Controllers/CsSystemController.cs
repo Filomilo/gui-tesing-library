@@ -1,18 +1,17 @@
-﻿using gui_tesing_library.Components;
+﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Runtime.InteropServices;
+using System.Threading;
+using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Directives;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using gui_tesing_library.SystemCalls;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace gui_tesing_library
 {
-
     public class CsSystemController : IGTSystem
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
@@ -25,7 +24,7 @@ namespace gui_tesing_library
             {
                 if (_gtSystem == null)
                 {
-                    _gtSystem = new SystemController();
+                    _gtSystem = new CsSystemController();
                 }
 
                 return _gtSystem;
@@ -82,9 +81,10 @@ namespace gui_tesing_library
         [Log]
         public IGTProcess StartProcess(string commandString)
         {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-            IGTProcess gtProcess = new GTProcess(_SystemCalls.CreateProcess(commandString));
-            return gtProcess;
+            throw new NotImplementedException();
+            //Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
+            //IGTProcess gtProcess = new GTProcess_CS(_SystemCalls.CreateProcess(commandString));
+            //return gtProcess;
         }
 
         public GTSystemVersion OsVersion
@@ -92,7 +92,17 @@ namespace gui_tesing_library
             get { return new GTSystemVersion(Environment.OSVersion); }
         }
 
-        public Vector2 MaximizedWindowSize { get; set; }
+        public Vector2i MaximizedWindowSize { get; }
+
+        public GTSystemVersion GetOsVersion()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vector2i GetMaximizedWindowSize()
+        {
+            throw new NotImplementedException();
+        }
 
         GTSystemVersion IGTSystem.GetSystemVersion()
         {

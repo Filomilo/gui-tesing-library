@@ -10,8 +10,10 @@
   GtSystemController.cpp
   GTSystemVersion.cpp
   GTWindow.cpp
+  ISystemCalls.cpp
   Key.cpp
   SystemCalls.cpp
+  SystemCallsFactory.cpp
   Vector2f.cpp
   Vector2i.cpp
   Generating Code...

@@ -4,19 +4,43 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using gui_tesing_library.Components;
 using gui_tesing_library.Models;
 
 namespace gui_tesing_library.Controllers
 {
     public class SystemController : IGTSystem
     {
-        public static SystemController Instance { get; } = null;
+        public static SystemController _Instance = null;
+        private static GTSystemControler_CS SystemControler_CS = null;
+
+        public static SystemController Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new SystemController();
+                }
+
+                return _Instance;
+            }
+        }
+
+        private SystemController()
+        {
+            SystemControler_CS = GTSystemControler_CS.Instance();
+        }
+
         public GTSystemVersion OsVersion
         {
             get { return null; }
         }
 
-        public Vector2 MaximizedWindowSize { get; set; }
+        public Vector2i MaximizedWindowSize
+        {
+            get { return new Vector2i(SystemControler_CS.GetMaximizedWindowSize()); }
+        }
 
         public GTSystemVersion GetSystemVersion()
         {
@@ -25,7 +49,9 @@ namespace gui_tesing_library.Controllers
 
         public IGTProcess StartProcess(string commandString)
         {
-            throw new NotImplementedException();
+            return new gui_tesing_library.Components.GTProcess(
+                GTSystemControler_CS.Instance().StartProcess(commandString)
+            );
         }
 
         public string GetClipBoardContent()
@@ -84,6 +110,16 @@ namespace gui_tesing_library.Controllers
         }
 
         public Vector2i GetScreenSize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public GTSystemVersion GetOsVersion()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vector2i GetMaximizedWindowSize()
         {
             throw new NotImplementedException();
         }

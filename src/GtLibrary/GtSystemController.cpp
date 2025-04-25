@@ -1,6 +1,13 @@
 #include "pch.h"
 #include "GtSystemController.h"
+#include <vector>
+#include <string>
+#include <memory>
 
+
+GtSystemController::GtSystemController() {
+}
+std::shared_ptr<GtSystemController> GtSystemController::_gtSystem = nullptr;
 std::shared_ptr<GtSystemController> GtSystemController::Instance()
 {
     if (!_gtSystem) {

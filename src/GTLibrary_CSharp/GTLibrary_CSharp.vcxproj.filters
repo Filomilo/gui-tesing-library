@@ -18,9 +18,45 @@
     <ClInclude Include="TestWrap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GTSystemControler_CS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GTWindow_CS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GTProcess_CS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2i_CS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GTSystemVersion_CS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Converters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestWrap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GTSystemControler_CS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GTWindow_CS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GTProcess_CS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2i_CS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GTSystemVersion_CS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Converters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

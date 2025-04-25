@@ -1,9 +1,9 @@
-﻿using gui_tesing_library.Controllers;
+﻿using System;
+using gui_tesing_library.Controllers;
 using gui_tesing_library.Directives;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using gui_tesing_library.SystemCalls;
-using System;
 
 namespace gui_tesing_library.Components
 {
@@ -110,10 +110,11 @@ namespace gui_tesing_library.Components
         [Log]
         public IGTProcess GetProcessOfWindow()
         {
-            int processHandle = this._SystemCalls.GetProcessHandleFromId(
-                this._SystemCalls.GetWindowThreadProcessId(this._handle)
-            );
-            return new GTProcess(processHandle);
+            throw new NotImplementedException();
+            //int processHandle = this._SystemCalls.GetProcessHandleFromId(
+            //    this._SystemCalls.GetWindowThreadProcessId(this._handle)
+            //);
+            //return new GTProcess_CS(processHandle);
         }
 
         [Log]
@@ -252,8 +253,12 @@ namespace gui_tesing_library.Components
         public Color GetContentPixelColorAt(Vector2f realtivePostion)
         {
             Vector2i contentSize = this.GetWindowContentSize();
-            return GetContentPixelColorAt(new Vector2i((int)(contentSize.x * realtivePostion.x),
-                (int)(contentSize.y * realtivePostion.y)));
+            return GetContentPixelColorAt(
+                new Vector2i(
+                    (int)(contentSize.x * realtivePostion.x),
+                    (int)(contentSize.y * realtivePostion.y)
+                )
+            );
         }
 
         public IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color)
@@ -290,12 +295,17 @@ namespace gui_tesing_library.Components
             return this;
         }
 
-        public IGTWindow ContentPixelAtShouldBeColor(Vector2f sliderColorCheckPostion, Color colorshouldbe, int errorPass)
+        public IGTWindow ContentPixelAtShouldBeColor(
+            Vector2f sliderColorCheckPostion,
+            Color colorshouldbe,
+            int errorPass
+        )
         {
             Helpers.AwaitTrue(
                 () =>
                 {
-                    return GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe) < errorPass;
+                    return GetContentPixelColorAt(sliderColorCheckPostion)
+                            .getDiffrence(colorshouldbe) < errorPass;
                 },
                 $"Content Pixel color at {sliderColorCheckPostion} of window {this.GetWindowName()} was not {colorshouldbe} but {GetContentPixelColorAt(sliderColorCheckPostion)} with in given time, difreance: [[{GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)}]], with error pass [[{errorPass}]]"
             );

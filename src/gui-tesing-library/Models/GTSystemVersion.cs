@@ -14,17 +14,14 @@ namespace gui_tesing_library.Models
 
         public string VersionString
         {
-            get
-            {
-                return _OsVersion;
-            }
+            get { return _OsVersion; }
         }
-
 
         public GTSystemVersion(OperatingSystem osVersion)
         {
             this._OsVersion = osVersion.VersionString;
         }
 
+        public GTSystemVersion(GTSystemVersion_CS gTSystemVersion_CS) { }
     }
 }

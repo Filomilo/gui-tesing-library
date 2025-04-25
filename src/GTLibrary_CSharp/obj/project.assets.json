@@ -1,11 +1,29 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "GtLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/GtLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GtLibrary.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "GtLibrary/1.0.0": {
+      "type": "project",
+      "path": "../GtLibrary/GtLibrary.vcxproj",
+      "msbuildProject": "../GtLibrary/GtLibrary.vcxproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "GtLibrary >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\fboro\\.nuget\\packages\\": {},
@@ -40,7 +58,11 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
+              "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj"
+            }
+          }
         }
       },
       "restoreAuditProperties": {

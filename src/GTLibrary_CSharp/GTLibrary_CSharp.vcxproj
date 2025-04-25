@@ -82,7 +82,8 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -113,10 +114,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Converters.h" />
+    <ClInclude Include="GTProcess_CS.h" />
+    <ClInclude Include="GTSystemControler_CS.h" />
+    <ClInclude Include="GTSystemVersion_CS.h" />
+    <ClInclude Include="GTWindow_CS.h" />
     <ClInclude Include="TestWrap.h" />
+    <ClInclude Include="Vector2i_CS.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Converters.cpp" />
+    <ClCompile Include="GTProcess_CS.cpp" />
+    <ClCompile Include="GTSystemControler_CS.cpp" />
+    <ClCompile Include="GTSystemVersion_CS.cpp" />
+    <ClCompile Include="GTWindow_CS.cpp" />
     <ClCompile Include="TestWrap.cpp" />
+    <ClCompile Include="Vector2i_CS.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GtLibrary\GtLibrary.vcxproj">
+      <Project>{b9f2c38e-d71f-4076-8bb2-ae9f23ae57ef}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
