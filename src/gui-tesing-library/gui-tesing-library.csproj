@@ -46,7 +46,4 @@
     <PackageReference Include="WindowsInput" Version="6.4.1" PrivateAssets="All" />
 
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\gui-testing-library-native\gui-testing-library-native.vcxproj" />
-  </ItemGroup>
 </Project>

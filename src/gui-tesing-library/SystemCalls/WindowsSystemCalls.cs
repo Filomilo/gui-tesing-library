@@ -354,10 +354,6 @@ namespace gui_tesing_library.SystemCalls
 
         public void MoveMouseTo(Vector2i newPos)
         {
-            //Vector2f aboslutePostion =
-            //    new Vector2f((newPos.x * 65535f / WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXSCREEN)),
-            //        (newPos.y * 65535f / WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYSCREEN)));
-            //aboslutePostion = new Vector2f(newPos.x, newPos.y);
             _inputSimulator.Mouse.MoveMouseTo(
                 newPos.x, newPos.y
             );

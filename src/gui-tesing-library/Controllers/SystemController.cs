@@ -8,18 +8,16 @@ using gui_tesing_library.Models;
 
 namespace gui_tesing_library.Controllers
 {
-    internal class SystemController: IGTSystem
+    public class SystemController : IGTSystem
     {
         public static SystemController Instance { get; } = null;
         public GTSystemVersion OsVersion
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public Vector2 MaximizedWindowSize { get; set; }
+
         public GTSystemVersion GetSystemVersion()
         {
             throw new NotImplementedException();

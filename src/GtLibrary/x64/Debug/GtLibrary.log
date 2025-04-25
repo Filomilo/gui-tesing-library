@@ -1,0 +1,18 @@
+﻿  pch.cpp
+  Color.cpp
+  GTKeyboad.cpp
+  GtLibrary.cpp
+  GTMouse.cpp
+  GTProcess.cpp
+  GTScreen.cpp
+  GTScreenshot.cpp
+  GTSystem.cpp
+  GtSystemController.cpp
+  GTSystemVersion.cpp
+  GTWindow.cpp
+  Key.cpp
+  SystemCalls.cpp
+  Vector2f.cpp
+  Vector2i.cpp
+  Generating Code...
+  GtLibrary.vcxproj -> D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\x64\Debug\GtLibrary.lib

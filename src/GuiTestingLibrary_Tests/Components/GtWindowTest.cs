@@ -11,6 +11,7 @@ namespace GuiTestingLibrary_Tets.Components
     {
         [Required]
         private IGTProcess gtRocess;
+
         [Required]
         private IGTWindow window;
 
@@ -41,7 +42,6 @@ namespace GuiTestingLibrary_Tets.Components
             Assert.That(SystemController.Instance.FindTopWindowByName("Hello!") == null);
             ;
         }
-
 
         [Test]
         public void getWindowNameTest()

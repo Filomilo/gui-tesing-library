@@ -12,48 +12,10 @@ using System.Threading;
 
 namespace gui_tesing_library
 {
-    [ComVisible(true)]
-    [Guid("6494d476-a797-422b-85a9-cba51a17c6a2")] 
-    [ClassInterface(ClassInterfaceType.None)]
+
     public class CsSystemController : IGTSystem
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
-
-        //private static readonly SystemController _instance = new SystemController();
-        //private SystemController() { }
-        //public static SystemController Instance => _instance;
-
-        //public static Vector2 MaximizedWindowSize
-        //{
-        //    get
-        //    {
-        //        return new Vector2(
-        //            WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXMAXIMIZED),
-        //            WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYMAXIMIZED)
-        //            );
-        //    }
-        //}
-
-        //public OperatingSystem GetOSVersion()
-        //{
-        //    return Environment.OSVersion;
-        //}
-
-
-        //public GTWindow GetWindowByName(string name)
-        //{
-        //    try
-        //    {
-        //        Helpers.AwaitTrue(() => { return (long)WinApiWrapper.FindWindowA(null, name) > 0; });
-        //        IntPtr winId = (IntPtr)WinApiWrapper.FindWindowA(null, name);
-
-        //        return new GTWindow((long)winId);
-        //    }
-        //    catch (TimeoutException ex)
-        //    {
-        //        return null;
-        //    }
-        //}
 
         static IGTSystem _gtSystem = null;
 

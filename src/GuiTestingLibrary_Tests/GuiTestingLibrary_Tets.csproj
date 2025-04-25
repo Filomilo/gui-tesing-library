@@ -40,9 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="gui-tesing-library">
-      <HintPath>..\gui-testing-library-java\gui-tesing-library.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj" />
+    <ProjectReference Include="..\gui-tesing-library\gui-tesing-library.csproj" />
   </ItemGroup>
 
 
