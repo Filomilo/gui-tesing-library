@@ -6,8 +6,13 @@
   GTProcess.cpp
   GTScreen.cpp
   GTScreenshot.cpp
+D:\proejcts\gui-tesing-library\gui-tesing-library\src\GtLibrary\GTScreenshot.cpp(12,23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/GTScreenshot.cpp')
+  
+D:\proejcts\gui-tesing-library\gui-tesing-library\src\GtLibrary\GTScreenshot.cpp(16,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/GTScreenshot.cpp')
+  
   GTSystem.cpp
-  GtSystemController.cpp
   GTSystemVersion.cpp
   GTWindow.cpp
   ISystemCalls.cpp

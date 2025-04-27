@@ -1,12 +1,12 @@
 #pragma once
+#include "pch.h"
 #include <string>
 #include <vector>
 #include <memory>
 #include "GTSystemVersion.h"
 #include "Vector2i.h"
-#include "GTProcess.h"
-#include "GTWindow.h"
-
+class GTWindow;
+class GTProcess;
 class ISystemCalls {
 public:
     virtual ~ISystemCalls() = default;
@@ -23,7 +23,7 @@ public:
     virtual std::vector<std::shared_ptr<GTProcess>> GetActiveProcesses() = 0;
     virtual std::shared_ptr<GTWindow> FindTopWindowByName(const std::string& name) = 0;
 
-    virtual std::shared_ptr<ISystemCalls> WindowOfNameShouldExist(const std::string& name) = 0;
+    virtual void WindowOfNameShouldExist(const std::string& name) = 0;
 
     virtual int GetWindowTitleBarHeight() = 0;
     virtual int GetWindowBorderWidth() = 0;

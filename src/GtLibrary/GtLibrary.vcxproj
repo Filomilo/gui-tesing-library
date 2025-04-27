@@ -147,7 +147,6 @@
     <ClInclude Include="GTScreen.h" />
     <ClInclude Include="GTScreenshot.h" />
     <ClInclude Include="GTSystem.h" />
-    <ClInclude Include="GtSystemController.h" />
     <ClInclude Include="GTSystemVersion.h" />
     <ClInclude Include="GTWindow.h" />
     <ClInclude Include="ISystemCalls.h" />
@@ -168,7 +167,6 @@
     <ClCompile Include="GTScreen.cpp" />
     <ClCompile Include="GTScreenshot.cpp" />
     <ClCompile Include="GTSystem.cpp" />
-    <ClCompile Include="GtSystemController.cpp" />
     <ClCompile Include="GTSystemVersion.cpp" />
     <ClCompile Include="GTWindow.cpp" />
     <ClCompile Include="ISystemCalls.cpp" />

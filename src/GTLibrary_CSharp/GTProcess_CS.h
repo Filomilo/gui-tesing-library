@@ -1,6 +1,13 @@
 #pragma once
 #include "../GtLibrary/GTProcess.h"
 #include <memory>
+#include <vector>
+#include <string>
+#include "GTProcess_CS.h"
+#include "GTWindow_CS.h"
+#include "Vector2i_CS.h"
+#include "GTSystemVersion_CS.h"
+#include "../GtLibrary/GTSystem.h"
 public ref class GTProcess_CS
 {
 private: 

@@ -114,21 +114,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Color_CS.h" />
     <ClInclude Include="Converters.h" />
+    <ClInclude Include="GTKeyboard_CS.h" />
+    <ClInclude Include="GTMouse_CS.h" />
     <ClInclude Include="GTProcess_CS.h" />
+    <ClInclude Include="GTScreen_CS.h" />
     <ClInclude Include="GTSystemControler_CS.h" />
     <ClInclude Include="GTSystemVersion_CS.h" />
     <ClInclude Include="GTWindow_CS.h" />
-    <ClInclude Include="TestWrap.h" />
+    <ClInclude Include="ImageComparer_CS.h" />
+    <ClInclude Include="Key_CS.h" />
+    <ClInclude Include="ScreenShot_CS.h" />
+    <ClInclude Include="Vector2f_CS.h" />
     <ClInclude Include="Vector2i_CS.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Color_CS.cpp" />
     <ClCompile Include="Converters.cpp" />
+    <ClCompile Include="GTKeyboard_CS.cpp" />
+    <ClCompile Include="GTMouse_CS.cpp" />
     <ClCompile Include="GTProcess_CS.cpp" />
+    <ClCompile Include="GTScreen_CS.cpp" />
     <ClCompile Include="GTSystemControler_CS.cpp" />
     <ClCompile Include="GTSystemVersion_CS.cpp" />
     <ClCompile Include="GTWindow_CS.cpp" />
-    <ClCompile Include="TestWrap.cpp" />
+    <ClCompile Include="ImageComparer_CS.cpp" />
+    <ClCompile Include="Key_CS.cpp" />
+    <ClCompile Include="ScreenShot_CS.cpp" />
+    <ClCompile Include="Vector2f_CS.cpp" />
     <ClCompile Include="Vector2i_CS.cpp" />
   </ItemGroup>
   <ItemGroup>

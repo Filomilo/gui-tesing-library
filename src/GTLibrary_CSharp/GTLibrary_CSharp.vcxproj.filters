@@ -13,51 +13,123 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{434f6646-c81e-4840-a23e-b0868a871ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{bddf09e3-1925-4bc2-b3cb-6a7a91861f81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{a041786b-e398-4c10-b8b4-42b597528aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{f39b103b-aa76-44fd-972b-bc0c7bbc98bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{19ff3405-4f3c-4ec9-b987-0938f5640803}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{2f3fa184-1168-4c7f-b337-146815af652f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{008cdfd1-a5e2-453f-9660-b5190225577c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{60cc6611-1704-4460-8b38-fac6d9627db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models">
+      <UniqueIdentifier>{a5d96a1d-c364-4a35-b485-cb07676a9fa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{1e2485cc-fe2d-4bd9-adca-dc7daf694beb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TestWrap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GTSystemControler_CS.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GTProcess_CS.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="GTWindow_CS.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="GTProcess_CS.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GTKeyboard_CS.h">
+      <Filter>Header Files\Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2i_CS.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GTMouse_CS.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="GTScreen_CS.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="GTSystemControler_CS.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageComparer_CS.h">
+      <Filter>Header Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Key_CS.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Color_CS.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="GTSystemVersion_CS.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenShot_CS.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2f_CS.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2i_CS.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="Converters.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestWrap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GTSystemControler_CS.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GTProcess_CS.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="GTWindow_CS.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GTProcess_CS.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GTMouse_CS.cpp">
+      <Filter>Source Files\Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2i_CS.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GTSystemControler_CS.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="GTKeyboard_CS.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="GTScreen_CS.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Color_CS.cpp">
+      <Filter>Source Files\Models</Filter>
     </ClCompile>
     <ClCompile Include="GTSystemVersion_CS.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2f_CS.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2i_CS.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenShot_CS.cpp">
+      <Filter>Source Files\Models</Filter>
     </ClCompile>
     <ClCompile Include="Converters.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Key_CS.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageComparer_CS.cpp">
+      <Filter>Source Files\Services</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

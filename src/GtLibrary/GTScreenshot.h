@@ -20,6 +20,6 @@ public:
     Color GetPixelColorAt(const Vector2i& pos) const;
     void SaveAsBitmap(const std::string& file) const;
     double CompareToImage(const std::string& filePathToComparingImage) const;
-    GTScreenshot SimmilarityBetweenImagesShouldBe(const std::string& imagePath, double similarity) const;
+    void SimmilarityBetweenImagesShouldBe(const std::string& imagePath, double similarity) const;
 };
 

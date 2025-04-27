@@ -53,12 +53,12 @@ std::shared_ptr<GTProcess> GTSystem::StartProcess(const std::string& commandStri
 
 GTSystemVersion GTSystem::GetOsVersion() const {
 
-    return GTSystemVersion();
+    return GTSystemVersion("");
 }
 
 GTSystemVersion GTSystem::GetSystemVersion() {
 
-    return GTSystemVersion();
+    return GTSystemVersion("");
 }
 
 int GTSystem::GetWindowTitleBarHeight() {

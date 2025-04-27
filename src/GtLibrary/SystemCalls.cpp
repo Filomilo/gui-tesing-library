@@ -3,9 +3,10 @@
 #include "SystemCalls.h"
 #include "SystemCallsFactory.h"
 #include <windows.h>
+#include "GtSystemVersion.h"
 
  GTSystemVersion SystemCalls::GetOsVersion() {
-    return GTSystemVersion();
+    return GTSystemVersion("");
 }
 
 Vector2i SystemCalls::GetMaximizedWindowSize() {
@@ -16,7 +17,7 @@ Vector2i SystemCalls::GetMaximizedWindowSize() {
 }
 
 GTSystemVersion SystemCalls::GetSystemVersion() {
-    return GTSystemVersion();
+    return GTSystemVersion("");
 }
 
 std::shared_ptr<GTProcess> SystemCalls::StartProcess(const std::string& commandString) {
@@ -47,8 +48,8 @@ std::shared_ptr<GTWindow> SystemCalls::FindTopWindowByName(const std::string& na
     return nullptr;
 }
 
-std::shared_ptr<ISystemCalls> SystemCalls::WindowOfNameShouldExist(const std::string& name) {
-    return std::make_shared<SystemCalls>(*this);
+void SystemCalls::WindowOfNameShouldExist(const std::string& name) {
+    
 }
 
 int SystemCalls::GetWindowTitleBarHeight() {

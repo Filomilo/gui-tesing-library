@@ -36,7 +36,7 @@ public ref class GTSystemControler_CS
         GTSystemControler_CS^ WindowOfNameShouldExist(String^ name);
         List<GTProcess_CS^>^ GetActiveProcesses();
         List<GTWindow_CS^>^ GetActiveWindows();
-        std::string GetClipBoardContent();
+        String^ GetClipBoardContent();
         GTProcess_CS^ StartProcess(String^ commandString);
         GTSystemVersion_CS^ GetOsVersion() ;
         GTSystemVersion_CS^ GetSystemVersion();

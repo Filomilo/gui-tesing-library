@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using gui_tesing_library.Components;
 using gui_tesing_library.Models;
 
@@ -34,7 +35,7 @@ namespace gui_tesing_library.Controllers
 
         public GTSystemVersion OsVersion
         {
-            get { return null; }
+            get { return new GTSystemVersion(SystemControler_CS.GetOsVersion()); }
         }
 
         public Vector2i MaximizedWindowSize
@@ -44,7 +45,7 @@ namespace gui_tesing_library.Controllers
 
         public GTSystemVersion GetSystemVersion()
         {
-            throw new NotImplementedException();
+            return new GTSystemVersion(SystemControler_CS.GetOsVersion());
         }
 
         public IGTProcess StartProcess(string commandString)
@@ -56,72 +57,73 @@ namespace gui_tesing_library.Controllers
 
         public string GetClipBoardContent()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetClipBoardContent();
         }
 
         public IEnumerable<IGTWindow> GetActiveWindows()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetActiveWindows().Select(w => new GTWindow(w));
         }
 
         public IEnumerable<IGTWindow> FindWindowByName(string name)
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.FindWindowByName(name).Select(w => new GTWindow(w));
         }
 
         public IEnumerable<IGTProcess> FindProcessByName(string name)
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.FindProcessByName(name).Select(p => new GTProcess(p));
         }
 
         public IEnumerable<IGTProcess> GetActiveProcesses()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetActiveProcesses().Select(p => new GTProcess(p));
         }
 
         public IGTWindow FindTopWindowByName(string name)
         {
-            throw new NotImplementedException();
+            return new GTWindow(SystemControler_CS.FindTopWindowByName(name));
         }
 
         public IGTSystem WindowOfNameShouldExist(string name)
         {
-            throw new NotImplementedException();
+            SystemControler_CS.WindowOfNameShouldExist(name);
+            return this;
         }
 
         public int GetWindowTitleBarHeight()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetWindowTitleBarHeight();
         }
 
         public int GetWindowBorderWidth()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetWindowBorderWidth();
         }
 
         public int GetWindowBorderHeight()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetWindowBorderHeight();
         }
 
         public int GetWindowPadding()
         {
-            throw new NotImplementedException();
+            return SystemControler_CS.GetWindowPadding();
         }
 
         public Vector2i GetScreenSize()
         {
-            throw new NotImplementedException();
+            return new Vector2i(SystemControler_CS.GetScreenSize());
         }
 
         public GTSystemVersion GetOsVersion()
         {
-            throw new NotImplementedException();
+            return new GTSystemVersion(SystemControler_CS.GetOsVersion());
         }
 
         public Vector2i GetMaximizedWindowSize()
         {
-            throw new NotImplementedException();
+            return new Vector2i(SystemControler_CS.GetMaximizedWindowSize());
         }
     }
 }

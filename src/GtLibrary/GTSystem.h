@@ -1,12 +1,18 @@
 #pragma once
+#include "pch.h"
 #include "SystemCalls.h"
 #include <vector>
 #include <string>
 #include "GTWindow.h"
 #include "GTProcess.h"
-#include "GTSystem.h"
 #include "GTSystemVersion.h"
 #include "Vector2i.h"
+
+class GTWindow;
+class GTProcess;
+class GTSystemVersion;
+class SystemCalls;
+
 class GTSystem
 {
 private:
