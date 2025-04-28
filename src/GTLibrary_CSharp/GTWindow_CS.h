@@ -1,14 +1,21 @@
 #pragma once
+using namespace System;
+
 #include <memory>
 #include <vector>
 #include <string>
 #include "GTProcess_CS.h"
-#include "GTWindow_CS.h"
 #include "Vector2i_CS.h"
 #include "Vector2f_CS.h"
 #include "GTSystemVersion_CS.h"
 #include "../GtLibrary/GTWindow.h"
 #include "Color_CS.h"
+#include "ScreenShot_CS.h"
+
+ref class Vector2i_CS;
+ref class Vector2f_CS;
+ref class GTProcess_CS;
+ref class Color_CS;
 public ref class GTWindow_CS
 {
 private:
@@ -28,24 +35,24 @@ public:
 
         
         Vector2i_CS^ GetPosition() ;
-        bool^ DoesExist() ;
+        bool DoesExist() ;
         String^ GetName() ;
-        bool^ IsMinimized() ;
+        bool IsMinimized() ;
 
         
-        GTWindow_CS^ MoveWindow(const Vector2i_CS^ offset);
-        GTWindow_CS^ Minimize();
-        GTWindow_CS^ Maximize();
+        void MoveWindow(const Vector2i_CS^ offset);
+        void Minimize();
+        void Maximize();
         GTProcess_CS^ GetProcessOfWindow();
-        GTWindow_CS^ Close();
-        GTWindow_CS^ SetWindowSize(int x, int y);
-        GTWindow_CS^ SetPosition(int x, int y);
-        GTWindow_CS^ BringUpFront();
-        GTWindow_CS^ SizeShouldBe(const Vector2i_CS^ size);
-        GTWindow_CS^ ShouldWindowExist(bool exists);
-        GTWindow_CS^ KillProcess();
+        void Close();
+        void SetWindowSize(int x, int y);
+        void SetPosition(int x, int y);
+        void BringUpFront();
+        void SizeShouldBe(const Vector2i_CS^ size);
+        void ShouldWindowExist(bool exists);
+        void KillProcess();
 
-        GTWindow_CS^ ShouldBeMinimized(bool state);
+        void ShouldBeMinimized(bool state);
         String^ GetWindowName() ;
 
         Vector2i_CS^ GetWindowContentPosition() ;
@@ -53,10 +60,16 @@ public:
 
         Color_CS^ GetContentPixelColorAt(const Vector2i_CS^ position) ;
         Color_CS^ GetContentPixelColorAt(const Vector2f_CS^ relativePosition) ;
-        GTWindow_CS^ ContentPixelAtShouldBeColor(const Vector2i_CS^ position, const Color_CS^ color);
-        GTWindow_CS^ CenterWindow();
-        GTWindow_CS^ WindowNameShouldBe(const String^ title);
-        GTWindow_CS^ ContentPixelAtShouldBeColor(const Vector2f_CS^ sliderColorCheckPosition, const Color_CS^ colorShouldBe, int errorPass);
-
+        void ContentPixelAtShouldBeColor(const Vector2i_CS^ position, const Color_CS^ color);
+        void CenterWindow();
+        void WindowNameShouldBe(const String^ title);
+        void ContentPixelAtShouldBeColor(const Vector2f_CS^ sliderColorCheckPosition, const Color_CS^ colorShouldBe, int errorPass);
+		Vector2i_CS^ GetWindowSize();
+		Vector2i_CS^ GetMaximizedWindowSize();
+        ScreenShot_CS^ GetScreenshot();
+        ScreenShot_CS^ GetScreenshotRect(const Vector2i_CS^ position, const Vector2i_CS^ size);
+        Color_CS^ GetPixelColorAt(const Vector2i_CS^ position);
+        void PixelAtShouldBeColor(const Vector2i_CS^ position, const Color_CS^ color);
+		Vector2i_CS^ GetWindowPosition();
 };
 

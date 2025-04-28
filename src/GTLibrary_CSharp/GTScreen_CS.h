@@ -5,14 +5,14 @@
 public ref class GTScreen_CS
 {
 public:
-    // Properties
-    property Vector2i_CS^ Size;
-    property Vector2i_CS^ MaximizedWindowSize;
 
-    // Methods
+    Vector2i_CS^ GetSize();
+    Vector2i_CS^ GetMaximizedWindowSize();
+
+
     ScreenShot_CS^ GetScreenshot();
     ScreenShot_CS^ GetScreenshotRect(Vector2i_CS^ position, Vector2i_CS^ size);
     Color_CS^ GetPixelColorAt(Vector2i_CS^ position);
-    GTScreen_CS^ PixelAtShouldBeColor(Vector2i_CS^ position, Color_CS^ colorColor);
+    void PixelAtShouldBeColor(Vector2i_CS^ position, Color_CS^ colorColor);
 };
 

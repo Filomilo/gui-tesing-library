@@ -1,5 +1,5 @@
 #pragma once
-ref class Vector2f_CS
+public ref class Vector2f_CS
 {
 };
 

@@ -10,6 +10,7 @@ public:
     GTSystemVersion(const GTSystemVersion& other);
 
     std::string GetVersionString() const;
+
 };
 
 

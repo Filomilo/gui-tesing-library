@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using gui_tesing_library.Controllers;
+using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 
 namespace gui_tesing_library.Components
@@ -11,132 +12,175 @@ namespace gui_tesing_library.Components
     internal class GTWindow : IGTWindow
     {
         private GTWindow_CS _windowCS;
-        public Vector2i Size { get; }
-        public Vector2i MaximizedWindowSize { get; }
 
-        public ScreenShot GetScreenshot()
+        public GTWindow(GTWindow_CS windowCS)
         {
-            throw new NotImplementedException();
+            _windowCS = windowCS;
         }
 
-        public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
+        public Vector2i Size
         {
-            throw new NotImplementedException();
+            get { return new Vector2i(_windowCS.GetWindowSize()); }
+        }
+
+        public Vector2i MaximizedWindowSize
+        {
+            get { return new Vector2i(_windowCS.GetMaximizedWindowSize()); }
+        }
+
+        public IScreenShot GetScreenshot()
+        {
+            return new ScreenShot(_windowCS.GetScreenshot());
+        }
+
+        public IScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
+        {
+            return new ScreenShot(_windowCS.GetScreenshotRect(position.Native(), size.Native()));
         }
 
         public Color GetPixelColorAt(Vector2i postion)
         {
-            throw new NotImplementedException();
+            return new Color(_windowCS.GetPixelColorAt(postion.Native()));
         }
 
         public IGTScreen PixelAtShouldBeColor(Vector2i position, Color colorColor)
         {
-            throw new NotImplementedException();
+            _windowCS.PixelAtShouldBeColor(position.Native(), colorColor.Native());
+            return this;
         }
 
-        public Vector2i Position { get; }
-        public bool DoesExist { get; }
-        public string Name { get; }
-        public bool IsMinimized { get; }
+        public Vector2i Position
+        {
+            get { return new Vector2i(_windowCS.GetWindowPosition()); }
+        }
+
+        public bool DoesExist
+        {
+            get { return _windowCS.DoesExist(); }
+        }
+
+        public string Name
+        {
+            get { return _windowCS.GetWindowName(); }
+        }
+
+        public bool IsMinimized
+        {
+            get { return _windowCS.IsMinimized(); }
+        }
 
         public IGTWindow MoveWindow(Vector2i offset)
         {
-            throw new NotImplementedException();
+            _windowCS.MoveWindow(offset.Native());
+            return this;
         }
 
         public IGTWindow Minimize()
         {
-            throw new NotImplementedException();
+            _windowCS.Minimize();
+            return this;
         }
 
         public IGTWindow Maximize()
         {
-            throw new NotImplementedException();
+            _windowCS.Maximize();
+            return this;
         }
 
         public IGTProcess GetProcessOfWindow()
         {
-            throw new NotImplementedException();
+            return new GTProcess(_windowCS.GetProcessOfWindow());
         }
 
         public IGTWindow Close()
         {
-            throw new NotImplementedException();
+            _windowCS.Close();
+            return this;
         }
 
         public IGTWindow SetWindowSize(int x, int y)
         {
-            throw new NotImplementedException();
+            _windowCS.SetWindowSize(x, y);
+            return this;
         }
 
         public IGTWindow SetPostion(int x, int y)
         {
-            throw new NotImplementedException();
+            _windowCS.SetPosition(x, y);
+            return this;
         }
 
         public IGTWindow BringUpFront()
         {
-            throw new NotImplementedException();
+            _windowCS.BringUpFront();
+            return this;
         }
 
         public IGTWindow SizeShouldBe(Vector2i vector2I)
         {
-            throw new NotImplementedException();
+            _windowCS.SizeShouldBe(vector2I.Native());
+            return this;
         }
 
         public IGTWindow ShouldWindowExist(bool v)
         {
-            throw new NotImplementedException();
+            _windowCS.ShouldWindowExist(v);
+            return this;
         }
 
         public IGTWindow KillProcess()
         {
-            throw new NotImplementedException();
+            _windowCS.KillProcess();
+            return this;
         }
 
         public IGTWindow ShouldBeMinimized(bool state)
         {
-            throw new NotImplementedException();
+            _windowCS.ShouldBeMinimized(state);
+            return this;
         }
 
         public string GetWindowName()
         {
-            throw new NotImplementedException();
+            return _windowCS.GetWindowName();
         }
 
         public Vector2i GetWindowContentPosition()
         {
-            throw new NotImplementedException();
+            return new Vector2i(_windowCS.GetWindowContentPosition());
         }
 
         public Vector2i GetWindowContentSize()
         {
-            throw new NotImplementedException();
+            return new Vector2i(_windowCS.GetWindowContentSize());
         }
 
         public Color GetContentPixelColorAt(Vector2i postion)
         {
-            throw new NotImplementedException();
+            return new Color(_windowCS.GetContentPixelColorAt(postion.Native()));
         }
 
         public Color GetContentPixelColorAt(Vector2f realtivePostion)
         {
-            throw new NotImplementedException();
+            return new Color(_windowCS.GetContentPixelColorAt(realtivePostion.Native()));
         }
 
         public IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color)
         {
-            throw new NotImplementedException();
+            _windowCS.ContentPixelAtShouldBeColor(position.Native(), color.Native());
+            return this;
         }
 
         public IGTWindow CenterWindow()
         {
-            throw new NotImplementedException();
+            _windowCS.CenterWindow();
+            return this;
         }
 
         public IGTWindow WindowNameShouldBe(string title)
         {
-            throw new NotImplementedException();
+            _windowCS.WindowNameShouldBe(title);
+            return this;
         }
 
         public IGTWindow ContentPixelAtShouldBeColor(
@@ -145,7 +189,17 @@ namespace gui_tesing_library.Components
             int errorPass
         )
         {
-            throw new NotImplementedException();
+            _windowCS.ContentPixelAtShouldBeColor(
+                sliderColorCheckPostion.Native(),
+                colorshouldbe.Native(),
+                errorPass
+            );
+            return this;
+        }
+
+        internal GTWindow_CS native()
+        {
+            return this._windowCS;
         }
     }
 }

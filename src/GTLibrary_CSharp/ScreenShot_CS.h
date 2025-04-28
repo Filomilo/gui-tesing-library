@@ -1,5 +1,6 @@
 #pragma once
-ref class ScreenShot_CS
+public ref class ScreenShot_CS
 {
+
 };
 

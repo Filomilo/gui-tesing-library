@@ -1,4 +1,5 @@
-﻿using gui_tesing_library.Models;
+﻿using gui_tesing_library.Interfaces;
+using gui_tesing_library.Models;
 using NUnit.Framework;
 
 namespace gui_tesing_library.Controllers.Tests
@@ -9,7 +10,7 @@ namespace gui_tesing_library.Controllers.Tests
         [Test()]
         public void GetScreenshotTest()
         {
-            ScreenShot screenShot = ScreenController.Instance.GetScreenshot();
+            IScreenShot screenShot = ScreenController.Instance.GetScreenshot();
             screenShot.SaveAsBitmap("C\\test.bmp");
         }
     }

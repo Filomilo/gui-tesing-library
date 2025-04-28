@@ -12,7 +12,7 @@ using gui_tesing_library.SystemCalls;
 
 namespace gui_tesing_library
 {
-    public class CsSystemController : IGTSystem
+    public class SystemControllerCS : IGTSystem
     {
         private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
 
@@ -24,7 +24,7 @@ namespace gui_tesing_library
             {
                 if (_gtSystem == null)
                 {
-                    _gtSystem = new CsSystemController();
+                    _gtSystem = new SystemControllerCS();
                 }
 
                 return _gtSystem;
@@ -47,7 +47,7 @@ namespace gui_tesing_library
             int handle = this._SystemCalls.FindWindowByName(name);
             if (handle <= 0)
                 return null;
-            IGTWindow window = new GTWindow(handle);
+            IGTWindow window = new GTWindowCS(handle);
             return window;
         }
 

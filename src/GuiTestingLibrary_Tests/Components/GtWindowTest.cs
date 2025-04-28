@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using gui_tesing_library;
 using gui_tesing_library.Controllers;
+using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using NUnit.Framework;
 
@@ -95,7 +96,7 @@ namespace GuiTestingLibrary_Tets.Components
         {
             window.ShouldBeMinimized(false);
             Thread.Sleep(1000);
-            ScreenShot screenShot = window.GetScreenshot();
+            IScreenShot screenShot = window.GetScreenshot();
             Assert.That(screenShot != null);
             screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
         }

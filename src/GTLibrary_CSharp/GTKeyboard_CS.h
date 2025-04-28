@@ -1,4 +1,6 @@
 #pragma once
+using namespace System;
+
 #include "Key_CS.h"
 #include <memory>
 #include <vector>
@@ -12,7 +14,7 @@ public ref class GTKeyboard_CS
 {
     public:
   
-        ~GTKeyboard_CS() = default;
+        ~GTKeyboard_CS();
 
        
         void PressKey(Key_CS key);

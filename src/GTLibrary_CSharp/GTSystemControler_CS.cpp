@@ -55,8 +55,8 @@ List<GTWindow_CS^>^ GTSystemControler_CS::GetActiveWindows() {
     return managedWindows;
 }
 
-std::string GTSystemControler_CS::GetClipBoardContent() {
-    return nativeSystem->GetClipBoardContent();
+String^ GTSystemControler_CS::GetClipBoardContent() {
+    return Converters::ConvertStdStringToString(nativeSystem->GetClipBoardContent()) ;
 }
 
 GTProcess_CS^ GTSystemControler_CS::StartProcess(String^ commandString) {
@@ -96,6 +96,6 @@ Vector2i_CS^ GTSystemControler_CS::GetScreenSize() {
 
 Vector2i_CS^ GTSystemControler_CS::GetMaximizedWindowSize()
 {
-	return gcnew Vector2i_CS( nativeSystem->GetMaximizedWindowSize());
-    // TODO: insert return statement here
+	return gcnew Vector2i_CS(nativeSystem->GetMaximizedWindowSize());
+
 }

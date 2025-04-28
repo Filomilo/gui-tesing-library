@@ -1,12 +1,12 @@
 #pragma once
 #pragma once
+using namespace System;
 
 #include <string>
 #include "Vector2i_CS.h"
 #include "Vector2f_CS.h"
 #include "GTWindow_CS.h"
 
-using namespace System;
 
 public ref class GTMouse_CS
 {
@@ -27,10 +27,10 @@ public:
     void Scroll(int scrollValue);
     void SetPositionRelativeToWindow(GTWindow_CS^ window, Vector2i_CS^ position);
     void SetPositionRelativeToWindow(GTWindow_CS^ window, Vector2f_CS^ position);
-    void PositionShouldBe(Vector2i_CS^ pos, int errorDistance = 0);
+    void PositionShouldBe(Vector2i_CS^ pos, int errorDistance );
     void MoveMouseTo(Vector2i_CS^ newRedSliderPosition);
     void MoveMouseRelativeToWindowTo(GTWindow_CS^ window, Vector2i_CS^ position);
     void MoveMouseRelativeToWindowTo(GTWindow_CS^ window, Vector2f_CS^ position);
     Vector2f_CS^ GetPositionRelativeToWindow(GTWindow_CS^ window);
-    void PositionRelativeToWindowShouldBe(GTWindow_CS^ window, Vector2f_CS^ position, float errorDistance = 0);
+    void PositionRelativeToWindowShouldBe(GTWindow_CS^ window, Vector2f_CS^ position, float errorDistance );
 };

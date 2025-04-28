@@ -118,7 +118,7 @@ namespace gui_tesing_library.Components
         }
 
         [Log]
-        public ScreenShot GetScreenshot()
+        public IScreenShot GetScreenshot()
         {
             return SystemCallsFactory
                 .GetSystemCalls()
@@ -131,7 +131,7 @@ namespace gui_tesing_library.Components
 
         [Log]
         [Delay]
-        public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
+        public IScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
         {
             throw new NotImplementedException();
         }

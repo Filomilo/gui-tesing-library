@@ -55,6 +55,11 @@ namespace gui_tesing_library.Controllers
             return x * y;
         }
 
+        internal Vector2i_CS Native()
+        {
+            throw new NotImplementedException();
+        }
+
         public static Vector2i operator +(Vector2i a, Vector2i b) =>
             new Vector2i(a.x + b.x, a.y + b.y);
 
@@ -70,6 +75,11 @@ namespace gui_tesing_library.Controllers
         {
             return new Vector2i((int)v.x, (int)v.y);
         }
+
+        public static explicit operator Vector2i_CS(Vector2i v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Vector2f
@@ -79,6 +89,8 @@ namespace gui_tesing_library.Controllers
             this.x = x;
             this.y = y;
         }
+
+        public Vector2f(Vector2f_CS vector2f_CS) { }
 
         public float x { get; set; }
         public float y { get; set; }
@@ -119,6 +131,11 @@ namespace gui_tesing_library.Controllers
             Vector2f distance = new Vector2f(this.x - pos.x, this.y - pos.y);
             return (float)
                 Math.Sqrt(Math.Pow((double)distance.x, 2) + Math.Pow((double)distance.y, 2));
+        }
+
+        public Vector2f_CS Native()
+        {
+            throw new NotImplementedException();
         }
 
         public static Vector2f operator +(Vector2f a, Vector2f b) =>
