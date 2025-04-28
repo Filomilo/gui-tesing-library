@@ -1,18 +1,15 @@
 #include "pch.h"
 #include "GTKeyboad.h"
 
-IGTKeyboard* IGTKeyboard::PressKey(Key key) {
-    return this;
-}
+void GTKeyboard::PressKey(Key key) {
 
-IGTKeyboard* IGTKeyboard::ReleaseKey(Key key) {
-    return this;
 }
+void  GTKeyboard::ReleaseKey(Key key) {
 
-IGTKeyboard* IGTKeyboard::ClickKey(Key key) {
-    return this;
 }
+void  GTKeyboard::ClickKey(Key key) {
 
-IGTKeyboard* IGTKeyboard::Type(const std::string& text) {
-    return this;
+}
+void  GTKeyboard::Type(const std::string& text) {
+
 }

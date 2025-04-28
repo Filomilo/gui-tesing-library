@@ -40,7 +40,7 @@ public:
         bool IsMinimized() ;
 
         
-        void MoveWindow(const Vector2i_CS^ offset);
+        void MoveWindow(Vector2i_CS^ offset);
         void Minimize();
         void Maximize();
         GTProcess_CS^ GetProcessOfWindow();
@@ -71,5 +71,6 @@ public:
         Color_CS^ GetPixelColorAt(const Vector2i_CS^ position);
         void PixelAtShouldBeColor(const Vector2i_CS^ position, const Color_CS^ color);
 		Vector2i_CS^ GetWindowPosition();
+        GTWindow* GetNative();
 };
 

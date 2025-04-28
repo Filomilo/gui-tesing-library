@@ -6,6 +6,7 @@ Vector2i GTMouse::GetPosition() const {
 }
 
 void GTMouse::MoveMouse(const Vector2i& offset) {
+
 }
 
 void GTMouse::SetPosition(const Vector2i& position) {

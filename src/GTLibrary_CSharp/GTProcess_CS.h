@@ -1,4 +1,8 @@
 #pragma once
+using namespace System;
+using namespace System::Collections::Generic;
+
+
 #include "../GtLibrary/GTProcess.h"
 #include <memory>
 #include <vector>
@@ -8,6 +12,9 @@
 #include "Vector2i_CS.h"
 #include "GTSystemVersion_CS.h"
 #include "../GtLibrary/GTSystem.h"
+
+ref class GTWindow_CS;
+
 public ref class GTProcess_CS
 {
 private: 
@@ -21,5 +28,11 @@ public:
 	!GTProcess_CS() {
 		delete _nativeProcess;
 	}
+
+	void kill();
+	long GetRamUsage();
+	bool IsAlive();
+	String^ GetName();
+	List<GTWindow_CS^>^  GetWindowsOfProcess();
 };
 

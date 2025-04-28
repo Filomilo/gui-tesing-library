@@ -12,8 +12,13 @@ class GTProcess;
 
 class GTWindow
 {
+private:
+    int handle;
+
 public:
-    GTWindow() = default;
+    GTWindow(int handle) {
+        this->handle = handle;
+    }
 
     
     Vector2i GetPosition() const;

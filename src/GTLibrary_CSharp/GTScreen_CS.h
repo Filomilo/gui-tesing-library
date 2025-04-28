@@ -2,10 +2,17 @@
 #include "Vector2i_CS.h"
 #include "Color_CS.h"
 #include "ScreenShot_CS.h"
+#include "../GtLibrary/GTScreen.h"
 public ref class GTScreen_CS
 {
-public:
+private:
+    GTScreen* native = new GTScreen();
 
+public:
+    ~GTScreen_CS()
+    {
+        delete native;
+    }
     Vector2i_CS^ GetSize();
     Vector2i_CS^ GetMaximizedWindowSize();
 

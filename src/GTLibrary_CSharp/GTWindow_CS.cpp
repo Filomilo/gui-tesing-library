@@ -4,34 +4,34 @@
 #include "Vector2f_CS.h"
 #include "GTProcess_CS.h"
 #include "Color_CS.h"
-
+#include "Converters.h"
 #include "GTWindow_CS.h"
 
 Vector2i_CS^ GTWindow_CS::GetPosition() {
-	return nullptr;
+	return Converters::Vector2iToVector2iCS(_nativeWindow->GetPosition());
 }
 bool GTWindow_CS::DoesExist() {
 
-	return false;
+	return this->_nativeWindow->DoesExist();
 }
 String^ GTWindow_CS::GetName() {
-	return "";
+	return Converters::ConvertStdStringToString(_nativeWindow->GetName());
 }
 bool GTWindow_CS::IsMinimized() {
-	return false;
+	return _nativeWindow->IsMinimized();
 }
 
-void GTWindow_CS::MoveWindow(const Vector2i_CS^ offset) {
-
+void GTWindow_CS::MoveWindow(Vector2i_CS^ offset) {
+	_nativeWindow->MoveWindow(Converters::Vector2iCSToVector2i(offset));
 }
 void GTWindow_CS::Minimize() {
-
-}
+	_nativeWindow->Minimize();
+;}
 void GTWindow_CS::Maximize() {
-
+	_nativeWindow->Maximize();
 }
 GTProcess_CS^ GTWindow_CS::GetProcessOfWindow() {
-	return nullptr;
+	return Converters::
 }
 void GTWindow_CS::Close() {
 
@@ -108,3 +108,8 @@ void GTWindow_CS::PixelAtShouldBeColor(const Vector2i_CS^ position, const Color_
 Vector2i_CS^ GTWindow_CS::GetWindowPosition() {
 	return nullptr;
 }
+GTWindow* GTWindow_CS::GetNative()
+{
+	return this->_nativeWindow;
+}
+

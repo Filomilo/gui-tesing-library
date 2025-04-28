@@ -3,12 +3,12 @@
 #include <string>
 #include "Key.h"
 
-class IGTKeyboard {
+class GTKeyboard {
 public:
-    virtual ~IGTKeyboard() = default;
+     ~GTKeyboard() = default;
 
-    virtual IGTKeyboard* PressKey(Key key) = 0;
-    virtual IGTKeyboard* ReleaseKey(Key key) = 0;
-    virtual IGTKeyboard* ClickKey(Key key) = 0;
-    virtual IGTKeyboard* Type(const std::string& text) = 0;
+     void PressKey(Key key);
+     void ReleaseKey(Key key);
+     void ClickKey(Key key);
+     void Type(const std::string& text);
 };

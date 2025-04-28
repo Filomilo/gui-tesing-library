@@ -6,10 +6,13 @@ using namespace System;
 #include "Vector2i_CS.h"
 #include "Vector2f_CS.h"
 #include "GTWindow_CS.h"
+#include "../GtLibrary/GTMouse.h"
 
 
 public ref class GTMouse_CS
 {
+private:
+    GTMouse* native = new GTMouse();
 public:
     property Vector2i_CS^ Position;
 
