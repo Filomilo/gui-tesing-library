@@ -40,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj" />
     <ProjectReference Include="..\gui-tesing-library\gui-tesing-library.csproj" />
   </ItemGroup>
 

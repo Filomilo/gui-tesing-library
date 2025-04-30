@@ -1,4 +1,5 @@
 #pragma once
+#include "../GtLibrary/GTScreenshot.h"
 public ref class ScreenShot_CS
 {
 private:

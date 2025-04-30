@@ -48,7 +48,8 @@ public:
 
     static std::shared_ptr<GTWindow> WidnowCsToWindow(GTWindow_CS^ win)
     {
-        return std::make_shared<GTWindow>(win->GetNative());
+     
+        return std::make_shared<GTWindow>(win->GetNative()->getHangle());
     }
 
     static ScreenShot_CS^ ScreenShotTOScreenShotCs(std::shared_ptr<GTScreenshot>  screen)
@@ -70,7 +71,16 @@ public:
 
     static GTProcess_CS^ ProcessToProcessCS(GTProcess proc)
     {
-        return gcnew GTProcess_CS()
+        return Converters::ProcessToProcessCS(proc);
     }
+
+	static GTWindow_CS^ WindowToWindowCs(GTWindow win)
+	{
+		return Converters::WindowToWindowCs(win);
+	}
+	static GTProcess_CS^ ProcessToProcessCS(std::shared_ptr<GTProcess>  proc)
+	{
+		return gcnew GTProcess_CS(proc);
+	}
 
 };

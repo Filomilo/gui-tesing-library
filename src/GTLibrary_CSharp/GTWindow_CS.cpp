@@ -31,7 +31,7 @@ void GTWindow_CS::Maximize() {
 	_nativeWindow->Maximize();
 }
 GTProcess_CS^ GTWindow_CS::GetProcessOfWindow() {
-	return Converters::
+	return Converters::ProcessToProcessCS(_nativeWindow->GetProcessOfWindow());
 }
 void GTWindow_CS::Close() {
 

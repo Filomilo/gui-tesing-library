@@ -6,13 +6,13 @@
   GTProcess.cpp
   GTScreen.cpp
   GTScreenshot.cpp
+D:\proejcts\gui-tesing-library\gui-tesing-library\src\GtLibrary\GTScreenshot.cpp(12,23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/GTScreenshot.cpp')
+  
+D:\proejcts\gui-tesing-library\gui-tesing-library\src\GtLibrary\GTScreenshot.cpp(16,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/GTScreenshot.cpp')
+  
   GTSystem.cpp
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GtLibrary\GTScreenshot.cpp(12,23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file '/GTScreenshot.cpp')
-  
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GtLibrary\GTScreenshot.cpp(16,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file '/GTScreenshot.cpp')
-  
   GTSystemVersion.cpp
   GTWindow.cpp
   ISystemCalls.cpp
@@ -22,4 +22,4 @@ C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GtLibrary\GTS
   Vector2f.cpp
   Vector2i.cpp
   Generating Code...
-  GtLibrary.vcxproj -> C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\GtLibrary.lib
+  GtLibrary.vcxproj -> D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\x64\Debug\GtLibrary.lib

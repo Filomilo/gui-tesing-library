@@ -33,8 +33,8 @@ namespace GuiTestingLibrary_Tets
         public void Test_GetMaximisedWindowSize()
         {
             Vector2i MaxWindowsize = SystemController.Instance.MaximizedWindowSize;
-            Assert.That(MaxWindowsize.x == 1936); // System specific
-            Assert.That(MaxWindowsize.y == 1048);
+            Assert.That(MaxWindowsize.x == 1920); // System specific
+            Assert.That(MaxWindowsize.y == 1200);
         }
     }
 }

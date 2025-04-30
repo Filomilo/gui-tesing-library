@@ -92,3 +92,7 @@ void GTWindow::WindowNameShouldBe(const std::string& title) {
 
 void GTWindow::ContentPixelAtShouldBeColor(const Vector2f& sliderColorCheckPosition, const Color& colorShouldBe, int errorPass) {
 }
+
+int GTWindow::getHangle() const {
+	return this->handle;
+}

@@ -51,6 +51,6 @@ public:
     void CenterWindow();
     void WindowNameShouldBe(const std::string& title);
     void ContentPixelAtShouldBeColor(const Vector2f& sliderColorCheckPosition, const Color& colorShouldBe, int errorPass);
-
+	int getHangle() const;
 };
 
