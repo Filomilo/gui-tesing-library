@@ -11,8 +11,8 @@ private:
     std::vector<std::vector<Color>> pixels;
 
 public:
-    GTScreenshot(int width, int height);
-    GTScreenshot(const std::string& bitmapFilePath);
+    GTScreenshot()=default;
+     GTScreenshot(const std::string& bitmapFilePath);
 
     int GetWidth() const;
     int GetHeight() const;

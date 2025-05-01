@@ -8,3 +8,4 @@ src/test.log
 *.tlog
 /src/gui-testing-library-java/x64
 !src/JavaFx_Demo/target/JavaFx_Demo-1.0-SNAPSHOT-shaded.jar
+*.obj

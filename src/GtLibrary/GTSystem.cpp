@@ -38,51 +38,57 @@ std::vector<std::shared_ptr<GTProcess>> GTSystem::GetActiveProcesses() {
 }
 
 std::vector<std::shared_ptr<GTWindow>> GTSystem::GetActiveWindows() {
-    return {};
+    std::vector<int> windowhandles = this->_SystemCalls->GetActiveWindows();
+    std::vector<std::shared_ptr<GTWindow>> windows = std::vector<std::shared_ptr<GTWindow>>();
+    for(int handle : windowhandles)
+    {
+        windows.push_back(std::make_shared<GTWindow>(handle));
+    }
+    return windows;
 }
 
 std::string GTSystem::GetClipBoardContent() {
 
-    return "";
+    return this->_SystemCalls->GetClipBoardContent();
 }
 
 std::shared_ptr<GTProcess> GTSystem::StartProcess(const std::string& commandString) {
 
-    return nullptr;
+    return std::make_shared<GTProcess>(this->_SystemCalls->StartProcess(commandString)) ;
 }
 
 GTSystemVersion GTSystem::GetOsVersion() const {
 
-    return GTSystemVersion("");
+    return this->_SystemCalls->GetOsVersion();
 }
 
 GTSystemVersion GTSystem::GetSystemVersion() {
 
-    return GTSystemVersion("");
+    return this->_SystemCalls->GetSystemVersion();
 }
 
 int GTSystem::GetWindowTitleBarHeight() {
 
-    return 0;
+    return this->_SystemCalls->GetWindowTitleBarHeight();
 }
 
 int GTSystem::GetWindowBorderWidth() {
  
-    return 0;
+    return this->_SystemCalls->GetWindowBorderWidth();
 }
 
 int GTSystem::GetWindowBorderHeight() {
 
-    return 0;
+	return this->_SystemCalls->GetWindowBorderHeight();
 }
 
 int GTSystem::GetWindowPadding() {
-  return 0;
+    return this->_SystemCalls->GetWindowPadding();
 }
 
 Vector2i GTSystem::GetScreenSize() {
    
-    return Vector2i(0, 0);
+	return this->_SystemCalls->GetScreenSize();
 }
 
 Vector2i GTSystem::GetMaximizedWindowSize() {

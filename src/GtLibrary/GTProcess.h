@@ -6,8 +6,11 @@
 #include "GTWindow.h"
 class GTWindow;
 class GTProcess {
+private:
+    int handle;
 public:
-    virtual ~GTProcess() = default;
+    ~GTProcess() = default;
+	GTProcess(int handle) : handle(handle) {}
 
   std::string GetName() const;
   bool IsAlive() const ;

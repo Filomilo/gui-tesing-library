@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Configuration.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GTKeyboad.h" />
     <ClInclude Include="GTMouse.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="GTSystem.h" />
     <ClInclude Include="GTSystemVersion.h" />
     <ClInclude Include="GTWindow.h" />
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="ISystemCalls.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="pch.h" />
@@ -160,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="GTKeyboad.cpp" />
     <ClCompile Include="GtLibrary.cpp" />
     <ClCompile Include="GTMouse.cpp" />
@@ -169,6 +172,7 @@
     <ClCompile Include="GTSystem.cpp" />
     <ClCompile Include="GTSystemVersion.cpp" />
     <ClCompile Include="GTWindow.cpp" />
+    <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="ISystemCalls.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="pch.cpp">

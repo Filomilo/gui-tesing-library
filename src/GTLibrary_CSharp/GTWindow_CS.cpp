@@ -31,12 +31,13 @@ void GTWindow_CS::Maximize() {
 	_nativeWindow->Maximize();
 }
 GTProcess_CS^ GTWindow_CS::GetProcessOfWindow() {
-	return Converters::
+	return Converters::ProcessToProcessCS(_nativeWindow->GetProcessOfWindow());
 }
 void GTWindow_CS::Close() {
-
+	_nativeWindow->Close();
 }
 void GTWindow_CS::SetWindowSize(int x, int y) {
+	_nativeWindow->SetWindowSize(x,y);
 
 }
 void GTWindow_CS::SetPosition(int x, int y) {

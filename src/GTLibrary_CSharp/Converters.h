@@ -51,7 +51,7 @@ public:
         return std::make_shared<GTWindow>(win->GetNative());
     }
 
-    static ScreenShot_CS^ ScreenShotTOScreenShotCs(std::shared_ptr<GTScreenshot>  screen)
+    static ScreenShot_CS^ ScreenShotTOScreenShotCs(GTScreenshot  screen)
     {
         return gcnew ScreenShot_CS(screen);
     }
@@ -68,9 +68,9 @@ public:
 
     }
 
-    static GTProcess_CS^ ProcessToProcessCS(GTProcess proc)
+    static GTProcess_CS^ ProcessToProcessCS(std::shared_ptr<GTProcess> proc)
     {
-        return gcnew GTProcess_CS()
+        return gcnew GTProcess_CS(proc);
     }
 
 };

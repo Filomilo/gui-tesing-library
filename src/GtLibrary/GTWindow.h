@@ -22,6 +22,7 @@ public:
 
     
     Vector2i GetPosition() const;
+    Vector2i GetSize() const;
     bool DoesExist() const;
     std::string GetName() const;
     bool IsMinimized() const;
