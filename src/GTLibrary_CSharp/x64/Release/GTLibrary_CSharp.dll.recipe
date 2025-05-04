@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.runtimeconfig.json</FullPath>
+      <FullPath>F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Release\GTLibrary_CSharp.runtimeconfig.json</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.dll</FullPath>
+      <FullPath>F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Release\GTLibrary_CSharp.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

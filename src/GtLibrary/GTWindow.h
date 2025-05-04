@@ -13,10 +13,10 @@ class GTProcess;
 class GTWindow
 {
 private:
-    int handle;
+    HWND handle;
 
 public:
-    GTWindow(int handle) {
+    GTWindow(HWND handle) {
         this->handle = handle;
     }
 
@@ -24,14 +24,14 @@ public:
     Vector2i GetPosition() const;
     Vector2i GetSize() const;
     bool DoesExist() const;
-    std::string GetName() const;
+    std::wstring GetName() const;
     bool IsMinimized() const;
 
    
     void MoveWindow(const Vector2i& offset);
     void Minimize();
     void Maximize();
-    std::shared_ptr<GTProcess> GetProcessOfWindow();
+    GTProcess* GetProcessOfWindow();
     void Close();
     void SetWindowSize(int x, int y) ;
     void SetPosition(int x, int y);
@@ -41,7 +41,7 @@ public:
     void KillProcess();
 
     void ShouldBeMinimized(bool state);
-    std::string GetWindowName() const;
+    std::wstring GetWindowName() const;
 
     Vector2i GetWindowContentPosition() const;
     Vector2i GetWindowContentSize() const;
@@ -50,8 +50,8 @@ public:
     Color GetContentPixelColorAt(const Vector2f& relativePosition) const;
     void ContentPixelAtShouldBeColor(const Vector2i& position, const Color& color) ;
     void CenterWindow();
-    void WindowNameShouldBe(const std::string& title);
+    void WindowNameShouldBe(const std::wstring& title);
     void ContentPixelAtShouldBeColor(const Vector2f& sliderColorCheckPosition, const Color& colorShouldBe, int errorPass);
-
+    HWND GetHandle();
 };
 

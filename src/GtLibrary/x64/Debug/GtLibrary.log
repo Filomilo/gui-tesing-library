@@ -1,25 +1,34 @@
 ﻿  pch.cpp
+  Casters.cpp
+F:\projects\gui-tesing-library\src\GtLibrary\Casters.h(19,37): warning C4244: 'return': conversion from 'intptr_t' to 'int', possible loss of data
+  (compiling source file '/Casters.cpp')
+  
   Color.cpp
+  Configuration.cpp
   GTKeyboad.cpp
   GtLibrary.cpp
   GTMouse.cpp
   GTProcess.cpp
   GTScreen.cpp
   GTScreenshot.cpp
+F:\projects\gui-tesing-library\src\GtLibrary\GTScreenshot.cpp(11,23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/GTScreenshot.cpp')
+  
+F:\projects\gui-tesing-library\src\GtLibrary\GTScreenshot.cpp(15,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '/GTScreenshot.cpp')
+  
   GTSystem.cpp
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GtLibrary\GTScreenshot.cpp(12,23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file '/GTScreenshot.cpp')
-  
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GtLibrary\GTScreenshot.cpp(16,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file '/GTScreenshot.cpp')
-  
   GTSystemVersion.cpp
   GTWindow.cpp
+  Helpers.cpp
   ISystemCalls.cpp
   Key.cpp
   SystemCalls.cpp
+F:\projects\gui-tesing-library\src\GtLibrary\Casters.h(19,37): warning C4244: 'return': conversion from 'intptr_t' to 'int', possible loss of data
+  (compiling source file '/SystemCalls.cpp')
+  
   SystemCallsFactory.cpp
   Vector2f.cpp
   Vector2i.cpp
   Generating Code...
-  GtLibrary.vcxproj -> C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\GtLibrary.lib
+  GtLibrary.vcxproj -> F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Debug\GtLibrary.lib

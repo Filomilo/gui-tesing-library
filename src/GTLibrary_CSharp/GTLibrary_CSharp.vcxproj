@@ -110,7 +110,8 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>User32.lib
+</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

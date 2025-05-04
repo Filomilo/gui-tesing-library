@@ -14,41 +14,41 @@ public:
      GTSystemVersion GetOsVersion();
      Vector2i GetMaximizedWindowSize();
      GTSystemVersion GetSystemVersion();
-     int StartProcess(const std::string& commandString);
-     std::string GetClipBoardContent();
+     HANDLE StartProcess(const std::string& commandString);
+     std::wstring GetClipBoardContent();
 
-     std::vector<int> GetActiveWindows();
-     std::vector<int> FindWindowByName(const std::string& name);
-     std::vector<int> FindProcessByName(const std::string& name);
-     std::vector<int> GetActiveProcesses();
-     int FindTopWindowByName(const std::string& name);
+     std::vector<HWND> GetActiveWindows();
+     std::vector<HWND> FindWindowByName(const std::wstring& name);
+     std::vector<HANDLE> FindProcessByName(const std::wstring& name);
+     std::vector<HANDLE> GetActiveProcesses();
+     HWND FindTopWindowByName(const std::wstring& name);
 
-     void WindowOfNameShouldExist(const std::string& name);
+     void WindowOfNameShouldExist(const std::wstring& name);
 
      int GetWindowTitleBarHeight();
      int GetWindowBorderWidth();
      int GetWindowBorderHeight();
      int GetWindowPadding();
      Vector2i GetScreenSize();
-     long GetRamUsageOfProcess(int handle);
-     void KillProcess(int handle);
-     bool IsProcesAlive(int handle);
-     Vector2i GetWindowPostion(int handle);
-     bool DoesWindowExist(int handle);
-     std::string GetWindowName(int handle);
-     bool IsWindowMinimized(int handle);
-     void SetWindowPosition(int handle, const Vector2i& position);
-     void MinizmizeWindow(int handle);
-     void MaximizeWindow(int handle);
-     int GetProcessOfWindow(int handle);
-     void CloseWindow(int handle);
-     void SetWindowSize(int handle, const Vector2i& size);
-     void BringWindowUpFront(int handle);
-     Color GetPixelColorAt(int handle, const Vector2i& position);
-    	void TypeText(const std::string& text);
-     void PressKey(Key key);
-     void ReleaseKey(Key key);
-     void ClickKey(Key key);
+     long GetRamUsageOfProcess(HANDLE handle);
+     void KillProcess(HANDLE handle);
+     bool IsProcesAlive(HANDLE handle);
+     Vector2i GetWindowPostion(HWND handle);
+     bool DoesWindowExist(HWND handle);
+     std::wstring GetWindowName(HWND handle);
+     bool IsWindowMinimized(HWND handle);
+     void SetWindowPosition(HWND handle, const Vector2i& position);
+     void MinizmizeWindow(HWND handle);
+     void MaximizeWindow(HWND handle);
+     HANDLE GetProcessOfWindow(HWND handle);
+     void TerminateWindow(HWND handle);
+     void SetWindowSize(HWND handle, const Vector2i& size);
+     void BringWindowUpFront(HWND handle);
+     Color GetPixelColorAt(HWND handle, const Vector2i& position);
+    	void TypeText(const std::wstring& text);
+     void PressKey(GTKey key);
+     void ReleaseKey(GTKey key);
+     void ClickKey(GTKey key);
 
      Vector2i GetMousePosition();
      void MoveMouse(const Vector2i& offset);
@@ -67,7 +67,9 @@ public:
 
      GTScreenshot GetScreenshot();
      GTScreenshot GetScreenshotRect(Vector2i postion, Vector2i size);
+     Vector2i GetSizeOfWindow(HWND handle);
+     std::wstring GetProcesName(HANDLE handle);
+     std::vector<HWND> GetWindowsOfProcess(HANDLE handle);
 
-   
 };
 

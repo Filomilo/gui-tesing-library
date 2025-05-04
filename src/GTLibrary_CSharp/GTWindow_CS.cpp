@@ -15,7 +15,7 @@ bool GTWindow_CS::DoesExist() {
 	return this->_nativeWindow->DoesExist();
 }
 String^ GTWindow_CS::GetName() {
-	return Converters::ConvertStdStringToString(_nativeWindow->GetName());
+	return Converters::ConvertWStdStringToString(_nativeWindow->GetName());
 }
 bool GTWindow_CS::IsMinimized() {
 	return _nativeWindow->IsMinimized();

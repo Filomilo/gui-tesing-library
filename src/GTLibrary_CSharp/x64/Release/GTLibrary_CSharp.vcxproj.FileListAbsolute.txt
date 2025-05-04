@@ -1,0 +1,5 @@
+F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Release\Ijwhost.dll
+F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Release\GTLibrary_CSharp.deps.json
+F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Release\GTLibrary_CSharp.runtimeconfig.json
+F:\projects\gui-tesing-library\src\GTLibrary_CSharp\x64\Release\GTLibrary_CSharp.sourcelink.json
+F:\projects\gui-tesing-library\src\GTLibrary_CSharp\x64\Release\GTLibrary_CSharp.genruntimeconfig.cache

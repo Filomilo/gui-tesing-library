@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Casters.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="framework.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Vector2i.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Casters.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="GTKeyboad.cpp" />

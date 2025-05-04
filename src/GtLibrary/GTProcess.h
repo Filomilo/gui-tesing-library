@@ -3,16 +3,17 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "Windows.h"
 #include "GTWindow.h"
 class GTWindow;
 class GTProcess {
 private:
-    int handle;
+    HANDLE handle;
 public:
     ~GTProcess() = default;
-	GTProcess(int handle) : handle(handle) {}
+	GTProcess(HANDLE handle) : handle(handle) {}
 
-  std::string GetName() const;
+  std::wstring GetName() const;
   bool IsAlive() const ;
   std::vector<std::shared_ptr<GTWindow>> GetWindowsOfProcess() const;
   long GetRamUsage() const ;

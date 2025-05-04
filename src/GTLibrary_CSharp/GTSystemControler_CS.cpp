@@ -29,7 +29,7 @@ List<GTProcess_CS^>^ GTSystemControler_CS::FindProcessByName(String^ name) {
 
 GTWindow_CS^ GTSystemControler_CS::FindTopWindowByName(String^ name) {
     auto nativeWindow = nativeSystem->FindTopWindowByName(Converters::ConvertStringToStdString(name));
-    return nativeWindow ? gcnew GTWindow_CS(nativeWindow.get()) : nullptr;
+    return gcnew GTWindow_CS(new GTWindow(nativeWindow.GetHandle())) ;
 }
 
 GTSystemControler_CS^ GTSystemControler_CS::WindowOfNameShouldExist(String^ name) {
@@ -56,13 +56,13 @@ List<GTWindow_CS^>^ GTSystemControler_CS::GetActiveWindows() {
 }
 
 String^ GTSystemControler_CS::GetClipBoardContent() {
-    return Converters::ConvertStdStringToString(nativeSystem->GetClipBoardContent()) ;
+    return Converters::ConvertWStdStringToString(nativeSystem->GetClipBoardContent()) ;
 }
 
 GTProcess_CS^ GTSystemControler_CS::StartProcess(String^ commandString) {
    
  auto nativeProcess = nativeSystem->StartProcess(Converters::ConvertStringToStdString(commandString));
-    return  nativeProcess ? gcnew GTProcess_CS(nativeProcess.get()) : nullptr;
+    return  nativeProcess ? gcnew GTProcess_CS(nativeProcess) : nullptr;
 }
 
 GTSystemVersion_CS^ GTSystemControler_CS::GetOsVersion() {

@@ -7,8 +7,8 @@ class GTKeyboard {
 public:
      ~GTKeyboard() = default;
 
-     void PressKey(Key key);
-     void ReleaseKey(Key key);
-     void ClickKey(Key key);
-     void Type(const std::string& text);
+     void PressKey(GTKey key);
+     void ReleaseKey(GTKey key);
+     void ClickKey(GTKey key);
+     void Type(const std::wstring& text);
 };

@@ -18,7 +18,7 @@ bool GTWindow::DoesExist() const {
     return SystemCallsFactory::GetSystemCalls()->DoesWindowExist(handle);
 }
 
-std::string GTWindow::GetName() const {
+std::wstring GTWindow::GetName() const {
 	return SystemCallsFactory::GetSystemCalls()->GetWindowName(handle);
 }
 
@@ -40,12 +40,12 @@ void GTWindow::Maximize() {
     SystemCallsFactory::GetSystemCalls()->MaximizeWindow(handle);
 }
 
-std::shared_ptr<GTProcess> GTWindow::GetProcessOfWindow() {
-    return std::make_shared<GTProcess>(SystemCallsFactory::GetSystemCalls()->GetProcessOfWindow(handle));
+GTProcess* GTWindow::GetProcessOfWindow() {
+    return new GTProcess(SystemCallsFactory::GetSystemCalls()->GetProcessOfWindow(handle));
 }
 
 void GTWindow::Close() {
-    SystemCallsFactory::GetSystemCalls()->CloseWindow(handle);
+    SystemCallsFactory::GetSystemCalls()->TerminateWindow(handle);
 }
 
 void GTWindow::SetWindowSize(int x, int y) {
@@ -87,7 +87,7 @@ void GTWindow::ShouldBeMinimized(bool state) {
 		});
 }
 
-std::string GTWindow::GetWindowName() const {
+std::wstring GTWindow::GetWindowName() const {
 	return SystemCallsFactory::GetSystemCalls()->GetWindowName(handle);
 }
 
@@ -146,9 +146,9 @@ void GTWindow::CenterWindow() {
 
 }
 
-void GTWindow::WindowNameShouldBe(const std::string& title) {
+void GTWindow::WindowNameShouldBe(const std::wstring& title) {
 	Helpers::ensureTrue([&]() {
-		std::string name = SystemCallsFactory::GetSystemCalls()->GetWindowName(handle);
+		std::wstring name = SystemCallsFactory::GetSystemCalls()->GetWindowName(handle);
 		return name == title;
 		});
 }
@@ -159,4 +159,12 @@ void GTWindow::ContentPixelAtShouldBeColor(const Vector2f& sliderColorCheckPosit
         return color.Equals(colorShouldBe, errorPass);
         };
     Helpers::ensureTrue(func);
+}
+
+HWND GTWindow::GetHandle() {
+    return this->handle;
+}
+
+Vector2i GTWindow::GetSize() const {
+    return SystemCallsFactory().GetSystemCalls()->GetSizeOfWindow(this->handle);
 }

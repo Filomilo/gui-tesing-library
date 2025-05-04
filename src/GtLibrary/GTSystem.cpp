@@ -24,7 +24,7 @@ std::vector<std::shared_ptr<GTProcess>> GTSystem::FindProcessByName(const std::s
     return {};
 }
 
-std::shared_ptr<GTWindow> GTSystem::FindTopWindowByName(const std::string& name) {
+GTWindow GTSystem::FindTopWindowByName(const std::string& name) {
     return nullptr;
 }
 
@@ -38,23 +38,23 @@ std::vector<std::shared_ptr<GTProcess>> GTSystem::GetActiveProcesses() {
 }
 
 std::vector<std::shared_ptr<GTWindow>> GTSystem::GetActiveWindows() {
-    std::vector<int> windowhandles = this->_SystemCalls->GetActiveWindows();
+    std::vector<HWND> windowhandles = this->_SystemCalls->GetActiveWindows();
     std::vector<std::shared_ptr<GTWindow>> windows = std::vector<std::shared_ptr<GTWindow>>();
-    for(int handle : windowhandles)
+    for(HWND handle : windowhandles)
     {
         windows.push_back(std::make_shared<GTWindow>(handle));
     }
     return windows;
 }
 
-std::string GTSystem::GetClipBoardContent() {
+std::wstring GTSystem::GetClipBoardContent() {
 
     return this->_SystemCalls->GetClipBoardContent();
 }
 
-std::shared_ptr<GTProcess> GTSystem::StartProcess(const std::string& commandString) {
+GTProcess* GTSystem::StartProcess(const std::string& commandString) {
 
-    return std::make_shared<GTProcess>(this->_SystemCalls->StartProcess(commandString)) ;
+    return new GTProcess((HANDLE)this->_SystemCalls->StartProcess(commandString)) ;
 }
 
 GTSystemVersion GTSystem::GetOsVersion() const {

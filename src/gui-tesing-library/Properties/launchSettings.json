@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "gui-tesing-library": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

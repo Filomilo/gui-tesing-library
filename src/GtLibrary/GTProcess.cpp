@@ -3,18 +3,18 @@
 #include <windows.h>
 #include <stdexcept>
 #include "SystemCallsFactory.h"
-std::string GTProcess::GetName() const {
-    return "";
+std::wstring GTProcess::GetName() const {
+    return SystemCallsFactory::GetSystemCalls()->GetProcesName(handle);
 }
 
 bool GTProcess::IsAlive() const {
-    return SystemCallsFactory::GetSystemCalls()->IsProcesAlive(handle);
+	return SystemCallsFactory::GetSystemCalls()->IsProcesAlive(handle);
 }
 
 std::vector<std::shared_ptr<GTWindow>> GTProcess::GetWindowsOfProcess() const {
-	std::vector<int> handles = SystemCallsFactory::GetSystemCalls()->FindProcessByName(this->GetName());
+	std::vector<HWND> handles = SystemCallsFactory::GetSystemCalls()->GetWindowsOfProcess(this->handle);
 	std::vector<std::shared_ptr<GTWindow>> windows;
-	for (int handle : handles) {
+	for (HWND handle : handles) {
 		std::shared_ptr<GTWindow> window = std::make_shared<GTWindow>(handle);
 		if (window) {
 			windows.push_back(window);
@@ -23,8 +23,9 @@ std::vector<std::shared_ptr<GTWindow>> GTProcess::GetWindowsOfProcess() const {
 	return windows;
 }
 
+
 long GTProcess::GetRamUsage() const {
-	SystemCallsFactory::GetSystemCalls()->GetRamUsageOfProcess(this->handle);
+return	SystemCallsFactory::GetSystemCalls()->GetRamUsageOfProcess(this->handle);
 }
 
 void GTProcess::Kill() {
