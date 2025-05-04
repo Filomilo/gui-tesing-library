@@ -25,12 +25,14 @@ std::vector<std::shared_ptr<GTProcess>> GTSystem::FindProcessByName(const std::s
 }
 
 GTWindow GTSystem::FindTopWindowByName(const std::string& name) {
-    return nullptr;
+    HWND hwnd = FindWindowA(nullptr, name.c_str());
+    if (hwnd != nullptr) {
+        if (IsWindow(hwnd)) {
+            return GTWindow(hwnd);
+        }
+        return NULL;
 }
 
-std::shared_ptr<GTSystem> GTSystem::WindowOfNameShouldExist(const std::string& name) {
-    return nullptr;
-}
 
 std::vector<std::shared_ptr<GTProcess>> GTSystem::GetActiveProcesses() {
 

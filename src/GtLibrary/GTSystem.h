@@ -26,7 +26,7 @@ public:
     std::vector<std::shared_ptr<GTWindow>> FindWindowByName(const std::string& name);
     std::vector<std::shared_ptr<GTProcess>> FindProcessByName(const std::string& name);
     GTWindow FindTopWindowByName(const std::string& name);
-    std::shared_ptr<GTSystem> WindowOfNameShouldExist(const std::string& name);
+   void WindowOfNameShouldExist(const std::string& name);
     std::vector<std::shared_ptr<GTProcess>> GetActiveProcesses();
     std::vector<std::shared_ptr<GTWindow>> GetActiveWindows();
     std::wstring GetClipBoardContent();
