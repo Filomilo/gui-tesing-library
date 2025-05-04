@@ -1,8 +1,0 @@
-﻿  SystemCalls.cpp
-F:\projects\gui-tesing-library\src\GtLibrary\SystemCalls.cpp(103,20): warning C4312: 'reinterpret_cast': conversion from 'int' to 'HWND' of greater size
-  (compiling source file '/SystemCalls.cpp')
-  
-F:\projects\gui-tesing-library\src\GtLibrary\SystemCalls.cpp(107,20): warning C4312: 'reinterpret_cast': conversion from 'int' to 'HWND' of greater size
-  (compiling source file '/SystemCalls.cpp')
-  
-  GtLibrary.vcxproj -> F:\projects\gui-tesing-library\src\gui-tesing-library\x64\Release\GtLibrary.lib
