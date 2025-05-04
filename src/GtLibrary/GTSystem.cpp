@@ -30,7 +30,9 @@ GTWindow GTSystem::FindTopWindowByName(const std::string& name) {
         if (IsWindow(hwnd)) {
             return GTWindow(hwnd);
         }
-        return NULL;
+        
+    }
+    return NULL;
 }
 
 
