@@ -16,7 +16,6 @@ class ISystemCalls {
 public:
     virtual ~ISystemCalls() = default;
 
-    virtual GTSystemVersion GetOsVersion() = 0;
     virtual Vector2i GetMaximizedWindowSize() = 0;
     virtual GTSystemVersion GetSystemVersion() = 0;
     virtual HANDLE StartProcess(const std::string& commandString) = 0;
@@ -70,7 +69,6 @@ public:
     virtual void MoveMouseTo(const Vector2i& position) = 0;
     
     virtual GTScreenshot GetScreenshot()=0;
-    virtual GTScreenshot GetScreenshotRect(Vector2i postion, Vector2i size)=0;
     virtual Vector2i GetSizeOfWindow(HWND handle)=0;
     virtual std::wstring GetProcesName(HANDLE handle) = 0;
     virtual std::vector<HWND> GetWindowsOfProcess(HANDLE handle) = 0;

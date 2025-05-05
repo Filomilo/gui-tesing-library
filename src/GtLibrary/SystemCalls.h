@@ -11,7 +11,6 @@ public:
     SystemCalls() = default;
 
 
-     GTSystemVersion GetOsVersion();
      Vector2i GetMaximizedWindowSize();
      GTSystemVersion GetSystemVersion();
      HANDLE StartProcess(const std::string& commandString);
@@ -63,8 +62,7 @@ public:
      void ScrollMouse(int scrollValue);
      void MoveMouseTo(const Vector2i& position);
 
-     GTScreenshot GetScreenshot();
-     GTScreenshot GetScreenshotRect(Vector2i postion, Vector2i size);
+     GTScreenshot* GetScreenshot(HWND handle, Vector2i startPos, Vector2i size);
      Vector2i GetSizeOfWindow(HWND handle);
      std::wstring GetProcesName(HANDLE handle);
      std::vector<HWND> GetWindowsOfProcess(HANDLE handle);

@@ -29,9 +29,7 @@ void pirintError() {
 
 
 
- GTSystemVersion SystemCalls::GetOsVersion() {
-    return GTSystemVersion("");
-}
+
 
 Vector2i SystemCalls::GetMaximizedWindowSize() {
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
@@ -92,12 +90,45 @@ HANDLE SystemCalls::StartProcess(const std::string& commandString) {
 }
 
 std::wstring SystemCalls::GetClipBoardContent() {
-    throw std::exception("not implemdnerd");
-    //return "";
+    if (!OpenClipboard(nullptr)) {
+        pirintError();
+    }
+
+    HANDLE hData = GetClipboardData(CF_UNICODETEXT);
+    if (hData == nullptr) {
+        CloseClipboard();
+        pirintError();
+    }
+
+    LPCWSTR pszText = static_cast<LPCWSTR>(GlobalLock(hData));
+    if (pszText == nullptr) {
+        CloseClipboard();
+        pirintError();
+    }
+
+    std::wstring text(pszText);
+
+    GlobalUnlock(hData);
+    CloseClipboard();
+
+    return text;
 }
 
 std::vector<HWND> SystemCalls::GetActiveWindows() {
-    return {};
+    std::vector<HWND> windowHandles;
+
+    EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL {
+        std::vector<HWND>* handles = reinterpret_cast<std::vector<HWND>*>(lParam);
+        if (IsWindowVisible(hwnd)) {
+            int length = GetWindowTextLengthW(hwnd);
+            if (length > 0) {
+                handles->push_back(hwnd);
+            }
+        }
+        return TRUE;
+        }, reinterpret_cast<LPARAM>(&windowHandles));
+
+    return windowHandles;
 }
 
 std::vector<HWND> SystemCalls::FindWindowByName(const std::wstring& name) {
@@ -249,7 +280,15 @@ void SystemCalls::BringWindowUpFront(HWND handle) {
 
 Color SystemCalls::GetPixelColorAt(HWND handle, const Vector2i& position) {
 
-    return Color();
+    HDC hdc = GetDC(handle);
+    COLORREF pixel = GetPixel(hdc, position.x, position.y);
+    ReleaseDC(handle, hdc);
+
+    int red = (int)(pixel & 0x000000FF);
+    int green = (int)((pixel & 0x0000FF00) >> 8);
+    int blue = (int)((pixel & 0x00FF0000) >> 16);
+
+    return Color(red, green, blue);
 }
 
 void SystemCalls::TypeText(const std::wstring& text) {
@@ -338,14 +377,101 @@ void SystemCalls::MoveMouseTo(const Vector2i& position) {
    
 }
 
-GTScreenshot SystemCalls::GetScreenshot() {
-    return GTScreenshot();
-}
-GTScreenshot SystemCalls::GetScreenshotRect(Vector2i postion, Vector2i size) {
 
-    return GTScreenshot();
+static GTScreenshot* HbitampToGtScreenShot(HBITMAP hbitmap) {
+    BITMAP bmp;
+    if (GetObject(hbitmap, sizeof(BITMAP), &bmp) == 0) {
+        pirintError();
+        throw std::runtime_error("Failed to retrieve bitmap info.");
+    }
+
+    int width = bmp.bmWidth;
+    int height = bmp.bmHeight;
+
+    BITMAPINFO bmi = {};
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = width;
+    bmi.bmiHeader.biHeight = -height;
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 24;   
+    bmi.bmiHeader.biCompression = BI_RGB;
+
+    int rowSize = ((width * 3 + 3) & ~3);
+    std::vector<uint8_t> data(rowSize * height);
+
+ 
+    HDC hdc = GetDC(nullptr);
+    if (!GetDIBits(hdc, hbitmap, 0, height, data.data(), &bmi, DIB_RGB_COLORS)) {
+        ReleaseDC(nullptr, hdc);
+        pirintError();
+        throw std::runtime_error("Failed to get bitmap bits.");
+    }
+    ReleaseDC(nullptr, hdc);
+    std::vector< std::vector<Color>> pixels = std::vector< std::vector<Color>>();
+    pixels.resize(height, std::vector<Color>(width));
+    for (int y = 0; y < height; ++y) {
+        const uint8_t* row = data.data() + y * rowSize;
+        for (int x = 0; x < width; ++x) {
+            Color c;
+            c.b = row[x * 3 + 0];
+            c.g = row[x * 3 + 1];
+            c.r = row[x * 3 + 2];
+            pixels[y][x] = c;
+        }
+    }
+    return new GTScreenshot(pixels);
 }
 
+GTScreenshot* SystemCalls::GetScreenshot(HWND handle, Vector2i startPos, Vector2i size) {
+    HDC hdcScreen = GetDC(handle);
+    if (!hdcScreen) {
+        pirintError();
+        throw std::runtime_error("Failed to get screen DC");
+    }
+       
+
+    HDC hdcMemDC = CreateCompatibleDC(hdcScreen);
+    if (!hdcMemDC) {
+        ReleaseDC(handle, hdcScreen);
+        pirintError();
+        throw std::runtime_error("Failed to create compatible DC");
+    }
+
+    HBITMAP hBitmap = CreateCompatibleBitmap(hdcScreen, size.x, size.y);
+    if (!hBitmap) {
+        DeleteDC(hdcMemDC);
+        ReleaseDC(handle, hdcScreen);
+        pirintError();
+
+        throw std::runtime_error("Failed to create compatible bitmap");
+    }
+
+    HGDIOBJ hOld = SelectObject(hdcMemDC, hBitmap);
+
+    BOOL res = BitBlt(
+        hdcMemDC,
+        0, 0,
+        size.x, size.y,
+        hdcScreen,
+        startPos.x, startPos.y, 
+        SRCCOPY
+    );
+
+    if (!res) {
+        SelectObject(hdcMemDC, hOld);
+        DeleteObject(hBitmap);
+        DeleteDC(hdcMemDC);
+        ReleaseDC(handle, hdcScreen);
+        pirintError();
+        throw std::runtime_error("BitBlt failed");
+    }
+
+    SelectObject(hdcMemDC, hOld);
+    DeleteDC(hdcMemDC);
+    ReleaseDC(handle, hdcScreen);
+
+    return HbitampToGtScreenShot(hBitmap);
+}
 HWND SystemCalls::FindTopWindowByName(const std::wstring& name) {
     return (HWND)nullptr;
 }

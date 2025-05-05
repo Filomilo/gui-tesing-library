@@ -13,6 +13,9 @@ private:
 public:
     GTScreenshot()=default;
      GTScreenshot(const std::string& bitmapFilePath);
+     GTScreenshot(std::vector<std::vector<Color>> pixels) {
+         this->pixels = pixels;
+     }
 
     int GetWidth() const;
     int GetHeight() const;
