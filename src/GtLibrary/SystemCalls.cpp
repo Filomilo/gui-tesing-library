@@ -20,7 +20,7 @@ void pirintError() {
         NULL
     );
 
-    std::cerr << L"failed. Error " << errorCode
+    std::wcerr << L"failed. Error " << errorCode
         << L": " << (errorMsg ? errorMsg : L"Unknown error") << std::endl;
 
     if (errorMsg)
@@ -113,9 +113,6 @@ std::vector<HANDLE> SystemCalls::GetActiveProcesses() {
 }
 
 
-void SystemCalls::WindowOfNameShouldExist(const std::wstring& name) {
-    
-}
 
 int SystemCalls::GetWindowTitleBarHeight() {
     return ::GetSystemMetrics(SM_CYCAPTION);
@@ -214,9 +211,12 @@ void SystemCalls::MaximizeWindow(HWND handle) {
 
 HANDLE SystemCalls::GetProcessOfWindow(HWND handle) {
     DWORD processId;
+    if (!IsWindow(handle))
+    {
+        throw std::runtime_error("Not vlaid windwo handle");
+    }
     GetWindowThreadProcessId(handle, &processId);
     HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
-
     return hProcess;
 }
 

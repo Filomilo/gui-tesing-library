@@ -23,8 +23,6 @@ public:
      std::vector<HANDLE> GetActiveProcesses();
      HWND FindTopWindowByName(const std::wstring& name);
 
-     void WindowOfNameShouldExist(const std::wstring& name);
-
      int GetWindowTitleBarHeight();
      int GetWindowBorderWidth();
      int GetWindowBorderHeight();

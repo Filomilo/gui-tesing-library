@@ -15,6 +15,7 @@ Vector2i GTWindow::GetPosition() const {
 }
 
 bool GTWindow::DoesExist() const {
+    Configuration::GetInstance()->DefaultSleep();
     return SystemCallsFactory::GetSystemCalls()->DoesWindowExist(handle);
 }
 
@@ -64,7 +65,7 @@ void GTWindow::BringUpFront() {
 
 void GTWindow::SizeShouldBe(const Vector2i& vector2I) {
     Helpers::ensureTrue([&]() {
-        Vector2i size = SystemCallsFactory::GetSystemCalls()->GetWindowPostion(handle);
+        Vector2i size = SystemCallsFactory::GetSystemCalls()->GetSizeOfWindow(handle);
         return size.Equals(vector2I);
         });
 }
@@ -77,7 +78,8 @@ void GTWindow::ShouldWindowExist(bool v) {
 }
 
 void GTWindow::KillProcess() {
-	SystemCallsFactory::GetSystemCalls()->KillProcess(handle);
+    GTProcess* proc = this->GetProcessOfWindow();
+    proc->Kill();
 }
 
 void GTWindow::ShouldBeMinimized(bool state) {

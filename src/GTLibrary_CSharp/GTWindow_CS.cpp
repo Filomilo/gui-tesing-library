@@ -47,13 +47,15 @@ void GTWindow_CS::BringUpFront() {
 
 
 }
-void GTWindow_CS::SizeShouldBe(const Vector2i_CS^ size) {
-
+void GTWindow_CS::SizeShouldBe(Vector2i_CS^ size)
+{
+	_nativeWindow->SizeShouldBe(Converters::Vector2iCSToVector2i(size));
 }
 void GTWindow_CS::ShouldWindowExist(bool exists) {
 
 }
 void GTWindow_CS::KillProcess() {
+	_nativeWindow->KillProcess();
 
 }
 void GTWindow_CS::ShouldBeMinimized(bool state) {
@@ -87,7 +89,7 @@ void GTWindow_CS::ContentPixelAtShouldBeColor(const Vector2f_CS^ sliderColorChec
 
 }
 Vector2i_CS^ GTWindow_CS::GetWindowSize() {
-	return nullptr;
+	return gcnew Vector2i_CS(_nativeWindow->GetSize());
 }
 Vector2i_CS^ GTWindow_CS::GetMaximizedWindowSize() {
 	return nullptr;

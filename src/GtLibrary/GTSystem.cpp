@@ -3,7 +3,11 @@
 #include <stdexcept>
 #include "SystemCalls.h"
 #include "memory.h"
+#include "Helpers.h"
+#include <optional>
+#include "GTWindow.h"
 
+class GTWindow;
 
 std::shared_ptr<GTSystem> GTSystem::_gtSystem = nullptr;
 
@@ -16,15 +20,15 @@ std::shared_ptr<GTSystem> GTSystem::Instance() {
     return _gtSystem;
 }
 
-std::vector<std::shared_ptr<GTWindow>> GTSystem::FindWindowByName(const std::string& name) {
+std::vector<GTWindow> GTSystem::FindWindowByName(const std::string& name) {
     return {};
 }
 
-std::vector<std::shared_ptr<GTProcess>> GTSystem::FindProcessByName(const std::string& name) {
+std::vector<GTProcess> GTSystem::FindProcessByName(const std::string& name) {
     return {};
 }
 
-GTWindow GTSystem::FindTopWindowByName(const std::string& name) {
+std::optional<GTWindow> GTSystem::FindTopWindowByName(const std::string& name) {
     HWND hwnd = FindWindowA(nullptr, name.c_str());
     if (hwnd != nullptr) {
         if (IsWindow(hwnd)) {
@@ -32,7 +36,7 @@ GTWindow GTSystem::FindTopWindowByName(const std::string& name) {
         }
         
     }
-    return NULL;
+    return std::nullopt;
 }
 
 
@@ -41,12 +45,12 @@ std::vector<std::shared_ptr<GTProcess>> GTSystem::GetActiveProcesses() {
     return {};
 }
 
-std::vector<std::shared_ptr<GTWindow>> GTSystem::GetActiveWindows() {
+std::vector<GTWindow> GTSystem::GetActiveWindows() {
     std::vector<HWND> windowhandles = this->_SystemCalls->GetActiveWindows();
-    std::vector<std::shared_ptr<GTWindow>> windows = std::vector<std::shared_ptr<GTWindow>>();
+    std::vector<GTWindow> windows = std::vector<GTWindow>();
     for(HWND handle : windowhandles)
     {
-        windows.push_back(std::make_shared<GTWindow>(handle));
+        windows.push_back(GTWindow(handle));
     }
     return windows;
 }
@@ -99,3 +103,10 @@ Vector2i GTSystem::GetMaximizedWindowSize() {
 	return this->_SystemCalls->GetMaximizedWindowSize();
 }
 
+void GTSystem::WindowOfNameShouldExist(const std::string& name) {
+ 
+    Helpers::ensureTrue([this,name]()-> bool {
+        std::optional<GTWindow> window = this->FindTopWindowByName(name);
+        return window.has_value();
+        });
+}

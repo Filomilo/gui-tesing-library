@@ -48,7 +48,7 @@ public:
         void SetWindowSize(int x, int y);
         void SetPosition(int x, int y);
         void BringUpFront();
-        void SizeShouldBe(const Vector2i_CS^ size);
+        void SizeShouldBe( Vector2i_CS^ size);
         void ShouldWindowExist(bool exists);
         void KillProcess();
 

@@ -1,32 +1,15 @@
 #pragma once
 class Configuration
 {
-	static long timeout;
-
+	long timeout=1000;
+	long defaultSleep = 700;
 	static Configuration* instance;
 public:
-	static Configuration* GetInstance()
-	{
-		if (instance == nullptr)
-		{
-			instance = new Configuration();
-			instance->SetDefaultTimeout();
-		}
-		return instance;
-	}
-	static void SetTimeout(long newTimeout)
-	{
-		timeout = newTimeout;
-	}
-	static long GetTimeout()
-	{
-		return timeout;
-	}
-	static void SetDefaultTimeout()
-	{
-		timeout = 1000;
-	}
-
+	static Configuration* GetInstance();
+	void SetTimeout(long newTimeout);
+	long GetTimeout();
+	void SetDefaultTimeout();
+	void DefaultSleep();
 
 
 };

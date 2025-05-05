@@ -57,7 +57,7 @@ namespace gui_tesing_library.Controllers
 
         internal Vector2i_CS Native()
         {
-            throw new NotImplementedException();
+            return Vector2i_CS.Create(x, y);
         }
 
         public static Vector2i operator +(Vector2i a, Vector2i b) =>

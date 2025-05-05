@@ -12,7 +12,7 @@ public:
 
 	static void ensureTrue(std::function<bool()> functionPointer)
 	{
-		long timeout = Configuration::GetTimeout();
+		long timeout = Configuration::GetInstance()->GetTimeout();
 		auto  startTime = high_resolution_clock::now();
 		while (true)
 		{

@@ -2,7 +2,8 @@
   "profiles": {
     "gui-tesing-library": {
       "commandName": "Project",
-      "nativeDebugging": true
+      "nativeDebugging": true,
+      "sqlDebugging": false
     }
   }
 }

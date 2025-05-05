@@ -82,7 +82,8 @@ namespace gui_tesing_library.Controllers
 
         public IGTWindow FindTopWindowByName(string name)
         {
-            return new GTWindow(SystemControler_CS.FindTopWindowByName(name));
+            GTWindow_CS win = SystemControler_CS.FindTopWindowByName(name);
+            return win == null ? null : new GTWindow(win);
         }
 
         public IGTSystem WindowOfNameShouldExist(string name)

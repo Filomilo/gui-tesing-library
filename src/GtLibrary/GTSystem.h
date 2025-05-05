@@ -7,7 +7,7 @@
 #include "GTProcess.h"
 #include "GTSystemVersion.h"
 #include "Vector2i.h"
-
+#include <optional>
 class GTWindow;
 class GTProcess;
 class GTSystemVersion;
@@ -23,12 +23,12 @@ public:
 
     static std::shared_ptr<GTSystem> Instance();
 
-    std::vector<std::shared_ptr<GTWindow>> FindWindowByName(const std::string& name);
-    std::vector<std::shared_ptr<GTProcess>> FindProcessByName(const std::string& name);
-    GTWindow FindTopWindowByName(const std::string& name);
+    std::vector<GTWindow> FindWindowByName(const std::string& name);
+    std::vector<GTProcess> FindProcessByName(const std::string& name);
+    std::optional<GTWindow>  FindTopWindowByName(const std::string& name);
    void WindowOfNameShouldExist(const std::string& name);
     std::vector<std::shared_ptr<GTProcess>> GetActiveProcesses();
-    std::vector<std::shared_ptr<GTWindow>> GetActiveWindows();
+    std::vector<GTWindow> GetActiveWindows();
     std::wstring GetClipBoardContent();
     GTProcess* StartProcess(const std::string& commandString);
     GTSystemVersion GetOsVersion() const;

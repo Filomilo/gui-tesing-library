@@ -7,5 +7,8 @@ public:
 	int Y;
 	Vector2i_CS(int x, int y) : X(x), Y(y) {}
 	Vector2i_CS(Vector2i vec) : X(vec.x), Y(vec.y) {}
+	static Vector2i_CS^ Create(int x, int y) {
+		return gcnew Vector2i_CS(x, y);
+	}
 };
 
