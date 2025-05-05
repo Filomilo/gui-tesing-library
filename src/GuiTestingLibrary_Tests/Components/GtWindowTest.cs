@@ -20,9 +20,10 @@ namespace GuiTestingLibrary_Tets.Components
         public void init()
         {
             gtRocess = SystemController.Instance.StartProcess(
-                "\"C:\\Program Files\\Common Files\\Oracle\\Java\\javapath\\java\" -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
+                "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
             );
-            Assert.That(gtRocess.IsAlive);
+            Assert.That(gtRocess != null, "Gt proces retuned null");
+            Assert.That(gtRocess.IsAlive, "Gt rocess in snot alive");
             window = SystemController
                 .Instance.WindowOfNameShouldExist("Hello!")
                 .FindTopWindowByName("Hello!");
@@ -40,7 +41,10 @@ namespace GuiTestingLibrary_Tets.Components
             window.KillProcess();
             window.ShouldWindowExist(false);
             Assert.That(window.DoesExist == false);
-            Assert.That(SystemController.Instance.FindTopWindowByName("Hello!") == null);
+            Assert.That(
+                SystemController.Instance.FindTopWindowByName("Hello!") == null,
+                "Window with anme Hello should not exist"
+            );
             ;
         }
 
@@ -73,7 +77,8 @@ namespace GuiTestingLibrary_Tets.Components
         public void setWindowPostionTest()
         {
             window.SetPostion(0, 0);
-            Assert.That(window.Position.x == 0 && window.Position.y == 0);
+            Vector2i pos = window.Position;
+            Assert.That(pos.x == 0 && pos.y == 0);
         }
 
         [Test]

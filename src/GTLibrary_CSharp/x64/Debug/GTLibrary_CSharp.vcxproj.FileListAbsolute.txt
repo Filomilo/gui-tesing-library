@@ -1,9 +1,8 @@
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\Ijwhost.dll
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.deps.json
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.runtimeconfig.json
-C:\1id21a\fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GTLibrary_CSharp\x64\Debug\GTLibrary_CSharp.genruntimeconfig.cache
+C:\Users\student\Documents\1ID21a\Fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\Ijwhost.dll
+C:\Users\student\Documents\1ID21a\Fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.deps.json
+C:\Users\student\Documents\1ID21a\Fb\gui-tesing-library-24-stworzenie-dll-from-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.runtimeconfig.json
+C:\Users\student\Documents\1ID21a\Fb\gui-tesing-library-24-stworzenie-dll-from-library\src\GTLibrary_CSharp\x64\Debug\GTLibrary_CSharp.genruntimeconfig.cache
 D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\x64\Debug\Ijwhost.dll
 D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.deps.json
 D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\x64\Debug\GTLibrary_CSharp.runtimeconfig.json
-D:\proejcts\gui-tesing-library\gui-tesing-library\src\GTLibrary_CSharp\x64\Debug\GTLibrary_CSharp.sourcelink.json
 D:\proejcts\gui-tesing-library\gui-tesing-library\src\GTLibrary_CSharp\x64\Debug\GTLibrary_CSharp.genruntimeconfig.cache

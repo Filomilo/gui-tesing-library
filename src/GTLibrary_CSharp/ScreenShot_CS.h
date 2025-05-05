@@ -3,15 +3,23 @@
 public ref class ScreenShot_CS
 {
 private:
-	GTScreenshot* native;
+    GTScreenshot* native;
 public:
-	ScreenShot_CS(std::shared_ptr<GTScreenshot> screen)
+	ScreenShot_CS(GTScreenshot screen)
 	{
-		native = screen.get();
+        native = new GTScreenshot(screen);
+
 	}
-	~ScreenShot_CS()
-	{
-		delete native;
-	}
+    ~ScreenShot_CS()
+    {
+        this->!ScreenShot_CS();
+    }
+
+    !ScreenShot_CS() 
+    {
+        delete native;
+        native = nullptr;
+    }
+
 };
 

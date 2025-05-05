@@ -51,7 +51,7 @@ namespace gui_tesing_library.Components
 
         public Vector2i Position
         {
-            get { return new Vector2i(_windowCS.GetWindowPosition()); }
+            get { return new Vector2i(_windowCS.GetPosition()); }
         }
 
         public bool DoesExist

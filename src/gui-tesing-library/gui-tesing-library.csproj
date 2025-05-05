@@ -10,6 +10,7 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
 	  <FodyEnable>true</FodyEnable>
     <FileVersion>1.0.0.0</FileVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml">
@@ -48,5 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

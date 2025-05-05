@@ -14,5 +14,5 @@ void GTKeyboard_CS::ClickKey(Key_CS key) {
 }
 
 void GTKeyboard_CS::Type(String^ text) {
-	native->Type(Converters::ConvertStringToStdString(text));
+	native->Type(Converters::ConvertStringToWStdString(text));
 }

@@ -83,7 +83,7 @@ public enum class Key_CS
     KEY_2,
     KEY_1,
     KEY_0,
-    DELETE,
+    KEY_DELETE,
     INSERT,
     PRINT,
     SELECT,

@@ -80,6 +80,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -110,7 +111,8 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies />
+      <AdditionalDependencies>User32.lib
+</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

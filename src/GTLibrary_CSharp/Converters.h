@@ -8,23 +8,31 @@ using namespace System;
 #include "Vector2f_CS.h"
 #include "GTWindow_CS.h"
 #include "../GtLibrary/GTScreenshot.h"
-//#include <msclr/marshal_cppstd.h>
+#include <msclr/marshal_cppstd.h>
 
 ref class Converters
 {
 public:
     static std::string ConvertStringToStdString(System::String^ managedString) {
-        return "asd";
-        //return msclr::interop::marshal_as<std::string>(managedString);
+  
+        return msclr::interop::marshal_as<std::string>(managedString);
     }
     static String^ ConvertStdStringToString(std::string string) {
-        return "asd";
-        //return msclr::interop::marshal_as<std::string>(managedString);
+        return gcnew System::String(string.c_str());
     }
 
-    static Key KeyCSToKEy(Key_CS key_Cs)
+    static String^ ConvertWStdStringToString(std::wstring string)
     {
-        return Key::RSHIFT;
+        return gcnew String(string.c_str());
+    }
+    static std::wstring ConvertStringToWStdString(System::String^ managedString) {
+
+        return msclr::interop::marshal_as<std::wstring>(managedString);
+    }
+
+    static GTKey KeyCSToKEy(Key_CS key_Cs)
+    {
+        return GTKey::RSHIFT;
     }
 
     static Vector2i Vector2iCSToVector2i(Vector2i_CS^ vec)
@@ -48,11 +56,10 @@ public:
 
     static std::shared_ptr<GTWindow> WidnowCsToWindow(GTWindow_CS^ win)
     {
-     
-        return std::make_shared<GTWindow>(win->GetNative()->getHangle());
+        return std::make_shared<GTWindow>(win->GetNative()->GetHandle());
     }
 
-    static ScreenShot_CS^ ScreenShotTOScreenShotCs(std::shared_ptr<GTScreenshot>  screen)
+    static ScreenShot_CS^ ScreenShotTOScreenShotCs(GTScreenshot  screen)
     {
         return gcnew ScreenShot_CS(screen);
     }
@@ -69,18 +76,9 @@ public:
 
     }
 
-    static GTProcess_CS^ ProcessToProcessCS(GTProcess proc)
+    static GTProcess_CS^ ProcessToProcessCS(GTProcess* proc)
     {
-        return Converters::ProcessToProcessCS(proc);
+        return gcnew GTProcess_CS(proc);
     }
-
-	static GTWindow_CS^ WindowToWindowCs(GTWindow win)
-	{
-		return Converters::WindowToWindowCs(win);
-	}
-	static GTProcess_CS^ ProcessToProcessCS(std::shared_ptr<GTProcess>  proc)
-	{
-		return gcnew GTProcess_CS(proc);
-	}
 
 };

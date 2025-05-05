@@ -15,7 +15,7 @@ bool GTWindow_CS::DoesExist() {
 	return this->_nativeWindow->DoesExist();
 }
 String^ GTWindow_CS::GetName() {
-	return Converters::ConvertStdStringToString(_nativeWindow->GetName());
+	return Converters::ConvertWStdStringToString(_nativeWindow->GetName());
 }
 bool GTWindow_CS::IsMinimized() {
 	return _nativeWindow->IsMinimized();
@@ -34,32 +34,35 @@ GTProcess_CS^ GTWindow_CS::GetProcessOfWindow() {
 	return Converters::ProcessToProcessCS(_nativeWindow->GetProcessOfWindow());
 }
 void GTWindow_CS::Close() {
-
+	_nativeWindow->Close();
 }
 void GTWindow_CS::SetWindowSize(int x, int y) {
+	_nativeWindow->SetWindowSize(x,y);
 
 }
 void GTWindow_CS::SetPosition(int x, int y) {
-
+	_nativeWindow->SetPosition(x, y);
 }
 void GTWindow_CS::BringUpFront() {
-
+	_nativeWindow->BringUpFront();
 
 }
-void GTWindow_CS::SizeShouldBe(const Vector2i_CS^ size) {
-
+void GTWindow_CS::SizeShouldBe(Vector2i_CS^ size)
+{
+	_nativeWindow->SizeShouldBe(Converters::Vector2iCSToVector2i(size));
 }
 void GTWindow_CS::ShouldWindowExist(bool exists) {
 
 }
 void GTWindow_CS::KillProcess() {
+	_nativeWindow->KillProcess();
 
 }
 void GTWindow_CS::ShouldBeMinimized(bool state) {
-
+	_nativeWindow->ShouldBeMinimized(state);
 }
 String^ GTWindow_CS::GetWindowName() {
-	return "";
+	return Converters::ConvertWStdStringToString(_nativeWindow->GetName());
 }
 Vector2i_CS^ GTWindow_CS::GetWindowContentPosition() {
 	return nullptr;
@@ -86,7 +89,7 @@ void GTWindow_CS::ContentPixelAtShouldBeColor(const Vector2f_CS^ sliderColorChec
 
 }
 Vector2i_CS^ GTWindow_CS::GetWindowSize() {
-	return nullptr;
+	return gcnew Vector2i_CS(_nativeWindow->GetSize());
 }
 Vector2i_CS^ GTWindow_CS::GetMaximizedWindowSize() {
 	return nullptr;

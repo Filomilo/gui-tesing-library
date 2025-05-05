@@ -13,6 +13,13 @@ public ref class GTMouse_CS
 {
 private:
     GTMouse* native = new GTMouse();
+    ~GTMouse_CS()
+    {
+        this->!GTMouse_CS();
+    }
+    !GTMouse_CS() {
+        delete native;
+    }
 public:
     property Vector2i_CS^ Position;
 

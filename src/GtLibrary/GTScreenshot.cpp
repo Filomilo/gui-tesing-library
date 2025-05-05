@@ -2,8 +2,7 @@
 #include "GTScreenshot.h"
 #include "GTScreenshot.h"
 
-GTScreenshot::GTScreenshot(int width, int height) : pixels(width, std::vector<Color>(height)) {
-}
+
 
 GTScreenshot::GTScreenshot(const std::string& bitmapFilePath) {
 }

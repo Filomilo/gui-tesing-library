@@ -1,26 +1,33 @@
 #include "pch.h"
 #include "GTScreen.h"
+#include "SystemCallsFactory.h"
+#include "SystemCalls.h"
+#include "GTWindow.h"
+#include "Helpers.h"
 
 Vector2i GTScreen::GetSize() const {
-    return Vector2i();
+	return SystemCallsFactory::GetSystemCalls()->GetScreenSize();
 }
 
 Vector2i GTScreen::GetMaximizedWindowSize() const {
-    return Vector2i();
+	return SystemCallsFactory::GetSystemCalls()->GetMaximizedWindowSize();
 }
 
-std::shared_ptr<GTScreenshot> GTScreen::GetScreenshot() const {
-    return std::make_shared<GTScreenshot>(0, 0);
+GTScreenshot GTScreen::GetScreenshot() const {
+	return SystemCallsFactory::GetSystemCalls()->GetScreenshot();
 }
 
-std::shared_ptr<GTScreenshot> GTScreen::GetScreenshotRect(const Vector2i& position, const Vector2i& size) const {
-    return std::make_shared<GTScreenshot>(0, 0);
+GTScreenshot GTScreen::GetScreenshotRect(const Vector2i& position, const Vector2i& size) const {
+	return SystemCallsFactory::GetSystemCalls()->GetScreenshotRect(position, size);
 }
 
 Color GTScreen::GetPixelColorAt(const Vector2i& position) const {
-    return Color();
+	return SystemCallsFactory::GetSystemCalls()->GetPixelColorAt(0,position);
 }
 
-std::shared_ptr<GTScreen> GTScreen::PixelAtShouldBeColor(const Vector2i& position, const Color& color) {
-    return std::make_shared<GTScreen>();
+void GTScreen::PixelAtShouldBeColor(const Vector2i& position, const Color& color) {
+	Helpers::ensureTrue([&]() {
+		Color pixelColor = this->GetPixelColorAt(position);
+		return pixelColor.Equals(color);
+		});
 }

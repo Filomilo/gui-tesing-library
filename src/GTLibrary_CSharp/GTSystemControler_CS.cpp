@@ -10,9 +10,9 @@ using namespace System::Collections::Generic;
 
 List<GTWindow_CS^>^ GTSystemControler_CS::FindWindowByName(String^ name) {
     auto nativeWindows = nativeSystem->FindWindowByName(Converters::ConvertStringToStdString(name));
-    List<GTWindow_CS^>^ managedWindows = gcnew List<GTWindow_CS^>();
+    List<GTWindow_CS^>^ managedWindows = gcnew List<GTWindow_CS^>(2);
     for (auto& nativeWindow : nativeWindows) {
-        managedWindows->Add(gcnew GTWindow_CS(nativeWindow.get()));
+        managedWindows->Add(gcnew GTWindow_CS(new GTWindow(nativeWindow.GetHandle())));
     }
     return managedWindows;
 }
@@ -20,7 +20,7 @@ List<GTWindow_CS^>^ GTSystemControler_CS::FindWindowByName(String^ name) {
 List<GTProcess_CS^>^ GTSystemControler_CS::FindProcessByName(String^ name) {
    
     auto nativeProcesses = nativeSystem->FindProcessByName(Converters::ConvertStringToStdString(name));
-    List<GTProcess_CS^>^ managedProcesses = gcnew List<GTProcess_CS^>();
+    List<GTProcess_CS^>^ managedProcesses = gcnew List<GTProcess_CS^>(2);
   /*  for (auto& nativeProcess : nativeProcesses) {
         managedProcesses->Add(gcnew GTProcess_CS(static_cast<GTProcess*>(nativeProcess.get())));
     }*/
@@ -29,7 +29,11 @@ List<GTProcess_CS^>^ GTSystemControler_CS::FindProcessByName(String^ name) {
 
 GTWindow_CS^ GTSystemControler_CS::FindTopWindowByName(String^ name) {
     auto nativeWindow = nativeSystem->FindTopWindowByName(Converters::ConvertStringToStdString(name));
-    return nativeWindow ? gcnew GTWindow_CS(nativeWindow.get()) : nullptr;
+    if (!nativeWindow.has_value())
+    {
+        return nullptr;
+    }
+    return gcnew GTWindow_CS(new GTWindow(nativeWindow.value().GetHandle()));
 }
 
 GTSystemControler_CS^ GTSystemControler_CS::WindowOfNameShouldExist(String^ name) {
@@ -39,7 +43,7 @@ GTSystemControler_CS^ GTSystemControler_CS::WindowOfNameShouldExist(String^ name
 
 List<GTProcess_CS^>^ GTSystemControler_CS::GetActiveProcesses() {
     auto nativeProcesses = nativeSystem->GetActiveProcesses();
-    List<GTProcess_CS^>^ managedProcesses = gcnew List<GTProcess_CS^>();
+    List<GTProcess_CS^>^ managedProcesses = gcnew List<GTProcess_CS^>(2);
    /* for (auto& nativeProcess : nativeProcesses) {
         managedProcesses->Add(gcnew GTProcess_CS(nativeProcess.get()));
     }*/
@@ -48,21 +52,21 @@ List<GTProcess_CS^>^ GTSystemControler_CS::GetActiveProcesses() {
 
 List<GTWindow_CS^>^ GTSystemControler_CS::GetActiveWindows() {
     auto nativeWindows = nativeSystem->GetActiveWindows();
-    List<GTWindow_CS^>^ managedWindows = gcnew List<GTWindow_CS^>();
+    List<GTWindow_CS^>^ managedWindows = gcnew List<GTWindow_CS^>(2);
     for (auto& nativeWindow : nativeWindows) {
-        managedWindows->Add(gcnew GTWindow_CS(nativeWindow));
+        managedWindows->Add(gcnew GTWindow_CS(new GTWindow(nativeWindow.GetHandle())));
     }
     return managedWindows;
 }
 
 String^ GTSystemControler_CS::GetClipBoardContent() {
-    return Converters::ConvertStdStringToString(nativeSystem->GetClipBoardContent()) ;
+    return Converters::ConvertWStdStringToString(nativeSystem->GetClipBoardContent()) ;
 }
 
 GTProcess_CS^ GTSystemControler_CS::StartProcess(String^ commandString) {
    
  auto nativeProcess = nativeSystem->StartProcess(Converters::ConvertStringToStdString(commandString));
-    return  nativeProcess ? gcnew GTProcess_CS(nativeProcess.get()) : nullptr;
+    return  nativeProcess ? gcnew GTProcess_CS(nativeProcess) : nullptr;
 }
 
 GTSystemVersion_CS^ GTSystemControler_CS::GetOsVersion() {

@@ -11,7 +11,7 @@ namespace gui_tesing_library.Controllers
     [Singleton]
     public partial class MouseController : IGTMouse
     {
-        static GTMouse_CS gtMouse_Cs = null;
+        static GTMouse_CS gtMouse_Cs = new GTMouse_CS();
         public Vector2i Position { get; }
 
         public IGTMouse MoveMouse(Vector2i offset)
