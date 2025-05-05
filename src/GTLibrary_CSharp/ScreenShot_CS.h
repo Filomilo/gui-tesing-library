@@ -5,9 +5,9 @@ public ref class ScreenShot_CS
 private:
     GTScreenshot* native;
 public:
-	ScreenShot_CS(GTScreenshot screen)
+	ScreenShot_CS(GTScreenshot* screen)
 	{
-        native = new GTScreenshot(screen);
+        native = (screen);
 
 	}
     ~ScreenShot_CS()

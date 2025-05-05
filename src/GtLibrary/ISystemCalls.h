@@ -68,7 +68,7 @@ public:
     virtual void ScrollMouse(int scrollValue) = 0;
     virtual void MoveMouseTo(const Vector2i& position) = 0;
     
-    virtual GTScreenshot GetScreenshot()=0;
+    virtual GTScreenshot* GetScreenshot(HWND handle, Vector2i startPos, Vector2i size)=0;
     virtual Vector2i GetSizeOfWindow(HWND handle)=0;
     virtual std::wstring GetProcesName(HANDLE handle) = 0;
     virtual std::vector<HWND> GetWindowsOfProcess(HANDLE handle) = 0;

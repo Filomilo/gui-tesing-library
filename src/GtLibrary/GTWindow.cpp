@@ -170,3 +170,24 @@ HWND GTWindow::GetHandle() {
 Vector2i GTWindow::GetSize() const {
     return SystemCallsFactory().GetSystemCalls()->GetSizeOfWindow(this->handle);
 }
+
+GTScreenshot* GTWindow::GetScreenshot()
+{
+    Vector2i size = Vector2i();
+    Vector2i pos = Vector2i();
+    return   SystemCallsFactory().GetSystemCalls()->GetScreenshot(this->handle, pos, size);
+}
+GTScreenshot* GTWindow::GetScreenshotRect(Vector2i position, Vector2i size) {
+    return   SystemCallsFactory().GetSystemCalls()->GetScreenshot(this->handle, position, size);
+}
+
+Color GTWindow::GetPixelColorAt(Vector2i position) {
+    return   SystemCallsFactory().GetSystemCalls()->GetPixelColorAt(this->handle, position);
+}
+void GTWindow::PixelAtShouldBeColor(Vector2i position, Color color) {
+    std::function<bool()> func = [&]()->bool {
+        Color color = this->GetPixelColorAt(position);
+        return color.Equals(color);
+        };
+    Helpers::ensureTrue(func);
+}

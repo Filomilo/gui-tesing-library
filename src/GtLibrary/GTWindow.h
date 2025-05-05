@@ -53,5 +53,12 @@ public:
     void WindowNameShouldBe(const std::wstring& title);
     void ContentPixelAtShouldBeColor(const Vector2f& sliderColorCheckPosition, const Color& colorShouldBe, int errorPass);
     HWND GetHandle();
+    GTScreenshot* GetScreenshot();
+    GTScreenshot* GetScreenshotRect(Vector2i position, Vector2i size);
+
+
+    Color GetPixelColorAt(Vector2i position);
+
+    void PixelAtShouldBeColor(Vector2i position, Color color);
 };
 

@@ -14,3 +14,6 @@ src/test.log
 /src/GtLibrary/x64
 /src/GtLibrary/x64
 /src/GTLibrary_CSharp/x64
+/src/GTLibrary_CSharp/x64
+/src/GTLibrary_CSharp/x64
+*.obj

@@ -58,19 +58,20 @@ public:
         Vector2i_CS^ GetWindowContentPosition() ;
         Vector2i_CS^ GetWindowContentSize();
 
-        Color_CS^ GetContentPixelColorAt(const Vector2i_CS^ position) ;
-        Color_CS^ GetContentPixelColorAt(const Vector2f_CS^ relativePosition) ;
-        void ContentPixelAtShouldBeColor(const Vector2i_CS^ position, const Color_CS^ color);
+        Color_CS^ GetContentPixelColorAt( Vector2i_CS^ position) ;
+        Color_CS^ GetContentPixelColorAt( Vector2f_CS^ relativePosition) ;
+        void ContentPixelAtShouldBeColor( Vector2i_CS^ position,  Color_CS^ color);
         void CenterWindow();
-        void WindowNameShouldBe(const String^ title);
-        void ContentPixelAtShouldBeColor(const Vector2f_CS^ sliderColorCheckPosition, const Color_CS^ colorShouldBe, int errorPass);
+        void WindowNameShouldBe(String^ title);
+        void ContentPixelAtShouldBeColor(Vector2f_CS^ sliderColorCheckPosition, Color_CS^ colorShouldBe, int errorPass);
 		Vector2i_CS^ GetWindowSize();
 		Vector2i_CS^ GetMaximizedWindowSize();
         ScreenShot_CS^ GetScreenshot();
-        ScreenShot_CS^ GetScreenshotRect(const Vector2i_CS^ position, const Vector2i_CS^ size);
-        Color_CS^ GetPixelColorAt(const Vector2i_CS^ position);
-        void PixelAtShouldBeColor(const Vector2i_CS^ position, const Color_CS^ color);
+        ScreenShot_CS^ GetScreenshotRect(Vector2i_CS^ position, Vector2i_CS^ size);
+        Color_CS^ GetPixelColorAt(Vector2i_CS^ position);
+        void PixelAtShouldBeColor(Vector2i_CS^ position, Color_CS^ color);
 		Vector2i_CS^ GetWindowPosition();
         GTWindow* GetNative();
+ 
 };
 

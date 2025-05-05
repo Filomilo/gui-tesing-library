@@ -59,7 +59,7 @@ public:
         return std::make_shared<GTWindow>(win->GetNative()->GetHandle());
     }
 
-    static ScreenShot_CS^ ScreenShotTOScreenShotCs(GTScreenshot  screen)
+    static ScreenShot_CS^ ScreenShotTOScreenShotCs(GTScreenshot*  screen)
     {
         return gcnew ScreenShot_CS(screen);
     }

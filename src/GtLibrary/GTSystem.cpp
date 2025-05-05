@@ -67,7 +67,7 @@ GTProcess* GTSystem::StartProcess(const std::string& commandString) {
 
 GTSystemVersion GTSystem::GetOsVersion() const {
 
-    return this->_SystemCalls->GetOsVersion();
+    return this->_SystemCalls->GetSystemVersion();
 }
 
 GTSystemVersion GTSystem::GetSystemVersion() {
