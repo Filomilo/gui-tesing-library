@@ -12,7 +12,11 @@ namespace gui_tesing_library.Controllers
     public partial class MouseController : IGTMouse
     {
         static GTMouse_CS gtMouse_Cs = new GTMouse_CS();
-        public Vector2i Position { get; }
+
+        public Vector2i Position
+        {
+            get { return new Vector2i(gtMouse_Cs.GetPosition()); }
+        }
 
         public IGTMouse MoveMouse(Vector2i offset)
         {

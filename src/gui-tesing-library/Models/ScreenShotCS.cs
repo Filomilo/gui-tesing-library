@@ -76,7 +76,7 @@ namespace gui_tesing_library.Models
             return simmilarity;
         }
 
-        public ScreenShotCS SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity)
+        public IScreenShot SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity)
         {
             double simmilarityOfImage = this.CompareToImage(ImagePath);
             if (simmilarityOfImage > simmilarity)

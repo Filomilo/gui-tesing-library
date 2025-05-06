@@ -40,7 +40,12 @@ namespace gui_tesing_library.Models
             this.b = color.B;
         }
 
-        public Color(Color_CS color_CS) { }
+        public Color(Color_CS color_CS)
+        {
+            this.r = color_CS.r;
+            this.g = color_CS.g;
+            this.b = color_CS.b;
+        }
 
         public override string ToString()
         {
@@ -77,7 +82,7 @@ namespace gui_tesing_library.Models
 
         internal Color_CS Native()
         {
-            throw new NotImplementedException();
+            return Color_CS.create(this.r, this.g, this.b);
         }
     }
 }

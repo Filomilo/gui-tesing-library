@@ -90,7 +90,11 @@ namespace gui_tesing_library.Controllers
             this.y = y;
         }
 
-        public Vector2f(Vector2f_CS vector2f_CS) { }
+        public Vector2f(Vector2f_CS vector2f_CS)
+        {
+            this.x = vector2f_CS.x;
+            this.y = vector2f_CS.y;
+        }
 
         public float x { get; set; }
         public float y { get; set; }
@@ -135,7 +139,7 @@ namespace gui_tesing_library.Controllers
 
         public Vector2f_CS Native()
         {
-            throw new NotImplementedException();
+            return new Vector2f_CS(this.x, this.y);
         }
 
         public static Vector2f operator +(Vector2f a, Vector2f b) =>

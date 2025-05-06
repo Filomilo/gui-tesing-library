@@ -259,36 +259,55 @@ void SystemCalls::TerminateWindow(HWND handle) {
 
 void SystemCalls::BringWindowUpFront(HWND handle) {
     HWND hwnd = handle;
+    AllowSetForegroundWindow(ASFW_ANY);
     if (!IsWindow(handle))
     {
         throw std::runtime_error("Not vlaid windwo handle");
     }
-    if (ShowWindow(hwnd, SW_SHOW)==0)
+
+
+    
+
+    DWORD windowThreadProcessId = GetWindowThreadProcessId(GetForegroundWindow(), LPDWORD(0));
+    DWORD currentThreadId = GetCurrentThreadId();
+    DWORD CONST_SW_SHOW = 5;
+    AttachThreadInput(windowThreadProcessId, currentThreadId, true);
+    BringWindowToTop(hwnd);
+    ShowWindow(hwnd, CONST_SW_SHOW);
+    if (ShowWindow(hwnd, SW_SHOW) == 0)
     {
         pirintError();
     }
-    if (SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW)==0)
+    if (SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW) == 0)
     {
         pirintError();
     }
-    if (BringWindowToTop(hwnd)==0)
+    if (BringWindowToTop(hwnd) == 0)
     {
         pirintError();
     }
-  ;
+
+    AttachThreadInput(windowThreadProcessId, currentThreadId, false);
+
+
 }
 
 Color SystemCalls::GetPixelColorAt(HWND handle, const Vector2i& position) {
 
     HDC hdc = GetDC(handle);
     COLORREF pixel = GetPixel(hdc, position.x, position.y);
+    if (pixel == CLR_INVALID) {
+        ReleaseDC(handle, hdc);
+        pirintError();
+        return Color(0, 0, 0); 
+    }
     ReleaseDC(handle, hdc);
 
     int red = (int)(pixel & 0x000000FF);
     int green = (int)((pixel & 0x0000FF00) >> 8);
     int blue = (int)((pixel & 0x00FF0000) >> 16);
-
-    return Color(red, green, blue);
+    Color col = Color(red, green, blue);
+    return col;
 }
 
 void SystemCalls::TypeText(const std::wstring& text) {
@@ -316,13 +335,21 @@ Vector2i SystemCalls::GetMousePosition() {
     return Vector2i(pt.x, pt.y);
 }
 
+
+
 void SystemCalls::MoveMouse(const Vector2i& offset) {
+    Vector2i currPos = GetMousePosition();
         INPUT input = {};
         input.type = INPUT_MOUSE;
         input.mi.mouseData = 0;
-        input.mi.dx = offset.x * (65536 / GetSystemMetrics(SM_CXSCREEN));
-        input.mi.dy = offset.y * (65536 / GetSystemMetrics(SM_CYSCREEN));
-        input.mi.dwFlags = MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE;
+        int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+        int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+        double normalizedX = ((double)(currPos.x + offset.x)) * 65535.0 / (screenWidth - 1);
+        double normalizedY = ((double)(currPos.y + offset.y)) * 65535.0 / (screenHeight - 1);
+
+        input.mi.dx = static_cast<LONG>(normalizedX);
+        input.mi.dy = static_cast<LONG>(normalizedY);   input.mi.dwFlags = MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE;
         SendInput(1, &input, sizeof(input));
 }
 
@@ -332,41 +359,48 @@ void SystemCalls::SetMousePosition(const Vector2i& position) {
         pirintError();
     }
 }
-
+void MouseClick(DWORD downFlag, DWORD upFlag) {
+    INPUT input[2] = {};
+    input[0].type = INPUT_MOUSE;
+    input[0].mi.dwFlags = downFlag;
+    input[1].type = INPUT_MOUSE;
+    input[1].mi.dwFlags = upFlag;
+    SendInput(2, input, sizeof(INPUT));
+}
 void SystemCalls::ClickLeftMouse() {
-
+    MouseClick(MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP);
 }
 
 void SystemCalls::ClickRightMouse() {
-    
+    MouseClick(MOUSEEVENTF_RIGHTDOWN, MOUSEEVENTF_RIGHTUP);
 }
 
 void SystemCalls::ClickMiddleMouse() {
-    
+    MouseClick(MOUSEEVENTF_MIDDLEDOWN, MOUSEEVENTF_MIDDLEUP);
 }
 
 void SystemCalls::PressLeftMouse() {
-  
+    MouseClick(MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTDOWN);
 }
 
 void SystemCalls::PressMiddleMouse() {
-
+    MouseClick(MOUSEEVENTF_MIDDLEDOWN, MOUSEEVENTF_MIDDLEDOWN);
 }
 
 void SystemCalls::PressRightMouse() {
-    
+    MouseClick(MOUSEEVENTF_RIGHTDOWN, MOUSEEVENTF_RIGHTDOWN);
 }
 
 void SystemCalls::ReleaseLeftMouse() {
-
+    MouseClick(MOUSEEVENTF_LEFTUP, MOUSEEVENTF_LEFTUP);
 }
 
 void SystemCalls::ReleaseMiddleMouse() {
- 
+    MouseClick(MOUSEEVENTF_MIDDLEUP, MOUSEEVENTF_MIDDLEUP);
 }
 
 void SystemCalls::ReleaseRightMouse() {
-
+    MouseClick(MOUSEEVENTF_RIGHTUP, MOUSEEVENTF_RIGHTUP);
 }
 
 void SystemCalls::ScrollMouse(int scrollValue) {
@@ -374,7 +408,18 @@ void SystemCalls::ScrollMouse(int scrollValue) {
 }
 
 void SystemCalls::MoveMouseTo(const Vector2i& position) {
-   
+    INPUT input = {};
+    input.type = INPUT_MOUSE;
+    input.mi.mouseData = 0;
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    double normalizedX = ((double)(position.x)) * 65535.0 / (screenWidth - 1);
+    double normalizedY = ((double)(position.y)) * 65535.0 / (screenHeight - 1);
+
+    input.mi.dx = static_cast<LONG>(normalizedX);
+    input.mi.dy = static_cast<LONG>(normalizedY);   input.mi.dwFlags = MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE;
+    SendInput(1, &input, sizeof(input));
 }
 
 

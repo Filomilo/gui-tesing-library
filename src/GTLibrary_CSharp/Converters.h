@@ -9,7 +9,8 @@ using namespace System;
 #include "GTWindow_CS.h"
 #include "../GtLibrary/GTScreenshot.h"
 #include <msclr/marshal_cppstd.h>
-
+#include <msclr/marshal.h>
+using namespace msclr::interop;
 ref class Converters
 {
 public:
@@ -23,7 +24,7 @@ public:
 
     static String^ ConvertWStdStringToString(std::wstring string)
     {
-        return gcnew String(string.c_str());
+        return marshal_as<String^>(string);
     }
     static std::wstring ConvertStringToWStdString(System::String^ managedString) {
 

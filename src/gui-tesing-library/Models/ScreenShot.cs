@@ -10,30 +10,42 @@ namespace gui_tesing_library.Models
 {
     public class ScreenShot : IScreenShot
     {
-        public ScreenShot(ScreenShot_CS screenShot_CS) { }
+        private ScreenShot_CS screenShot;
 
-        public int Width => throw new NotImplementedException();
+        public ScreenShot(ScreenShot_CS screenShot_CS)
+        {
+            this.screenShot = screenShot_CS;
+        }
 
-        public int Height => throw new NotImplementedException();
+        public int Width
+        {
+            get { return screenShot.GetWidth(); }
+        }
+
+        public int Height
+        {
+            get { return screenShot.GetHeight(); }
+        }
 
         public double CompareToImage(string filePathToComparingImage)
         {
-            throw new NotImplementedException();
+            return screenShot.CompareToImage(filePathToComparingImage);
         }
 
         public Color GetPixelColorAt(Vector2i pos)
         {
-            throw new NotImplementedException();
+            return new Color(screenShot.GetPixelColorAt(pos.Native()));
         }
 
         public void SaveAsBitmap(string file)
         {
-            throw new NotImplementedException();
+            this.screenShot.SaveAsBitmap(file);
         }
 
-        public ScreenShotCS SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity)
+        public IScreenShot SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity)
         {
-            throw new NotImplementedException();
+            this.screenShot.SimmilarityBetweenImagesShouldBe(ImagePath, simmilarity);
+            return this;
         }
     }
 }

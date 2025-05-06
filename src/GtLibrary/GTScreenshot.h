@@ -1,5 +1,7 @@
 #pragma once
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "Color.h"
 #include "Vector2i.h"
 #include <string>

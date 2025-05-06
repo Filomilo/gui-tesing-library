@@ -10,5 +10,5 @@ public interface IScreenShot
     Color GetPixelColorAt(Vector2i pos);
     void SaveAsBitmap(string file);
     double CompareToImage(string filePathToComparingImage);
-    ScreenShotCS SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity);
+    IScreenShot SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity);
 }

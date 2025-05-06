@@ -21,7 +21,7 @@ private:
         delete native;
     }
 public:
-    property Vector2i_CS^ Position;
+    Vector2i_CS^ GetPosition();
 
     void MoveMouse(Vector2i_CS^ offset);
     void SetPosition(Vector2i_CS^ position);

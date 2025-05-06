@@ -1,5 +1,9 @@
 #pragma once
+using namespace System;
+
 #include "../GtLibrary/GTScreenshot.h"
+#include "Color_CS.h"
+#include "Vector2i_CS.h"
 public ref class ScreenShot_CS
 {
 private:
@@ -21,5 +25,12 @@ public:
         native = nullptr;
     }
 
+
+    int GetWidth();
+    int GetHeight();
+    double CompareToImage(String^ filePathToCompare);
+    Color_CS^ GetPixelColorAt(Vector2i_CS^ pos);
+    void SaveAsBitmap(String^ file);
+    void SimmilarityBetweenImagesShouldBe(String^ ImagePath, double simmilarity);
 };
 

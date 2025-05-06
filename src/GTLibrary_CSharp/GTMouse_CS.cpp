@@ -46,13 +46,13 @@ void GTMouse_CS::PressRight()
 
 void GTMouse_CS::ReleaseLeft()
 {
-	native->PressLeft();
+	native->ReleaseLeft();
 
 }
 
 void GTMouse_CS::ReleaseMiddle()
 {
-	native->PressMiddle();
+	native->ReleaseMiddle();
 
 }
 
@@ -88,7 +88,7 @@ void GTMouse_CS::PositionShouldBe(Vector2i_CS^ pos, int errorDistance)
 
 void GTMouse_CS::MoveMouseTo(Vector2i_CS^ newRedSliderPosition)
 {
-	native->MoveMouse(Converters::Vector2iCSToVector2i(newRedSliderPosition));
+	native->MoveMouseTo(Converters::Vector2iCSToVector2i(newRedSliderPosition));
 
 }
 
@@ -110,4 +110,9 @@ Vector2f_CS^ GTMouse_CS::GetPositionRelativeToWindow(GTWindow_CS^ window)
 void GTMouse_CS::PositionRelativeToWindowShouldBe(GTWindow_CS^ window, Vector2f_CS^ position, float errorDistance)
 {
 	native->PositionRelativeToWindowShouldBe(Converters::WidnowCsToWindow(window), Converters::Vector2fCSToVector2f(position), errorDistance);
+}
+
+Vector2i_CS^ GTMouse_CS::GetPosition() {
+	return Converters::Vector2iToVector2iCS(native->GetPosition());
+
 }

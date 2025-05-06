@@ -119,11 +119,12 @@ Vector2i GTWindow::GetWindowContentSize() const {
 }
 
 Color GTWindow::GetContentPixelColorAt(const Vector2i& position) const {
-
+    Configuration::GetInstance()->DefaultSleep();
 	return SystemCallsFactory::GetSystemCalls()->GetPixelColorAt(handle, position);
 }
 
 Color GTWindow::GetContentPixelColorAt(const Vector2f& relativePosition) const {
+    Configuration::GetInstance()->DefaultSleep();
     Vector2i contentSize = this->GetWindowContentSize();
     return GetContentPixelColorAt(
         Vector2i(
@@ -141,6 +142,7 @@ void GTWindow::ContentPixelAtShouldBeColor(const Vector2i& position, const Color
 }
 
 void GTWindow::CenterWindow() {
+    Configuration::GetInstance()->DefaultSleep();
     Vector2i screenSize = SystemCallsFactory::GetSystemCalls()->GetScreenSize();
     Vector2i windowSize = this->GetSize();
     Vector2i diffrence = screenSize - windowSize;
@@ -149,6 +151,7 @@ void GTWindow::CenterWindow() {
 }
 
 void GTWindow::WindowNameShouldBe(const std::wstring& title) {
+    Configuration::GetInstance()->DefaultSleep();
 	Helpers::ensureTrue([&]() {
 		std::wstring name = SystemCallsFactory::GetSystemCalls()->GetWindowName(handle);
 		return name == title;
@@ -173,7 +176,7 @@ Vector2i GTWindow::GetSize() const {
 
 GTScreenshot* GTWindow::GetScreenshot()
 {
-    Vector2i size = Vector2i();
+    Vector2i size = this->GetWindowContentSize();
     Vector2i pos = Vector2i();
     return   SystemCallsFactory().GetSystemCalls()->GetScreenshot(this->handle, pos, size);
 }
