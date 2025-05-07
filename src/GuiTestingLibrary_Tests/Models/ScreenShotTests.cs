@@ -26,14 +26,20 @@ namespace gui_tesing_library.Models.Tests
         [Test()]
         public void ScreenShotTest()
         {
-            throw new NotImplementedException();
-            //ScreenShot screenShot = window.GetScreenshot();
-            //Vector2i expectedImageSize = window.GetWindowContentSize();
-            //Assert.That(screenShot != null);
-            //Assert.That(screenShot.Width > 0);
-            //Assert.That(screenShot.Height > 0);
-            //Assert.That(screenShot.Width == expectedImageSize.x, $"Screenshot width is [[{screenShot.Width}]] and expected [[{expectedImageSize.x}]]");
-            //Assert.That(screenShot.Height == expectedImageSize.y, $"Screenshot width is [[{screenShot.Height}]] and expected [[{expectedImageSize.y}]]");
+            IScreenShot screenShot = window.GetScreenshot();
+            screenShot.SaveAsBitmap("D:\\temp\\img.bmp");
+            Vector2i expectedImageSize = window.GetWindowContentSize();
+            Assert.That(screenShot != null);
+            Assert.That(screenShot.Width > 0);
+            Assert.That(screenShot.Height > 0);
+            Assert.That(
+                screenShot.Width == expectedImageSize.x,
+                $"Screenshot width is [[{screenShot.Width}]] and expected [[{expectedImageSize.x}]]"
+            );
+            Assert.That(
+                screenShot.Height == expectedImageSize.y,
+                $"Screenshot width is [[{screenShot.Height}]] and expected [[{expectedImageSize.y}]]"
+            );
         }
 
         [Test()]

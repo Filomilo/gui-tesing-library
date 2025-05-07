@@ -14,13 +14,13 @@ Vector2i GTScreen::GetMaximizedWindowSize() const {
 }
 
 GTScreenshot* GTScreen::GetScreenshot() const {
-	throw std::exception("not implennted");
-	//return SystemCallsFactory::GetSystemCalls()->GetScreenshot();
+
+	return SystemCallsFactory::GetSystemCalls()->GetScreenshot(NULL, Vector2i(0,0),GetSize());
 }
 
 GTScreenshot* GTScreen::GetScreenshotRect(const Vector2i& position, const Vector2i& size) const {
-	throw std::exception("not implennted");
-	//return SystemCallsFactory::GetSystemCalls()->GetScreenshot(position, size);
+
+	return SystemCallsFactory::GetSystemCalls()->GetScreenshot(NULL,position, size);
 }
 
 Color GTScreen::GetPixelColorAt(const Vector2i& position) const {
