@@ -7,6 +7,8 @@
 #include "GTScreenshot.h"
 #include "Casters.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 void pirintError() {
     DWORD errorCode = GetLastError();
     LPWSTR errorMsg = nullptr;
@@ -90,29 +92,29 @@ HANDLE SystemCalls::StartProcess(const std::string& commandString) {
 }
 
 std::wstring SystemCalls::GetClipBoardContent() {
-    if (!OpenClipboard(nullptr)) {
-        pirintError();
+    std::wstring text;
+
+    if (IsClipboardFormatAvailable(CF_UNICODETEXT))
+    {
+        if (OpenClipboard(nullptr))
+        {
+            HANDLE hData = GetClipboardData(CF_UNICODETEXT);
+            if (hData != nullptr)
+            {
+                LPCWSTR pText = static_cast<LPCWSTR>(GlobalLock(hData));
+                if (pText != nullptr)
+                {
+                    text = pText;
+                    GlobalUnlock(hData);
+                }
+            }
+            CloseClipboard(); 
+        }
     }
-
-    HANDLE hData = GetClipboardData(CF_UNICODETEXT);
-    if (hData == nullptr) {
-        CloseClipboard();
-        pirintError();
-    }
-
-    LPCWSTR pszText = static_cast<LPCWSTR>(GlobalLock(hData));
-    if (pszText == nullptr) {
-        CloseClipboard();
-        pirintError();
-    }
-
-    std::wstring text(pszText);
-
-    GlobalUnlock(hData);
-    CloseClipboard();
 
     return text;
 }
+
 
 std::vector<HWND> SystemCalls::GetActiveWindows() {
     std::vector<HWND> windowHandles;
@@ -331,6 +333,7 @@ void SystemCalls::TypeText(const std::wstring& text) {
     HKL hkl = GetKeyboardLayout(0);
     for (size_t i = 0; i < text.length(); i++)
     {
+        //std::this_thread::sleep_for(std::chrono::milliseconds(2));
         SimulateKeyPress(text[i], hkl);
     }
 }
@@ -340,6 +343,7 @@ void SystemCalls::PressKey(GTKey key) {
 }
 
 void SystemCalls::ReleaseKey(GTKey key) {
+ 
     keybd_event(Casters::GTKeyToVK(key), 0, KEYEVENTF_KEYUP, 0);
 }
 

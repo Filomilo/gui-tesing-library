@@ -2,7 +2,7 @@
 class Configuration
 {
 	long timeout=1000;
-	long defaultSleep = 2000;
+	long defaultSleep = 500;
 	static Configuration* instance;
 public:
 	static Configuration* GetInstance();
