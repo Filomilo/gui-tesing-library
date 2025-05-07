@@ -10,6 +10,7 @@ Configuration* Configuration::GetInstance()
 	{
 		instance = new Configuration();
 		instance->SetDefaultTimeout();
+		instance->DefaultSleep();
 	}
 	return instance;
 }
@@ -28,5 +29,5 @@ void Configuration::SetDefaultTimeout()
 }
 
 void Configuration::DefaultSleep() {
-	std::this_thread::sleep_for(std::chrono::milliseconds(this->defaultSleep)); 
+	std::this_thread::sleep_for(std::chrono::milliseconds(500)); 
 }

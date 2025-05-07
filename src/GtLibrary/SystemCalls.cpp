@@ -309,21 +309,43 @@ Color SystemCalls::GetPixelColorAt(HWND handle, const Vector2i& position) {
     Color col = Color(red, green, blue);
     return col;
 }
+void SimulateKeyPress(wchar_t key, HKL hkl) {
 
+    SHORT vkCode = VkKeyScanExA(key, hkl); 
+    BYTE keyCode = LOBYTE(vkCode); 
+    BYTE shiftState = HIBYTE(vkCode);
+
+   
+    if (shiftState & 0x01) { 
+        keybd_event(VK_SHIFT, 0, 0, 0);
+    }
+
+    keybd_event(keyCode, 0, 0, 0);
+    keybd_event(keyCode, 0, KEYEVENTF_KEYUP, 0); 
+
+    if (shiftState & 0x01) {
+        keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0); 
+    }
+}
 void SystemCalls::TypeText(const std::wstring& text) {
-
+    HKL hkl = GetKeyboardLayout(0);
+    for (size_t i = 0; i < text.length(); i++)
+    {
+        SimulateKeyPress(text[i], hkl);
+    }
 }
 
 void SystemCalls::PressKey(GTKey key) {
-
+    keybd_event(Casters::GTKeyToVK(key), 0, 0, 0);
 }
 
 void SystemCalls::ReleaseKey(GTKey key) {
-
+    keybd_event(Casters::GTKeyToVK(key), 0, KEYEVENTF_KEYUP, 0);
 }
 
 void SystemCalls::ClickKey(GTKey key) {
-
+    PressKey(key);
+    ReleaseKey(key);
 }
 
 Vector2i SystemCalls::GetMousePosition() {
