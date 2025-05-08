@@ -29,7 +29,7 @@ namespace GuiTestingLibrary_Tets
         }
 
         [Test]
-        //[Ignore("This test is platform specific")]
+        [Ignore("This test is platform specific")]
         public void Test_GetMaximisedWindowSize()
         {
             Vector2i MaxWindowsize = SystemController.Instance.MaximizedWindowSize;
