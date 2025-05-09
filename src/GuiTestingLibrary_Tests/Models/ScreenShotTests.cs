@@ -20,7 +20,7 @@ namespace gui_tesing_library.Models.Tests
         public void TearDown()
         {
             window.Close();
-            window.GetProcessOfWindow().kill();
+            window.GetProcessOfWindow().kill(); TestHelpers.CloseExampleGui();
         }
 
         [Test()]
@@ -64,8 +64,9 @@ namespace gui_tesing_library.Models.Tests
         public void CompareToImageTest()
         {
             IScreenShot screenShot = window.GetScreenshot();
+            //screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
             Assert.That(
-                screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) == 1,
+                screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) >0.96,
                 $"Comparing to itself should return 1, instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
             );
         }

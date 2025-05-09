@@ -1,14 +1,14 @@
 {
   "format": 1,
   "restore": {
-    "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj": {}
+    "F:\\projects\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj": {}
   },
   "projects": {
-    "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
+    "F:\\projects\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
       "restore": {
-        "projectUniqueName": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj",
+        "projectUniqueName": "F:\\projects\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj",
         "projectName": "GtLibrary",
-        "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj",
+        "projectPath": "F:\\projects\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "native": {
@@ -20,14 +20,14 @@
         "native": {}
       }
     },
-    "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj": {
+    "F:\\projects\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
+        "projectUniqueName": "F:\\projects\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
         "projectName": "GTLibrary_CSharp",
-        "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
+        "projectPath": "F:\\projects\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
         "packagesPath": "C:\\Users\\fboro\\.nuget\\packages\\",
-        "outputPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\obj\\",
+        "outputPath": "F:\\projects\\gui-tesing-library\\src\\GTLibrary_CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
@@ -50,8 +50,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
-                "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj"
+              "F:\\projects\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
+                "projectPath": "F:\\projects\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj"
               }
             }
           }
