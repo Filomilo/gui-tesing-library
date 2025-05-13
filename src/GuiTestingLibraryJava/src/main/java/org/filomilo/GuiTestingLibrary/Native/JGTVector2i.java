@@ -1,6 +1,22 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
-public class JGTVector2i {
+public class JGTVector2i implements AutoCloseable {
+
+    JGTVector2i(long ptr){
+        nativePtr=ptr;
+    }
+    private long nativePtr;
+
+    public long getNativePtr() {
+        return nativePtr;
+    }
+
+    public native void dispose();
+
+    @Override
+    public void close() throws Exception {
+        dispose();
+    }
     public native float getLength();
 
     public native boolean equals(JGTVector2i other);

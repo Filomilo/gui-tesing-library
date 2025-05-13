@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     org_filomilo_GuiTestingLibrary_Native_JGTSystemVersion
+ * Method:    dispose
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTSystemVersion_dispose
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTSystemVersion
  * Method:    GetVersionString
  * Signature: ()Ljava/lang/String;
  */

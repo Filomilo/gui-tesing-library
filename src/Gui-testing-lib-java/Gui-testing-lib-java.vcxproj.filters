@@ -54,6 +54,9 @@
     <ClInclude Include="org_filomilo_GuiTestingLibrary_Native_JGTWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Converters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="org_filomilo_GuiTestingLibrary_Native_JGTWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Converters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

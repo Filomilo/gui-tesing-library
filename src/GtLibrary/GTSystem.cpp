@@ -40,9 +40,15 @@ std::optional<GTWindow> GTSystem::FindTopWindowByName(const std::string& name) {
 }
 
 
-std::vector<std::shared_ptr<GTProcess>> GTSystem::GetActiveProcesses() {
+std::vector<GTProcess> GTSystem::GetActiveProcesses() {
+    std::vector<HANDLE> handles= _SystemCalls->GetActiveProcesses();
+    std::vector<GTProcess> processes = std::vector<GTProcess>(1);
+    for (size_t i = 0; i < handles.size(); i++)
+    {
+        processes.push_back(GTProcess(handles[i]));
+    }
+    return processes;
 
-    return {};
 }
 
 std::vector<GTWindow> GTSystem::GetActiveWindows() {

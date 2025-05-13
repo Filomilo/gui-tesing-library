@@ -23,13 +23,13 @@ public:
      void ReleaseMiddle();
      void ReleaseRight();
      void Scroll(int scrollValue);
-     void SetPositionRelativeToWindow(const std::shared_ptr<GTWindow>& window, const Vector2i& position);
-     void SetPositionRelativeToWindow(const std::shared_ptr<GTWindow>& window, const Vector2f& position);
+     void SetPositionRelativeToWindow(GTWindow  window, const Vector2i& position);
+     void SetPositionRelativeToWindow(GTWindow window, const Vector2f& position);
      void PositionShouldBe(const Vector2i& pos, int errorDistance = 0);
      void MoveMouseTo(const Vector2i& newRedSliderPosition);
-     void MoveMouseRelativeToWindowTo(const std::shared_ptr<GTWindow>& window, const Vector2i& position);
-     void MoveMouseRelativeToWindowTo(const std::shared_ptr<GTWindow>& window, const Vector2f& vector2f);
-     Vector2f GetPositionRelativeToWindow(const std::shared_ptr<GTWindow>& window) const;
-     void PositionRelativeToWindowShouldBe(const std::shared_ptr<GTWindow>& window, const Vector2f& vector2f, float errorDistance = 0);
+     void MoveMouseRelativeToWindowTo( GTWindow  window, const Vector2i& position);
+     void MoveMouseRelativeToWindowTo(  GTWindow window, const Vector2f& vector2f);
+     Vector2f GetPositionRelativeToWindow(GTWindow window) const;
+     void PositionRelativeToWindowShouldBe(GTWindow window, const Vector2f& vector2f, float errorDistance = 0);
 };
 

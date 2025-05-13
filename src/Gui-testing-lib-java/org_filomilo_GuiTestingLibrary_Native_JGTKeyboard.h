@@ -9,22 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     org_filomilo_GuiTestingLibrary_Native_JGTKeyboard
- * Method:    create
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTKeyboard_create
-  (JNIEnv *, jobject);
-
-/*
- * Class:     org_filomilo_GuiTestingLibrary_Native_JGTKeyboard
- * Method:    destroy
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTKeyboard_destroy
-  (JNIEnv *, jobject);
-
-/*
- * Class:     org_filomilo_GuiTestingLibrary_Native_JGTKeyboard
  * Method:    pressKey
  * Signature: (Lorg/filomilo/GuiTestingLibrary/Native/JGTKey;)V
  */

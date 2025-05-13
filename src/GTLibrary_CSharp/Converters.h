@@ -157,9 +157,9 @@ public:
     }
 
 
-    static std::shared_ptr<GTWindow> WidnowCsToWindow(GTWindow_CS^ win)
+    static GTWindow WidnowCsToWindow(GTWindow_CS^ win)
     {
-        return std::make_shared<GTWindow>(win->GetNative()->GetHandle());
+        return GTWindow(win->GetNative()->GetHandle());
     }
 
     static ScreenShot_CS^ ScreenShotTOScreenShotCs(GTScreenshot*  screen)

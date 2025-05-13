@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     org_filomilo_GuiTestingLibrary_Native_JGTScreenshot
+ * Method:    dispose
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTScreenshot_dispose
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTScreenshot
  * Method:    GetWidth
  * Signature: ()I
  */
@@ -26,9 +34,9 @@ JNIEXPORT jint JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTScreenshot_
 /*
  * Class:     org_filomilo_GuiTestingLibrary_Native_JGTScreenshot
  * Method:    GetPixelColorAt
- * Signature: (II)Ljava/lang/String;
+ * Signature: (II)Lorg/filomilo/GuiTestingLibrary/Native/JGTColor;
  */
-JNIEXPORT jstring JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTScreenshot_GetPixelColorAt
+JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTScreenshot_GetPixelColorAt
   (JNIEnv *, jobject, jint, jint);
 
 /*

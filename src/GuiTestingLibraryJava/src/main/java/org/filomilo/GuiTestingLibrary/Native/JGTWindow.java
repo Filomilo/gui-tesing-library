@@ -1,7 +1,24 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 
-public class JGTWindow {
+public class JGTWindow implements AutoCloseable {
+
+    JGTWindow(long ptr){
+        nativePtr=ptr;
+    }
+    private long nativePtr;
+
+    public long getNativePtr() {
+        return nativePtr;
+    }
+
+    public native void dispose();
+
+    @Override
+    public void close() throws Exception {
+        dispose();
+    }
+
     public native JGTVector2i GetPosition();
 
     public native JGTVector2i GetSize();
@@ -61,4 +78,6 @@ public class JGTWindow {
     public native JGTColor GetPixelColorAt(JGTVector2i position);
 
     public native void PixelAtShouldBeColor(JGTVector2i position, JGTColor color);
+
+
 }

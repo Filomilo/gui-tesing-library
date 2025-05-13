@@ -11,14 +11,14 @@ bool GTProcess::IsAlive() const {
 	return SystemCallsFactory::GetSystemCalls()->IsProcesAlive(handle);
 }
 
-std::vector<std::shared_ptr<GTWindow>> GTProcess::GetWindowsOfProcess() const {
+std::vector<GTWindow> GTProcess::GetWindowsOfProcess() const {
 	std::vector<HWND> handles = SystemCallsFactory::GetSystemCalls()->GetWindowsOfProcess(this->handle);
-	std::vector<std::shared_ptr<GTWindow>> windows;
+	std::vector<GTWindow> windows;
 	for (HWND handle : handles) {
-		std::shared_ptr<GTWindow> window = std::make_shared<GTWindow>(handle);
-		if (window) {
+		GTWindow window = GTWindow(handle);
+	
 			windows.push_back(window);
-		}
+		
 	}
 	return windows;
 }

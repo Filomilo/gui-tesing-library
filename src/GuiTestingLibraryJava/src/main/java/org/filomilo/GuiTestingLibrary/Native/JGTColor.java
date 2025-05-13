@@ -1,7 +1,8 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTColor {
-    private int r, g, b;
+
+    public int r, g, b;
 
     public JGTColor() {
         r = 0;

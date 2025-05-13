@@ -12,10 +12,11 @@ private:
 public:
     ~GTProcess() = default;
 	GTProcess(HANDLE handle) : handle(handle) {}
+    GTProcess() : GTProcess((HANDLE) - 1) {}
 
   std::wstring GetName() const;
   bool IsAlive() const ;
-  std::vector<std::shared_ptr<GTWindow>> GetWindowsOfProcess() const;
+  std::vector<GTWindow> GetWindowsOfProcess() const;
   long GetRamUsage() const ;
   void Kill();
 };

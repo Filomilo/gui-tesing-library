@@ -112,13 +112,17 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(JAVA_HOME)/include;$(JAVA_HOME)/include/win32; </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(JAVA_HOME)/include;$(JAVA_HOME)/include/win32</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(ProjectDir)External\*.dll" "$(ProjectDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -130,6 +134,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(JAVA_HOME)/include;$(JAVA_HOME)/include/win32</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -138,8 +144,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(ProjectDir)External\*.dll" "$(ProjectDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Converters.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="org_filomilo_GuiTestingLibrary_Native_JGTConfiguration.h" />
     <ClInclude Include="org_filomilo_GuiTestingLibrary_Native_JGTKeyboard.h" />
@@ -155,6 +165,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Converters.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="org_filomilo_GuiTestingLibrary_Native_JGTConfiguration.cpp" />
     <ClCompile Include="org_filomilo_GuiTestingLibrary_Native_JGTKeyboard.cpp" />
@@ -173,6 +184,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GtLibrary\GtLibrary.vcxproj">
+      <Project>{b9f2c38e-d71f-4076-8bb2-ae9f23ae57ef}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
