@@ -6,21 +6,86 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gui-tesing-library", "gui-tesing-library.csproj", "{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiTestingLibrary_Tets", "..\GuiTestingLibrary_Tests\GuiTestingLibrary_Tets.csproj", "{A634DAF2-25E0-7020-985E-821DEA113D05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF} = {B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GtLibrary", "..\GtLibrary\GtLibrary.vcxproj", "{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GTLibrary_CSharp", "..\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj", "{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gui-testing-lib-java", "..\Gui-testing-lib-java\Gui-testing-lib-java.vcxproj", "{E5894C27-ED8F-41E6-8566-159135877A04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Debug|x64.Build.0 = Debug|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Debug|x86.Build.0 = Debug|Any CPU
 		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Release|x64.ActiveCfg = Release|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Release|x64.Build.0 = Release|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C3EE646-C4CE-40C0-AF2D-686653D69EF6}.Release|x86.Build.0 = Release|Any CPU
 		{A634DAF2-25E0-7020-985E-821DEA113D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A634DAF2-25E0-7020-985E-821DEA113D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Debug|x64.Build.0 = Debug|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Debug|x86.Build.0 = Debug|Any CPU
 		{A634DAF2-25E0-7020-985E-821DEA113D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A634DAF2-25E0-7020-985E-821DEA113D05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Release|x64.ActiveCfg = Release|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Release|x64.Build.0 = Release|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Release|x86.ActiveCfg = Release|Any CPU
+		{A634DAF2-25E0-7020-985E-821DEA113D05}.Release|x86.Build.0 = Release|Any CPU
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Debug|Any CPU.Build.0 = Debug|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Debug|x64.ActiveCfg = Debug|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Debug|x64.Build.0 = Debug|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Debug|x86.ActiveCfg = Debug|Win32
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Debug|x86.Build.0 = Debug|Win32
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Release|Any CPU.ActiveCfg = Release|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Release|Any CPU.Build.0 = Release|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Release|x64.ActiveCfg = Release|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Release|x64.Build.0 = Release|x64
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Release|x86.ActiveCfg = Release|Win32
+		{B9F2C38E-D71F-4076-8BB2-AE9F23AE57EF}.Release|x86.Build.0 = Release|Win32
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Debug|Any CPU.Build.0 = Debug|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Debug|x64.ActiveCfg = Debug|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Debug|x64.Build.0 = Debug|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Debug|x86.ActiveCfg = Debug|Win32
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Debug|x86.Build.0 = Debug|Win32
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Release|Any CPU.ActiveCfg = Release|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Release|Any CPU.Build.0 = Release|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Release|x64.ActiveCfg = Release|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Release|x64.Build.0 = Release|x64
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Release|x86.ActiveCfg = Release|Win32
+		{FEE5D8F6-B7FD-6D3F-B19B-4AC043F94549}.Release|x86.Build.0 = Release|Win32
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Debug|Any CPU.Build.0 = Debug|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Debug|x64.ActiveCfg = Debug|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Debug|x64.Build.0 = Debug|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Debug|x86.ActiveCfg = Debug|Win32
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Debug|x86.Build.0 = Debug|Win32
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Release|Any CPU.ActiveCfg = Release|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Release|Any CPU.Build.0 = Release|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Release|x64.ActiveCfg = Release|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Release|x64.Build.0 = Release|x64
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Release|x86.ActiveCfg = Release|Win32
+		{E5894C27-ED8F-41E6-8566-159135877A04}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

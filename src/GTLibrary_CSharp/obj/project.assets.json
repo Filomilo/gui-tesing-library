@@ -1,0 +1,99 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "GtLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/GtLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GtLibrary.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GtLibrary/1.0.0": {
+      "type": "project",
+      "path": "../GtLibrary/GtLibrary.vcxproj",
+      "msbuildProject": "../GtLibrary/GtLibrary.vcxproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "GtLibrary >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\fboro\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
+      "projectName": "GTLibrary_CSharp",
+      "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
+      "packagesPath": "C:\\Users\\fboro\\.nuget\\packages\\",
+      "outputPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\obj\\",
+      "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\fboro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj": {
+              "projectPath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GtLibrary\\GtLibrary.vcxproj"
+            }
+          }
+        }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "secondaryFramework": "native",
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

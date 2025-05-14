@@ -1,8 +1,4 @@
-﻿using GregsStack.InputSimulatorStandard;
-using gui_tesing_library.Controllers;
-using gui_tesing_library.Interfaces;
-using gui_tesing_library.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -11,7 +7,12 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using GregsStack.InputSimulatorStandard;
+using gui_tesing_library.Controllers;
+using gui_tesing_library.Interfaces;
+using gui_tesing_library.Models;
 using Color = gui_tesing_library.Models.Color;
+
 namespace gui_tesing_library.SystemCalls
 {
     public class WindowsSystemCalls : ISystemCalls
@@ -134,7 +135,10 @@ namespace gui_tesing_library.SystemCalls
         public void BringWindowUpFront(int handle)
         {
             WinApiWrapper.ShowWindow(new IntPtr(handle), WinApiWrapper.NCmdShow.SW_RESTORE);
-            bool returnVal = WinApiWrapper.ShowWindow(new IntPtr(handle), WinApiWrapper.NCmdShow.SW_SHOW);
+            bool returnVal = WinApiWrapper.ShowWindow(
+                new IntPtr(handle),
+                WinApiWrapper.NCmdShow.SW_SHOW
+            );
             WinApiWrapper.SetWindowPos(
                 new IntPtr(handle),
                 WinApiWrapper.HwndInsertAfter.HWND_TOPMOST,
@@ -169,7 +173,7 @@ namespace gui_tesing_library.SystemCalls
                 vector2i.y,
                 0,
                 0,
-                    WinApiWrapper.UFlags.SWP_NOSIZE
+                WinApiWrapper.UFlags.SWP_NOSIZE
             );
         }
 
@@ -182,7 +186,7 @@ namespace gui_tesing_library.SystemCalls
                 0,
                 vector2i.x,
                 vector2i.y,
-                 WinApiWrapper.UFlags.SWP_NOMOVE
+                WinApiWrapper.UFlags.SWP_NOMOVE
             );
         }
 
@@ -274,7 +278,11 @@ namespace gui_tesing_library.SystemCalls
             return WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXPADDEDBORDER);
         }
 
-        public ScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size)
+        public IScreenShot GetScreenShotFromHandle(
+            int handle,
+            Vector2i StartPosition,
+            Vector2i Size
+        )
         {
             IntPtr hdcScreen = WinApiWrapper.GetDC(new IntPtr(handle));
             int hdcMemDC = WinApiWrapper.CreateCompatibleDC(hdcScreen);
@@ -315,7 +323,9 @@ namespace gui_tesing_library.SystemCalls
                 WinApiWrapper.DeleteDC(new IntPtr(hdcMemDC));
                 WinApiWrapper.ReleaseDC(new IntPtr(handle), hdcScreen);
                 int error = Marshal.GetLastWin32Error();
-                throw new InvalidOperationException($"Marshal copy error code: {error} -- {e.Message}");
+                throw new InvalidOperationException(
+                    $"Marshal copy error code: {error} -- {e.Message}"
+                );
             }
 
             WinApiWrapper.SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));
@@ -323,7 +333,7 @@ namespace gui_tesing_library.SystemCalls
             WinApiWrapper.ReleaseDC(IntPtr.Zero, hdcScreen);
             WinApiWrapper.ReleaseDC(IntPtr.Zero, hdcMemDC);
 
-            return new ScreenShot(bitmap);
+            return new ScreenShotCS(bitmap);
         }
 
         public Vector2i GetScreenSize()
@@ -354,13 +364,7 @@ namespace gui_tesing_library.SystemCalls
 
         public void MoveMouseTo(Vector2i newPos)
         {
-            //Vector2f aboslutePostion =
-            //    new Vector2f((newPos.x * 65535f / WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXSCREEN)),
-            //        (newPos.y * 65535f / WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYSCREEN)));
-            //aboslutePostion = new Vector2f(newPos.x, newPos.y);
-            _inputSimulator.Mouse.MoveMouseTo(
-                newPos.x, newPos.y
-            );
+            _inputSimulator.Mouse.MoveMouseTo(newPos.x, newPos.y);
         }
 
         public void TypeText(string text)

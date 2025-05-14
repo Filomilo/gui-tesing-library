@@ -39,7 +39,7 @@ namespace gui_tesing_library.Interfaces
         int GetWindowBorderWidth();
         int GetWindowBorderHeight();
         int GetWindowPadding();
-        ScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size);
+        IScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size);
         Vector2i GetScreenSize();
         Color GetPixelColorAt(Vector2i postion, int handle);
         void MoveMouse(Vector2i offset);

@@ -40,6 +40,13 @@ namespace gui_tesing_library.Models
             this.b = color.B;
         }
 
+        public Color(Color_CS color_CS)
+        {
+            this.r = color_CS.r;
+            this.g = color_CS.g;
+            this.b = color_CS.b;
+        }
+
         public override string ToString()
         {
             return $"[{r},{g},{b}]";
@@ -68,7 +75,14 @@ namespace gui_tesing_library.Models
             int rdiff = this.r - color.r;
             int gdiff = this.g - color.g;
             int bdiff = this.b - color.b;
-            return Math.Sqrt(Math.Pow(Math.Sqrt(Math.Pow(rdiff, 2) + Math.Pow(bdiff, 2)), 2) + Math.Pow(gdiff, 2));
+            return Math.Sqrt(
+                Math.Pow(Math.Sqrt(Math.Pow(rdiff, 2) + Math.Pow(bdiff, 2)), 2) + Math.Pow(gdiff, 2)
+            );
+        }
+
+        internal Color_CS Native()
+        {
+            return Color_CS.create(this.r, this.g, this.b);
         }
     }
 }

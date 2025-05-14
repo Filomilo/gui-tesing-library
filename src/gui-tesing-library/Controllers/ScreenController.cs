@@ -1,73 +1,47 @@
-﻿using gui_tesing_library.Directives;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
-using gui_tesing_library.SystemCalls;
-using System;
+using Lombok.NET;
 
 namespace gui_tesing_library.Controllers
 {
-    public class ScreenController : IGTScreen
+    [Singleton]
+    public partial class ScreenController : IGTScreen
     {
-        private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
+        private static GTScreen_CS gtScreen_Cs = new GTScreen_CS();
 
-        public Vector2i Size { get; }
+        public Vector2i Size
+        {
+            get { return new Vector2i(gtScreen_Cs.GetSize()); }
+        }
 
         public Vector2i MaximizedWindowSize
         {
-            get
-            {
-                return _SystemCalls.GetMaximizedWindowSize();
-                ;
-            }
+            get { return new Vector2i(gtScreen_Cs.GetMaximizedWindowSize()); }
         }
-        private static IGTScreen _gtScreen;
 
-        public static IGTScreen Instance
+        public IScreenShot GetScreenshot()
         {
-            get
-            {
-                if (_gtScreen == null)
-                {
-                    _gtScreen = new ScreenController();
-                }
-
-                return _gtScreen;
-            }
+            return new ScreenShot(gtScreen_Cs.GetScreenshot());
         }
 
-        public ScreenShot GetScreenshot()
+        public IScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
         {
-            return SystemCallsFactory
-                .GetSystemCalls()
-                .GetScreenShotFromHandle(
-                    0,
-                    new Vector2i(0, 0),
-                    SystemController.Instance.GetScreenSize()
-                );
+            return new ScreenShot(gtScreen_Cs.GetScreenshotRect(position.Native(), size.Native()));
         }
 
-        public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
         public Color GetPixelColorAt(Vector2i postion)
         {
-            //return SystemCallsFactory.GetSystemCalls().GetPixelColorAt(postion, 0);
-            return new Color(0, 0, 0);
+            return new Color(gtScreen_Cs.GetPixelColorAt(postion.Native()));
         }
 
-        [Log]
-        public IGTScreen PixelAtShouldBeColor(Vector2i postion, Color color)
+        public IGTScreen PixelAtShouldBeColor(Vector2i position, Color colorColor)
         {
-            Helpers.AwaitTrue(
-                () =>
-                {
-                    return GetPixelColorAt(postion).Equals(color);
-                },
-                $"Pixel color at {postion} was not {color} with in given time"
-            );
+            gtScreen_Cs.PixelAtShouldBeColor(position.Native(), colorColor.Native());
             return this;
         }
     }

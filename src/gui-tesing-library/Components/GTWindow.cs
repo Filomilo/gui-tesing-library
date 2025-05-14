@@ -1,305 +1,205 @@
-﻿using gui_tesing_library.Controllers;
-using gui_tesing_library.Directives;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
-using gui_tesing_library.SystemCalls;
-using System;
 
 namespace gui_tesing_library.Components
 {
-    public class GTWindow : IGTWindow
+    internal class GTWindow : IGTWindow
     {
-        private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
-        private int _handle;
+        private GTWindow_CS _windowCS;
 
-        public GTWindow(int handle)
+        public GTWindow(GTWindow_CS windowCS)
         {
-            if (handle == 0)
-                throw new ArgumentException("Window cannot have handle 0");
-            _handle = handle;
-        }
-
-        public Vector2i Position
-        {
-            get { return this._SystemCalls.GetWindowPositon(this._handle); }
-        }
-
-        public bool DoesExist
-        {
-            get { return this._SystemCalls.DoesWindowExist(this._handle); }
-        }
-
-        public string Name => throw new NotImplementedException();
-        public bool IsMinimized
-        {
-            get { return this._SystemCalls.IsWindowsMinimized(this._handle); }
+            _windowCS = windowCS;
         }
 
         public Vector2i Size
         {
-            get { return this._SystemCalls.GetWindowSize(this._handle); }
+            get { return new Vector2i(_windowCS.GetWindowSize()); }
         }
-        public Vector2i MaximizedWindowSize { get; }
 
-        [Delay]
-        [Log]
-        IGTWindow IGTWindow.Close()
+        public Vector2i MaximizedWindowSize
         {
-            this._SystemCalls.CloseWindow(this._handle);
-            return this;
+            get { return new Vector2i(_windowCS.GetMaximizedWindowSize()); }
         }
 
-        [Log]
-        [Delay]
-        public IGTWindow SetWindowSize(int x, int y)
+        public IScreenShot GetScreenshot()
         {
-            this._SystemCalls.SetWindowSize(this._handle, new Vector2i(x, y));
-            return this;
+            return new ScreenShot(_windowCS.GetScreenshot());
         }
 
-        [Log]
-        [Delay]
-        public IGTWindow SetPostion(int x, int y)
+        public IScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
         {
-            this._SystemCalls.SetWindowPostion(this._handle, new Vector2i(x, y));
-            return this;
+            return new ScreenShot(_windowCS.GetScreenshotRect(position.Native(), size.Native()));
         }
 
-        [Log]
-        [Delay]
-        public IGTWindow BringUpFront()
-        {
-            this._SystemCalls.BringWindowUpFront(this._handle);
-            return this;
-        }
-
-        [Log]
-        [Delay]
-        public IGTProcess Close()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
         public Color GetPixelColorAt(Vector2i postion)
         {
-            return SystemCallsFactory.GetSystemCalls().GetPixelColorAt(postion, this._handle);
+            return new Color(_windowCS.GetPixelColorAt(postion.Native()));
         }
 
-        [Log]
-        public IGTScreen PixelAtShouldBeColor(Vector2i position, Color color)
+        public IGTScreen PixelAtShouldBeColor(Vector2i position, Color colorColor)
         {
-            Helpers.AwaitTrue(
-                () =>
-                {
-                    return GetPixelColorAt(position).Equals(color);
-                },
-                $"Pixel color at {position} of window {this.GetWindowName()} was not {color} with in given time"
-            );
+            _windowCS.PixelAtShouldBeColor(position.Native(), colorColor.Native());
             return this;
         }
 
-        [Log]
-        [Delay]
-        IGTWindow IGTWindow.Maximize()
+        public Vector2i Position
         {
-            this._SystemCalls.MaximizeWindow(this._handle);
+            get { return new Vector2i(_windowCS.GetPosition()); }
+        }
+
+        public bool DoesExist
+        {
+            get { return _windowCS.DoesExist(); }
+        }
+
+        public string Name
+        {
+            get { return _windowCS.GetWindowName(); }
+        }
+
+        public bool IsMinimized
+        {
+            get { return _windowCS.IsMinimized(); }
+        }
+
+        public IGTWindow MoveWindow(Vector2i offset)
+        {
+            _windowCS.MoveWindow(offset.Native());
             return this;
         }
 
-        [Log]
+        public IGTWindow Minimize()
+        {
+            _windowCS.Minimize();
+            return this;
+        }
+
+        public IGTWindow Maximize()
+        {
+            _windowCS.Maximize();
+            return this;
+        }
+
         public IGTProcess GetProcessOfWindow()
         {
-            int processHandle = this._SystemCalls.GetProcessHandleFromId(
-                this._SystemCalls.GetWindowThreadProcessId(this._handle)
-            );
-            return new GTProcess(processHandle);
+            return new GTProcess(_windowCS.GetProcessOfWindow());
         }
 
-        [Log]
-        public ScreenShot GetScreenshot()
+        public IGTWindow Close()
         {
-            return SystemCallsFactory
-                .GetSystemCalls()
-                .GetScreenShotFromHandle(
-                    this._handle,
-                    new Vector2i(0, 0),
-                    this.GetWindowContentSize()
-                );
-        }
-
-        [Log]
-        [Delay]
-        public ScreenShot GetScreenshotRect(Vector2i position, Vector2i size)
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
-        [Delay]
-        IGTWindow IGTWindow.Minimize()
-        {
-            this._SystemCalls.MinimizeWindow(this._handle);
+            _windowCS.Close();
             return this;
         }
 
-        [Log]
-        [Delay]
-        public IGTProcess Maximize()
+        public IGTWindow SetWindowSize(int x, int y)
         {
-            throw new NotImplementedException();
-        }
-
-        [Log]
-        [Delay]
-        IGTWindow IGTWindow.MoveWindow(Vector2i offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
-        [Delay]
-        public IGTProcess Minimize()
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
-        [Delay]
-        public IGTProcess MoveWindow(Vector2i offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
-        IGTWindow IGTWindow.SizeShouldBe(Vector2i vector2I)
-        {
-            Helpers.AwaitTrue(() =>
-            {
-                return this.Size.Equals(vector2I);
-            });
+            _windowCS.SetWindowSize(x, y);
             return this;
         }
 
-        [Log]
-        IGTWindow IGTWindow.ShouldWindowExist(bool v)
+        public IGTWindow SetPostion(int x, int y)
         {
-            Helpers.AwaitTrue(
-                (() => this.DoesExist == v),
-                $"Window {this.GetWindowName()} is not {v} within max time"
-            );
+            _windowCS.SetPosition(x, y);
             return this;
         }
 
-        [Log]
-        IGTWindow IGTWindow.KillProcess()
+        public IGTWindow BringUpFront()
         {
-            this.GetProcessOfWindow().kill();
+            _windowCS.BringUpFront();
             return this;
         }
 
-        [Log]
+        public IGTWindow SizeShouldBe(Vector2i vector2I)
+        {
+            _windowCS.SizeShouldBe(vector2I.Native());
+            return this;
+        }
+
+        public IGTWindow ShouldWindowExist(bool v)
+        {
+            _windowCS.ShouldWindowExist(v);
+            return this;
+        }
+
+        public IGTWindow KillProcess()
+        {
+            _windowCS.KillProcess();
+            return this;
+        }
+
         public IGTWindow ShouldBeMinimized(bool state)
         {
-            Helpers.AwaitTrue(() =>
-            {
-                return this.IsMinimized == state;
-            });
+            _windowCS.ShouldBeMinimized(state);
             return this;
         }
 
-        [Log]
         public string GetWindowName()
         {
-            return SystemCallsFactory.GetSystemCalls().GetWindowName(this._handle);
+            return _windowCS.GetWindowName();
         }
 
         public Vector2i GetWindowContentPosition()
         {
-            Vector2i positon = this.Position;
-            return new Vector2i(
-                positon.x + SystemController.Instance.GetWindowBorderWidth(),
-                positon.y
-                    + SystemController.Instance.GetWindowBorderHeight()
-                    + SystemController.Instance.GetWindowTitleBarHeight()
-            );
+            return new Vector2i(_windowCS.GetWindowContentPosition());
         }
 
         public Vector2i GetWindowContentSize()
         {
-            Vector2i size = this.Size;
-            int borderWidth = SystemController.Instance.GetWindowBorderWidth();
-            int windwopadding = SystemController.Instance.GetWindowPadding();
-            int WindowBorderHeight = SystemController.Instance.GetWindowBorderHeight();
-            int windowtielebarheight = SystemController.Instance.GetWindowTitleBarHeight();
-            return new Vector2i(
-                size.x - borderWidth * 2 - windwopadding * 2 - 1,
-                size.y - WindowBorderHeight * 2 - windowtielebarheight - windwopadding * 2 - 5
-            );
+            return new Vector2i(_windowCS.GetWindowContentSize());
         }
 
-        [Log]
-        [Delay]
         public Color GetContentPixelColorAt(Vector2i postion)
         {
-            //Vector2i WindowPOsiton = this.Position;
-            //Vector2i ContnetPostion = this.GetWindowContentPosition();
-            //Vector2i offset = ContnetPostion - WindowPOsiton;
-            //Vector2i newPos = postion + offset;
-            return this.GetPixelColorAt(postion);
+            return new Color(_windowCS.GetContentPixelColorAt(postion.Native()));
         }
 
         public Color GetContentPixelColorAt(Vector2f realtivePostion)
         {
-            Vector2i contentSize = this.GetWindowContentSize();
-            return GetContentPixelColorAt(new Vector2i((int)(contentSize.x * realtivePostion.x),
-                (int)(contentSize.y * realtivePostion.y)));
+            return new Color(_windowCS.GetContentPixelColorAt(realtivePostion.Native()));
         }
 
         public IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color)
         {
-            Helpers.AwaitTrue(
-                () =>
-                {
-                    return GetContentPixelColorAt(position).Equals(color);
-                },
-                $"Content Pixel color at {position} of window {this.GetWindowName()} was not {color} but {GetContentPixelColorAt(position)} with in given time"
-            );
+            _windowCS.ContentPixelAtShouldBeColor(position.Native(), color.Native());
             return this;
         }
 
         public IGTWindow CenterWindow()
         {
-            Vector2i screenSize = SystemController.Instance.GetScreenSize();
-            Vector2i windowSize = this.Size;
-            Vector2i diffrence = screenSize - windowSize;
-            this.SetPostion(diffrence.x / 2, diffrence.y / 2);
-
+            _windowCS.CenterWindow();
             return this;
         }
 
         public IGTWindow WindowNameShouldBe(string title)
         {
-            Helpers.AwaitTrue(
-                () =>
-                {
-                    return this.GetWindowName() == title;
-                },
-                $"Window name was not [[{title}]] but [[{this.GetWindowName()}]] within {Configuration.ProcesAwaitTime} ms"
+            _windowCS.WindowNameShouldBe(title);
+            return this;
+        }
+
+        public IGTWindow ContentPixelAtShouldBeColor(
+            Vector2f sliderColorCheckPostion,
+            Color colorshouldbe,
+            int errorPass
+        )
+        {
+            _windowCS.ContentPixelAtShouldBeColor(
+                sliderColorCheckPostion.Native(),
+                colorshouldbe.Native(),
+                errorPass
             );
             return this;
         }
 
-        public IGTWindow ContentPixelAtShouldBeColor(Vector2f sliderColorCheckPostion, Color colorshouldbe, int errorPass)
+        internal GTWindow_CS native()
         {
-            Helpers.AwaitTrue(
-                () =>
-                {
-                    return GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe) < errorPass;
-                },
-                $"Content Pixel color at {sliderColorCheckPostion} of window {this.GetWindowName()} was not {colorshouldbe} but {GetContentPixelColorAt(sliderColorCheckPostion)} with in given time, difreance: [[{GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)}]], with error pass [[{errorPass}]]"
-            );
-            return this;
+            return this._windowCS;
         }
     }
 }

@@ -4,7 +4,6 @@ using gui_tesing_library.Models;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
-
 namespace GuiTestingLibrary_Tets
 {
     [TestFixture]
@@ -23,7 +22,7 @@ namespace GuiTestingLibrary_Tets
             MouseController.Instance.SetPosition(newPos);
             Assert.That(
                 newPos.Equals(MouseController.Instance.Position),
-                $"Mouse position is not {newPos}",
+                $"Mouse position is not {newPos} but {MouseController.Instance.Position}",
                 $"{newPos} Equals {MouseController.Instance.Position}"
             );
         }
@@ -36,7 +35,15 @@ namespace GuiTestingLibrary_Tets
             Vector2i position = window.Position;
             Vector2i size = window.Size;
             Vector2i closePostion = new Vector2i(position.x + size.x - 30, position.y + 10);
-            MouseController.Instance.SetPosition(closePostion).PositionShouldBe(closePostion);
+            Assert.DoesNotThrow(
+                () =>
+                {
+                    MouseController
+                        .Instance.SetPosition(closePostion)
+                        .PositionShouldBe(closePostion);
+                },
+                $"Positon shuld be {closePostion} but is {MouseController.Instance.Position}"
+            );
             Assert.That(
                 MouseController.Instance.Position.Equals(closePostion),
                 $"Mouse controller is not on close button postion {closePostion} but {MouseController.Instance.Position}",
@@ -77,39 +84,55 @@ namespace GuiTestingLibrary_Tets
         [Test]
         public void ColorSwicherTest()
         {
-
             IGTWindow window = TestHelpers.OpenExampleGui();
             gui_tesing_library.Configuration.ActionDelay = 100;
             window.SetWindowSize(1280, 720).CenterWindow();
             Thread.Sleep(1000);
 
-            Color initilaColor = window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest);
+            Color initilaColor = window.GetContentPixelColorAt(
+                TestHelpers.RelativePostions.ColorSwitcherColorTest
+            );
             Assert.That(
                 initilaColor.Equals(Color.Lime),
                 $"Initial color at {TestHelpers.RelativePostions.ColorSwitcherColorTest} was not white but {initilaColor}"
             );
 
-            MouseController.Instance.SetPositionRelativeToWindow(window, TestHelpers.RelativePostions.ColorSwitcherGreenButton);
+            MouseController.Instance.SetPositionRelativeToWindow(
+                window,
+                TestHelpers.RelativePostions.ColorSwitcherGreenButton
+            );
             MouseController.Instance.ClickLeft();
 
             Assert.That(
-                window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest).Equals(Color.Green),
+                window
+                    .GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)
+                    .Equals(Color.Green),
                 $"CHanged first color at {TestHelpers.RelativePostions.ColorSwitcherColorTest} was not green but {window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)}"
             );
 
-            MouseController.Instance.SetPositionRelativeToWindow(window, TestHelpers.RelativePostions.ColorSwitcherWhiteButton);
+            MouseController.Instance.SetPositionRelativeToWindow(
+                window,
+                TestHelpers.RelativePostions.ColorSwitcherWhiteButton
+            );
             MouseController.Instance.ClickLeft();
 
             Assert.That(
-                window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest).Equals(Color.White),
+                window
+                    .GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)
+                    .Equals(Color.White),
                 $"CHanged first color at {TestHelpers.RelativePostions.ColorSwitcherColorTest} was not white  but {window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)}"
             );
 
-            MouseController.Instance.SetPositionRelativeToWindow(window, TestHelpers.RelativePostions.ColorSwitcherBlackButton);
+            MouseController.Instance.SetPositionRelativeToWindow(
+                window,
+                TestHelpers.RelativePostions.ColorSwitcherBlackButton
+            );
             MouseController.Instance.ClickLeft();
 
             Assert.That(
-                window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest).Equals(Color.Black),
+                window
+                    .GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)
+                    .Equals(Color.Black),
                 $"CHanged first color at {TestHelpers.RelativePostions.ColorSwitcherColorTest} was not black  but {window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)}"
             );
         }
@@ -121,17 +144,30 @@ namespace GuiTestingLibrary_Tets
             Vector2f pos = new Vector2f(0.5f, 0.5f);
             MouseController.Instance.SetPositionRelativeToWindow(window, pos);
             Thread.Sleep(1000);
-            Assert.That(MouseController.Instance.GetPostionRelativeToWinodw(window).DistanceFrom(pos) < 0.01, $"Mouse postion reative to window should be [[{pos}]] but is [[{MouseController.Instance.GetPostionRelativeToWinodw(window)}]]");
+            Assert.That(
+                MouseController.Instance.GetPostionRelativeToWinodw(window).DistanceFrom(pos)
+                    < 0.01,
+                $"Mouse postion reative to window should be [[{pos}]] but is [[{MouseController.Instance.GetPostionRelativeToWinodw(window)}]]"
+            );
         }
+
         [Test]
         public void setMOusePostinoRelativeToWindwo()
         {
             IGTWindow window = TestHelpers.OpenExampleGui();
             MouseController.Instance.SetPositionRelativeToWindow(window, new Vector2f(0.5f, 0.5f));
-            Assert.DoesNotThrow((() =>
-            {
-                MouseController.Instance.PositionRelativeToWindowShouldBe(window, new Vector2f(0.5f, 0.5f), 0.01f);
-            }));
+            Assert.DoesNotThrow(
+                (
+                    () =>
+                    {
+                        MouseController.Instance.PositionRelativeToWindowShouldBe(
+                            window,
+                            new Vector2f(0.5f, 0.5f),
+                            0.01f
+                        );
+                    }
+                )
+            );
         }
 
         [Test]
@@ -139,18 +175,21 @@ namespace GuiTestingLibrary_Tets
         {
             MouseController.Instance.SetPosition(new Vector2i(100, 100));
             Assert.That(
-                MouseController.Instance.PositionShouldBe(new Vector2i(100, 100)).Position.Equals(new Vector2i(100, 100)),
+                MouseController
+                    .Instance.PositionShouldBe(new Vector2i(100, 100))
+                    .Position.Equals(new Vector2i(100, 100)),
                 $"Mouse position is not {new Vector2i(100, 100)} but {MouseController.Instance.Position}"
             );
             MouseController.Instance.MoveMouseTo(new Vector2i(200, 200));
-            Assert.DoesNotThrow(() =>
+            Assert.DoesNotThrow(
+                () =>
                 {
                     MouseController.Instance.PositionShouldBe(new Vector2i(200, 200), 2);
-                }
-              ,
+                },
                 $"Mouse position is not {new Vector2i(200, 200)} but {MouseController.Instance.Position}"
             );
         }
+
         [Test]
         public void moveRealitveToWindow()
         {
@@ -158,18 +197,26 @@ namespace GuiTestingLibrary_Tets
             Vector2i conntentPositon = window.GetWindowContentPosition();
             MouseController.Instance.SetPositionRelativeToWindow(window, new Vector2i(100, 100));
             Assert.That(
-                MouseController.Instance.PositionShouldBe(conntentPositon + new Vector2i(100, 100)).Position.Equals(conntentPositon + new Vector2i(100, 100)),
+                MouseController
+                    .Instance.PositionShouldBe(conntentPositon + new Vector2i(100, 100))
+                    .Position.Equals(conntentPositon + new Vector2i(100, 100)),
                 $"Mouse position is not {conntentPositon + new Vector2i(100, 100)} but {MouseController.Instance.Position}"
             );
             MouseController.Instance.MoveMouseRelativeToWindowTo(window, new Vector2i(200, 200));
 
-            Assert.DoesNotThrow((() =>
-            {
-                MouseController.Instance.PositionShouldBe(conntentPositon + new Vector2i(200, 200), 2);
-            }), $"Mouse position is not {conntentPositon + new Vector2i(200, 200)} but {MouseController.Instance.Position}");
-
+            Assert.DoesNotThrow(
+                (
+                    () =>
+                    {
+                        MouseController.Instance.PositionShouldBe(
+                            conntentPositon + new Vector2i(200, 200),
+                            2
+                        );
+                    }
+                ),
+                $"Mouse position is not {conntentPositon + new Vector2i(200, 200)} but {MouseController.Instance.Position}"
+            );
         }
-
 
         [Test]
         public void MoveRelativeToWindowRelative()
@@ -180,13 +227,24 @@ namespace GuiTestingLibrary_Tets
 
             Assert.DoesNotThrow(() =>
             {
-                MouseController.Instance.MoveMouseRelativeToWindowTo(window, new Vector2f(0.5f, 0.5f));
+                MouseController.Instance.MoveMouseRelativeToWindowTo(
+                    window,
+                    new Vector2f(0.5f, 0.5f)
+                );
             });
             Thread.Sleep(1000);
-            Assert.DoesNotThrow((() =>
-            {
-                MouseController.Instance.PositionRelativeToWindowShouldBe(window, new Vector2f(0.5f, 0.5f), 0.02f);
-            }));
+            Assert.DoesNotThrow(
+                (
+                    () =>
+                    {
+                        MouseController.Instance.PositionRelativeToWindowShouldBe(
+                            window,
+                            new Vector2f(0.5f, 0.5f),
+                            0.02f
+                        );
+                    }
+                )
+            );
         }
 
         [Test]
@@ -231,7 +289,9 @@ namespace GuiTestingLibrary_Tets
             //    window.Position + sliderBlueStaVector2I + new Vector2i(sliderLength, 0)
             //);
             //Thread.Sleep(3000);
-            Color initColor = window.GetContentPixelColorAt(TestHelpers.RelativePostions.SliderColorCheckPostion);
+            Color initColor = window.GetContentPixelColorAt(
+                TestHelpers.RelativePostions.SliderColorCheckPostion
+            );
 
             Assert.That(
                 initColor.Equals(Color.Black),
@@ -240,17 +300,37 @@ namespace GuiTestingLibrary_Tets
 
             var setColor = (int r, int g, int b) =>
             {
-                float redOffset = (float)(TestHelpers.RelativePostions.ColorSliderLength * (r / 255.0));
-                float greeOffset = (float)(TestHelpers.RelativePostions.ColorSliderLength * (g / 255.0));
-                float blueOffset = (float)(TestHelpers.RelativePostions.ColorSliderLength * (b / 255.0));
+                float redOffset = (float)(
+                    TestHelpers.RelativePostions.ColorSliderLength * (r / 255.0)
+                );
+                float greeOffset = (float)(
+                    TestHelpers.RelativePostions.ColorSliderLength * (g / 255.0)
+                );
+                float blueOffset = (float)(
+                    TestHelpers.RelativePostions.ColorSliderLength * (b / 255.0)
+                );
 
-                Vector2f newRedSliderPostion = TestHelpers.RelativePostions.RedSliderStartPostion + new Vector2f(redOffset, 0f);
+                Vector2f newRedSliderPostion =
+                    TestHelpers.RelativePostions.RedSliderStartPostion
+                    + new Vector2f(redOffset, 0f);
                 Vector2f newGreenSliderPostion =
-                    TestHelpers.RelativePostions.GreenSliderStartPostion + new Vector2f(greeOffset, 0);
-                Vector2f newBlueSliderPostion = TestHelpers.RelativePostions.BlueSliderStartPostion + new Vector2f(blueOffset, 0);
-                Assert.That(newRedSliderPostion.x < TestHelpers.RelativePostions.RedSliderEndPostion.x, $"Red lisder move positn oshoudl be less then maximusm red slider postion, new positon [[{newRedSliderPostion}]] slider max [[{TestHelpers.RelativePostions.RedSliderEndPostion}]]");
-                Assert.That(newGreenSliderPostion.x < TestHelpers.RelativePostions.GreenSliderEndPostion.x, $"Green lisder move positn oshoudl be less then maximusm Green slider postion, new positon [[{newGreenSliderPostion}]] slider max [[{TestHelpers.RelativePostions.GreenSliderEndPostion}]]");
-                Assert.That(newBlueSliderPostion.x < TestHelpers.RelativePostions.BlueSliderEndPostion.x, $"Blue lisder move positn oshoudl be less then maximusm Blue slider postion, new positon [[{newBlueSliderPostion}]] slider max [[{TestHelpers.RelativePostions.BlueSliderEndPostion}]]");
+                    TestHelpers.RelativePostions.GreenSliderStartPostion
+                    + new Vector2f(greeOffset, 0);
+                Vector2f newBlueSliderPostion =
+                    TestHelpers.RelativePostions.BlueSliderStartPostion
+                    + new Vector2f(blueOffset, 0);
+                Assert.That(
+                    newRedSliderPostion.x < TestHelpers.RelativePostions.RedSliderEndPostion.x,
+                    $"Red lisder move positn oshoudl be less then maximusm red slider postion, new positon [[{newRedSliderPostion}]] slider max [[{TestHelpers.RelativePostions.RedSliderEndPostion}]]"
+                );
+                Assert.That(
+                    newGreenSliderPostion.x < TestHelpers.RelativePostions.GreenSliderEndPostion.x,
+                    $"Green lisder move positn oshoudl be less then maximusm Green slider postion, new positon [[{newGreenSliderPostion}]] slider max [[{TestHelpers.RelativePostions.GreenSliderEndPostion}]]"
+                );
+                Assert.That(
+                    newBlueSliderPostion.x < TestHelpers.RelativePostions.BlueSliderEndPostion.x,
+                    $"Blue lisder move positn oshoudl be less then maximusm Blue slider postion, new positon [[{newBlueSliderPostion}]] slider max [[{TestHelpers.RelativePostions.BlueSliderEndPostion}]]"
+                );
 
                 window.BringUpFront();
                 MouseController.Instance.SetPositionRelativeToWindow(window, currRedSliderPostion);
@@ -279,7 +359,14 @@ namespace GuiTestingLibrary_Tets
 
                 Color Colorshouldbe = new Color(r, g, b);
                 Thread.Sleep(100);
-                Color currColor = window.BringUpFront().ContentPixelAtShouldBeColor(TestHelpers.RelativePostions.SliderColorCheckPostion, Colorshouldbe, 6).GetContentPixelColorAt(TestHelpers.RelativePostions.SliderColorCheckPostion);
+                Color currColor = window
+                    .BringUpFront()
+                    .ContentPixelAtShouldBeColor(
+                        TestHelpers.RelativePostions.SliderColorCheckPostion,
+                        Colorshouldbe,
+                        6
+                    )
+                    .GetContentPixelColorAt(TestHelpers.RelativePostions.SliderColorCheckPostion);
 
                 Assert.That(
                     currColor.getDiffrence(Colorshouldbe) < 6,

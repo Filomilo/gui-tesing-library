@@ -1,161 +1,130 @@
-﻿using gui_tesing_library.Components;
-using gui_tesing_library.Controllers;
-using gui_tesing_library.Directives;
-using gui_tesing_library.Interfaces;
-using gui_tesing_library.Models;
-using gui_tesing_library.SystemCalls;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
-using System.Threading;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Navigation;
+using gui_tesing_library.Components;
+using gui_tesing_library.Models;
 
-namespace gui_tesing_library
+namespace gui_tesing_library.Controllers
 {
     public class SystemController : IGTSystem
     {
-        private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
+        public static SystemController _Instance = null;
+        private static GTSystemControler_CS SystemControler_CS = null;
 
-        //private static readonly SystemController _instance = new SystemController();
-        //private SystemController() { }
-        //public static SystemController Instance => _instance;
-
-        //public static Vector2 MaximizedWindowSize
-        //{
-        //    get
-        //    {
-        //        return new Vector2(
-        //            WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXMAXIMIZED),
-        //            WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CYMAXIMIZED)
-        //            );
-        //    }
-        //}
-
-        //public OperatingSystem GetOSVersion()
-        //{
-        //    return Environment.OSVersion;
-        //}
-
-
-        //public GTWindow GetWindowByName(string name)
-        //{
-        //    try
-        //    {
-        //        Helpers.AwaitTrue(() => { return (long)WinApiWrapper.FindWindowA(null, name) > 0; });
-        //        IntPtr winId = (IntPtr)WinApiWrapper.FindWindowA(null, name);
-
-        //        return new GTWindow((long)winId);
-        //    }
-        //    catch (TimeoutException ex)
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        static IGTSystem _gtSystem = null;
-
-        public static IGTSystem Instance
+        public static SystemController Instance
         {
             get
             {
-                if (_gtSystem == null)
+                if (_Instance == null)
                 {
-                    _gtSystem = new SystemController();
+                    _Instance = new SystemController();
                 }
 
-                return _gtSystem;
+                return _Instance;
             }
         }
 
-        public IEnumerable<IGTWindow> FindWindowByName(string name)
+        private SystemController()
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IGTProcess> FindProcessByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        [Log]
-        public IGTWindow FindTopWindowByName(string name)
-        {
-            int handle = this._SystemCalls.FindWindowByName(name);
-            if (handle <= 0)
-                return null;
-            IGTWindow window = new GTWindow(handle);
-            return window;
-        }
-
-        public IGTSystem WindowOfNameShouldExist(string name)
-        {
-            Helpers.AwaitTrue(
-                () =>
-                {
-                    return this._SystemCalls.FindWindowByName(name) != 0;
-                },
-                $"No window of name [{name}]"
-            );
-            return this;
-        }
-
-        public IEnumerable<IGTProcess> GetActiveProcesses()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<IGTWindow> GetActiveWindows()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetClipBoardContent()
-        {
-            return this._SystemCalls.GetClipBoardData();
-        }
-
-        [Log]
-        public IGTProcess StartProcess(string commandString)
-        {
-            Thread.Sleep(gui_tesing_library.Configuration.ActionDelay);
-            IGTProcess gtProcess = new GTProcess(_SystemCalls.CreateProcess(commandString));
-            return gtProcess;
+            SystemControler_CS = GTSystemControler_CS.Instance();
         }
 
         public GTSystemVersion OsVersion
         {
-            get { return new GTSystemVersion(Environment.OSVersion); }
+            get { return new GTSystemVersion(SystemControler_CS.GetOsVersion()); }
         }
 
-        public Vector2 MaximizedWindowSize { get; set; }
-
-        GTSystemVersion IGTSystem.GetSystemVersion()
+        public Vector2i MaximizedWindowSize
         {
-            throw new NotImplementedException();
+            get { return new Vector2i(SystemControler_CS.GetMaximizedWindowSize()); }
+        }
+
+        public GTSystemVersion GetSystemVersion()
+        {
+            return new GTSystemVersion(SystemControler_CS.GetOsVersion());
+        }
+
+        public IGTProcess StartProcess(string commandString)
+        {
+            return new gui_tesing_library.Components.GTProcess(
+                GTSystemControler_CS.Instance().StartProcess(commandString)
+            );
+        }
+
+        public string GetClipBoardContent()
+        {
+            return SystemControler_CS.GetClipBoardContent();
+        }
+
+        public IEnumerable<IGTWindow> GetActiveWindows()
+        {
+            return SystemControler_CS.GetActiveWindows().Select(w => new GTWindow(w));
+        }
+
+        public IEnumerable<IGTWindow> FindWindowByName(string name)
+        {
+            return SystemControler_CS.FindWindowByName(name).Select(w => new GTWindow(w));
+        }
+
+        public IEnumerable<IGTProcess> FindProcessByName(string name)
+        {
+            return SystemControler_CS.FindProcessByName(name).Select(p => new GTProcess(p));
+        }
+
+        public IEnumerable<IGTProcess> GetActiveProcesses()
+        {
+            return SystemControler_CS.GetActiveProcesses().Select(p => new GTProcess(p));
+        }
+
+        public IGTWindow FindTopWindowByName(string name)
+        {
+            GTWindow_CS win = SystemControler_CS.FindTopWindowByName(name);
+            return win == null ? null : new GTWindow(win);
+        }
+
+        public IGTSystem WindowOfNameShouldExist(string name)
+        {
+            SystemControler_CS.WindowOfNameShouldExist(name);
+            return this;
         }
 
         public int GetWindowTitleBarHeight()
         {
-            return this._SystemCalls.GetWindowTitleBarHeight();
+            return SystemControler_CS.GetWindowTitleBarHeight();
         }
 
         public int GetWindowBorderWidth()
         {
-            return this._SystemCalls.GetWindowBorderWidth();
+            return SystemControler_CS.GetWindowBorderWidth();
         }
 
         public int GetWindowBorderHeight()
         {
-            return this._SystemCalls.GetWindowBorderHeight();
+            return SystemControler_CS.GetWindowBorderHeight();
         }
 
         public int GetWindowPadding()
         {
-            return this._SystemCalls.GetWindowPadding();
+            return SystemControler_CS.GetWindowPadding();
         }
 
         public Vector2i GetScreenSize()
         {
-            return this._SystemCalls.GetScreenSize();
+            return new Vector2i(SystemControler_CS.GetScreenSize());
+        }
+
+        public GTSystemVersion GetOsVersion()
+        {
+            return new GTSystemVersion(SystemControler_CS.GetOsVersion());
+        }
+
+        public Vector2i GetMaximizedWindowSize()
+        {
+            return new Vector2i(SystemControler_CS.GetMaximizedWindowSize());
         }
     }
 }
