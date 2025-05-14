@@ -12,7 +12,7 @@ class DllLoadTest {
     public void LoadDll() {
         log.info("test");
         org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> {
-            System.load("F:/projects/gui-tesing-library/src/GuiTestingLibraryJava/src/main/resources/gui-testing-library-java.dll");
+            System.load("D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GuiTestingLibraryJava\\src\\main\\resources\\Gui-testing-lib-java.dll");
 
         });
     }

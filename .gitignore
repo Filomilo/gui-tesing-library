@@ -18,3 +18,8 @@ src/test.log
 /src/GTLibrary_CSharp/x64
 *.obj
 /src/Gui-testing-lib-java/x64
+/src/GuiTestingLibraryJava/src/main/java/org/filomilo/GuiTestingLibrary/Native/headers
+*.iobj
+*.ipdb
+*.pch
+*.pdb

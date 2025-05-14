@@ -12,3 +12,8 @@ JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f
 (JNIEnv* env, jobject obj1, jobject obj2) {
     return Converters::Vector2fToJVector2f(env, Converters::JVector2fToVector2f(env, obj1) - Converters::JVector2fToVector2f(env, obj2));
 }
+
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_dispose
+(JNIEnv* env, jobject obj) {
+	delete static_cast<Vector2f*>(Converters::getNativePtr(env, obj));
+}

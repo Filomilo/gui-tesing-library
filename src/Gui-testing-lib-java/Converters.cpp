@@ -6,16 +6,6 @@
 
 
 
-jfieldID getNativeHandleField(JNIEnv* env, jobject obj) {
-    jclass cls = env->GetObjectClass(obj);
-    return env->GetFieldID(cls, "nativeHandle", "J");
-}
-
-void* getNativePtr(JNIEnv* env, jobject obj) {
-    jfieldID fid = getNativeHandleField(env, obj);
-    jlong handle = env->GetLongField(obj, fid);
-    return reinterpret_cast<void*>(handle);
-}
 
 
 jobject createJavaVector(JNIEnv* env,std::string className, void* pointer) {

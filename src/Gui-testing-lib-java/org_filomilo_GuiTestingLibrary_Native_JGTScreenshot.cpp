@@ -32,3 +32,9 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTScreenshot_
 (JNIEnv* env, jobject obj, jstring locationOfImageToCompare, jdouble shoudlBe) {
     Converters::JScreenShotToGtScreenShot(env, obj)->SimmilarityBetweenImagesShouldBe(Converters::JStringToString(env, locationOfImageToCompare), shoudlBe);
 }
+
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTScreenshot_dispose
+(JNIEnv* env, jobject obj)
+{
+	delete static_cast<GTScreenshot*>(Converters::getNativePtr(env, obj));
+}

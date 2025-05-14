@@ -1,0 +1,2 @@
+D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\x64\Release\Gui-testing-lib-java.dll.lastcodeanalysissucceeded
+D:\proejcts\gui-tesing-library\gui-tesing-library\src\Gui-testing-lib-java\x64\Release\NativeCodeAnalysis.read.1.tlog

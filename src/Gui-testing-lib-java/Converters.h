@@ -11,6 +11,8 @@
 #include "../GtLibrary/GTScreenshot.h"
 #include "../GtLibrary/GTSystemVersion.h"
 
+
+
 class Converters
 {
 
@@ -42,6 +44,18 @@ public:
 
 	static jobject GtScreenShotToJScreenShot(JNIEnv* env, GTScreenshot* _GtScreenshot);
 	static GTScreenshot* JScreenShotToGtScreenShot(JNIEnv* env, jobject _jscrrenShot);
+
+	static jfieldID getNativeHandleField(JNIEnv* env, jobject obj) {
+		jclass cls = env->GetObjectClass(obj);
+		return env->GetFieldID(cls, "nativeHandle", "J");
+	}
+
+	static void* getNativePtr(JNIEnv* env, jobject obj) {
+		jfieldID fid = getNativeHandleField(env, obj);
+		jlong handle = env->GetLongField(obj, fid);
+		return reinterpret_cast<void*>(handle);
+	}
+
 
 	static jobject GtColorToJColor(JNIEnv* env, Color _color);
 	static Color JColorToGtColor(JNIEnv* env, jobject _Jcolor);

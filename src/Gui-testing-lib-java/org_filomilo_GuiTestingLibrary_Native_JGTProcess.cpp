@@ -34,3 +34,9 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTProcess_kil
 (JNIEnv* env, jobject obj) {
     Converters::JProcessToGtProcess(env, obj).Kill();
 }
+
+
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTProcess_dispose
+(JNIEnv* env, jobject obj) {
+	delete static_cast<GTProcess*>(Converters::getNativePtr(env, obj));
+}

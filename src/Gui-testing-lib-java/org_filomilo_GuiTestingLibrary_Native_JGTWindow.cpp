@@ -162,3 +162,8 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_Pixe
         Converters::JColorToGtColor(env, color)
     );
 }
+
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_dispose
+(JNIEnv* env, jobject obj) {
+	delete static_cast<GTWindow*>(Converters::getNativePtr(env, obj));
+}
