@@ -1,7 +1,9 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTVector2f implements AutoCloseable {
-
+    static {
+        NativeDllLoader.LoadDll();
+    }
     JGTVector2f(long ptr){
         nativePtr=ptr;
     }

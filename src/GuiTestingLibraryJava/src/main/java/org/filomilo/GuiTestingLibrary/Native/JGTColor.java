@@ -1,6 +1,9 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTColor {
+    static {
+        NativeDllLoader.LoadDll();
+    }
 
     public int r, g, b;
 

@@ -1,7 +1,9 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTScreenshot implements AutoCloseable {
-
+    static {
+        NativeDllLoader.LoadDll();
+    }
     JGTScreenshot(long ptr){
         nativePtr=ptr;
     }

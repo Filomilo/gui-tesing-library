@@ -1,7 +1,9 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTConfiguration {
-
+    static {
+        NativeDllLoader.LoadDll();
+    }
 
     public native long GetTimeout();
 
