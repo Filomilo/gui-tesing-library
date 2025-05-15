@@ -67,7 +67,9 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_Brin
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_SizeShouldBe
 (JNIEnv* env, jobject obj, jobject vec) {
-    Converters::JWindowToGtWindow(env, obj).SizeShouldBe(Converters::JVector2IToVector2I(env, vec));
+    Vector2i _vec = Converters::JVector2IToVector2I(env, vec);
+    GTWindow win = Converters::JWindowToGtWindow(env, obj);
+    win.SizeShouldBe(_vec);
 }
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_ShouldWindowExist
@@ -166,4 +168,10 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_Pixe
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_dispose
 (JNIEnv* env, jobject obj) {
 	delete static_cast<GTWindow*>(Converters::getNativePtr(env, obj));
+}
+
+
+JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTWindow_GetProcessOfWindow
+(JNIEnv* env, jobject obj) {
+    return Converters::GTrocessToJProcess(env,(static_cast<GTWindow*>(Converters::getNativePtr(env, obj)))->GetProcessOfWindow());
 }

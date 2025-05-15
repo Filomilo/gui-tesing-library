@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2f
+ * Method:    setup
+ * Signature: (FF)V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_setup
+  (JNIEnv *, jobject, jfloat, jfloat);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2f
  * Method:    dispose
  * Signature: ()V
  */
@@ -21,6 +29,22 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_di
  * Signature: ()F
  */
 JNIEXPORT jfloat JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_length
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2f
+ * Method:    getX
+ * Signature: ()F
+ */
+JNIEXPORT jfloat JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_getX
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2f
+ * Method:    getY
+ * Signature: ()F
+ */
+JNIEXPORT jfloat JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_getY
   (JNIEnv *, jobject);
 
 /*

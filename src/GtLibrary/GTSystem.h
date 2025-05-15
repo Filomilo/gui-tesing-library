@@ -30,7 +30,7 @@ public:
     std::vector<GTProcess> GetActiveProcesses();
     std::vector<GTWindow> GetActiveWindows();
     std::wstring GetClipBoardContent();
-    GTProcess* StartProcess(const std::string& commandString);
+    GTProcess StartProcess(const std::string& commandString);
     GTSystemVersion GetOsVersion() const;
     GTSystemVersion GetSystemVersion();
 

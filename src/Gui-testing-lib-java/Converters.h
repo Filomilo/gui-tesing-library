@@ -10,6 +10,7 @@
 #include "../GtLibrary/Color.h"
 #include "../GtLibrary/GTScreenshot.h"
 #include "../GtLibrary/GTSystemVersion.h"
+#include "../GtLibrary/Configuration.h"
 
 
 
@@ -38,7 +39,7 @@ public:
 	static GTWindow JWindowToGtWindow(JNIEnv* env, jobject _jwindow);
 	static jobject GtWindowToJwindow(JNIEnv* env, GTWindow win);
 
-	static GTProcess JProcessToGtProcess(JNIEnv* env, jobject _Jprocess);
+	static GTProcess* JProcessToGtProcess(JNIEnv* env, jobject _Jprocess);
 	static  jobject GTrocessToJProcess(JNIEnv* env, GTProcess _process);
 
 
@@ -47,12 +48,17 @@ public:
 
 	static jfieldID getNativeHandleField(JNIEnv* env, jobject obj) {
 		jclass cls = env->GetObjectClass(obj);
-		return env->GetFieldID(cls, "nativeHandle", "J");
+		return env->GetFieldID(cls, "nativePtr", "J");
 	}
 
 	static void* getNativePtr(JNIEnv* env, jobject obj) {
 		jfieldID fid = getNativeHandleField(env, obj);
 		jlong handle = env->GetLongField(obj, fid);
+		if (handle < 0)
+		{
+			return nullptr;
+		}
+
 		return reinterpret_cast<void*>(handle);
 	}
 
@@ -62,5 +68,12 @@ public:
 
 	static jobject GtOsVersionToJOsVersion(JNIEnv* env, GTSystemVersion _osVersion);
 	static GTSystemVersion JOSVersionToGTOsVersion(JNIEnv* env, jobject _josVersion);
+
+	static jboolean boolToJBool(JNIEnv* env, bool val);
+
+	static jobject ImageCOmparertOJImageComparer(JNIEnv* env, int cppEnumValue);
+
+	static IMMAGE_COMPARPER_TYPE JIMAGECOpmaretOGtImageCOmparer(JNIEnv* env, jobject javaEnum);
 };
+
 

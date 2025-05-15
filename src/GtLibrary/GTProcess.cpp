@@ -31,3 +31,7 @@ return	SystemCallsFactory::GetSystemCalls()->GetRamUsageOfProcess(this->handle);
 void GTProcess::Kill() {
     SystemCallsFactory::GetSystemCalls()->KillProcess(this->handle);
 }
+
+HANDLE GTProcess::GetHandle() {
+	return this->handle;
+}

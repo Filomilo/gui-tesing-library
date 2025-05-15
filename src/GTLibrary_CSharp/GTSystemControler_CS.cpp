@@ -66,7 +66,8 @@ String^ GTSystemControler_CS::GetClipBoardContent() {
 GTProcess_CS^ GTSystemControler_CS::StartProcess(String^ commandString) {
    
  auto nativeProcess = nativeSystem->StartProcess(Converters::ConvertStringToStdString(commandString));
-    return  nativeProcess ? gcnew GTProcess_CS(nativeProcess) : nullptr;
+ GTProcess* _GTProcess = new GTProcess(nativeProcess.GetHandle());
+    return  _GTProcess ? gcnew GTProcess_CS(_GTProcess) : nullptr;
 }
 
 GTSystemVersion_CS^ GTSystemControler_CS::GetOsVersion() {

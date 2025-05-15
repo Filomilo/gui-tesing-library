@@ -7,6 +7,13 @@ public class JGTVector2i implements AutoCloseable {
     JGTVector2i(long ptr){
         nativePtr=ptr;
     }
+
+    private native void setup(int x, int y);
+
+    public JGTVector2i(int x, int y){
+        setup(x, y);
+    };
+
     private long nativePtr;
 
     public long getNativePtr() {

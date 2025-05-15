@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractImageComparer.h" />
     <ClInclude Include="Casters.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Configuration.h" />
@@ -154,9 +155,11 @@
     <ClInclude Include="GTSystemVersion.h" />
     <ClInclude Include="GTWindow.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="ImageComparerFactory.h" />
     <ClInclude Include="ISystemCalls.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PixelByPixelImageComparer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SystemCalls.h" />
     <ClInclude Include="SystemCallsFactory.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="Vector2i.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractImageComparer.cpp" />
     <ClCompile Include="Casters.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Configuration.cpp" />
@@ -177,6 +181,7 @@
     <ClCompile Include="GTSystemVersion.cpp" />
     <ClCompile Include="GTWindow.cpp" />
     <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="ImageComparerFactory.cpp" />
     <ClCompile Include="ISystemCalls.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="pch.cpp">
@@ -185,6 +190,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PixelByPixelImageComparer.cpp" />
     <ClCompile Include="SystemCalls.cpp" />
     <ClCompile Include="SystemCallsFactory.cpp" />
     <ClCompile Include="Vector2f.cpp" />
