@@ -2,6 +2,23 @@ package org.filomilo.GuiTestingLibrary.Native;
 
 
 public class JGTMouse {
+    static {
+        NativeDllLoader.LoadDll();
+    }
+
+    private static  JGTMouse Instance = new JGTMouse();
+    private JGTMouse() {
+
+    }
+    public static JGTMouse getInstance() {
+        if(Instance == null)
+        {
+            Instance = new JGTMouse();
+        }
+        return Instance;
+    }
+
+
     public native JGTVector2i GetPosition();
 
     public native void MoveMouse(JGTVector2i offset);

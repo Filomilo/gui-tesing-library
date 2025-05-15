@@ -60,3 +60,20 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_di
 (JNIEnv* env, jobject obj) {
 	delete static_cast<Vector2i*>(Converters::getNativePtr(env, obj));
 }
+
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_setup
+(JNIEnv* env, jobject obj, jint x, jint y) {
+    Vector2i* vec = new Vector2i();
+    vec->x = x;
+    vec->y = y;
+    jclass cls = env->GetObjectClass(obj);
+
+    jfieldID fid =Converters::getNativeHandleField(env,obj);
+
+    if (fid == nullptr) {
+
+        return;
+    }
+
+    env->SetLongField(obj, fid, reinterpret_cast<jlong>((void*)vec));
+}

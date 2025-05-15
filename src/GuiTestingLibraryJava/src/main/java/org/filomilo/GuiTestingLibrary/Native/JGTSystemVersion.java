@@ -1,7 +1,9 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTSystemVersion implements AutoCloseable {
-
+    static {
+        NativeDllLoader.LoadDll();
+    }
     JGTSystemVersion(long ptr){
         nativePtr=ptr;
     }

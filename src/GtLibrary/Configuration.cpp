@@ -11,6 +11,7 @@ Configuration* Configuration::GetInstance()
 		instance = new Configuration();
 		instance->SetDefaultTimeout();
 		instance->DefaultSleep();
+		instance->type = IMMAGE_COMPARPER_TYPE::PIXELBYPIXEL;
 	}
 	return instance;
 }
@@ -30,4 +31,21 @@ void Configuration::SetDefaultTimeout()
 
 void Configuration::DefaultSleep() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(this->defaultSleep));
+}
+
+void Configuration::setActioNDelay(long time) {
+	this->defaultSleep = time;
+}
+long Configuration::getActionDelay() {
+	return this->defaultSleep;
+}
+
+void Configuration::setDeafultActioNDelay() {
+	this->defaultSleep = 1000;
+}
+IMMAGE_COMPARPER_TYPE Configuration::GetImageComparerType() {
+	return this->type;
+}
+void Configuration::setImageCompareType(IMMAGE_COMPARPER_TYPE type) {
+	this->type = type;
 }

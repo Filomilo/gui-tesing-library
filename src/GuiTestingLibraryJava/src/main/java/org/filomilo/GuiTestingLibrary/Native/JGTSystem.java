@@ -1,6 +1,21 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTSystem {
+    static {
+        NativeDllLoader.LoadDll();
+    }
+    private static JGTSystem Instance;
+    private JGTSystem (){
+
+    }
+    public static JGTSystem getInstance(){
+        if(Instance == null){
+            Instance = new JGTSystem();
+        }
+        return Instance;
+    }
+
+
     public native JGTWindow[] FindWindowByName(String name);
     public native JGTProcess[] FindProcessByName(String name);
     public native JGTWindow FindTopWindowByName(String name); // Could return null if not found

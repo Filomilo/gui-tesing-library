@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <jni.h>
 #include "Converters.h"
+#include <iostream>
 
 
 
@@ -98,12 +99,15 @@ std::string Converters::JStringToString(JNIEnv* env, jstring _jstring) {
      return createJavaVector(env, "org/filomilo/GuiTestingLibrary/Native/JGTWindow", win);
  }
 
- GTProcess Converters::JProcessToGtProcess(JNIEnv* env, jobject _Jprocess) {
+ GTProcess* Converters::JProcessToGtProcess(JNIEnv* env, jobject _Jprocess) {
+
      GTProcess* proc = (GTProcess*)getNativePtr(env, _Jprocess);
-     return *proc;
+     return proc;
  }
   jobject Converters::GTrocessToJProcess(JNIEnv* env, GTProcess _process) {
-      GTProcess* proc = new GTProcess(_process);
+      GTProcess* proc = new GTProcess(_process.GetHandle());
+      std::cout << "Converting windwos to jwindow:: \n";
+      std::wcout << proc->GetName();
       return createJavaVector(env, "org/filomilo/GuiTestingLibrary/Native/JGTProcess", proc);
   }
 
@@ -150,4 +154,27 @@ std::string Converters::JStringToString(JNIEnv* env, jstring _jstring) {
  GTSystemVersion Converters::JOSVersionToGTOsVersion(JNIEnv* env, jobject _josVersion) {
      GTSystemVersion* os = (GTSystemVersion*)getNativePtr(env, _josVersion);
      return *os;
+ }
+
+ jboolean Converters::boolToJBool(JNIEnv* env, bool val) {
+     return val ? JNI_TRUE : JNI_FALSE;
+ }
+
+ jobject Converters::ImageCOmparertOJImageComparer(JNIEnv* env, int cppEnumValue) {
+     jclass enumClass = env->FindClass("org/filomilo/GuiTestingLibrary/Native/JGTConfiguration/IMageComparer");
+     jmethodID valuesMethod = env->GetStaticMethodID(enumClass, "values", "()[org/filomilo/GuiTestingLibrary/Native/JGTConfiguration/IMageComparer;");
+     jobjectArray enumValues = (jobjectArray)env->CallStaticObjectMethod(enumClass, valuesMethod);
+     jobject javaEnum = env->GetObjectArrayElement(enumValues, cppEnumValue);
+     return javaEnum;
+ }
+
+
+ IMMAGE_COMPARPER_TYPE Converters::JIMAGECOpmaretOGtImageCOmparer(JNIEnv* env, jobject javaEnum)
+ {
+     jclass enumClass = env->GetObjectClass(javaEnum);
+     jmethodID ordinalMethod = env->GetMethodID(enumClass, "ordinal", "()I");
+     jint ordinal = env->CallIntMethod(javaEnum, ordinalMethod);
+
+     IMMAGE_COMPARPER_TYPE cppEnum = static_cast<IMMAGE_COMPARPER_TYPE>(ordinal);
+     return cppEnum;
  }

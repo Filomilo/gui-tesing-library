@@ -39,6 +39,46 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfigurati
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_DefaultSleep
   (JNIEnv *, jobject);
 
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTConfiguration
+ * Method:    GetActionDelay
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_GetActionDelay
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTConfiguration
+ * Method:    SetActionDelay
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetActionDelay
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTConfiguration
+ * Method:    SetDefaultActionDelay
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetDefaultActionDelay
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTConfiguration
+ * Method:    GetImageComparer
+ * Signature: ()Lorg/filomilo/GuiTestingLibrary/Native/JGTConfiguration/IMageComparer;
+ */
+JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_GetImageComparer
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTConfiguration
+ * Method:    SetImageComparer
+ * Signature: (Lorg/filomilo/GuiTestingLibrary/Native/JGTConfiguration/IMageComparer;)V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetImageComparer
+  (JNIEnv *, jobject, jobject);
+
 #ifdef __cplusplus
 }
 #endif

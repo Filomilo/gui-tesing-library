@@ -2,6 +2,9 @@ package org.filomilo.GuiTestingLibrary.Native;
 
 
 public class JGTScreen {
+    static {
+        NativeDllLoader.LoadDll();
+    }
     public native JGTVector2i GetSize();
 
     public native JGTVector2i GetMaximizedWindowSize();

@@ -19,4 +19,5 @@ public:
   std::vector<GTWindow> GetWindowsOfProcess() const;
   long GetRamUsage() const ;
   void Kill();
+  HANDLE GetHandle();
 };

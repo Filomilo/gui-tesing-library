@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Models">
       <UniqueIdentifier>{f9e696be-05d4-4538-ab02-cd07610bfeca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Service">
+      <UniqueIdentifier>{f184bf07-6b59-47bd-ba41-3ddbd099c9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Serivces">
+      <UniqueIdentifier>{48f0225c-ce63-4d7a-9d02-5c493aeacbc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,6 +108,15 @@
     <ClInclude Include="Casters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractImageComparer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageComparerFactory.h">
+      <Filter>Header Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelByPixelImageComparer.h">
+      <Filter>Header Files\Service</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GtLibrary.cpp">
@@ -163,6 +178,15 @@
     </ClCompile>
     <ClCompile Include="Casters.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractImageComparer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelByPixelImageComparer.cpp">
+      <Filter>Source Files\Serivces</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageComparerFactory.cpp">
+      <Filter>Source Files\Serivces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

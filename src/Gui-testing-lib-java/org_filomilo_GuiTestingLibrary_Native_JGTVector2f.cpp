@@ -17,3 +17,33 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_di
 (JNIEnv* env, jobject obj) {
 	delete static_cast<Vector2f*>(Converters::getNativePtr(env, obj));
 }
+
+
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_setup
+(JNIEnv* env , jobject obj, jfloat x, jfloat y) {
+    Vector2f* vec = new Vector2f();
+    vec->x = x;
+    vec->y = y;
+    jclass cls = env->GetObjectClass(obj);
+
+    jfieldID fid = Converters::getNativeHandleField(env, obj);
+
+    if (fid == nullptr) {
+
+        return;
+    }
+
+    env->SetLongField(obj, fid, reinterpret_cast<jlong>((void*)vec));
+}
+
+
+JNIEXPORT jfloat JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_getX
+(JNIEnv* env, jobject obj) {
+    return static_cast<Vector2f*>(Converters::getNativePtr(env, obj))->x;
+}
+
+
+JNIEXPORT jfloat JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2f_getY
+(JNIEnv* env, jobject obj) {
+    return static_cast<Vector2f*>(Converters::getNativePtr(env, obj))->y;
+}

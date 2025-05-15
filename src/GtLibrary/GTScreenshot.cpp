@@ -2,6 +2,8 @@
 #include "GTScreenshot.h"
 #include "GTScreenshot.h"
 #include "Helpers.h"
+#include "ImageComparerFactory.h"
+#include "AbstractImageComparer.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 
 #include "stb_image_write.h"
@@ -41,29 +43,10 @@ void GTScreenshot::SaveAsBitmap(const std::string& file) const {
 }
 
 double GTScreenshot::CompareToImage(const std::string& filePathToComparingImage) const {
-    int width = this->GetWidth();
-    int height = this->GetHeight();
-
-    GTScreenshot toCompareTo = GTScreenshot::loadBMP(filePathToComparingImage);
-    toCompareTo.resize(Vector2i(width, height));
-    long amountOFPixels = width * height;
-    long pixelsMatch = 0;
-    for (size_t i = 0; i < width; i++)
-    {
-        for (size_t j = 0; j < height; j++)
-        {
-            Color pixelOrigin = this->GetPixelColorAt(Vector2i(i, j));
-            Color pixelTocompare = toCompareTo.GetPixelColorAt(Vector2i(i, j));
-            if (pixelOrigin.Equals(pixelTocompare))
-            {
-                pixelsMatch++;
-            }
-            else {
-                printf("Tset");
-            }
-        }
-    }
-    return ((double)pixelsMatch) / (amountOFPixels);
+    AbstractImageComparer*  comparer= ImageComparerFactory::getImageCompaprer();
+    double rs = comparer->CompareImages((GTScreenshot*)this, filePathToComparingImage);
+    delete comparer;
+    return rs;
 }
 
 void GTScreenshot::SimmilarityBetweenImagesShouldBe(const std::string& imagePath, double similarity) const {

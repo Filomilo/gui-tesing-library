@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2i
+ * Method:    setup
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_setup
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2i
  * Method:    dispose
  * Signature: ()V
  */

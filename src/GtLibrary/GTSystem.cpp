@@ -66,9 +66,9 @@ std::wstring GTSystem::GetClipBoardContent() {
     return this->_SystemCalls->GetClipBoardContent();
 }
 
-GTProcess* GTSystem::StartProcess(const std::string& commandString) {
+GTProcess GTSystem::StartProcess(const std::string& commandString) {
 
-    return new GTProcess((HANDLE)this->_SystemCalls->StartProcess(commandString)) ;
+    return GTProcess((HANDLE)this->_SystemCalls->StartProcess(commandString)) ;
 }
 
 GTSystemVersion GTSystem::GetOsVersion() const {

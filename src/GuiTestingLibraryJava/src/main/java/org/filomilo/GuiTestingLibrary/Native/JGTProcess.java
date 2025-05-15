@@ -1,7 +1,9 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
 public class JGTProcess implements AutoCloseable {
-
+    static {
+        NativeDllLoader.LoadDll();
+    }
     JGTProcess(long ptr){
         nativePtr=ptr;
     }

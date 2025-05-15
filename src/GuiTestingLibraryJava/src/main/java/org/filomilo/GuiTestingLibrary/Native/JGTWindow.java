@@ -2,7 +2,9 @@ package org.filomilo.GuiTestingLibrary.Native;
 
 
 public class JGTWindow implements AutoCloseable {
-
+    static {
+        NativeDllLoader.LoadDll();
+    }
     JGTWindow(long ptr){
         nativePtr=ptr;
     }
