@@ -60,7 +60,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Slider fx:id="resSlider" max="1.0" onDragDetected="#redMouseDrag" onMouseDragOver="#redMouseDrag" GridPane.rowIndex="1" />
+                  <Slider fx:id="resSlider" max="1.0" GridPane.rowIndex="1" />
                   <Slider fx:id="GreenSlider" max="1.0" GridPane.rowIndex="2" />
                   <Slider fx:id="BlueSlider" max="1.0" GridPane.rowIndex="3" />
                   <Pane fx:id="SliderColorPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />

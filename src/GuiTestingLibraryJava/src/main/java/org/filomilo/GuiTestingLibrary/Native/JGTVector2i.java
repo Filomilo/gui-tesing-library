@@ -8,6 +8,10 @@ public class JGTVector2i implements AutoCloseable {
         nativePtr=ptr;
     }
 
+    public JGTVector2i(JGTVector2i copy) {
+      setup(copy.getX(),copy.gety());
+    }
+
     private native void setup(int x, int y);
 
     public JGTVector2i(int x, int y){
@@ -41,5 +45,6 @@ public class JGTVector2i implements AutoCloseable {
     public native JGTVector2i divide(int scalar);
 
     public native JGTVector2i divide(JGTVector2i other);
-
+    public native int getX();
+    public native int gety();
 }

@@ -36,7 +36,7 @@ public class HelloController {
     @FXML
     public void initialize() {
         // Ensuring resSlider is initialized before adding a listener
-        ChangeListener sliderChange=new ChangeListener<Number>() {
+        ChangeListener<Number> sliderChange=new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 onSliderChange();
@@ -98,10 +98,7 @@ public class HelloController {
     }
 
 
-    public void redMouseDrag(MouseDragEvent mouseDragEvent) {
 
-
-    }
 
     public void OnOpenModalButton(ActionEvent actionEvent) {
         Stage parentStage = (Stage) chnageTitleBUtton.getScene().getWindow();
