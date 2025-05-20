@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dq6cVHhaLxnBodGFioxtbyvtuCy15rhH7+mrOjFJ57DvAz7CTICxUUMU7kLI/QobO15cNUMKbwyGHzOTi94UVQ==",
+  "dgSpecHash": "ZwRzu+5J6Wo=",
   "success": true,
-  "projectFilePath": "C:\\1id21a\\fb\\gui-tesing-library-main\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\student\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.31\\microsoft.windows.sdk.net.ref.10.0.22621.31.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\proejcts\\gui-tesing-library\\gui-tesing-library\\src\\GTLibrary_CSharp\\GTLibrary_CSharp.vcxproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

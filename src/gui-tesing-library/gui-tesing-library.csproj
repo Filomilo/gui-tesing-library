@@ -23,6 +23,7 @@
       <IncludeAssets>compile;runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="dotnet-framework-sonarscanner" Version="9.2.0" />
 
     <PackageReference Include="ILRepack" Version="2.0.41">
       <PrivateAssets>all</PrivateAssets>

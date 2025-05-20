@@ -8,8 +8,6 @@ namespace gui_tesing_library
     {
         Vector2i Size { get; }
 
-        Vector2i MaximizedWindowSize { get; }
-
         IScreenShot GetScreenshot();
         IScreenShot GetScreenshotRect(Vector2i position, Vector2i size);
         Color GetPixelColorAt(Vector2i postion);

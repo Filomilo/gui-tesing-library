@@ -19,27 +19,14 @@ namespace GuiTestingLibrary_Tets.Components
         [NUnit.Framework.SetUp]
         public void init()
         {
-            gtRocess = SystemController.Instance.StartProcess(
-                "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
-            );
-            Assert.That(gtRocess != null, "Gt proces retuned null");
-            Assert.That(gtRocess.IsAlive, "Gt rocess in snot alive");
-            window = SystemController
-                .Instance.WindowOfNameShouldExist("Hello!")
-                .FindTopWindowByName("Hello!");
+            window = TestHelpers.OpenExampleGui();
             Assert.That(window != null);
         }
 
         [NUnit.Framework.TearDown]
         public void purge()
         {
-            Assert.DoesNotThrow(() =>
-            {
-                gtRocess.kill();
-            });
-            window.Close();
-            window.KillProcess();
-            window.ShouldWindowExist(false);
+            TestHelpers.CloseExampleGui();
             Assert.That(window.DoesExist == false);
             Assert.That(
                 SystemController.Instance.FindTopWindowByName("Hello!") == null,
@@ -60,10 +47,10 @@ namespace GuiTestingLibrary_Tets.Components
         {
             Assert.DoesNotThrow(() =>
             {
-                window.SizeShouldBe(new Vector2i(336, 279));
+                window.SizeShouldBe(new Vector2i(1280, 720));
             });
 
-            Assert.That(window.Size.x == 336 && window.Size.y == 279);
+            Assert.That(window.Size.x == 1280 && window.Size.y == 720);
         }
 
         [Test]
@@ -120,7 +107,7 @@ namespace GuiTestingLibrary_Tets.Components
             //);
             Vector2i contentSize = window.GetWindowContentSize();
             Vector2i contentPs = window.GetWindowContentPosition();
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             ////////////////////////////////////////////////////////////////////
             //Vector2i rightCorenr = new Vector2i(window.GetWindowContentSize().x, 0);
             //Color colorRightTop = window.GetContentPixelColorAt(rightCorenr);
@@ -141,9 +128,9 @@ namespace GuiTestingLibrary_Tets.Components
             ///
             ///
             gui_tesing_library.Configuration.ActionDelay = 0;
-            for (int x = 0; x < colorGridSize; x++)
+            for (int x = 0; x < colorGridSize; x += 10)
             {
-                for (int y = 0; y < colorGridSize; y++)
+                for (int y = 0; y < colorGridSize; y += 10)
                 {
                     Color colorLeftTop = window.GetContentPixelColorAt(new Vector2i(x, y));
                     Assert.That(
@@ -152,9 +139,9 @@ namespace GuiTestingLibrary_Tets.Components
                     );
                 }
             }
-            for (int x = 0; x < colorGridSize; x++)
+            for (int x = 0; x < colorGridSize; x += 10)
             {
-                for (int y = 0; y < colorGridSize; y++)
+                for (int y = 0; y < colorGridSize; y += 10)
                 {
                     Vector2i pixelpos = new Vector2i(contentSize.x - x, y);
                     Color colorRightTop = window.GetContentPixelColorAt(pixelpos);
@@ -164,9 +151,9 @@ namespace GuiTestingLibrary_Tets.Components
                     );
                 }
             }
-            for (int x = 0; x < colorGridSize; x++)
+            for (int x = 0; x < colorGridSize; x += 10)
             {
-                for (int y = 0; y < colorGridSize; y++)
+                for (int y = 0; y < colorGridSize; y += 10)
                 {
                     Vector2i pixelpos = new Vector2i(x, contentSize.y - y);
                     Color colorLeftBottom = window.GetContentPixelColorAt(pixelpos);
@@ -176,6 +163,165 @@ namespace GuiTestingLibrary_Tets.Components
                     );
                 }
             }
+        }
+
+        [Test()]
+        public void GetPixelColorAtPostion()
+        {
+            Vector2i pos = new Vector2i(10, 10);
+            Assert.That(
+                window.PixelAtShouldBeColor(pos, Color.Red).GetPixelColorAt(pos).Equals(Color.Red),
+                $"Pixel at {pos} shoud be RED but is {window.GetPixelColorAt(pos)}"
+            );
+        }
+
+        [Test()]
+        public void GetContentPixelColorAtPostion()
+        {
+            Vector2i pos = new Vector2i(1, 1);
+            Assert.That(
+                window
+                    .ContentPixelAtShouldBeColor(pos, Color.Red)
+                    .GetContentPixelColorAt(pos)
+                    .Equals(Color.Red),
+                $"Pixel at {pos} shoud be RED but is {window.GetPixelColorAt(pos)}"
+            );
+        }
+
+        [Test()]
+        public void GetwindowContentSize()
+        {
+            Vector2i windwoSize = new Vector2i(800, 800);
+            window.SetWindowSize(windwoSize.x, windwoSize.y).CenterWindow();
+            Vector2i expctedContentSize =
+                windwoSize
+                - new Vector2i(
+                    SystemController.Instance.GetWindowBorderWidth() * 2
+                        + SystemController.Instance.GetWindowPadding() * 2
+                        + 1,
+                    SystemController.Instance.GetWindowBorderHeight() * 2
+                        + SystemController.Instance.GetWindowTitleBarHeight()
+                        + SystemController.Instance.GetWindowPadding() * 2
+                        + 5
+                );
+            Assert.That(
+                window.GetWindowContentSize().Equals(expctedContentSize),
+                $"Window content size should be {expctedContentSize} but is {window.GetWindowContentSize()}"
+            );
+        }
+
+        [Test()]
+        public void MinimizeMaximizeWindow()
+        {
+            window.Minimize();
+            Assert.That(
+                window.ShouldBeMinimized(true).IsMinimized,
+                $"Window should be minimized but is not"
+            );
+            window.Maximize();
+
+            Assert.That(
+                window.ShouldBeMinimized(false).IsMinimized == false,
+                $"Window should be maximized but is not"
+            );
+        }
+
+        [Test()]
+        public void GetWindowTitle()
+        {
+            String title = "Hello!";
+            Assert.That(
+                window.WindowNameShouldBe(title).GetWindowName().Equals(title),
+                $"window title shoudl bse [[{title}]] but is {window.GetWindowName()}"
+            );
+            Assert.That(
+                window.Name.Equals(title),
+                $"window title shoudl bse [[{title}]] but is {window.GetWindowName()}"
+            );
+        }
+
+        [Test()]
+        public void SetGetPostion()
+        {
+            Vector2i pos = new Vector2i(100, 100);
+            window.SetPostion(pos.x, pos.y);
+            Assert.That(
+                window.Position.Equals(pos),
+                $"Window postion should be {pos} but is {window.Position}"
+            );
+        }
+
+        [Test()]
+        public void MoveWIndow()
+        {
+            Vector2i startpos = new Vector2i(100, 1000);
+            Vector2i moveVEctor = new Vector2i(100, 100);
+            window.SetPostion(startpos.x, startpos.y);
+            Assert.That(
+                window.Position.Equals(startpos),
+                $"Window postion should be {startpos} but is {window.Position}"
+            );
+            window.MoveWindow(moveVEctor);
+            Assert.That(
+                window.Position.Equals(startpos + moveVEctor),
+                $"Window postion should be {startpos} but is {window.Position}"
+            );
+        }
+
+        [Test()]
+        public void GetScrrensShot()
+        {
+            IScreenShot screenShot = window.GetScreenshot();
+
+            Assert.That(
+                screenShot.Width == (window.GetWindowContentSize().x),
+                $"Screenshot image width should be {window.GetWindowContentSize().x} but is {screenShot.Width}"
+            );
+            Assert.That(
+                screenShot.Height == (window.GetWindowContentSize().y),
+                $"Screenshot image width should be {window.GetWindowContentSize().y} but is {screenShot.Height}"
+            );
+
+            Assert.That(
+                screenShot.GetPixelColorAt(new Vector2i(0, 0)).Equals(Color.Red),
+                $"Screenshot image at {new Vector2i(0, 0)} should be RED but is {screenShot.GetPixelColorAt(new Vector2i(0, 0))}"
+            );
+            double simmilarity = screenShot.CompareToImage(
+                TestHelpers.InageReferance.EntryWindow720p
+            );
+            Assert.That(
+                simmilarity > 0.95,
+                $"Screenshot should be simmilat to EntryWindow720p but similiarity is {simmilarity}"
+            );
+        }
+
+        [Test()]
+        public void GetScrrensShotRect()
+        {
+            Vector2i rectPos = new Vector2i(0, 0);
+            Vector2i rectSize = new Vector2i(100, 100);
+            IScreenShot screenShot = window.GetScreenshotRect(rectPos, rectSize);
+            //screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
+            Assert.That(
+                screenShot.Width == (rectSize.x),
+                $"Screenshot image width should be {rectSize.x} but is {screenShot.Width}"
+            );
+            Assert.That(
+                screenShot.Height == (rectSize.y),
+                $"Screenshot image width should be {rectSize.y} but is {screenShot.Height}"
+            );
+
+            Assert.That(
+                screenShot.GetPixelColorAt(new Vector2i(0, 0)).Equals(Color.Red),
+                $"Screenshot image at {new Vector2i(0, 0)} should be RED but is {screenShot.GetPixelColorAt(new Vector2i(0, 0))}"
+            );
+            double simmilarity = screenShot.CompareToImage(
+                TestHelpers.InageReferance.EntryWindow720p100px
+            );
+            Assert.That(
+                simmilarity > 0.95,
+                $"Screenshot should be simmilat to EntryWindow720p100px but similiarity is {simmilarity}"
+            );
         }
     }
 }

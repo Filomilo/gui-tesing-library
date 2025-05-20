@@ -1,0 +1,1 @@
+‰RkD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\GuiTestingLibrary_Tets.csproj¢net8.0-windowsòCSharp12

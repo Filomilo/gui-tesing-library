@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>GTLibrary_CSharp</ProjectName>
+  <ProjectLanguage>C++</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>fee5d8f6-b7fd-6d3f-b19b-4ac043f94549</ProjectGuid>
+  <FullPath>D:\proejcts\gui-tesing-library\gui-tesing-library\src\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\.sonarqube\conf\1\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings />
+  <Configuration>Debug</Configuration>
+  <Platform>x64</Platform>
+  <TargetFramework>net8.0</TargetFramework>
+</ProjectInfo>

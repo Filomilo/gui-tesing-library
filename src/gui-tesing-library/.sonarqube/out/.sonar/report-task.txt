@@ -1,0 +1,6 @@
+projectKey=guiTetingLibrary
+serverUrl=http://localhost:9000
+serverVersion=25.5.0.107428
+dashboardUrl=http://localhost:9000/dashboard?id=guiTetingLibrary
+ceTaskId=ea1b46e5-156b-473c-a1bb-fe54ecc2b699
+ceTaskUrl=http://localhost:9000/api/ce/task?id=ea1b46e5-156b-473c-a1bb-fe54ecc2b699

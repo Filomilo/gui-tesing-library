@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>Gui-testing-lib-java</ProjectName>
+  <ProjectLanguage>C++</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>e5894c27-ed8f-41e6-8566-159135877a04</ProjectGuid>
+  <FullPath>D:\proejcts\gui-tesing-library\gui-tesing-library\src\Gui-testing-lib-java\Gui-testing-lib-java.vcxproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\proejcts\gui-tesing-library\gui-tesing-library\src\gui-tesing-library\.sonarqube\conf\4\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings />
+  <Configuration>Debug</Configuration>
+  <Platform>x64</Platform>
+</ProjectInfo>

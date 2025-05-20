@@ -1,5 +1,6 @@
 ﻿using gui_tesing_library;
 using gui_tesing_library.Controllers;
+using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using NUnit.Framework;
 using NUnit.Framework.Internal;

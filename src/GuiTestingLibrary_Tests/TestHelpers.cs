@@ -8,13 +8,14 @@ namespace GuiTestingLibrary_Tets
 {
     class TestHelpers
     {
+        public static String JavaExectutionCommand =
+            "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar";
+
         public static IGTWindow OpenExampleGui()
         {
             int prevActionDleay = gui_tesing_library.Configuration.ActionDelay;
             gui_tesing_library.Configuration.ActionDelay = 10;
-            IGTProcess gtRocess = SystemController.Instance.StartProcess(
-                "java -jar ..\\..\\..\\..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
-            );
+            IGTProcess gtRocess = SystemController.Instance.StartProcess(JavaExectutionCommand);
             Assert.That(gtRocess.IsAlive);
             IGTWindow window = SystemController
                 .Instance.WindowOfNameShouldExist("Hello!")
@@ -113,6 +114,8 @@ namespace GuiTestingLibrary_Tets
             internal static readonly string BlackSquare =
                 ImageReferanceLocation + "BlackSquare.bmp";
             public static string EntryWindow720p = ImageReferanceLocation + "EntryWindow_720p.bmp";
+            public static string EntryWindow720p100px =
+                ImageReferanceLocation + "EntryWindow720p100px.bmp";
         }
 
         public static string GetLoremIpsumText()
