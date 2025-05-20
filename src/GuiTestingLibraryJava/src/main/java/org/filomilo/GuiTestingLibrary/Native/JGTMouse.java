@@ -61,4 +61,5 @@ public class JGTMouse {
 
     public native void PositionRelativeToWindowShouldBe(JGTWindow window, JGTVector2f vector2f, float errorDistance);
 
+
 }

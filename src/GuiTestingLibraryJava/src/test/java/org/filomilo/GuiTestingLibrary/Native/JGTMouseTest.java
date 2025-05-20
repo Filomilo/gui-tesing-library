@@ -2,7 +2,9 @@ package org.filomilo.GuiTestingLibrary.Native;
 
 import org.apache.logging.log4j.core.util.Assert;
 import org.filomilo.GuiTestingLibrary.TestHelpers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 
 import java.util.Random;
 
@@ -13,6 +15,11 @@ interface ColorSetter {
 }
 
 class JGTMouseTest {
+
+    @AfterEach
+    public void teardown(){
+        TestHelpers.CloseExampleGui();
+    }
 
     @Test
     public void SetGetMousePostionTest()
@@ -30,7 +37,7 @@ class JGTMouseTest {
 
         JGTVector2i position = window.GetPosition();
         JGTVector2i size = window.GetSize();
-        JGTVector2i closePostion = new JGTVector2i(position.add(size).add(new JGTVector2i(-30,10)));
+        JGTVector2i closePostion =new JGTVector2i(position.getX() + size.getX() - 30, position.gety() + 10);
         assertDoesNotThrow(()->{
             JGTMouse.getInstance().SetPosition(closePostion);
             JGTMouse.getInstance().PositionShouldBe(closePostion,1);
@@ -39,7 +46,7 @@ class JGTMouseTest {
                 );
 
        assertTrue(JGTMouse.getInstance().GetPosition().equals(closePostion),
-               "Mouse controller is not on close button postion {"+closePostion+"} but {"+JGTMouse.getInstance().Position+"}"
+               "Mouse controller is not on close button postion {"+closePostion+"} but {"+JGTMouse.getInstance().GetPosition()+"}"
                );
 
 
@@ -64,7 +71,7 @@ class JGTMouseTest {
         JGTColor initColor = window.GetContentPixelColorAt(
                 TestHelpers.RelativePostions.SliderColorCheckPostion
         );
-            assertTrue(initColor.Equals(JGTColor.Black));
+            assertTrue(initColor.equals(JGTColor.Black));
 
         ColorSetter setColor = (int r, int g, int b) ->
         {
@@ -158,8 +165,8 @@ class JGTMouseTest {
         JGTMouse.getInstance().SetPosition(new JGTVector2i(100, 100));
 
         assertTrue(()->{
-            JGTMouse.getInstance().PositionShouldBe(startPostino,1);
-            return JGTMouse.getInstance().equals(startPostino) ;
+            JGTMouse.getInstance().PositionShouldBe(startPostino,0);
+            return JGTMouse.getInstance().GetPosition().equals(startPostino) ;
         },"Mouse position is not {"+startPostino+"} but {"+JGTMouse.getInstance().GetPosition()+"}" );
 
         JGTMouse.getInstance().MoveMouse(mouseOffser);
@@ -186,16 +193,22 @@ class JGTMouseTest {
         );
 
 
-        assertTrue(initilaColor.Equals(JGTColor.Lime),
+        assertTrue(initilaColor.equals(JGTColor.Lime),
                 "Initial color at {"+TestHelpers.RelativePostions.ColorSwitcherColorTest+"} was not white but {"+initilaColor+"}"
                 );
 
         JGTMouse.getInstance().SetPositionRelativeToWindow(window,TestHelpers.RelativePostions.ColorSwitcherGreenButton);
         JGTMouse.getInstance().ClickLeft();
 
-        assertTrue(                window
-                .GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)
-                .equals(JGTColor.Green),"CHanged first color at {"+TestHelpers.RelativePostions.ColorSwitcherColorTest+"} was not green but {"+window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)+"}");
+        assertTrue(
+                ()->{
+                    window.ContentPixelAtShouldBeColor(TestHelpers.RelativePostions.ColorSwitcherColorTest,JGTColor.Green,0);
+                    JGTColor color=window
+                            .GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)
+                            ;
+                    return  color.equals(JGTColor.Green);
+                }
+                ,"CHanged first color at {"+TestHelpers.RelativePostions.ColorSwitcherColorTest+"} was not green {"+JGTColor.Green+" but {"+window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)+"}");
 
         JGTMouse.getInstance().SetPositionRelativeToWindow(window,TestHelpers.RelativePostions.ColorSwitcherWhiteButton);
         JGTMouse.getInstance().ClickLeft();

@@ -19,6 +19,8 @@ public class TestHelpers {
         {
             JGTSystem.getInstance().WindowOfNameShouldExist("Hello!");
             JGTWindow window = JGTSystem.getInstance().FindTopWindowByName("Hello!");
+            if(window==null)
+                return;
             JGTProcess gtRocess = window.GetProcessOfWindow();
             assertDoesNotThrow(() ->
                     {
@@ -37,7 +39,7 @@ public class TestHelpers {
 
     public static JGTWindow OpenExampleGui() {
         long prevActionDleay = JGTConfiguration .getInstance().GetActionDelay();
-        JGTConfiguration .getInstance().SetActionDelay(500);
+        JGTConfiguration .getInstance().SetActionDelay(10);
         JGTProcess gtRocess = JGTSystem.getInstance().StartProcess(
                 "java -jar ..\\JavaFx_Demo\\target\\JavaFx_Demo-1.0-SNAPSHOT-shaded.jar"
         );

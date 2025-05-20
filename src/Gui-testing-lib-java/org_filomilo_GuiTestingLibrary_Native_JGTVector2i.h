@@ -87,6 +87,22 @@ JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i
 JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_divide__Lorg_filomilo_GuiTestingLibrary_Native_JGTVector2i_2
   (JNIEnv *, jobject, jobject);
 
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2i
+ * Method:    getX
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_getX
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     org_filomilo_GuiTestingLibrary_Native_JGTVector2i
+ * Method:    gety
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_gety
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
