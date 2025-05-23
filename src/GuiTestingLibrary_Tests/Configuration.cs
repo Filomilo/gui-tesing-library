@@ -6,17 +6,8 @@
 
         public static long ProcesAwaitTime
         {
-            get
-            {
-                return _ProcesAwaitTime;
-            }
-            set
-            {
-                _ProcesAwaitTime = value;
-            }
+            get { return _ProcesAwaitTime; }
+            set { _ProcesAwaitTime = value; }
         }
-
-
-
     }
 }

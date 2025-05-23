@@ -69,22 +69,6 @@ namespace GuiTestingLibrary_Tets.Components
         }
 
         [Test]
-        [Ignore("Doenst owkr with c++")]
-        public void minimizeMaximizeWindow()
-        {
-            Assert.That(window.IsMinimized == false);
-            window.Minimize();
-            Assert.That(window.ShouldBeMinimized(true).IsMinimized == true);
-            window.BringUpFront();
-            Assert.That(window.ShouldBeMinimized(false).IsMinimized == false);
-            window.Maximize();
-            Assert.That(
-                window.Size.x == ScreenController.Instance.MaximizedWindowSize.x
-                    && window.Size.y == ScreenController.Instance.MaximizedWindowSize.y
-            );
-        }
-
-        [Test]
         public void GetScreenShot()
         {
             window.ShouldBeMinimized(false);

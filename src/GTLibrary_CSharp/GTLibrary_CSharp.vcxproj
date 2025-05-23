@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClInclude Include="Color_CS.h" />
     <ClInclude Include="Converters.h" />
+    <ClInclude Include="GtConfiguration_CS.h" />
     <ClInclude Include="GTKeyboard_CS.h" />
     <ClInclude Include="GTMouse_CS.h" />
     <ClInclude Include="GTProcess_CS.h" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="Color_CS.cpp" />
     <ClCompile Include="Converters.cpp" />
+    <ClCompile Include="GtConfiguration_CS.cpp" />
     <ClCompile Include="GTKeyboard_CS.cpp" />
     <ClCompile Include="GTMouse_CS.cpp" />
     <ClCompile Include="GTProcess_CS.cpp" />
