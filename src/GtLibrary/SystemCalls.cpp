@@ -9,6 +9,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include "psapi.h"
 void pirintError() {
     DWORD errorCode = GetLastError();
     LPWSTR errorMsg = nullptr;
@@ -183,7 +184,19 @@ void SystemCalls::SetWindowSize(HWND handle, const Vector2i& size) {
 
 
 long SystemCalls::GetRamUsageOfProcess(HANDLE handle) {
-    return 0;
+    PROCESS_MEMORY_COUNTERS pmc;
+
+   
+    if (NULL == handle)
+        return -1;
+
+    if (GetProcessMemoryInfo(handle, &pmc, sizeof(pmc)))
+    {
+        return pmc.WorkingSetSize;
+      
+    }
+    return - 1;
+
 }
 
 void SystemCalls::KillProcess(HANDLE handle) {
@@ -556,9 +569,20 @@ Vector2i SystemCalls::GetSizeOfWindow(HWND handle) {
 
 }
 
-std::wstring  SystemCalls::GetProcesName(HANDLE handle)
+std::wstring SystemCalls::GetProcesName(HANDLE handle)
 {
-    return L"";
+    wchar_t processName[MAX_PATH] = L"<unknown>";
+
+    if (handle)
+    {
+     
+        if (GetModuleFileNameEx(handle, 0, processName, MAX_PATH))
+        {
+          return  std::wstring(processName);
+        }
+     }
+ 
+    return std::wstring(processName);
 }
 
 std::vector<HWND> SystemCalls::GetWindowsOfProcess(HANDLE handle) {

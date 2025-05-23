@@ -25,10 +25,6 @@ namespace gui_tesing_library.Components
         }
         public bool IsAlive { get { return gTProcess_CS.IsAlive(); } }
 
-        public IEnumerable<IGTWindow> GetWindowsOfProcess()
-        {
-           return gTProcess_CS.GetWindowsOfProcess().Select(x=>new GTWindow(x));
-        }
 
         public long GetRamUsage()
         {

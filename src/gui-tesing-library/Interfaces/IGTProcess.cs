@@ -6,7 +6,6 @@ namespace gui_tesing_library
     {
         string Name { get; }
         bool IsAlive { get; }
-        IEnumerable<IGTWindow> GetWindowsOfProcess();
         long GetRamUsage();
         void kill();
     }

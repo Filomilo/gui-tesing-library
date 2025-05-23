@@ -27,5 +27,21 @@ namespace GuiTestingLibrary_Tets.Components
                 gtRocess.kill();
             });
         }
+
+        [Test]
+        public void TestRIghPreProcesNameTest()
+        {
+            String nameTobe = "java.exe";
+            String nameRetived = gtRocess.Name.Split('\\').Last();
+           Assert.That(nameRetived == nameTobe,$"extected proc name [[{nameRetived}]] to be [[{nameTobe}]]");
+        }
+
+        [Test]
+        public void TestGetRamUsage()
+        {
+            long ram = gtRocess.GetRamUsage();
+            Assert.That(ram > 0, $"extected proc ram usage to bigger than 0 but is [[{ram}]]");
+        }
+
     }
 }
