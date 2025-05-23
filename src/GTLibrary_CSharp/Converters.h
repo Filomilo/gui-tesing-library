@@ -10,6 +10,7 @@ using namespace System;
 #include "../GtLibrary/GTScreenshot.h"
 #include <msclr/marshal_cppstd.h>
 #include <msclr/marshal.h>
+#include "GtConfiguration_CS.h"
 using namespace msclr::interop;
 ref class Converters
 {
@@ -182,6 +183,23 @@ public:
     static GTProcess_CS^ ProcessToProcessCS(GTProcess* proc)
     {
         return gcnew GTProcess_CS(proc);
+    }
+
+    static CS_IMAGE_COMPARER_TYPE GtImageComparerToCsImageComparer(IMMAGE_COMPARPER_TYPE type)
+    {
+        switch(type)
+        {
+        case PIXELBYPIXEL: return CS_IMAGE_COMPARER_TYPE::PIXEL_BY_PIXEL;
+        }
+        
+    }
+
+    static IMMAGE_COMPARPER_TYPE CSImageComparerToGTImageComparer(CS_IMAGE_COMPARER_TYPE type)
+    {
+        switch (type)
+        {
+        case CS_IMAGE_COMPARER_TYPE::PIXEL_BY_PIXEL: return PIXELBYPIXEL;
+        }
     }
 
 };

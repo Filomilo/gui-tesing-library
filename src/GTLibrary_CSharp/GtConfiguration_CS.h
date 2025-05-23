@@ -1,7 +1,13 @@
 #pragma once
 using namespace System;
 #include "../GtLibrary/Configuration.h"
-ref class GtConfiguration_CS
+
+public enum class CS_IMAGE_COMPARER_TYPE
+{
+	PIXEL_BY_PIXEL
+};
+
+public ref class GtConfiguration_CS
 {
 public:
 
@@ -13,7 +19,7 @@ public:
 	void setActioNDelay(long time);
 	void setDeafultActioNDelay();
 	long getActionDelay();
-	IMMAGE_COMPARPER_TYPE GetImageComparerType();
-	void setImageCompareType(IMMAGE_COMPARPER_TYPE type);
+	CS_IMAGE_COMPARER_TYPE GetImageComparerType();
+	void setImageCompareType(CS_IMAGE_COMPARER_TYPE type);
 };
 

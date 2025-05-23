@@ -51,7 +51,7 @@ double GTScreenshot::CompareToImage(const std::string& filePathToComparingImage)
 
 void GTScreenshot::SimmilarityBetweenImagesShouldBe(const std::string& imagePath, double similarity) const {
     Helpers::ensureTrue([&]()->bool {
-        return this->CompareToImage(imagePath) == similarity;
+        return this->CompareToImage(imagePath) > similarity;
         });
     
 }

@@ -11,7 +11,7 @@ void AwaitTrue(std::function<bool()> func, const std::string& mes = "") {
         auto now = std::chrono::steady_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start).count();
 
-        if (elapsed > Configuration::GetInstance()->GetTimeout()) {
+        if (elapsed > GtConfiguration::GetInstance()->GetTimeout()) {
             throw std::runtime_error("Did not reach state within max time ::: " + mes);
         }
 

@@ -46,7 +46,7 @@ namespace GuiTestingLibrary_Tets
                     gtRocess.kill();
                 });
                 window.Close();
-                window.KillProcess();
+                window.KillProcess().ShouldWindowExist(false);
             }
             catch (Exception ex)
             {

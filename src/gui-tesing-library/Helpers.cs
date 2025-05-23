@@ -134,5 +134,25 @@ namespace gui_tesing_library
 
             sw.Stop();
         }
+
+        public static Configuration.IMAGE_COMPARER CSImageComparerToImageComparer(CS_IMAGE_COMPARER_TYPE type)
+        {
+            switch (type)
+            {
+                case CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL: return Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL;
+            }
+
+            throw new ArgumentException();
+        }
+
+        public static CS_IMAGE_COMPARER_TYPE ImageCompaererToCsImageComparer(Configuration.IMAGE_COMPARER type)
+        {
+            switch (type)
+            {
+                case Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL: return CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL;
+            }
+            throw new ArgumentException();
+
+        }
     }
 }

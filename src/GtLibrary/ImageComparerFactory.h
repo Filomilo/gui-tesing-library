@@ -8,7 +8,7 @@ public:
 	
 
 	static AbstractImageComparer* getImageCompaprer() {
-		switch (Configuration::GetInstance()-> GetImageComparerType())
+		switch (GtConfiguration::GetInstance()-> GetImageComparerType())
 		{
 		case IMMAGE_COMPARPER_TYPE::PIXELBYPIXEL:
 			return new PixelByPixelImageComparer();

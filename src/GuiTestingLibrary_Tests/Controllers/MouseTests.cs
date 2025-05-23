@@ -386,5 +386,35 @@ namespace GuiTestingLibrary_Tets
 
             Thread.Sleep(5000);
         }
+
+        [Test]
+        public void TestRIghtClickClose()
+        {
+            IGTWindow windwoGtWindow = TestHelpers.OpenExampleGui();
+            MouseController.Instance.SetPositionRelativeToWindow(windwoGtWindow, new Vector2i(20, -10));
+            MouseController.Instance.ClickRight();
+            MouseController.Instance.MoveMouse(new Vector2i(10, 130));
+            MouseController.Instance.ClickLeft();
+            Assert.DoesNotThrow(() =>
+            {
+                windwoGtWindow.ShouldWindowExist(false);
+            });
+            //Thread.Sleep(5000);
+        }
+        [Test]
+        public void TestRIghPressReleaseClose()
+        {
+            IGTWindow windwoGtWindow = TestHelpers.OpenExampleGui();
+            MouseController.Instance.SetPositionRelativeToWindow(windwoGtWindow, new Vector2i(20, -10));
+            MouseController.Instance.PressRight();
+            MouseController.Instance.ReleaseRight();
+            MouseController.Instance.MoveMouse(new Vector2i(10, 130));
+            MouseController.Instance.ClickLeft();
+            Assert.DoesNotThrow(() =>
+            {
+                windwoGtWindow.ShouldWindowExist(false);
+            });
+            //Thread.Sleep(5000);
+        }
     }
 }

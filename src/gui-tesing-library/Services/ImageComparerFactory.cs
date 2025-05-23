@@ -13,13 +13,14 @@ namespace gui_tesing_library.Services
 
         public static IImageComparer GetComparer()
         {
-            switch (Configuration.ImageComparerType)
-            {
-                case IMAGE_COMPARER_TYPE.HASH_COMPARER:
-                    return new HashImageComparer();
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            throw new NotImplementedException();
+            //switch (Configuration.ImageComparerType)
+            //{
+            //    case IMAGE_COMPARER_TYPE.HASH_COMPARER:
+            //        return new HashImageComparer();
+            //    default:
+            //        throw new ArgumentOutOfRangeException();
+            //}
         }
 
     }

@@ -270,9 +270,14 @@ namespace GuiTestingLibrary_Tets.Components
                 screenShot.GetPixelColorAt(new Vector2i(0, 0)).Equals(Color.Red),
                 $"Screenshot image at {new Vector2i(0, 0)} should be RED but is {screenShot.GetPixelColorAt(new Vector2i(0, 0))}"
             );
-            double simmilarity = screenShot.CompareToImage(
+            double simmilarity=0;
+            Assert.DoesNotThrow(() =>
+            {
+                simmilarity = screenShot.SimmilarityBetweenImagesShouldBe(TestHelpers.InageReferance.EntryWindow720p,0.9) .CompareToImage(
                 TestHelpers.InageReferance.EntryWindow720p
             );
+            });
+            
             Assert.That(
                 simmilarity > 0.95,
                 $"Screenshot should be simmilat to EntryWindow720p but similiarity is {simmilarity}"
@@ -307,5 +312,65 @@ namespace GuiTestingLibrary_Tets.Components
                 $"Screenshot should be simmilat to EntryWindow720p100px but similiarity is {simmilarity}"
             );
         }
+
+        [Test()]
+        public void WindowNameShouldBe()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                Assert.That(window.WindowNameShouldBe("Hello!").GetWindowName()=="Hello!" && window.Name == "Hello!");
+            });
+        }
+
+        [Test()]
+        public void ContentPixleShouldBe()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                Assert.That(window.ContentPixelAtShouldBeColor(new Vector2i(0,0), Color.Red).GetContentPixelColorAt(new Vector2i(0,0)).Equals(Color.Red) );
+            });
+            Assert.DoesNotThrow(() =>
+            {
+                Assert.That(window.PixelAtShouldBeColor(new Vector2i(10, 10), Color.Red).GetPixelColorAt(new Vector2i(10,10)).Equals(Color.Red));
+            });
+        }
+
+        [Test()]
+        public void ShouldBeMInimiezedTest()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                Assert.That(window.ShouldBeMinimized(false).IsMinimized==false);
+                window.Minimize();
+                Assert.That(window.ShouldBeMinimized(true).IsMinimized == true);
+                window.Maximize();
+                Assert.That(window.ShouldBeMinimized(false).IsMinimized == false);
+            });
+        }
+
+        [Test()]
+        public void PositionTest()
+        {
+            Assert.DoesNotThrow(() =>
+            {
+                window.SetPostion(0, 0);
+                Assert.That(window.Position.Equals(new Vector2i(0,0)));
+                window.MoveWindow(new Vector2i(100,100));
+                Assert.That(window.Position.Equals(new Vector2i(100, 100)));
+
+            });
+        }
+        [Test()]
+        public void MaximizeWindow()
+        {
+            window.Maximize();
+            Assert.That(window.ShouldBeMinimized(false).IsMinimized == false);
+            Vector2i adjusrmetnd = new Vector2i(-16, 32);
+            Assert.That(
+                window.Size.x+ adjusrmetnd.x == ScreenController.Instance.MaximizedWindowSize.x
+                && window.Size.y + adjusrmetnd.y == ScreenController.Instance.MaximizedWindowSize.y
+            , $"window size is {window.Size+ adjusrmetnd} but maxmiezed window size is {ScreenController.Instance.MaximizedWindowSize}");
+        }
+
     }
 }

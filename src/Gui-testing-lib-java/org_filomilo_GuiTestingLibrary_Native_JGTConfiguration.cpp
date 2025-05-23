@@ -6,49 +6,49 @@
 
 JNIEXPORT jlong JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_GetTimeout
 (JNIEnv* env, jobject) {
-    return Converters::LongToJLong(env, Configuration::GetInstance()->GetTimeout());
+    return Converters::LongToJLong(env, GtConfiguration::GetInstance()->GetTimeout());
 }
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetTimeout
 (JNIEnv* env, jobject, jlong _jlong) {
-    Configuration::GetInstance()->SetTimeout(Converters::JLongToLong(env, _jlong) );
+    GtConfiguration::GetInstance()->SetTimeout(Converters::JLongToLong(env, _jlong) );
 }
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetDefaultTimeout
 (JNIEnv*, jobject) {
-    Configuration::GetInstance()->SetDefaultTimeout();
+    GtConfiguration::GetInstance()->SetDefaultTimeout();
 }
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_DefaultSleep
 (JNIEnv*, jobject) {
-    Configuration::GetInstance()->DefaultSleep();
+    GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 
 JNIEXPORT jlong JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_GetActionDelay
 (JNIEnv*, jobject) {
-    return Configuration::GetInstance()->getActionDelay();
+    return GtConfiguration::GetInstance()->getActionDelay();
 }
 
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetActionDelay
 (JNIEnv*, jobject, jlong val) {
-    return Configuration::GetInstance()->setActioNDelay(val);
+    return GtConfiguration::GetInstance()->setActioNDelay(val);
 }
 
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetDefaultActionDelay
 (JNIEnv*, jobject) {
-    Configuration::GetInstance()->setDeafultActioNDelay();
+    GtConfiguration::GetInstance()->setDeafultActioNDelay();
 }
 
 JNIEXPORT jobject JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_GetImageComparer
 (JNIEnv* env, jobject obj) {
-    return Converters::ImageCOmparertOJImageComparer(env,Configuration::GetInstance()->GetImageComparerType());
+    return Converters::ImageCOmparertOJImageComparer(env, GtConfiguration::GetInstance()->GetImageComparerType());
 }
 
 
 JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTConfiguration_SetImageComparer
 (JNIEnv* env, jobject, jobject _enum) {
-    Configuration::GetInstance()->setImageCompareType(Converters::JIMAGECOpmaretOGtImageCOmparer(env, _enum));
+    GtConfiguration::GetInstance()->setImageCompareType(Converters::JIMAGECOpmaretOGtImageCOmparer(env, _enum));
 }
