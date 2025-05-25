@@ -3,46 +3,45 @@ using gui_tesing_library;
 using gui_tesing_library.Controllers;
 using NUnit.Framework;
 
-namespace GuiTestingLibrary_Tets.Components
+namespace GuiTestingLibrary_Tets.Components;
+
+[TestFixture]
+internal class GtProcessTest
 {
-    [TestFixture]
-    class GtProcessTest
+    [SetUp]
+    public void init()
     {
-        [Required]
-        private IGTProcess gtRocess;
+        gtRocess = SystemController.Instance.StartProcess(TestHelpers.JavaExectutionCommand);
+        Assert.That(gtRocess.IsAlive);
+    }
 
-        [NUnit.Framework.SetUp]
-        public void init()
+    [TearDown]
+    public void purge()
+    {
+        Assert.DoesNotThrow(() =>
         {
-            gtRocess = SystemController.Instance.StartProcess(TestHelpers.JavaExectutionCommand);
-            Assert.That(gtRocess.IsAlive);
-        }
+            gtRocess.kill();
+        });
+    }
 
-        [NUnit.Framework.TearDown]
-        public void purge()
-        {
-            Assert.DoesNotThrow(() =>
-            {
-                gtRocess.kill();
-            });
-        }
+    [Required]
+    private IGTProcess gtRocess;
 
-        [Test]
-        public void TestRIghPreProcesNameTest()
-        {
-            String nameTobe = "java.exe";
-            String nameRetived = gtRocess.Name.Split('\\').Last();
-            Assert.That(
-                nameRetived == nameTobe,
-                $"extected proc name [[{nameRetived}]] to be [[{nameTobe}]]"
-            );
-        }
+    [Test]
+    public void TestRIghPreProcesNameTest()
+    {
+        var nameTobe = "java.exe";
+        var nameRetived = gtRocess.Name.Split('\\').Last();
+        Assert.That(
+            nameRetived == nameTobe,
+            $"extected proc name [[{nameRetived}]] to be [[{nameTobe}]]"
+        );
+    }
 
-        [Test]
-        public void TestGetRamUsage()
-        {
-            long ram = gtRocess.GetRamUsage();
-            Assert.That(ram > 0, $"extected proc ram usage to bigger than 0 but is [[{ram}]]");
-        }
+    [Test]
+    public void TestGetRamUsage()
+    {
+        var ram = gtRocess.GetRamUsage();
+        Assert.That(ram > 0, $"extected proc ram usage to bigger than 0 but is [[{ram}]]");
     }
 }

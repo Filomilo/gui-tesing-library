@@ -67,7 +67,7 @@ public class ScreenShotTests
         Assert.That(
             screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) > 0.95,
             $"Comparing to itself should return bi bebr ta 0.96"
-            + $", instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
+                + $", instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
         );
     }
 

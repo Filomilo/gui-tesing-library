@@ -10,8 +10,8 @@ namespace gui_tesing_library_CS
     {
         internal static void AwaitTrue(Func<bool> func, string mes = "")
         {
-            bool state = false;
-            Stopwatch sw = Stopwatch.StartNew();
+            var state = false;
+            var sw = Stopwatch.StartNew();
             while (state == false)
             {
                 if (sw.ElapsedMilliseconds > Configuration.ProcesAwaitTime)
@@ -165,6 +165,7 @@ namespace gui_tesing_library
                 case Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL:
                     return CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL;
             }
+
             throw new ArgumentException();
         }
     }

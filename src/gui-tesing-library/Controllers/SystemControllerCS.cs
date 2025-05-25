@@ -25,7 +25,7 @@ public class SystemControllerCS : IGTSystem
         }
     }
 
-    public GTSystemVersion OsVersion => new GTSystemVersion(Environment.OSVersion);
+    public GTSystemVersion OsVersion => new(Environment.OSVersion);
 
     public Vector2i MaximizedWindowSize { get; }
 
