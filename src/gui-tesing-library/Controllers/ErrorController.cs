@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace gui_tesing_library.Controllers
+namespace gui_tesing_library_CS.Controllers
 {
     public static class ErrorController
     {

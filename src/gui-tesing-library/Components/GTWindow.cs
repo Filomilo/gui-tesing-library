@@ -23,10 +23,7 @@ namespace gui_tesing_library.Components
             get { return new Vector2i(_windowCS.GetWindowSize()); }
         }
 
-        public Vector2i MaximizedWindowSize
-        {
-            get { return new Vector2i(_windowCS.GetMaximizedWindowSize()); }
-        }
+
 
         public IScreenShot GetScreenshot()
         {

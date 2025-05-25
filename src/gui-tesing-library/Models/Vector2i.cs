@@ -1,7 +1,9 @@
 ﻿using System;
-
-namespace gui_tesing_library.Controllers
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("GuiTestingLibrary_Tets.Models")]
+namespace gui_tesing_library.Models
 {
+
     public class Vector2i
     {
         public Vector2i(int x, int y)
@@ -50,12 +52,12 @@ namespace gui_tesing_library.Controllers
             return $"[{x};{y}]";
         }
 
-        internal int Area()
+        public int Area()
         {
             return x * y;
         }
 
-        internal Vector2i_CS Native()
+        public Vector2i_CS Native()
         {
             return Vector2i_CS.Create(x, y);
         }
@@ -76,10 +78,7 @@ namespace gui_tesing_library.Controllers
             return new Vector2i((int)v.x, (int)v.y);
         }
 
-        public static explicit operator Vector2i_CS(Vector2i v)
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 
     public class Vector2f
@@ -125,16 +124,16 @@ namespace gui_tesing_library.Controllers
             return $"[{x};{y}]";
         }
 
-        internal float Area()
+        public float Area()
         {
             return x * y;
         }
 
         public float DistanceFrom(Vector2f pos)
         {
-            Vector2f distance = new Vector2f(this.x - pos.x, this.y - pos.y);
+            Vector2f offset = new Vector2f(this.x - pos.x, this.y - pos.y);
             return (float)
-                Math.Sqrt(Math.Pow((double)distance.x, 2) + Math.Pow((double)distance.y, 2));
+                Math.Sqrt(Math.Pow((double)offset.x, 2) + Math.Pow((double)offset.y, 2));
         }
 
         public Vector2f_CS Native()

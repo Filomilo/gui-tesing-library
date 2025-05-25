@@ -1,7 +1,36 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using gui_tesing_library;
 using gui_tesing_library.Models;
+
+namespace gui_tesing_library_CS
+{
+    public static class Helpers
+    {
+        internal static void AwaitTrue(Func<bool> func, string mes = "")
+        {
+            bool state = false;
+            Stopwatch sw = Stopwatch.StartNew();
+            while (state == false)
+            {
+                if (sw.ElapsedMilliseconds > Configuration.ProcesAwaitTime)
+                {
+                    sw.Stop();
+                    throw new TimeoutException("Did not reach state within max time ::: " + mes);
+                }
+
+                state = func();
+                if (!state)
+                    Thread.Sleep(100);
+            }
+
+            sw.Stop();
+        }
+
+    }
+
+}
 
 namespace gui_tesing_library
 {
@@ -116,25 +145,7 @@ namespace gui_tesing_library
             };
         }
 
-        internal static void AwaitTrue(Func<bool> func, string mes = "")
-        {
-            bool state = false;
-            Stopwatch sw = Stopwatch.StartNew();
-            while (state == false)
-            {
-                if (sw.ElapsedMilliseconds > Configuration.ProcesAwaitTime)
-                {
-                    sw.Stop();
-                    throw new TimeoutException("Did not reach state within max time ::: " + mes);
-                }
-                state = func();
-                if (!state)
-                    Thread.Sleep(100);
-            }
-
-            sw.Stop();
-        }
-
+     
         public static Configuration.IMAGE_COMPARER CSImageComparerToImageComparer(CS_IMAGE_COMPARER_TYPE type)
         {
             switch (type)

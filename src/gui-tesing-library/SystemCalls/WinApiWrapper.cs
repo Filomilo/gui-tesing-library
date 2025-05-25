@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace gui_tesing_library.SystemCalls
+namespace gui_tesing_library_CS.SystemCalls
 {
     public static class WinApiWrapper
     {

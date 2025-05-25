@@ -1,8 +1,9 @@
 ﻿using System;
+using gui_tesing_library_CS.Controllers;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 
-namespace gui_tesing_library.SystemCalls
+namespace gui_tesing_library_CS.SystemCalls
 {
     public static class SystemCallsFactory
     {

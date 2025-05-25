@@ -2,8 +2,9 @@
 using MethodDecorator.Fody.Interfaces;
 using System;
 using System.Reflection;
+using gui_tesing_library_CS.Controllers;
 
-namespace gui_tesing_library.Directives
+namespace gui_tesing_library_CS.Directives
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor)]
     class LogAttribute : Attribute, IMethodDecorator

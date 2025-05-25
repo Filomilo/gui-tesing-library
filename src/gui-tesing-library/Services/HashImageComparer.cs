@@ -3,7 +3,7 @@ using CoenM.ImageHash.HashAlgorithms;
 using gui_tesing_library.Interfaces;
 using System.IO;
 
-namespace gui_tesing_library.Services
+namespace gui_tesing_library_CS.Services
 {
     class HashImageComparer : IImageComparer
     {

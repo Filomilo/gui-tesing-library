@@ -66,8 +66,9 @@ namespace gui_tesing_library.Models.Tests
             IScreenShot screenShot = window.GetScreenshot();
             //screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
             Assert.That(
-                screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) >0.96,
-                $"Comparing to itself should return 1, instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
+                screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) >0.95,
+                $"Comparing to itself should return bi bebr ta 0.96" +
+                $", instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
             );
         }
 

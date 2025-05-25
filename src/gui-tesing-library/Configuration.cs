@@ -5,10 +5,10 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using gui_tesing_library_CS;
 using gui_tesing_library.Components;
 using gui_tesing_library.Models;
-using gui_tesing_library.Services;
-using static gui_tesing_library.Services.ImageComparerFactory;
+
 
 namespace gui_tesing_library
 {

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading;
+using gui_tesing_library_CS.Components;
+using gui_tesing_library_CS.Directives;
+using gui_tesing_library_CS.SystemCalls;
+using gui_tesing_library;
 using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
-using gui_tesing_library.Directives;
+
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
-using gui_tesing_library.SystemCalls;
 
-namespace gui_tesing_library
+
+namespace gui_tesing_library_CS
 {
     public class SystemControllerCS : IGTSystem
     {

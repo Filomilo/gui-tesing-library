@@ -8,12 +8,14 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using GregsStack.InputSimulatorStandard;
+using gui_tesing_library_CS.Models;
+using gui_tesing_library;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 using Color = gui_tesing_library.Models.Color;
 
-namespace gui_tesing_library.SystemCalls
+namespace gui_tesing_library_CS.SystemCalls
 {
     public class WindowsSystemCalls : ISystemCalls
     {
@@ -344,7 +346,7 @@ namespace gui_tesing_library.SystemCalls
             );
         }
 
-        public Models.Color GetPixelColorAt(Vector2i postion, int handle)
+        public Color GetPixelColorAt(Vector2i postion, int handle)
         {
             IntPtr hdc = WinApiWrapper.GetDC(new IntPtr(handle));
             uint pixel = WinApiWrapper.GetPixel(hdc, postion.x, postion.y);

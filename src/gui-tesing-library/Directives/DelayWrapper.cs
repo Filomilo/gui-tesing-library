@@ -2,8 +2,9 @@
 using System;
 using System.Reflection;
 using System.Threading;
+using gui_tesing_library;
 
-namespace gui_tesing_library.Directives
+namespace gui_tesing_library_CS.Directives
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor)]
     class DelayAttribute : Attribute, IMethodDecorator

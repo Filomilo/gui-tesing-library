@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using gui_tesing_library_CS.SystemCalls;
+using gui_tesing_library;
 using gui_tesing_library.Interfaces;
-using gui_tesing_library.SystemCalls;
+
 using Lombok.NET;
 
-namespace gui_tesing_library.Components.CS
+namespace gui_tesing_library_CS.Components.CS
 {
     [AllArgsConstructor]
     [With]

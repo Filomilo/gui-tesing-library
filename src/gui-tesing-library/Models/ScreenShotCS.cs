@@ -2,15 +2,16 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using gui_tesing_library.Controllers;
+using gui_tesing_library_CS.Services;
 using gui_tesing_library.Interfaces;
-using gui_tesing_library.Services;
+using gui_tesing_library.Models;
+using gui_tesing_library.Controllers;
 
-namespace gui_tesing_library.Models
+namespace gui_tesing_library_CS.Models
 {
     public class ScreenShotCS : IScreenShot
     {
-        Color[,] pixels;
+        gui_tesing_library.Models.Color[,] pixels;
 
         public int Width
         {
@@ -23,12 +24,12 @@ namespace gui_tesing_library.Models
 
         public ScreenShotCS(Bitmap bmp)
         {
-            this.pixels = new Color[bmp.Width, bmp.Height];
+            this.pixels = new gui_tesing_library.Models.Color[bmp.Width, bmp.Height];
             for (int x = 0; x < bmp.Width; x++)
             {
                 for (int y = 0; y < bmp.Height; y++)
                 {
-                    pixels[x, y] = new Color(bmp.GetPixel(x, y));
+                    pixels[x, y] = new gui_tesing_library.Models.Color(bmp.GetPixel(x, y));
                 }
             }
         }

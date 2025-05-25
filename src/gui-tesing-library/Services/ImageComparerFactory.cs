@@ -1,7 +1,7 @@
 ﻿using gui_tesing_library.Interfaces;
 using System;
 
-namespace gui_tesing_library.Services
+namespace gui_tesing_library_CS.Services
 {
 
     public static partial class ImageComparerFactory

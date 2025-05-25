@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using gui_tesing_library;
 using gui_tesing_library.Controllers;
+using gui_tesing_library.Models;
 using LoremNET;
 using NUnit.Framework;
 

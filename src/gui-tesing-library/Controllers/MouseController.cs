@@ -13,18 +13,18 @@ namespace gui_tesing_library.Controllers
     {
         static GTMouse_CS gtMouse_Cs = new GTMouse_CS();
 
-        public Vector2i Position
+        public gui_tesing_library.Models.Vector2i Position
         {
-            get { return new Vector2i(gtMouse_Cs.GetPosition()); }
+            get { return new gui_tesing_library.Models.Vector2i(gtMouse_Cs.GetPosition()); }
         }
 
-        public IGTMouse MoveMouse(Vector2i offset)
+        public IGTMouse MoveMouse(gui_tesing_library.Models.Vector2i offset)
         {
             gtMouse_Cs.MoveMouse(offset.Native());
             return this;
         }
 
-        public IGTMouse SetPosition(Vector2i position)
+        public IGTMouse SetPosition(gui_tesing_library.Models.Vector2i position)
         {
             gtMouse_Cs.SetPosition(position.Native());
             return this;
@@ -90,55 +90,55 @@ namespace gui_tesing_library.Controllers
             return this;
         }
 
-        public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2i positon)
+        public IGTMouse SetPositionRelativeToWindow(IGTWindow window, gui_tesing_library.Models.Vector2i positon)
         {
             GTWindow gtWindow_Cs = window as GTWindow;
             gtMouse_Cs.SetPositionRelativeToWindow(gtWindow_Cs.native(), positon.Native());
             return this;
         }
 
-        public IGTMouse SetPositionRelativeToWindow(IGTWindow window, Vector2f positon)
+        public IGTMouse SetPositionRelativeToWindow(IGTWindow window, gui_tesing_library.Models.Vector2f positon)
         {
             GTWindow gtWindow_Cs = window as GTWindow;
             gtMouse_Cs.SetPositionRelativeToWindow(gtWindow_Cs.native(), positon.Native());
             return this;
         }
 
-        public IGTMouse PositionShouldBe(Vector2i pos, int errorDistance = 0)
+        public IGTMouse PositionShouldBe(gui_tesing_library.Models.Vector2i pos, int errorDistance = 0)
         {
             gtMouse_Cs.PositionShouldBe(pos.Native(), errorDistance);
             return this;
         }
 
-        public IGTMouse MoveMouseTo(Vector2i newRedSliderPostion)
+        public IGTMouse MoveMouseTo(gui_tesing_library.Models.Vector2i newRedSliderPostion)
         {
             gtMouse_Cs.MoveMouseTo(newRedSliderPostion.Native());
             return this;
         }
 
-        public IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, Vector2i position)
+        public IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, gui_tesing_library.Models.Vector2i position)
         {
             GTWindow gtWindow_Cs = window as GTWindow;
             gtMouse_Cs.MoveMouseRelativeToWindowTo(gtWindow_Cs.native(), position.Native());
             return this;
         }
 
-        public IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, Vector2f vector2f)
+        public IGTMouse MoveMouseRelativeToWindowTo(IGTWindow window, gui_tesing_library.Models.Vector2f vector2f)
         {
             GTWindow gtWindow_Cs = window as GTWindow;
             gtMouse_Cs.MoveMouseRelativeToWindowTo(gtWindow_Cs.native(), vector2f.Native());
             return this;
         }
 
-        public Vector2f GetPostionRelativeToWinodw(IGTWindow window)
+        public gui_tesing_library.Models.Vector2f GetPostionRelativeToWinodw(IGTWindow window)
         {
             GTWindow gtWindow_Cs = window as GTWindow;
-            return new Vector2f(gtMouse_Cs.GetPositionRelativeToWindow(gtWindow_Cs.native()));
+            return new gui_tesing_library.Models.Vector2f(gtMouse_Cs.GetPositionRelativeToWindow(gtWindow_Cs.native()));
         }
 
         public IGTMouse PositionRelativeToWindowShouldBe(
             IGTWindow window,
-            Vector2f vector2f,
+            gui_tesing_library.Models.Vector2f vector2f,
             float errorDistance = 0
         )
         {
