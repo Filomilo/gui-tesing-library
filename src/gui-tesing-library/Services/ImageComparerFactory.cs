@@ -7,7 +7,7 @@ public static class ImageComparerFactory
 {
     public enum IMAGE_COMPARER_TYPE
     {
-        HASH_COMPARER,
+        HASH_COMPARER
     }
 
     public static IImageComparer GetComparer()

@@ -1,7 +1,7 @@
 ﻿using System;
-using gui_tesing_library;
 using gui_tesing_library_CS.Directives;
 using gui_tesing_library_CS.SystemCalls;
+using gui_tesing_library;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 
@@ -213,10 +213,7 @@ public class MouseControllerCS : IGTMouse
     )
     {
         Helpers.AwaitTrue(
-            () =>
-            {
-                return GetPostionRelativeToWinodw(window).DistanceFrom(realitvePos) < errorDistance;
-            },
+            () => { return GetPostionRelativeToWinodw(window).DistanceFrom(realitvePos) < errorDistance; },
             $"Mouse postion realtive to window was not {realitvePos} withing maximum time but {GetPostionRelativeToWinodw(window)} which is distance of [[{GetPostionRelativeToWinodw(window).DistanceFrom(realitvePos)}]]] and allowed is [[{errorDistance}]]"
         );
         return this;

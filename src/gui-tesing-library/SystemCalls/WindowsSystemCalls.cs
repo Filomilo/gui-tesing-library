@@ -110,8 +110,8 @@ public class WindowsSystemCalls : ISystemCalls
     {
         var processHandle = WinApiWrapper.OpenProcess(
             WinApiWrapper.ProcessAccessRights.PROCESS_QUERY_INFORMATION
-                | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ
-                | WinApiWrapper.ProcessAccessRights.PROCESS_TERMINATE,
+            | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ
+            | WinApiWrapper.ProcessAccessRights.PROCESS_TERMINATE,
             false,
             id
         );

@@ -1,7 +1,7 @@
 ﻿using System;
-using gui_tesing_library;
 using gui_tesing_library_CS.Directives;
 using gui_tesing_library_CS.SystemCalls;
+using gui_tesing_library;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
@@ -73,10 +73,7 @@ public class GTWindowCS : IGTWindow
     public IGTScreen PixelAtShouldBeColor(Vector2i position, Color color)
     {
         Helpers.AwaitTrue(
-            () =>
-            {
-                return GetPixelColorAt(position).Equals(color);
-            },
+            () => { return GetPixelColorAt(position).Equals(color); },
             $"Pixel color at {position} of window {GetWindowName()} was not {color} with in given time"
         );
         return this;
@@ -133,10 +130,7 @@ public class GTWindowCS : IGTWindow
     [Log]
     IGTWindow IGTWindow.SizeShouldBe(Vector2i vector2I)
     {
-        Helpers.AwaitTrue(() =>
-        {
-            return Size.Equals(vector2I);
-        });
+        Helpers.AwaitTrue(() => { return Size.Equals(vector2I); });
         return this;
     }
 
@@ -160,10 +154,7 @@ public class GTWindowCS : IGTWindow
     [Log]
     public IGTWindow ShouldBeMinimized(bool state)
     {
-        Helpers.AwaitTrue(() =>
-        {
-            return IsMinimized == state;
-        });
+        Helpers.AwaitTrue(() => { return IsMinimized == state; });
         return this;
     }
 
@@ -179,8 +170,8 @@ public class GTWindowCS : IGTWindow
         return new Vector2i(
             positon.x + SystemController.Instance.GetWindowBorderWidth(),
             positon.y
-                + SystemController.Instance.GetWindowBorderHeight()
-                + SystemController.Instance.GetWindowTitleBarHeight()
+            + SystemController.Instance.GetWindowBorderHeight()
+            + SystemController.Instance.GetWindowTitleBarHeight()
         );
     }
 
@@ -222,10 +213,7 @@ public class GTWindowCS : IGTWindow
     public IGTWindow ContentPixelAtShouldBeColor(Vector2i position, Color color)
     {
         Helpers.AwaitTrue(
-            () =>
-            {
-                return GetContentPixelColorAt(position).Equals(color);
-            },
+            () => { return GetContentPixelColorAt(position).Equals(color); },
             $"Content Pixel color at {position} of window {GetWindowName()} was not {color} but {GetContentPixelColorAt(position)} with in given time"
         );
         return this;
@@ -244,10 +232,7 @@ public class GTWindowCS : IGTWindow
     public IGTWindow WindowNameShouldBe(string title)
     {
         Helpers.AwaitTrue(
-            () =>
-            {
-                return GetWindowName() == title;
-            },
+            () => { return GetWindowName() == title; },
             $"Window name was not [[{title}]] but [[{GetWindowName()}]] within {Configuration.ProcesAwaitTime} ms"
         );
         return this;
@@ -263,7 +248,7 @@ public class GTWindowCS : IGTWindow
             () =>
             {
                 return GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)
-                    < errorPass;
+                       < errorPass;
             },
             $"Content Pixel color at {sliderColorCheckPostion} of window {GetWindowName()} was not {colorshouldbe} but {GetContentPixelColorAt(sliderColorCheckPostion)} with in given time, difreance: [[{GetContentPixelColorAt(sliderColorCheckPostion).getDiffrence(colorshouldbe)}]], with error pass [[{errorPass}]]"
         );
