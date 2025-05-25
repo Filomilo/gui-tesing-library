@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using gui_tesing_library;
 using gui_tesing_library_CS.Components;
 using gui_tesing_library_CS.Directives;
 using gui_tesing_library_CS.SystemCalls;
-using gui_tesing_library;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 
@@ -18,13 +18,14 @@ public class SystemControllerCS : IGTSystem
     {
         get
         {
-            if (_gtSystem == null) _gtSystem = new SystemControllerCS();
+            if (_gtSystem == null)
+                _gtSystem = new SystemControllerCS();
 
             return _gtSystem;
         }
     }
 
-    public GTSystemVersion OsVersion => new(Environment.OSVersion);
+    public GTSystemVersion OsVersion => new GTSystemVersion(Environment.OSVersion);
 
     public Vector2i MaximizedWindowSize { get; }
 
@@ -51,7 +52,10 @@ public class SystemControllerCS : IGTSystem
     public IGTSystem WindowOfNameShouldExist(string name)
     {
         Helpers.AwaitTrue(
-            () => { return _SystemCalls.FindWindowByName(name) != 0; },
+            () =>
+            {
+                return _SystemCalls.FindWindowByName(name) != 0;
+            },
             $"No window of name [{name}]"
         );
         return this;

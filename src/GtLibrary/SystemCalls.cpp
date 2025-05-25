@@ -40,9 +40,22 @@ Vector2i SystemCalls::GetMaximizedWindowSize() {
 
     return Vector2i(screenWidth, screenHeight);
 }
+typedef LONG(WINAPI* RtlGetVersionPtr)(PRTL_OSVERSIONINFOW);
 
 GTSystemVersion SystemCalls::GetSystemVersion() {
-    return GTSystemVersion("");
+    HMODULE hMod = ::GetModuleHandleW(L"ntdll.dll");
+    if (hMod) {
+        RtlGetVersionPtr fxPtr = (RtlGetVersionPtr)::GetProcAddress(hMod, "RtlGetVersion");
+        if (fxPtr != nullptr) {
+            RTL_OSVERSIONINFOW rovi = { 0 };
+            rovi.dwOSVersionInfoSize = sizeof(rovi);
+            if (fxPtr(&rovi) == 0) { // STATUS_SUCCESS
+                return GTSystemVersion("Windows", rovi.dwMajorVersion, rovi.dwMinorVersion, rovi.dwBuildNumber);
+            }
+        }
+    }
+    return GTSystemVersion("Windows", 0, 0, 0);
+
 }
 
 HANDLE _DuplicateHandle(HANDLE Origin) {

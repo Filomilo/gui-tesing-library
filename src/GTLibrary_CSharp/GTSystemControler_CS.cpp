@@ -9,7 +9,7 @@ using namespace System::Collections::Generic;
 
 
 List<GTWindow_CS^>^ GTSystemControler_CS::FindWindowByName(String^ name) {
-    auto nativeWindows = nativeSystem->FindWindowByName(Converters::ConvertStringToStdString(name));
+    auto nativeWindows = nativeSystem->FindWindowByName(Converters::ConvertStringToWStdString(name));
     List<GTWindow_CS^>^ managedWindows = gcnew List<GTWindow_CS^>(2);
     for (auto& nativeWindow : nativeWindows) {
         managedWindows->Add(gcnew GTWindow_CS(new GTWindow(nativeWindow.GetHandle())));
@@ -21,9 +21,10 @@ List<GTProcess_CS^>^ GTSystemControler_CS::FindProcessByName(String^ name) {
    
     auto nativeProcesses = nativeSystem->FindProcessByName(Converters::ConvertStringToStdString(name));
     List<GTProcess_CS^>^ managedProcesses = gcnew List<GTProcess_CS^>(2);
-  /*  for (auto& nativeProcess : nativeProcesses) {
-        managedProcesses->Add(gcnew GTProcess_CS(static_cast<GTProcess*>(nativeProcess.get())));
-    }*/
+    for (GTProcess nativeProcess : nativeProcesses) {
+        GTProcess* _GTProcess = new GTProcess(nativeProcess.GetHandle());
+        managedProcesses->Add(Converters::ProcessToProcessCS(_GTProcess));
+    }
     return managedProcesses;
 }
 
@@ -37,16 +38,22 @@ GTWindow_CS^ GTSystemControler_CS::FindTopWindowByName(String^ name) {
 }
 
 GTSystemControler_CS^ GTSystemControler_CS::WindowOfNameShouldExist(String^ name) {
-    nativeSystem->WindowOfNameShouldExist(Converters::ConvertStringToStdString(name));
+    try {
+        nativeSystem->WindowOfNameShouldExist(Converters::ConvertStringToStdString(name));
+    }
+	catch (const std::runtime_error& e) {
+		throw gcnew System::Exception(gcnew System::String(e.what()));
+	}
     return this;
 }
 
 List<GTProcess_CS^>^ GTSystemControler_CS::GetActiveProcesses() {
-    auto nativeProcesses = nativeSystem->GetActiveProcesses();
+    std::vector<GTProcess>  nativeProcesses = nativeSystem->GetActiveProcesses();
     List<GTProcess_CS^>^ managedProcesses = gcnew List<GTProcess_CS^>(2);
-   /* for (auto& nativeProcess : nativeProcesses) {
-        managedProcesses->Add(gcnew GTProcess_CS(nativeProcess.get()));
-    }*/
+    for (GTProcess nativeProcess : nativeProcesses) {
+		GTProcess* _GTProcess = new GTProcess(nativeProcess.GetHandle());
+        managedProcesses->Add(Converters::ProcessToProcessCS(_GTProcess));
+    }
     return managedProcesses;
 }
 

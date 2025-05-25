@@ -23,7 +23,7 @@ public:
 
     static std::shared_ptr<GTSystem> Instance();
 
-    std::vector<GTWindow> FindWindowByName(const std::string& name);
+    std::vector<GTWindow> FindWindowByName(const std::wstring& name);
     std::vector<GTProcess> FindProcessByName(const std::string& name);
     std::optional<GTWindow>  FindTopWindowByName(const std::string& name);
    void WindowOfNameShouldExist(const std::string& name);

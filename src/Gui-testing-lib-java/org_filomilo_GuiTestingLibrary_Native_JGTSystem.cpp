@@ -9,7 +9,7 @@ std::shared_ptr<GTSystem>  _GtSystem = GTSystem::Instance();
 
 JNIEXPORT jobjectArray JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTSystem_FindWindowByName
 (JNIEnv* env, jobject, jstring name) {
-    std::vector<GTWindow> windwos = _GtSystem->FindWindowByName(Converters::JStringToString(env, name));
+    std::vector<GTWindow> windwos = _GtSystem->FindWindowByName(Converters::JStringToWString(env, name));
     jclass windowClass = env->FindClass("org/filomilo/GuiTestingLibrary/Native/JGTWindow");
     jobjectArray array = env->NewObjectArray(windwos.size(), windowClass, nullptr);
     for (size_t i = 0; i < windwos.size(); i++)

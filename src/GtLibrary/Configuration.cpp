@@ -26,7 +26,7 @@ long GtConfiguration::GetTimeout()
 }
 void GtConfiguration::SetDefaultTimeout()
 {
-	timeout = 1000;
+	timeout = 10000;
 }
 
 void GtConfiguration::DefaultSleep() {

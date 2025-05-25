@@ -6,6 +6,7 @@
 #include "Helpers.h"
 #include <optional>
 #include "GTWindow.h"
+#include <tlhelp32.h>
 
 class GTWindow;
 
@@ -20,12 +21,58 @@ std::shared_ptr<GTSystem> GTSystem::Instance() {
     return _gtSystem;
 }
 
-std::vector<GTWindow> GTSystem::FindWindowByName(const std::string& name) {
-    return {};
+std::vector<GTWindow> GTSystem::FindWindowByName(const std::wstring& name) {
+	std::vector<GTWindow> AllWindows=GetActiveWindows();
+	std::vector<GTWindow> windows;
+	for (const GTWindow& window : AllWindows) {
+        if (window.GetName().compare(name)==0) {
+			windows.push_back(window);
+		}
+	}
+	return windows;
 }
 
 std::vector<GTProcess> GTSystem::FindProcessByName(const std::string& name) {
-    return {};
+  
+
+
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    PROCESSENTRY32 process;
+    ZeroMemory(&process, sizeof(process));
+    process.dwSize = sizeof(process);
+    std::vector<DWORD> pids;
+
+    if (Process32First(snapshot, &process))
+    {
+        do
+        {
+            std::wstring wname(name.begin(), name.end());
+            if (wcscmp(process.szExeFile, wname.c_str()) == 0)
+            {
+                pids.push_back(process.th32ProcessID);
+               
+            }
+        } while (Process32Next(snapshot, &process));
+    }
+
+    CloseHandle(snapshot);
+
+
+	std::vector<GTProcess> processes;
+	for (DWORD pid : pids)
+	{
+		HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pid);
+		if (processHandle != NULL) {
+			processes.push_back(GTProcess(processHandle));
+		}
+	}
+
+
+
+    return processes;
+
+
+
 }
 
 std::optional<GTWindow> GTSystem::FindTopWindowByName(const std::string& name) {
@@ -114,5 +161,5 @@ void GTSystem::WindowOfNameShouldExist(const std::string& name) {
     Helpers::ensureTrue([this,name]()-> bool {
         std::optional<GTWindow> window = this->FindTopWindowByName(name);
         return window.has_value();
-        });
+        },"Window of name "+ name + "should exist");
 }
