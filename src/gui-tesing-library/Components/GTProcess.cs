@@ -1,39 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xaml;
+﻿namespace gui_tesing_library.Components;
 
-namespace gui_tesing_library.Components
+public class GTProcess : IGTProcess
 {
-    public class GTProcess : IGTProcess
+    private readonly GTProcess_CS gTProcess_CS;
+
+    public GTProcess(GTProcess_CS gTProcess_CS)
     {
-        private GTProcess_CS gTProcess_CS;
+        this.gTProcess_CS = gTProcess_CS;
+    }
 
-        public GTProcess(GTProcess_CS gTProcess_CS)
-        {
-            this.gTProcess_CS = gTProcess_CS;
-        }
-
-        public string Name
-        {
-            get
-            {
-                return gTProcess_CS.GetName();
-            }
-        }
-        public bool IsAlive { get { return gTProcess_CS.IsAlive(); } }
+    public string Name => gTProcess_CS.GetName();
+    public bool IsAlive => gTProcess_CS.IsAlive();
 
 
-        public long GetRamUsage()
-        {
-            return gTProcess_CS.GetRamUsage();
-        }
+    public long GetRamUsage()
+    {
+        return gTProcess_CS.GetRamUsage();
+    }
 
-        public void kill()
-        {
-            gTProcess_CS.kill();
-        }
+    public void kill()
+    {
+        gTProcess_CS.kill();
     }
 }

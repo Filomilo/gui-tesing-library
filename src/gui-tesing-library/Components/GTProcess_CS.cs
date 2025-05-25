@@ -3,104 +3,97 @@ using System.Collections.Generic;
 using gui_tesing_library_CS.SystemCalls;
 using gui_tesing_library;
 using gui_tesing_library.Interfaces;
-
 using Lombok.NET;
 
-namespace gui_tesing_library_CS.Components.CS
+namespace gui_tesing_library_CS.Components.CS;
+
+[AllArgsConstructor]
+[With]
+public partial class GTProcess_CS_OLD : IGTProcess
 {
-    [AllArgsConstructor]
-    [With]
-    public partial class GTProcess_CS_OLD : IGTProcess
+    private int _handle;
+    private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
+
+    public GTProcess_CS_OLD(int handle)
     {
-        private ISystemCalls _SystemCalls = SystemCallsFactory.GetSystemCalls();
+        _handle = handle;
+    }
 
-        private int _handle;
+    //private Process _Process;
+    //public int ProcesId
+    //{
+    //    get { return this._Process.Id; }
+    //}
 
-        public GTProcess_CS_OLD(int handle)
-        {
-            this._handle = handle;
-        }
+    //public bool DoesExist
+    //{
+    //    get { return _Process.Id>0; }
+    //}
 
-        //private Process _Process;
-        //public int ProcesId
-        //{
-        //    get { return this._Process.Id; }
-        //}
+    //public int kill()
+    //{
+    //    if(!DoesExist)
+    //    {
+    //        //todo: logg warrignng
+    //        return 0;
+    //    }
+    //    this._Process.Kill();
+    //    Helpers.AwaitTrue(() =>
+    //    {
+    //        return this._Process.HasExited;
+    //    });
+    //    return 0;
+    //    // add exception handling
+    //}
 
-        //public bool DoesExist
-        //{
-        //    get { return _Process.Id>0; }
-        //}
+    //public GTProcess_CS(Process process)
+    //{
+    //    this._Process = process;
+    //}
 
-        //public int kill()
-        //{
-        //    if(!DoesExist)
-        //    {
-        //        //todo: logg warrignng
-        //        return 0;
-        //    }
-        //    this._Process.Kill();
-        //    Helpers.AwaitTrue(() =>
-        //    {
-        //        return this._Process.HasExited;
-        //    });
-        //    return 0;
-        //    // add exception handling
-        //}
+    //public List<GTWindow> getPrcoessWindow()
+    //{
 
-        //public GTProcess_CS(Process process)
-        //{
-        //    this._Process = process;
-        //}
+    //    List<IntPtr> windowHandles = new List<IntPtr>();
+    //    Console.WriteLine($"This Peocesss: {this.ProcesId}");
+    //    WinApiWrapper.EnumWindows((hwnd, param) =>
+    //       {
 
-        //public List<GTWindow> getPrcoessWindow()
-        //{
+    //           StringBuilder title = new StringBuilder(256);
+    //           WinApiWrapper.GetWindowText(hwnd, title, title.Capacity);
 
-        //    List<IntPtr> windowHandles = new List<IntPtr>();
-        //    Console.WriteLine($"This Peocesss: {this.ProcesId}");
-        //    WinApiWrapper.EnumWindows((hwnd, param) =>
-        //       {
+    //           if (title.Length > 0) // Ignore empty titles
+    //           {
+    //               Console.WriteLine($"Window Handle: {hwnd}, Title: {title}");
+    //           }
 
-        //           StringBuilder title = new StringBuilder(256);
-        //           WinApiWrapper.GetWindowText(hwnd, title, title.Capacity);
+    //           GetWindowThreadProcessId(hwnd, out uint parentProcessId);
 
-        //           if (title.Length > 0) // Ignore empty titles
-        //           {
-        //               Console.WriteLine($"Window Handle: {hwnd}, Title: {title}");
-        //           }
+    //           Console.WriteLine($"Window Handle: {hwnd}, Process ID: {parentProcessId}");
 
-        //           GetWindowThreadProcessId(hwnd, out uint parentProcessId);
-
-        //           Console.WriteLine($"Window Handle: {hwnd}, Process ID: {parentProcessId}");
-
-        //           return true; // Continue enumeration
-        //       }, IntPtr.Zero);
+    //           return true; // Continue enumeration
+    //       }, IntPtr.Zero);
 
 
+    //       return null;
 
-        //       return null;
+    //}
+    public string Name => throw new NotImplementedException();
 
-        //}
-        public string Name => throw new NotImplementedException();
+    public bool IsAlive => _SystemCalls.GetDoesProcessExist(_handle);
 
-        public bool IsAlive
-        {
-            get { return _SystemCalls.GetDoesProcessExist(this._handle); }
-        }
+    public long GetRamUsage()
+    {
+        throw new NotImplementedException();
+    }
 
-        public long GetRamUsage()
-        {
-            throw new NotImplementedException();
-        }
+    public void kill()
+    {
+        _SystemCalls.TerminateProcess(_handle);
+    }
 
-        public IEnumerable<IGTWindow> GetWindowsOfProcess()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void kill()
-        {
-            this._SystemCalls.TerminateProcess(this._handle);
-        }
+    public IEnumerable<IGTWindow> GetWindowsOfProcess()
+    {
+        throw new NotImplementedException();
     }
 }

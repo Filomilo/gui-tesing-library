@@ -28,8 +28,14 @@ namespace GuiTestingLibrary_Tets.Components
         {
             TestHelpers.CloseExampleGui();
             Assert.That(window.DoesExist == false);
-            Assert.That(
-                SystemController.Instance.FindTopWindowByName("Hello!") == null,
+            Assert.DoesNotThrow(
+                () =>
+                {
+                    TestHelpers.EnsureTrue(() =>
+                    {
+                        return SystemController.Instance.FindTopWindowByName("Hello!") == null;
+                    });
+                },
                 "Window with anme Hello should not exist"
             );
             ;
@@ -270,14 +276,17 @@ namespace GuiTestingLibrary_Tets.Components
                 screenShot.GetPixelColorAt(new Vector2i(0, 0)).Equals(Color.Red),
                 $"Screenshot image at {new Vector2i(0, 0)} should be RED but is {screenShot.GetPixelColorAt(new Vector2i(0, 0))}"
             );
-            double simmilarity=0;
+            double simmilarity = 0;
             Assert.DoesNotThrow(() =>
             {
-                simmilarity = screenShot.SimmilarityBetweenImagesShouldBe(TestHelpers.InageReferance.EntryWindow720p,0.9) .CompareToImage(
-                TestHelpers.InageReferance.EntryWindow720p
-            );
+                simmilarity = screenShot
+                    .SimmilarityBetweenImagesShouldBe(
+                        TestHelpers.InageReferance.EntryWindow720p,
+                        0.9
+                    )
+                    .CompareToImage(TestHelpers.InageReferance.EntryWindow720p);
             });
-            
+
             Assert.That(
                 simmilarity > 0.95,
                 $"Screenshot should be simmilat to EntryWindow720p but similiarity is {simmilarity}"
@@ -318,7 +327,10 @@ namespace GuiTestingLibrary_Tets.Components
         {
             Assert.DoesNotThrow(() =>
             {
-                Assert.That(window.WindowNameShouldBe("Hello!").GetWindowName()=="Hello!" && window.Name == "Hello!");
+                Assert.That(
+                    window.WindowNameShouldBe("Hello!").GetWindowName() == "Hello!"
+                        && window.Name == "Hello!"
+                );
             });
         }
 
@@ -327,11 +339,21 @@ namespace GuiTestingLibrary_Tets.Components
         {
             Assert.DoesNotThrow(() =>
             {
-                Assert.That(window.ContentPixelAtShouldBeColor(new Vector2i(0,0), Color.Red).GetContentPixelColorAt(new Vector2i(0,0)).Equals(Color.Red) );
+                Assert.That(
+                    window
+                        .ContentPixelAtShouldBeColor(new Vector2i(0, 0), Color.Red)
+                        .GetContentPixelColorAt(new Vector2i(0, 0))
+                        .Equals(Color.Red)
+                );
             });
             Assert.DoesNotThrow(() =>
             {
-                Assert.That(window.PixelAtShouldBeColor(new Vector2i(10, 10), Color.Red).GetPixelColorAt(new Vector2i(10,10)).Equals(Color.Red));
+                Assert.That(
+                    window
+                        .PixelAtShouldBeColor(new Vector2i(10, 10), Color.Red)
+                        .GetPixelColorAt(new Vector2i(10, 10))
+                        .Equals(Color.Red)
+                );
             });
         }
 
@@ -340,7 +362,7 @@ namespace GuiTestingLibrary_Tets.Components
         {
             Assert.DoesNotThrow(() =>
             {
-                Assert.That(window.ShouldBeMinimized(false).IsMinimized==false);
+                Assert.That(window.ShouldBeMinimized(false).IsMinimized == false);
                 window.Minimize();
                 Assert.That(window.ShouldBeMinimized(true).IsMinimized == true);
                 window.Maximize();
@@ -354,12 +376,12 @@ namespace GuiTestingLibrary_Tets.Components
             Assert.DoesNotThrow(() =>
             {
                 window.SetPostion(0, 0);
-                Assert.That(window.Position.Equals(new Vector2i(0,0)));
-                window.MoveWindow(new Vector2i(100,100));
+                Assert.That(window.Position.Equals(new Vector2i(0, 0)));
+                window.MoveWindow(new Vector2i(100, 100));
                 Assert.That(window.Position.Equals(new Vector2i(100, 100)));
-
             });
         }
+
         [Test()]
         public void MaximizeWindow()
         {
@@ -367,10 +389,11 @@ namespace GuiTestingLibrary_Tets.Components
             Assert.That(window.ShouldBeMinimized(false).IsMinimized == false);
             Vector2i adjusrmetnd = new Vector2i(-16, 32);
             Assert.That(
-                window.Size.x+ adjusrmetnd.x == ScreenController.Instance.MaximizedWindowSize.x
-                && window.Size.y + adjusrmetnd.y == ScreenController.Instance.MaximizedWindowSize.y
-            , $"window size is {window.Size+ adjusrmetnd} but maxmiezed window size is {ScreenController.Instance.MaximizedWindowSize}");
+                window.Size.x + adjusrmetnd.x == ScreenController.Instance.MaximizedWindowSize.x
+                    && window.Size.y + adjusrmetnd.y
+                        == ScreenController.Instance.MaximizedWindowSize.y,
+                $"window size is {window.Size + adjusrmetnd} but maxmiezed window size is {ScreenController.Instance.MaximizedWindowSize}"
+            );
         }
-
     }
 }
