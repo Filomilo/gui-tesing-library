@@ -1,6 +1,6 @@
-﻿using GregsStack.InputSimulatorStandard.Native;
+﻿using System;
+using GregsStack.InputSimulatorStandard.Native;
 using gui_tesing_library.Models;
-using System;
 
 namespace gui_tesing_library_CS
 {
@@ -430,9 +430,5 @@ namespace gui_tesing_library_CS
             }
             throw new ArgumentException($"Key {key} not found");
         }
-
-
-      
-
     }
 }

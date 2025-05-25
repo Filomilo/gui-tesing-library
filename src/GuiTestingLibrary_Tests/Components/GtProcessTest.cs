@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using gui_tesing_library;
-using gui_tesing_library.Components;
 using gui_tesing_library.Controllers;
 using NUnit.Framework;
 
@@ -33,7 +32,10 @@ namespace GuiTestingLibrary_Tets.Components
         {
             String nameTobe = "java.exe";
             String nameRetived = gtRocess.Name.Split('\\').Last();
-           Assert.That(nameRetived == nameTobe,$"extected proc name [[{nameRetived}]] to be [[{nameTobe}]]");
+            Assert.That(
+                nameRetived == nameTobe,
+                $"extected proc name [[{nameRetived}]] to be [[{nameTobe}]]"
+            );
         }
 
         [Test]
@@ -42,6 +44,5 @@ namespace GuiTestingLibrary_Tets.Components
             long ram = gtRocess.GetRamUsage();
             Assert.That(ram > 0, $"extected proc ram usage to bigger than 0 but is [[{ram}]]");
         }
-
     }
 }

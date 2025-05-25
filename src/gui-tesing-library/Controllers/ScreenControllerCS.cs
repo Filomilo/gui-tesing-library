@@ -1,7 +1,7 @@
 ﻿using System;
+using gui_tesing_library;
 using gui_tesing_library_CS.Directives;
 using gui_tesing_library_CS.SystemCalls;
-using gui_tesing_library;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
@@ -19,7 +19,8 @@ public class ScreenControllerCS : IGTScreen
     {
         get
         {
-            if (_gtScreen == null) _gtScreen = new ScreenController();
+            if (_gtScreen == null)
+                _gtScreen = new ScreenController();
 
             return _gtScreen;
         }
@@ -54,7 +55,10 @@ public class ScreenControllerCS : IGTScreen
     public IGTScreen PixelAtShouldBeColor(Vector2i postion, Color color)
     {
         Helpers.AwaitTrue(
-            () => { return GetPixelColorAt(postion).Equals(color); },
+            () =>
+            {
+                return GetPixelColorAt(postion).Equals(color);
+            },
             $"Pixel color at {postion} was not {color} with in given time"
         );
         return this;

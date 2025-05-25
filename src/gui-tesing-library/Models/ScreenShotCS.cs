@@ -69,7 +69,8 @@ public class ScreenShotCS : IScreenShot
     public IScreenShot SimmilarityBetweenImagesShouldBe(string ImagePath, double simmilarity)
     {
         var simmilarityOfImage = CompareToImage(ImagePath);
-        if (simmilarityOfImage > simmilarity) return this;
+        if (simmilarityOfImage > simmilarity)
+            return this;
 
         throw new Exception(
             $"Simmilarity of images is {simmilarityOfImage} but should be {simmilarity}"

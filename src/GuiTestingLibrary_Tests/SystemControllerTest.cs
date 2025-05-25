@@ -1,6 +1,4 @@
-using System.Numerics;
 using gui_tesing_library;
-using gui_tesing_library.Controllers;
 using gui_tesing_library.Controllers;
 using gui_tesing_library.Models;
 using NUnit.Framework;

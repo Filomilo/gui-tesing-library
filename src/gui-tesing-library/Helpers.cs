@@ -27,9 +27,7 @@ namespace gui_tesing_library_CS
 
             sw.Stop();
         }
-
     }
-
 }
 
 namespace gui_tesing_library
@@ -145,25 +143,29 @@ namespace gui_tesing_library
             };
         }
 
-     
-        public static Configuration.IMAGE_COMPARER CSImageComparerToImageComparer(CS_IMAGE_COMPARER_TYPE type)
+        public static Configuration.IMAGE_COMPARER CSImageComparerToImageComparer(
+            CS_IMAGE_COMPARER_TYPE type
+        )
         {
             switch (type)
             {
-                case CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL: return Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL;
+                case CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL:
+                    return Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL;
             }
 
             throw new ArgumentException();
         }
 
-        public static CS_IMAGE_COMPARER_TYPE ImageCompaererToCsImageComparer(Configuration.IMAGE_COMPARER type)
+        public static CS_IMAGE_COMPARER_TYPE ImageCompaererToCsImageComparer(
+            Configuration.IMAGE_COMPARER type
+        )
         {
             switch (type)
             {
-                case Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL: return CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL;
+                case Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL:
+                    return CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL;
             }
             throw new ArgumentException();
-
         }
     }
 }

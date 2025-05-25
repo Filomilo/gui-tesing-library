@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using gui_tesing_library.Controllers;
-using gui_tesing_library.Models;
+﻿using gui_tesing_library.Models;
 using NUnit.Framework;
 
 namespace GuiTestingLibrary_Tets.Models
@@ -12,16 +6,15 @@ namespace GuiTestingLibrary_Tets.Models
     [TestFixture]
     public class Veector2ITest
     {
-
-
         [Test]
-        public  void subtractTest()
+        public void subtractTest()
         {
             Vector2i a = new Vector2i(10, 10);
             Vector2i b = new Vector2i(2, 2);
             Vector2i subtractExpected = new Vector2i(8, 8);
             Assert.That((a - b).Equals(subtractExpected));
         }
+
         [Test]
         public void addTest()
         {
@@ -30,6 +23,7 @@ namespace GuiTestingLibrary_Tets.Models
             Vector2i addtExpected = new Vector2i(12, 12);
             Assert.That((a + b).Equals(addtExpected));
         }
+
         [Test]
         public void toStringTest()
         {
@@ -54,11 +48,12 @@ namespace GuiTestingLibrary_Tets.Models
             Vector2i subtractExpected = new Vector2i(5, 5);
             Assert.That((a / b).Equals(subtractExpected));
         }
+
         [Test]
         public void divisinbyIntTest()
         {
             Vector2i a = new Vector2i(10, 10);
-            int b=2;
+            int b = 2;
             Vector2i subtractExpected = new Vector2i(5, 5);
             Assert.That((a / b).Equals(subtractExpected));
         }
@@ -67,28 +62,31 @@ namespace GuiTestingLibrary_Tets.Models
         public void areaTest()
         {
             Vector2i a = new Vector2i(10, 10);
-            Assert.That(a.Area()==100);
+            Assert.That(a.Area() == 100);
         }
 
         [Test]
         public void getHash()
         {
             Vector2i a = new Vector2i(10, 10);
-            Assert.That(a.GetHashCode()!=null);
+            Assert.That(a.GetHashCode() != null);
         }
+
         [Test]
         public void castFromANtiveTestthTest()
         {
             Vector2i a = new Vector2i(2, 2);
-            Vector2i b = new Vector2i(new Vector2i_CS(2,2));
+            Vector2i b = new Vector2i(new Vector2i_CS(2, 2));
             Assert.That(a.Equals(b));
         }
+
         [Test]
         public void vectolEngth()
         {
             Vector2i a = new Vector2i(4, 3);
             Assert.That(a.Length.Equals(5));
         }
+
         [Test]
         public void nativeTest()
         {
@@ -96,7 +94,6 @@ namespace GuiTestingLibrary_Tets.Models
             Vector2i_CS b = new Vector2i(2, 2).Native();
             Assert.That(a.X.Equals(b.X) && a.Y.Equals(b.Y));
         }
-
 
         [Test]
         public void castFomrVector2f()

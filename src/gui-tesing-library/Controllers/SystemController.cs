@@ -19,7 +19,8 @@ public class SystemController : IGTSystem
     {
         get
         {
-            if (_Instance == null) _Instance = new SystemController();
+            if (_Instance == null)
+                _Instance = new SystemController();
 
             return _Instance;
         }
@@ -36,9 +37,7 @@ public class SystemController : IGTSystem
 
     public IGTProcess StartProcess(string commandString)
     {
-        return new GTProcess(
-            GTSystemControler_CS.Instance().StartProcess(commandString)
-        );
+        return new GTProcess(GTSystemControler_CS.Instance().StartProcess(commandString));
     }
 
     public string GetClipBoardContent()

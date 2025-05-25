@@ -43,7 +43,8 @@ public class WindowsSystemCalls : ISystemCalls
             programName = splits[0];
             splits.RemoveAt(0);
             args = "";
-            if (splits.Count > 0) args = string.Join(" ", splits);
+            if (splits.Count > 0)
+                args = string.Join(" ", splits);
         }
 
         // todo: handle spaces in path
@@ -59,7 +60,8 @@ public class WindowsSystemCalls : ISystemCalls
     public bool GetDoesProcessExist(int handle)
     {
         uint exitCode;
-        if (WinApiWrapper.GetExitCodeProcess(new IntPtr(handle), out exitCode)) return exitCode == 259; // STILL_ACTIVE;
+        if (WinApiWrapper.GetExitCodeProcess(new IntPtr(handle), out exitCode))
+            return exitCode == 259; // STILL_ACTIVE;
         return false;
     }
 
@@ -108,8 +110,8 @@ public class WindowsSystemCalls : ISystemCalls
     {
         var processHandle = WinApiWrapper.OpenProcess(
             WinApiWrapper.ProcessAccessRights.PROCESS_QUERY_INFORMATION
-            | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ
-            | WinApiWrapper.ProcessAccessRights.PROCESS_TERMINATE,
+                | WinApiWrapper.ProcessAccessRights.PROCESS_VM_READ
+                | WinApiWrapper.ProcessAccessRights.PROCESS_TERMINATE,
             false,
             id
         );
@@ -272,11 +274,7 @@ public class WindowsSystemCalls : ISystemCalls
         return WinApiWrapper.GetSystemMetrics(WinApiWrapper.SystemMetrics.SM_CXPADDEDBORDER);
     }
 
-    public IScreenShot GetScreenShotFromHandle(
-        int handle,
-        Vector2i StartPosition,
-        Vector2i Size
-    )
+    public IScreenShot GetScreenShotFromHandle(int handle, Vector2i StartPosition, Vector2i Size)
     {
         var hdcScreen = WinApiWrapper.GetDC(new IntPtr(handle));
         var hdcMemDC = WinApiWrapper.CreateCompatibleDC(hdcScreen);
@@ -317,9 +315,7 @@ public class WindowsSystemCalls : ISystemCalls
             WinApiWrapper.DeleteDC(new IntPtr(hdcMemDC));
             WinApiWrapper.ReleaseDC(new IntPtr(handle), hdcScreen);
             var error = Marshal.GetLastWin32Error();
-            throw new InvalidOperationException(
-                $"Marshal copy error code: {error} -- {e.Message}"
-            );
+            throw new InvalidOperationException($"Marshal copy error code: {error} -- {e.Message}");
         }
 
         WinApiWrapper.SelectObject(new IntPtr(hdcMemDC), new IntPtr(hOld));

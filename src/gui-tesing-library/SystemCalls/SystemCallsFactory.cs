@@ -9,7 +9,8 @@ public static class SystemCallsFactory
     public static ISystemCalls GetSystemCalls()
     {
         var os = Environment.OSVersion;
-        if (os.Platform == PlatformID.Win32NT) return new WindowsSystemCalls();
+        if (os.Platform == PlatformID.Win32NT)
+            return new WindowsSystemCalls();
         ErrorController.Throw(new NotImplementedException("This system is not yet supported"));
         return null;
     }

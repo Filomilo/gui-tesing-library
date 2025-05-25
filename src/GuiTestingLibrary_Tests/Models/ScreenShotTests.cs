@@ -1,5 +1,4 @@
-﻿using gui_tesing_library.Controllers;
-using gui_tesing_library.Interfaces;
+﻿using gui_tesing_library.Interfaces;
 using GuiTestingLibrary_Tets;
 using NUnit.Framework;
 
@@ -20,7 +19,8 @@ namespace gui_tesing_library.Models.Tests
         public void TearDown()
         {
             window.Close();
-            window.GetProcessOfWindow().kill(); TestHelpers.CloseExampleGui();
+            window.GetProcessOfWindow().kill();
+            TestHelpers.CloseExampleGui();
         }
 
         [Test()]
@@ -66,9 +66,9 @@ namespace gui_tesing_library.Models.Tests
             IScreenShot screenShot = window.GetScreenshot();
             //screenShot.SaveAsBitmap("D:\\temp\\test.bmp");
             Assert.That(
-                screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) >0.95,
-                $"Comparing to itself should return bi bebr ta 0.96" +
-                $", instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
+                screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p) > 0.95,
+                $"Comparing to itself should return bi bebr ta 0.96"
+                    + $", instead {screenShot.CompareToImage(TestHelpers.InageReferance.EntryWindow720p)}"
             );
         }
 

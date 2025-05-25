@@ -11,9 +11,7 @@ internal class DelayAttribute : Attribute, IMethodDecorator
 {
     private MethodBase _method;
 
-    public void Init(object instance, MethodBase method, object[] args)
-    {
-    }
+    public void Init(object instance, MethodBase method, object[] args) { }
 
     public void OnEntry()
     {
