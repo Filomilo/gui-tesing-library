@@ -456,7 +456,12 @@ void SystemCalls::ReleaseRightMouse() {
 }
 
 void SystemCalls::ScrollMouse(int scrollValue) {
+    INPUT input = { 0 };
+    input.type = INPUT_MOUSE;
+    input.mi.dwFlags = MOUSEEVENTF_WHEEL;
+    input.mi.mouseData = scrollValue;
 
+    SendInput(1, &input, sizeof(INPUT));
 }
 
 void SystemCalls::MoveMouseTo(const Vector2i& position) {

@@ -104,6 +104,12 @@ namespace GuiTestingLibrary_Tets
             public static Vector2f BlueSliderEndPostion = new Vector2f(0.652f, 0.33f);
             public static float ColorSliderLength =
                 BlueSliderEndPostion.x - BlueSliderStartPostion.x;
+            public static Vector2f CanvasPostion = new Vector2f(0.66f, 0.086f);
+            public static Vector2f CanvasSize = new Vector2f(0.30f, 0.27f);
+
+            public static Vector2f ScrollTestPosition = new Vector2f(0.8f, 0.92f);
+
+            public static Vector2f ScrollColorTestPosition = new Vector2f(0.8f, 0.75f);
         }
 
         private static string ImageReferanceLocation =
@@ -117,6 +123,7 @@ namespace GuiTestingLibrary_Tets
             public static string EntryWindow720p = ImageReferanceLocation + "EntryWindow_720p.bmp";
             public static string EntryWindow720p100px =
                 ImageReferanceLocation + "EntryWindow720p100px.bmp";
+            public static string DrawnCanvas = ImageReferanceLocation + "drawncanvas.bmp";
         }
 
         public static string GetLoremIpsumText()

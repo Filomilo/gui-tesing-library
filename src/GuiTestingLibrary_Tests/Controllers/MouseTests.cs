@@ -391,7 +391,10 @@ namespace GuiTestingLibrary_Tets
         public void TestRIghtClickClose()
         {
             IGTWindow windwoGtWindow = TestHelpers.OpenExampleGui();
-            MouseController.Instance.SetPositionRelativeToWindow(windwoGtWindow, new Vector2i(20, -10));
+            MouseController.Instance.SetPositionRelativeToWindow(
+                windwoGtWindow,
+                new Vector2i(20, -10)
+            );
             MouseController.Instance.ClickRight();
             MouseController.Instance.MoveMouse(new Vector2i(10, 130));
             MouseController.Instance.ClickLeft();
@@ -401,11 +404,15 @@ namespace GuiTestingLibrary_Tets
             });
             //Thread.Sleep(5000);
         }
+
         [Test]
         public void TestRIghPressReleaseClose()
         {
             IGTWindow windwoGtWindow = TestHelpers.OpenExampleGui();
-            MouseController.Instance.SetPositionRelativeToWindow(windwoGtWindow, new Vector2i(20, -10));
+            MouseController.Instance.SetPositionRelativeToWindow(
+                windwoGtWindow,
+                new Vector2i(20, -10)
+            );
             MouseController.Instance.PressRight();
             MouseController.Instance.ReleaseRight();
             MouseController.Instance.MoveMouse(new Vector2i(10, 130));
@@ -417,7 +424,96 @@ namespace GuiTestingLibrary_Tets
             //Thread.Sleep(5000);
         }
 
-    
+        [Test]
+        public void drawingTest()
+        {
+            IGTWindow windwoGtWindow = TestHelpers.OpenExampleGui();
+            Vector2f CanvasPostion = TestHelpers.RelativePostions.CanvasPostion;
+            Vector2f CanvasSize = TestHelpers.RelativePostions.CanvasSize;
+            Vector2i startPositon = new Vector2i(
+                (int)(windwoGtWindow.GetWindowContentSize().x * CanvasPostion.x),
+                (int)(windwoGtWindow.GetWindowContentSize().y * CanvasPostion.y)
+            );
+            Vector2i endPostion = new Vector2i(
+                (int)(windwoGtWindow.GetWindowContentSize().x * (CanvasSize.x + CanvasPostion.x)),
+                (int)(windwoGtWindow.GetWindowContentSize().y * (CanvasSize.y + CanvasPostion.y))
+            );
+            int delayprevoid = gui_tesing_library.Configuration.ActionDelay;
+            gui_tesing_library.Configuration.ActionDelay = 5;
+            MouseController.Instance.ClickMiddle();
+            int height = endPostion.y - startPositon.y;
 
+            for (int y = startPositon.y; y < endPostion.y; y += 1)
+            {
+                MouseController.Instance.SetPositionRelativeToWindow(
+                    windwoGtWindow,
+                    new Vector2i(startPositon.x, y)
+                );
+
+                switch (y / (height / 3))
+                {
+                    case 1:
+                        MouseController.Instance.PressRight();
+                        break;
+                    case 2:
+                        MouseController.Instance.PressLeft();
+                        break;
+                    case 3:
+                        MouseController.Instance.PressMiddle();
+                        break;
+                }
+
+                MouseController.Instance.MoveMouse(
+                    new Vector2i((endPostion.x - startPositon.x), 0)
+                );
+
+                switch (y / (height / 3))
+                {
+                    case 1:
+                        MouseController.Instance.ReleaseRight();
+                        break;
+                    case 2:
+                        MouseController.Instance.ReleaseLeft();
+                        break;
+                    case 3:
+                        MouseController.Instance.ReleaseMiddle();
+                        break;
+                }
+            }
+            gui_tesing_library.Configuration.ActionDelay = delayprevoid;
+
+            IScreenShot screenshot = windwoGtWindow
+                .BringUpFront()
+                .GetScreenshotRect(startPositon, endPostion - startPositon);
+
+            Assert.That(screenshot.CompareToImage(TestHelpers.InageReferance.DrawnCanvas) > 0.95);
+        }
+
+        [Test]
+        public void ScrollTest()
+        {
+            IGTWindow windwoGtWindow = TestHelpers.OpenExampleGui();
+            MouseController.Instance.SetPositionRelativeToWindow(
+                windwoGtWindow,
+                TestHelpers.RelativePostions.ScrollTestPosition
+            );
+            int scrollDff = 100;
+            gui_tesing_library.Configuration.ActionDelay = 10;
+            for (int i = 0; i < 20000; i += scrollDff)
+            {
+                MouseController.Instance.Scroll(-scrollDff);
+            }
+            gui_tesing_library.Configuration.ActionDelay = 500;
+
+            MouseController.Instance.ClickLeft();
+
+            Color color = windwoGtWindow.GetContentPixelColorAt(
+                TestHelpers.RelativePostions.ScrollColorTestPosition
+            );
+            Assert.That(
+                color.Equals(Color.Red),
+                $"Color at postion [[{TestHelpers.RelativePostions.ScrollColorTestPosition}]] is not {Color.Red} but [[{color}]] "
+            );
+        }
     }
 }

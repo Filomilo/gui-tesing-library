@@ -56,8 +56,6 @@ public class Color
     {
         if (ReferenceEquals(this, obj))
             return true;
-        if (this is null)
-            return false;
         if (obj is null)
             return false;
         if (GetType() != obj.GetType())
