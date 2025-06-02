@@ -14,4 +14,4 @@ def GetFilesOfType(Directory: str,extension: str) -> list[GTFile]:
     for file in directory.iterdir():
         if file.name.endswith(extension):
             files.append(GTFile(name=Path(file).name,content=GetContetnOfFile(file) ))
-    print(files)
+    return files

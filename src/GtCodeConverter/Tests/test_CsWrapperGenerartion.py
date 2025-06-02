@@ -1,6 +1,6 @@
 from src import GtCodeConverter
 
 
-def test_capital_case():
+def test():
     gtCodeConverter: GtCodeConverter = GtCodeConverter()
     gtCodeConverter.GtCodeConverter.

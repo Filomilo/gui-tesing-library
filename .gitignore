@@ -24,3 +24,5 @@ src/test.log
 *.pch
 *.pdb
 *.jfr
+*.pyc
+/src/GtCodeConverter/src/__pycache__
