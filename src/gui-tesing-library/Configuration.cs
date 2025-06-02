@@ -1,44 +1,30 @@
-﻿using gui_tesing_library.Services;
+﻿namespace gui_tesing_library;
 
-namespace gui_tesing_library
+public class Configuration
 {
-    public class Configuration
+    public enum IMAGE_COMPARER
     {
-        private static long _ProcesAwaitTime = 6000;
-
-        public static long ProcesAwaitTime
-        {
-            get
-            {
-                return _ProcesAwaitTime;
-            }
-            set
-            {
-                _ProcesAwaitTime = value;
-            }
-        }
-        private static int _ActionDelay = 800;
-
-        public static int ActionDelay
-        {
-            get
-            {
-                return _ActionDelay;
-            }
-            set
-            {
-                _ActionDelay = value;
-            }
-        }
-
-
-        public static ImageComparerFactory.IMAGE_COMPARER_TYPE ImageComparerType
-        {
-            get;
-            set;
-        } = ImageComparerFactory.IMAGE_COMPARER_TYPE.HASH_COMPARER;
+        PIEXEL_BY_PIXEL,
     }
 
+    private static GtConfiguration_CS gtConfiguration_CS = new GtConfiguration_CS();
 
+    public static long ProcesAwaitTime
+    {
+        get => gtConfiguration_CS.GetTimeout();
+        set => gtConfiguration_CS.SetTimeout((int)value);
+    }
 
+    public static int ActionDelay
+    {
+        get => gtConfiguration_CS.getActionDelay();
+        set => gtConfiguration_CS.setActioNDelay(value);
+    }
+
+    public static IMAGE_COMPARER ImageComparerType
+    {
+        get => Helpers.CSImageComparerToImageComparer(gtConfiguration_CS.GetImageComparerType());
+        set =>
+            gtConfiguration_CS.setImageCompareType(Helpers.ImageCompaererToCsImageComparer(value));
+    }
 }

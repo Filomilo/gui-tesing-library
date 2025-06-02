@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+
     <PackageReference Include="Fody" Version="6.9.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -43,6 +43,9 @@
   <ItemGroup>
     <ProjectReference Include="..\GTLibrary_CSharp\GTLibrary_CSharp.vcxproj" />
     <ProjectReference Include="..\gui-tesing-library\gui-tesing-library.csproj" />
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+	    <_Parameter1>MyTests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
 

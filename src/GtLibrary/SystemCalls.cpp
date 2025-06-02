@@ -9,6 +9,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include "psapi.h"
 void pirintError() {
     DWORD errorCode = GetLastError();
     LPWSTR errorMsg = nullptr;
@@ -39,9 +40,22 @@ Vector2i SystemCalls::GetMaximizedWindowSize() {
 
     return Vector2i(screenWidth, screenHeight);
 }
+typedef LONG(WINAPI* RtlGetVersionPtr)(PRTL_OSVERSIONINFOW);
 
 GTSystemVersion SystemCalls::GetSystemVersion() {
-    return GTSystemVersion("");
+    HMODULE hMod = ::GetModuleHandleW(L"ntdll.dll");
+    if (hMod) {
+        RtlGetVersionPtr fxPtr = (RtlGetVersionPtr)::GetProcAddress(hMod, "RtlGetVersion");
+        if (fxPtr != nullptr) {
+            RTL_OSVERSIONINFOW rovi = { 0 };
+            rovi.dwOSVersionInfoSize = sizeof(rovi);
+            if (fxPtr(&rovi) == 0) { // STATUS_SUCCESS
+                return GTSystemVersion("Windows", rovi.dwMajorVersion, rovi.dwMinorVersion, rovi.dwBuildNumber);
+            }
+        }
+    }
+    return GTSystemVersion("Windows", 0, 0, 0);
+
 }
 
 HANDLE _DuplicateHandle(HANDLE Origin) {
@@ -183,7 +197,19 @@ void SystemCalls::SetWindowSize(HWND handle, const Vector2i& size) {
 
 
 long SystemCalls::GetRamUsageOfProcess(HANDLE handle) {
-    return 0;
+    PROCESS_MEMORY_COUNTERS pmc;
+
+   
+    if (NULL == handle)
+        return -1;
+
+    if (GetProcessMemoryInfo(handle, &pmc, sizeof(pmc)))
+    {
+        return pmc.WorkingSetSize;
+      
+    }
+    return - 1;
+
 }
 
 void SystemCalls::KillProcess(HANDLE handle) {
@@ -430,7 +456,12 @@ void SystemCalls::ReleaseRightMouse() {
 }
 
 void SystemCalls::ScrollMouse(int scrollValue) {
+    INPUT input = { 0 };
+    input.type = INPUT_MOUSE;
+    input.mi.dwFlags = MOUSEEVENTF_WHEEL;
+    input.mi.mouseData = scrollValue;
 
+    SendInput(1, &input, sizeof(INPUT));
 }
 
 void SystemCalls::MoveMouseTo(const Vector2i& position) {
@@ -556,9 +587,20 @@ Vector2i SystemCalls::GetSizeOfWindow(HWND handle) {
 
 }
 
-std::wstring  SystemCalls::GetProcesName(HANDLE handle)
+std::wstring SystemCalls::GetProcesName(HANDLE handle)
 {
-    return L"";
+    wchar_t processName[MAX_PATH] = L"<unknown>";
+
+    if (handle)
+    {
+     
+        if (GetModuleFileNameEx(handle, 0, processName, MAX_PATH))
+        {
+          return  std::wstring(processName);
+        }
+     }
+ 
+    return std::wstring(processName);
 }
 
 std::vector<HWND> SystemCalls::GetWindowsOfProcess(HANDLE handle) {

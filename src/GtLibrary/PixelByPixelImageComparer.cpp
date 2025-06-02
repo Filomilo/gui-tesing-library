@@ -22,7 +22,7 @@ double PixelByPixelImageComparer::CompareImages(GTScreenshot* scrren, std::strin
                 pixelsMatch++;
             }
             else {
-                printf("Tset");
+                //printf("Tset");
             }
         }
     }

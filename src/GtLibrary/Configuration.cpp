@@ -3,12 +3,12 @@
 #include <chrono>
 #include <thread>
 
-Configuration* Configuration::instance = nullptr;
-Configuration* Configuration::GetInstance()
+GtConfiguration* GtConfiguration::instance = nullptr;
+GtConfiguration* GtConfiguration::GetInstance()
 {
 	if (instance == nullptr)
 	{
-		instance = new Configuration();
+		instance = new GtConfiguration();
 		instance->SetDefaultTimeout();
 		instance->DefaultSleep();
 		instance->type = IMMAGE_COMPARPER_TYPE::PIXELBYPIXEL;
@@ -16,36 +16,36 @@ Configuration* Configuration::GetInstance()
 	return instance;
 }
 
-void Configuration::SetTimeout(long newTimeout)
+void GtConfiguration::SetTimeout(long newTimeout)
 {
 	timeout = newTimeout;
 }
-long Configuration::GetTimeout()
+long GtConfiguration::GetTimeout()
 {
 	return timeout;
 }
-void Configuration::SetDefaultTimeout()
+void GtConfiguration::SetDefaultTimeout()
 {
-	timeout = 1000;
+	timeout = 10000;
 }
 
-void Configuration::DefaultSleep() {
+void GtConfiguration::DefaultSleep() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(this->defaultSleep));
 }
 
-void Configuration::setActioNDelay(long time) {
+void GtConfiguration::setActioNDelay(long time) {
 	this->defaultSleep = time;
 }
-long Configuration::getActionDelay() {
+long GtConfiguration::getActionDelay() {
 	return this->defaultSleep;
 }
 
-void Configuration::setDeafultActioNDelay() {
+void GtConfiguration::setDeafultActioNDelay() {
 	this->defaultSleep = 1000;
 }
-IMMAGE_COMPARPER_TYPE Configuration::GetImageComparerType() {
+IMMAGE_COMPARPER_TYPE GtConfiguration::GetImageComparerType() {
 	return this->type;
 }
-void Configuration::setImageCompareType(IMMAGE_COMPARPER_TYPE type) {
+void GtConfiguration::setImageCompareType(IMMAGE_COMPARPER_TYPE type) {
 	this->type = type;
 }

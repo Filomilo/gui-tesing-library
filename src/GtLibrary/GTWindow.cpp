@@ -15,7 +15,7 @@ Vector2i GTWindow::GetPosition() const {
 }
 
 bool GTWindow::DoesExist() const {
-    Configuration::GetInstance()->DefaultSleep();
+    GtConfiguration::GetInstance()->DefaultSleep();
     return SystemCallsFactory::GetSystemCalls()->DoesWindowExist(handle);
 }
 
@@ -35,10 +35,12 @@ void GTWindow::MoveWindow(const Vector2i& offset) {
 
 void GTWindow::Minimize() {
 	SystemCallsFactory::GetSystemCalls()->MinizmizeWindow(handle);
+    GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTWindow::Maximize() {
     SystemCallsFactory::GetSystemCalls()->MaximizeWindow(handle);
+        GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 GTProcess* GTWindow::GetProcessOfWindow() {
@@ -119,12 +121,12 @@ Vector2i GTWindow::GetWindowContentSize() const {
 }
 
 Color GTWindow::GetContentPixelColorAt(const Vector2i& position) const {
-    Configuration::GetInstance()->DefaultSleep();
+    GtConfiguration::GetInstance()->DefaultSleep();
 	return SystemCallsFactory::GetSystemCalls()->GetPixelColorAt(handle, position);
 }
 
 Color GTWindow::GetContentPixelColorAt(const Vector2f& relativePosition) const {
-    Configuration::GetInstance()->DefaultSleep();
+    GtConfiguration::GetInstance()->DefaultSleep();
     Vector2i contentSize = this->GetWindowContentSize();
     return GetContentPixelColorAt(
         Vector2i(
@@ -142,7 +144,7 @@ void GTWindow::ContentPixelAtShouldBeColor(const Vector2i& position, const Color
 }
 
 void GTWindow::CenterWindow() {
-    Configuration::GetInstance()->DefaultSleep();
+    GtConfiguration::GetInstance()->DefaultSleep();
     Vector2i screenSize = SystemCallsFactory::GetSystemCalls()->GetScreenSize();
     Vector2i windowSize = this->GetSize();
     Vector2i diffrence = screenSize - windowSize;
@@ -151,7 +153,7 @@ void GTWindow::CenterWindow() {
 }
 
 void GTWindow::WindowNameShouldBe(const std::wstring& title) {
-    Configuration::GetInstance()->DefaultSleep();
+    GtConfiguration::GetInstance()->DefaultSleep();
 	Helpers::ensureTrue([&]() {
 		std::wstring name = SystemCallsFactory::GetSystemCalls()->GetWindowName(handle);
 		return name == title;

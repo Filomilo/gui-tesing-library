@@ -6,86 +6,87 @@
 #include "Configuration.h"
 
 Vector2i GTMouse::GetPosition() const {
-	Configuration::GetInstance()-> DefaultSleep();
-	return SystemCallsFactory::GetSystemCalls()->GetMousePosition();
+	
+	return SystemCallsFactory::GetSystemCalls()->GetMousePosition();GtConfiguration::GetInstance()-> DefaultSleep();
 }
 
 void GTMouse::MoveMouse(const Vector2i& offset) {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->MoveMouse(offset);
+
+	SystemCallsFactory::GetSystemCalls()->MoveMouse(offset);	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::SetPosition(const Vector2i& position) {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->SetMousePosition(position);
+	
+	SystemCallsFactory::GetSystemCalls()->SetMousePosition(position);GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::ClickLeft() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ClickLeftMouse();
+	
+	SystemCallsFactory::GetSystemCalls()->ClickLeftMouse();GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::ClickRight() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ClickRightMouse();
+	
+	SystemCallsFactory::GetSystemCalls()->ClickRightMouse();GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::ClickMiddle() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ClickMiddleMouse();
+	
+	SystemCallsFactory::GetSystemCalls()->ClickMiddleMouse(); GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::PressLeft() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->PressLeftMouse();
+
+
+	GtConfiguration::GetInstance()->DefaultSleep();	SystemCallsFactory::GetSystemCalls()->PressLeftMouse();
 }
 
 void GTMouse::PressMiddle() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->PressMiddleMouse();
+	
+	SystemCallsFactory::GetSystemCalls()->PressMiddleMouse();GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::PressRight() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->PressRightMouse();
+
+	SystemCallsFactory::GetSystemCalls()->PressRightMouse();	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::ReleaseLeft() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ReleaseLeftMouse();
+
+	SystemCallsFactory::GetSystemCalls()->ReleaseLeftMouse();	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::ReleaseMiddle() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ReleaseMiddleMouse();
+
+	SystemCallsFactory::GetSystemCalls()->ReleaseMiddleMouse();	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::ReleaseRight() {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ReleaseRightMouse();
+
+	SystemCallsFactory::GetSystemCalls()->ReleaseRightMouse();	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::Scroll(int scrollValue) {
-	Configuration::GetInstance()->DefaultSleep();
-	SystemCallsFactory::GetSystemCalls()->ScrollMouse(scrollValue);
+
+	SystemCallsFactory::GetSystemCalls()->ScrollMouse(scrollValue);	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::SetPositionRelativeToWindow(GTWindow window, const Vector2i& position) {
-	Configuration::GetInstance()->DefaultSleep();
+
 	Vector2i windowPosition = window.GetWindowContentPosition();
 	Vector2i newPosition = windowPosition + position;
-	SystemCallsFactory::GetSystemCalls()->SetMousePosition(newPosition);
+	SystemCallsFactory::GetSystemCalls()->SetMousePosition(newPosition);	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::SetPositionRelativeToWindow(GTWindow window, const Vector2f& position) {
-	Configuration::GetInstance()->DefaultSleep();
+
 	Vector2i windowPosition = window.GetWindowContentPosition();
 	Vector2i windowSize = window.GetWindowContentSize();
 	Vector2i newPosition = windowPosition + Vector2i(
 		static_cast<int>(windowSize.x * position.x),
 		static_cast<int>(windowSize.y * position.y)
 	);
-	SystemCallsFactory::GetSystemCalls()->SetMousePosition(newPosition);
+	SystemCallsFactory::GetSystemCalls()->SetMousePosition(newPosition);	GtConfiguration::GetInstance()->DefaultSleep();
 }
 
 void GTMouse::PositionShouldBe(const Vector2i& pos, int errorDistance) {
@@ -96,19 +97,19 @@ void GTMouse::PositionShouldBe(const Vector2i& pos, int errorDistance) {
 }
 
 void GTMouse::MoveMouseTo(const Vector2i& newRedSliderPosition) {
-	Configuration::GetInstance()->DefaultSleep();
+	GtConfiguration::GetInstance()->DefaultSleep();
 	SystemCallsFactory::GetSystemCalls()->MoveMouseTo(newRedSliderPosition);
 }
 
 void GTMouse::MoveMouseRelativeToWindowTo(GTWindow window, const Vector2i& position) {
-	Configuration::GetInstance()->DefaultSleep();
+	GtConfiguration::GetInstance()->DefaultSleep();
 	Vector2i windowPosition = window.GetWindowContentPosition();
 	Vector2i newPosition = windowPosition + position;
 	SystemCallsFactory::GetSystemCalls()->MoveMouseTo(newPosition);
 }
 
 void GTMouse::MoveMouseRelativeToWindowTo(GTWindow window, const Vector2f& vector2f) {
-	Configuration::GetInstance()->DefaultSleep();
+	GtConfiguration::GetInstance()->DefaultSleep();
 	Vector2i windowPosition = window.GetWindowContentPosition();
 	Vector2i windowSize = window.GetWindowContentSize();
 	Vector2i newPosition = windowPosition + Vector2i(
@@ -120,7 +121,7 @@ void GTMouse::MoveMouseRelativeToWindowTo(GTWindow window, const Vector2f& vecto
 }
 
 Vector2f GTMouse::GetPositionRelativeToWindow(GTWindow window) const {
-		Configuration::GetInstance()-> DefaultSleep();
+		GtConfiguration::GetInstance()-> DefaultSleep();
 	Vector2i windowPosition = window.GetWindowContentPosition();
 	Vector2i currentPosition = GetPosition();
 	Vector2i windowSize = window.GetWindowContentSize();

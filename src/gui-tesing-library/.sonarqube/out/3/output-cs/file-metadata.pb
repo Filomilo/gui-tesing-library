@@ -1,0 +1,16 @@
+ô
+çD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\obj\Debug\net8.0-windows\GuiTestingLibrary_Tets.AssemblyInfo.csutf-8°
+ïD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\obj\Debug\net8.0-windows\.NETCoreApp,Version=v8.0.AssemblyAttributes.csutf-8õ
+èD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\obj\Debug\net8.0-windows\GuiTestingLibrary_Tets.GlobalUsings.g.csutf-8}
+rC:\Users\fboro\.nuget\packages\microsoft.net.test.sdk\17.8.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.csutf-8e
+\D:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\TestHelpers.csutf-8n
+eD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\SystemControllerTest.csutf-8p
+gD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Models\ScreenShotTests.csutf-8a
+XD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\DllTest.csutf-8z
+qD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Controllers\SystemControllerTest.csutf-8{
+rD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Controllers\ScreenControllerTests.csutf-8p
+gD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Controllers\MouseTests.csutf-8}
+tD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Controllers\KeyboardControllerTests.csutf-8g
+^D:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Configuration.csutf-8q
+hD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Components\GtWindowTest.csutf-8r
+iD:\proejcts\gui-tesing-library\gui-tesing-library\src\GuiTestingLibrary_Tests\Components\GtProcessTest.csutf-8

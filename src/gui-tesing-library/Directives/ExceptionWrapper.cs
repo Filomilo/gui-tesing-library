@@ -1,5 +1,4 @@
-﻿
-//namespace gui_tesing_library.Directives
+﻿//namespace gui_tesing_library.Directives
 //{
 //    [Serializable]
 //    class ExceptionWrapper: OnMethodBoundaryAspect
@@ -10,3 +9,4 @@
 //        }
 //    }
 //}
+

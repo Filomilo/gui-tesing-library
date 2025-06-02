@@ -1,7 +1,10 @@
 package org.filomilo.GuiTestingLibrary.Native;
 
+import org.apache.logging.log4j.core.util.Assert;
 import org.filomilo.GuiTestingLibrary.TestHelpers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 
 import java.util.Random;
 
@@ -13,8 +16,48 @@ interface ColorSetter {
 
 class JGTMouseTest {
 
+    @AfterEach
+    public void teardown(){
+        TestHelpers.CloseExampleGui();
+    }
+
+    @Test
+    public void SetGetMousePostionTest()
+    {
+        JGTVector2i newPos = new JGTVector2i(100, 100);
+        JGTMouse.getInstance().SetPosition(newPos);
+        assertTrue( newPos.equals(JGTMouse.getInstance().getInstance().GetPosition()),
+                "Mouse position is not {"+newPos+"} but {"+JGTMouse.getInstance().getInstance().GetPosition()+"}"
+        );
+    }
+    @Test
+    public void testCloseWindow()
+    {
+        JGTWindow window = TestHelpers.OpenExampleGui();
+
+        JGTVector2i position = window.GetPosition();
+        JGTVector2i size = window.GetSize();
+        JGTVector2i closePostion =new JGTVector2i(position.getX() + size.getX() - 30, position.gety() + 10);
+        assertDoesNotThrow(()->{
+            JGTMouse.getInstance().SetPosition(closePostion);
+            JGTMouse.getInstance().PositionShouldBe(closePostion,1);
+        },
+                "Positon shuld be {"+closePostion+"} but is {"+ JGTMouse.getInstance().GetPosition()+"}"
+                );
+
+       assertTrue(JGTMouse.getInstance().GetPosition().equals(closePostion),
+               "Mouse controller is not on close button postion {"+closePostion+"} but {"+JGTMouse.getInstance().GetPosition()+"}"
+               );
 
 
+        JGTMouse.getInstance().ClickLeft();
+
+        assertTrue(()->{
+            window.ShouldWindowExist(false);
+            return !window.DoesExist();
+        },"Window {"+window.GetWindowName()+"} stil exist"
+                );
+    }
 
     @Test
     public void ColorSliderTest() throws InterruptedException {
@@ -28,7 +71,7 @@ class JGTMouseTest {
         JGTColor initColor = window.GetContentPixelColorAt(
                 TestHelpers.RelativePostions.SliderColorCheckPostion
         );
-            assertTrue(initColor.Equals(JGTColor.Black));
+            assertTrue(initColor.equals(JGTColor.Black));
 
         ColorSetter setColor = (int r, int g, int b) ->
         {
@@ -111,5 +154,80 @@ class JGTMouseTest {
         Thread.sleep(5000);
         TestHelpers.CloseExampleGui();
     }
+
+    @Test
+    public void testMouseMove()
+    {
+        Random rnd = new Random();
+        JGTVector2i mouseOffser = new JGTVector2i(rnd.nextInt(0, 100), rnd.nextInt(0, 100));
+        JGTVector2i startPostino = new JGTVector2i(100, 100);
+        JGTVector2i finalPostion = startPostino.add( mouseOffser);
+        JGTMouse.getInstance().SetPosition(new JGTVector2i(100, 100));
+
+        assertTrue(()->{
+            JGTMouse.getInstance().PositionShouldBe(startPostino,0);
+            return JGTMouse.getInstance().GetPosition().equals(startPostino) ;
+        },"Mouse position is not {"+startPostino+"} but {"+JGTMouse.getInstance().GetPosition()+"}" );
+
+        JGTMouse.getInstance().MoveMouse(mouseOffser);
+
+        assertDoesNotThrow(()->{
+            JGTMouse.getInstance().PositionShouldBe(finalPostion, 2);
+        }
+        ,"Mouse position is not {"+finalPostion+"} but {"+JGTMouse.getInstance().GetPosition()+"} with move offset {"+mouseOffser+"}"
+        );
+
+    }
+
+    @Test
+    public void ColorSwicherTest() throws InterruptedException {
+        JGTWindow window = TestHelpers.OpenExampleGui();
+        JGTConfiguration.getInstance().SetActionDelay(100);
+
+        window.SetWindowSize(1280, 720);
+        window.CenterWindow();
+        Thread.sleep(1000);
+
+        JGTColor initilaColor = window.GetContentPixelColorAt(
+                TestHelpers.RelativePostions.ColorSwitcherColorTest
+        );
+
+
+        assertTrue(initilaColor.equals(JGTColor.Lime),
+                "Initial color at {"+TestHelpers.RelativePostions.ColorSwitcherColorTest+"} was not white but {"+initilaColor+"}"
+                );
+
+        JGTMouse.getInstance().SetPositionRelativeToWindow(window,TestHelpers.RelativePostions.ColorSwitcherGreenButton);
+        JGTMouse.getInstance().ClickLeft();
+
+        assertTrue(
+                ()->{
+                    window.ContentPixelAtShouldBeColor(TestHelpers.RelativePostions.ColorSwitcherColorTest,JGTColor.Green,0);
+                    JGTColor color=window
+                            .GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)
+                            ;
+                    return  color.equals(JGTColor.Green);
+                }
+                ,"CHanged first color at {"+TestHelpers.RelativePostions.ColorSwitcherColorTest+"} was not green {"+JGTColor.Green+" but {"+window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)+"}");
+
+        JGTMouse.getInstance().SetPositionRelativeToWindow(window,TestHelpers.RelativePostions.ColorSwitcherWhiteButton);
+        JGTMouse.getInstance().ClickLeft();
+
+        assertTrue(   window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest).equals(JGTColor.White),
+
+                "CHanged first color at {TestHelpers.RelativePostions.ColorSwitcherColorTest} was not white  but {"+window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)+"}");
+
+        JGTMouse.getInstance().SetPositionRelativeToWindow(window,TestHelpers.RelativePostions.ColorSwitcherBlackButton);
+
+
+        JGTMouse.getInstance().ClickLeft();
+
+        assertTrue(
+                window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest).equals(JGTColor.Black),
+          "CHanged first color at {"+TestHelpers.RelativePostions.ColorSwitcherColorTest+"} was not black  but {"+window.GetContentPixelColorAt(TestHelpers.RelativePostions.ColorSwitcherColorTest)+"}"
+        );
+
+    }
+
 
 }

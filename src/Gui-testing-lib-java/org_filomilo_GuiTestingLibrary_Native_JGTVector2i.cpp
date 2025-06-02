@@ -77,3 +77,13 @@ JNIEXPORT void JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_se
 
     env->SetLongField(obj, fid, reinterpret_cast<jlong>((void*)vec));
 }
+
+
+JNIEXPORT jint JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_getX
+(JNIEnv* env, jobject obj) {
+    return Converters::JVector2IToVector2I(env, obj).x;
+}
+JNIEXPORT jint JNICALL Java_org_filomilo_GuiTestingLibrary_Native_JGTVector2i_gety
+(JNIEnv* env, jobject obj) {
+    return Converters::JVector2IToVector2I(env, obj).y;
+}

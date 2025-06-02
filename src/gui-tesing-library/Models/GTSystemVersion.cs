@@ -1,27 +1,29 @@
 ﻿using System;
 
-namespace gui_tesing_library.Models
+namespace gui_tesing_library.Models;
+
+public class GTSystemVersion
 {
-    public class NumberedVersion
+    private readonly long _Build;
+    private readonly long _Major;
+    private readonly long _Minor;
+    private readonly string _OsType;
+
+    public GTSystemVersion(GTSystemVersion_CS gTSystemVersion_CS)
     {
-        public string versionString { get; }
-        public int Major { get; }
+        _OsType = gTSystemVersion_CS.GetOsType();
+        _Minor = gTSystemVersion_CS.GetMinor();
+        _Major = gTSystemVersion_CS.GetMajor();
+        _Build = gTSystemVersion_CS.GetBuild();
     }
 
-    public class GTSystemVersion
+    public GTSystemVersion(OperatingSystem oSVersion)
     {
-        private string _OsVersion;
-
-        public string VersionString
-        {
-            get { return _OsVersion; }
-        }
-
-        public GTSystemVersion(OperatingSystem osVersion)
-        {
-            this._OsVersion = osVersion.VersionString;
-        }
-
-        public GTSystemVersion(GTSystemVersion_CS gTSystemVersion_CS) { }
+        _OsType = oSVersion.Platform.ToString();
+        _Major = oSVersion.Version.Major;
+        _Minor = oSVersion.Version.Minor;
+        _Build = oSVersion.Version.Build;
     }
+
+    public string VersionString => $"{_OsType} {_Major}.{_Minor} Build: {_Build}";
 }

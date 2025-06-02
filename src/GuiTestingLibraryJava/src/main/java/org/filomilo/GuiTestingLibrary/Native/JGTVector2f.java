@@ -35,4 +35,9 @@ public class JGTVector2f implements AutoCloseable {
     public JGTVector2f add(JGTVector2f jgtVector2f) {
         return  new JGTVector2f(this.getX() + jgtVector2f.getX(), getY() + jgtVector2f.getY());
     }
+
+    @Override
+    public String toString() {
+        return "{"+getX()+";"+getY()+"}";
+    }
 }

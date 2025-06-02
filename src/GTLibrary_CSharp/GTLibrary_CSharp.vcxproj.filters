@@ -87,6 +87,9 @@
     <ClInclude Include="Converters.h">
       <Filter>Header Files\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="GtConfiguration_CS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GTProcess_CS.cpp">
@@ -130,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="ImageComparer_CS.cpp">
       <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="GtConfiguration_CS.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

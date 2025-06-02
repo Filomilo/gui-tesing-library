@@ -37,7 +37,7 @@ public class JGTColor {
     public static final JGTColor Lime = new JGTColor(0f, 1f, 0f);
 
 
-    public boolean Equals(JGTColor black) {
+    public boolean equals(JGTColor black) {
         return  this.r == black.r && this.g == black.g && this.b == black.b;
     }
 
@@ -48,5 +48,15 @@ public class JGTColor {
         return (int) Math.sqrt (
                 Math.pow(Math.sqrt(Math.pow(rdiff, 2) + Math.pow(bdiff, 2)), 2) + Math.pow(gdiff, 2)
         );
+    }
+
+
+    @Override
+    public String toString() {
+        return "JGTColor{" +
+                "r=" + r +
+                ", g=" + g +
+                ", b=" + b +
+                '}';
     }
 }

@@ -2,15 +2,15 @@
 enum IMMAGE_COMPARPER_TYPE {
 	PIXELBYPIXEL
 };
-class Configuration
+class GtConfiguration
 {
 	long timeout=1000;
 	long defaultSleep = 500;
-	static Configuration* instance;
+	static GtConfiguration* instance;
 	IMMAGE_COMPARPER_TYPE type;
 public:
 
-	static Configuration* GetInstance();
+	static GtConfiguration* GetInstance();
 	void SetTimeout(long newTimeout);
 	long GetTimeout();
 	void SetDefaultTimeout();

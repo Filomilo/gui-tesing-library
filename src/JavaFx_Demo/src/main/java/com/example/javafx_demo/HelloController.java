@@ -29,14 +29,18 @@ public class HelloController {
     @FXML private Pane ColorButtonPane;
     @FXML private Canvas CanvasPane;
     @FXML private GridPane OperatorGridPane;
-
+    @FXML private ListView listViewColors;
+    @FXML private Pane colorListPane;
     float rSlider=0;
     float gSlider=0;
     float bSlider=0;
+
+    Color brushColor=Color.BLACK;
+
     @FXML
     public void initialize() {
         // Ensuring resSlider is initialized before adding a listener
-        ChangeListener sliderChange=new ChangeListener<Number>() {
+        ChangeListener<Number> sliderChange=new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 onSliderChange();
@@ -47,7 +51,11 @@ public class HelloController {
         GreenSlider.valueProperty().addListener(sliderChange);
 
 
+        for (int i = 0; i < 200 ; i++) {
+            listViewColors.getItems().add(i);
 
+        }
+        listViewColors.getItems().add("red");
 
 
 
@@ -56,13 +64,30 @@ public class HelloController {
         gc.setLineWidth(2);
 
         CanvasPane.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+
             gc.beginPath();
             gc.moveTo(event.getX(), event.getY());
             gc.stroke();
+
+            if(event.isPrimaryButtonDown())
+            {
+                brushColor= Color.RED;
+
+            }
+            if(event.isSecondaryButtonDown())
+            {
+                brushColor=Color.BLUE;
+            }
+            if(event.isMiddleButtonDown())
+            {
+                brushColor=Color.GREEN;
+            }
         });
 
         CanvasPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+
             gc.lineTo(event.getX(), event.getY());
+            gc.setStroke(this.brushColor);
             gc.stroke();
         });
 
@@ -98,10 +123,7 @@ public class HelloController {
     }
 
 
-    public void redMouseDrag(MouseDragEvent mouseDragEvent) {
 
-
-    }
 
     public void OnOpenModalButton(ActionEvent actionEvent) {
         Stage parentStage = (Stage) chnageTitleBUtton.getScene().getWindow();
@@ -133,8 +155,14 @@ public class HelloController {
     }
 
 
+    public void listviewONclicked(MouseEvent mouseEvent) {
+        System.out.println("clicked on " + listViewColors.getSelectionModel().getSelectedItem());
+        if(listViewColors.getSelectionModel().getSelectedItem()=="red")
+        {
+            colorListPane.setStyle("-fx-background-color: red;");
+        }
 
-
+    }
 }
 
 

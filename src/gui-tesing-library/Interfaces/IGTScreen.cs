@@ -1,19 +1,15 @@
-﻿using gui_tesing_library.Controllers;
-using gui_tesing_library.Interfaces;
+﻿using gui_tesing_library.Interfaces;
 using gui_tesing_library.Models;
 
-namespace gui_tesing_library
+namespace gui_tesing_library;
+
+public interface IGTScreen
 {
-    public interface IGTScreen
-    {
-        Vector2i Size { get; }
+    Vector2i Size { get; }
 
-        Vector2i MaximizedWindowSize { get; }
+    IScreenShot GetScreenshot();
+    IScreenShot GetScreenshotRect(Vector2i position, Vector2i size);
+    Color GetPixelColorAt(Vector2i postion);
 
-        IScreenShot GetScreenshot();
-        IScreenShot GetScreenshotRect(Vector2i position, Vector2i size);
-        Color GetPixelColorAt(Vector2i postion);
-
-        IGTScreen PixelAtShouldBeColor(Vector2i position, Color colorColor);
-    }
+    IGTScreen PixelAtShouldBeColor(Vector2i position, Color colorColor);
 }

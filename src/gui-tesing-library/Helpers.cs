@@ -1,7 +1,34 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using gui_tesing_library;
 using gui_tesing_library.Models;
+
+namespace gui_tesing_library_CS
+{
+    public static class Helpers
+    {
+        internal static void AwaitTrue(Func<bool> func, string mes = "")
+        {
+            var state = false;
+            var sw = Stopwatch.StartNew();
+            while (state == false)
+            {
+                if (sw.ElapsedMilliseconds > Configuration.ProcesAwaitTime)
+                {
+                    sw.Stop();
+                    throw new TimeoutException("Did not reach state within max time ::: " + mes);
+                }
+
+                state = func();
+                if (!state)
+                    Thread.Sleep(100);
+            }
+
+            sw.Stop();
+        }
+    }
+}
 
 namespace gui_tesing_library
 {
@@ -116,23 +143,30 @@ namespace gui_tesing_library
             };
         }
 
-        internal static void AwaitTrue(Func<bool> func, string mes = "")
+        public static Configuration.IMAGE_COMPARER CSImageComparerToImageComparer(
+            CS_IMAGE_COMPARER_TYPE type
+        )
         {
-            bool state = false;
-            Stopwatch sw = Stopwatch.StartNew();
-            while (state == false)
+            switch (type)
             {
-                if (sw.ElapsedMilliseconds > Configuration.ProcesAwaitTime)
-                {
-                    sw.Stop();
-                    throw new TimeoutException("Did not reach state within max time ::: " + mes);
-                }
-                state = func();
-                if (!state)
-                    Thread.Sleep(100);
+                case CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL:
+                    return Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL;
             }
 
-            sw.Stop();
+            throw new ArgumentException();
+        }
+
+        public static CS_IMAGE_COMPARER_TYPE ImageCompaererToCsImageComparer(
+            Configuration.IMAGE_COMPARER type
+        )
+        {
+            switch (type)
+            {
+                case Configuration.IMAGE_COMPARER.PIEXEL_BY_PIXEL:
+                    return CS_IMAGE_COMPARER_TYPE.PIXEL_BY_PIXEL;
+            }
+
+            throw new ArgumentException();
         }
     }
 }
